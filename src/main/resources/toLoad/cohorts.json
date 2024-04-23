@@ -1,0 +1,359 @@
+[
+   {
+      "cohortDesign" : {
+         "id" : "OMIABIS:000101",
+         "label" : "longitudinal study design"
+      },
+      "cohortSize" : 2504,
+      "cohortType" : "study-defined",
+      "collectionEvents" : [
+         {
+            "eventGenders" : {
+               "availability" : true,
+               "availabilityCount" : 56,
+               "distribution" : {
+                  "genders" : {
+                     "female" : 56,
+                     "male" : 0
+                  }
+               }
+            }
+         }
+      ],
+      "id" : "Navara_dataset_case",
+      "ids" : {
+         "biosampleIds" : [
+            "MB21573",
+            "MB20184",
+            "MB20198",
+            "MB21572",
+            "MB20195",
+            "MB20187",
+            "MB20188",
+            "MB20192",
+            "MB20776",
+            "MB20099",
+            "MB20193",
+            "MB20197",
+            "MB20178",
+            "MB20179",
+            "MB21559",
+            "MB20181",
+            "MB20185",
+            "MB20190",
+            "MB20686",
+            "MB20180",
+            "MB20460",
+            "MB21568",
+            "MB20366",
+            "MB20787",
+            "MB20097",
+            "MB20191",
+            "MB20182",
+            "MB20194",
+            "MB20367",
+            "MB20368",
+            "MB20369",
+            "MB20370",
+            "MB20371",
+            "MB20373",
+            "MB20374",
+            "MB20375",
+            "MB20376",
+            "MB20377",
+            "MB20378",
+            "MB20379",
+            "MB20380",
+            "MB20356",
+            "MB20357",
+            "MB20358",
+            "MB20359",
+            "MB20360",
+            "MB20361",
+            "MB20362",
+            "MB20363"
+         ],
+         "individualIds" : [
+            "EU122",
+            "EU130",
+            "EU138",
+            "EU142",
+            "EU156",
+            "EU174",
+            "EU18",
+            "EU181",
+            "EU247",
+            "EU255_UN1929_",
+            "EU266",
+            "EU3",
+            "EU32",
+            "EU323",
+            "EU352_UN2451_",
+            "EU38",
+            "EU389",
+            "EU4",
+            "EU431",
+            "EU45",
+            "EU453",
+            "EU49",
+            "EU492_15_09_19",
+            "EU56",
+            "EU74_UN289_",
+            "EU80",
+            "EU9",
+            "EU94",
+            "PUA_366_S_0",
+            "PUA_422_S_0",
+            "PUA_435_S_1",
+            "PUA_440_S_1",
+            "PUA_448_S_1",
+            "PUA_466_S_1",
+            "PUA_467_S_1",
+            "PUA_498_S_1",
+            "PUA_508_S_0",
+            "PUA_510_S_0",
+            "PUA_554_S_0",
+            "PUA_614_S_1",
+            "PUA_621_S_1",
+            "PUA_650_S_1",
+            "PUA_666_S_1",
+            "PUA_674_S_0",
+            "PUA_678_S_0",
+            "PUA_679_S_0",
+            "PUA_682_S_0",
+            "PUA_728_S_1",
+            "PUA_731_S_0",
+            "PUA_754_S_1",
+            "UN1533",
+            "UN1706",
+            "UN2065",
+            "UN2376",
+            "UN3331_EU377_",
+            "UN426"
+         ]
+      },
+      "inclusionCriteria" : {
+         "ageRange" : {
+            "end" : {
+               "iso8601duration" : "P86Y0W"
+            },
+            "start" : {
+               "iso8601duration" : "P42Y0W"
+            }
+         },
+         "genders" : [
+            {
+               "id" : "NCIT:C16576",
+               "label" : "female"
+            },
+            {
+               "id" : "NCIT:C20197",
+               "label" : "male"
+            }
+         ]
+      },
+      "name" : "Navara_dataset_case"
+   },
+   {
+      "cohortDesign" : {
+         "id" : "OMIABIS:000101",
+         "label" : "longitudinal study design"
+      },
+      "cohortSize" : 2504,
+      "cohortType" : "study-defined",
+      "collectionEvents" : [
+         {
+            "eventGenders" : {
+               "availability" : true,
+               "availabilityCount" : 76,
+               "distribution" : {
+                  "genders" : {
+                     "female" : 8,
+                     "male" : 68
+                  }
+               }
+            }
+         }
+      ],
+      "id" : "Navara_dataset_ref",
+      "ids" : {
+         "biosampleIds" : [
+            "UN105",
+            "UN1066",
+            "UN1121",
+            "UN1138",
+            "UN1175",
+            "UN128",
+            "UN1310",
+            "UN1341",
+            "UN1352",
+            "UN1471",
+            "UN1557",
+            "UN1559",
+            "UN1613",
+            "UN1688",
+            "UN1689",
+            "UN1692",
+            "UN1774",
+            "UN18",
+            "UN1892",
+            "UN1893",
+            "UN1910",
+            "UN1983",
+            "UN2024",
+            "UN2033",
+            "UN2056",
+            "UN2140",
+            "UN2189",
+            "UN2204",
+            "UN2212",
+            "UN2237",
+            "UN2251",
+            "UN2286",
+            "UN2309_EU207_",
+            "UN2408",
+            "UN2457",
+            "UN2479",
+            "UN2515",
+            "UN2602",
+            "UN2622",
+            "UN2666",
+            "UN2676",
+            "UN2693",
+            "UN2720",
+            "UN2742",
+            "UN2789",
+            "UN2821",
+            "UN2881",
+            "UN2988",
+            "UN2989",
+            "UN3001",
+            "UN3003",
+            "UN3035",
+            "UN3051",
+            "UN3058",
+            "UN3110",
+            "UN3113",
+            "UN3126",
+            "UN3161",
+            "UN3191",
+            "UN3222",
+            "UN3226",
+            "UN3282",
+            "UN437",
+            "UN547_EU237_",
+            "UN551",
+            "UN602",
+            "UN605",
+            "UN702",
+            "UN75",
+            "UN775",
+            "UN850",
+            "UN851",
+            "UN906",
+            "UN917",
+            "UN930",
+            "UN942"
+         ],
+         "individualIds" : [
+            "UN105",
+            "UN1066",
+            "UN1121",
+            "UN1138",
+            "UN1175",
+            "UN128",
+            "UN1310",
+            "UN1341",
+            "UN1352",
+            "UN1471",
+            "UN1557",
+            "UN1559",
+            "UN1613",
+            "UN1688",
+            "UN1689",
+            "UN1692",
+            "UN1774",
+            "UN18",
+            "UN1892",
+            "UN1893",
+            "UN1910",
+            "UN1983",
+            "UN2024",
+            "UN2033",
+            "UN2056",
+            "UN2140",
+            "UN2189",
+            "UN2204",
+            "UN2212",
+            "UN2237",
+            "UN2251",
+            "UN2286",
+            "UN2309_EU207_",
+            "UN2408",
+            "UN2457",
+            "UN2479",
+            "UN2515",
+            "UN2602",
+            "UN2622",
+            "UN2666",
+            "UN2676",
+            "UN2693",
+            "UN2720",
+            "UN2742",
+            "UN2789",
+            "UN2821",
+            "UN2881",
+            "UN2988",
+            "UN2989",
+            "UN3001",
+            "UN3003",
+            "UN3035",
+            "UN3051",
+            "UN3058",
+            "UN3110",
+            "UN3113",
+            "UN3126",
+            "UN3161",
+            "UN3191",
+            "UN3222",
+            "UN3226",
+            "UN3282",
+            "UN437",
+            "UN547_EU237_",
+            "UN551",
+            "UN602",
+            "UN605",
+            "UN702",
+            "UN75",
+            "UN775",
+            "UN850",
+            "UN851",
+            "UN906",
+            "UN917",
+            "UN930",
+            "UN942"
+         ]
+      },
+      "inclusionCriteria" : {
+         "ageRange" : {
+            "end" : {
+               "iso8601duration" : "P86Y0W"
+            },
+            "start" : {
+               "iso8601duration" : "P42Y0W"
+            }
+         },
+         "genders" : [
+            {
+               "id" : "NCIT:C16576",
+               "label" : "female"
+            },
+            {
+               "id" : "NCIT:C20197",
+               "label" : "male"
+            }
+         ]
+      },
+      "name" : "Navara_dataset_ref"
+   }
+]

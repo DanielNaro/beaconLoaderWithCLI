@@ -1,0 +1,3038 @@
+[
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "EU122",
+      "individualId" : "EU122",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P51Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "EU130",
+      "individualId" : "EU130",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P52Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "EU138",
+      "individualId" : "EU138",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P42Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "EU142",
+      "individualId" : "EU142",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P43Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "EU156",
+      "individualId" : "EU156",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P45Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "EU174",
+      "individualId" : "EU174",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P45Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "EU18",
+      "individualId" : "EU18",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P47Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB21573",
+      "individualId" : "EU181",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P48Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20184",
+      "individualId" : "EU247",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P49Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20198",
+      "individualId" : "EU255_UN1929_",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P50Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB21572",
+      "individualId" : "EU266",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P51Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20195",
+      "individualId" : "EU3",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P52Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20187",
+      "individualId" : "EU32",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P52Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20188",
+      "individualId" : "EU323",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P53Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20192",
+      "individualId" : "EU352_UN2451_",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P53Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20776",
+      "individualId" : "EU38",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P54Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20099",
+      "individualId" : "EU389",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P54Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20193",
+      "individualId" : "EU4",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P55Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20197",
+      "individualId" : "EU431",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P55Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20178",
+      "individualId" : "EU45",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P55Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20179",
+      "individualId" : "EU453",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P86Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB21559",
+      "individualId" : "EU49",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P85Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20181",
+      "individualId" : "EU492_15_09_20",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P85Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20185",
+      "individualId" : "EU57",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P85Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20190",
+      "individualId" : "EU74_UN289_",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P84Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20686",
+      "individualId" : "EU80",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P83Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20180",
+      "individualId" : "EU9",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P83Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20460",
+      "individualId" : "EU94",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P83Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB21568",
+      "individualId" : "PUA_366_S_1",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P83Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20366",
+      "individualId" : "PUA_422_S_1",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P82Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20787",
+      "individualId" : "PUA_435_S_2",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P82Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20097",
+      "individualId" : "PUA_440_S_2",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P81Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20191",
+      "individualId" : "PUA_448_S_2",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P81Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20182",
+      "individualId" : "PUA_466_S_2",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P81Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20194",
+      "individualId" : "PUA_467_S_2",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P80Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20367",
+      "individualId" : "PUA_498_S_2",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P80Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20368",
+      "individualId" : "PUA_508_S_1",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P80Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20369",
+      "individualId" : "PUA_510_S_1",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P80Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20370",
+      "individualId" : "PUA_554_S_1",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P79Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20371",
+      "individualId" : "PUA_614_S_2",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P79Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20373",
+      "individualId" : "PUA_621_S_2",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P79Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20374",
+      "individualId" : "PUA_650_S_2",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P79Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20375",
+      "individualId" : "PUA_666_S_2",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P79Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20376",
+      "individualId" : "PUA_674_S_1",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P79Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20377",
+      "individualId" : "PUA_678_S_1",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P78Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20378",
+      "individualId" : "PUA_679_S_1",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P78Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20379",
+      "individualId" : "PUA_682_S_1",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P78Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20380",
+      "individualId" : "PUA_728_S_2",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P78Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20356",
+      "individualId" : "PUA_731_S_1",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P78Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20357",
+      "individualId" : "PUA_754_S_2",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P78Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20218",
+      "individualId" : "UN105",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P77Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20219",
+      "individualId" : "UN1066",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P77Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20535",
+      "individualId" : "UN1121",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P77Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20224",
+      "individualId" : "UN1138",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P77Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20726",
+      "individualId" : "UN1175",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P77Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20410",
+      "individualId" : "UN128",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P77Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20212",
+      "individualId" : "UN1310",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P76Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20207",
+      "individualId" : "UN1341",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P76Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20199",
+      "individualId" : "UN1352",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P76Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20215",
+      "individualId" : "UN1471",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P76Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20358",
+      "individualId" : "UN1533",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P76Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20223",
+      "individualId" : "UN1557",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P76Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20489",
+      "individualId" : "UN1559",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P76Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB21567",
+      "individualId" : "UN1613",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P76Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20437",
+      "individualId" : "UN1688",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P76Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20747",
+      "individualId" : "UN1689",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P74Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20206",
+      "individualId" : "UN1692",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P75Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20359",
+      "individualId" : "UN1706",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P76Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20211",
+      "individualId" : "UN1774",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P76Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20438",
+      "individualId" : "UN18",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P75Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20202",
+      "individualId" : "UN1892",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P75Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20753",
+      "individualId" : "UN1893",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P75Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20237",
+      "individualId" : "UN1910",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P74Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20687",
+      "individualId" : "UN1983",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P74Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20242",
+      "individualId" : "UN2024",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P54Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20226",
+      "individualId" : "UN2033",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P50Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20241",
+      "individualId" : "UN2056",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P35Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20360",
+      "individualId" : "UN2065",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P40Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20214",
+      "individualId" : "UN2140",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P40Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20730",
+      "individualId" : "UN2189",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P44Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20511",
+      "individualId" : "UN2204",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P55Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20250",
+      "individualId" : "UN2212",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P55Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20737",
+      "individualId" : "UN2237",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P54Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20748",
+      "individualId" : "UN2251",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P54Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20253",
+      "individualId" : "UN2286",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P56Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20796",
+      "individualId" : "UN2309_EU207_",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P47Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20361",
+      "individualId" : "UN2376",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P54Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20248",
+      "individualId" : "UN2408",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P52Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20217",
+      "individualId" : "UN2457",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P56Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20208",
+      "individualId" : "UN2479",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P56Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20209",
+      "individualId" : "UN2515",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P54Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20238",
+      "individualId" : "UN2602",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P53Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20240",
+      "individualId" : "UN2622",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P54Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20231",
+      "individualId" : "UN2666",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P56Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20234",
+      "individualId" : "UN2676",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P53Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20436",
+      "individualId" : "UN2693",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P56Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20243",
+      "individualId" : "UN2720",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P47Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20236",
+      "individualId" : "UN2742",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P75Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20235",
+      "individualId" : "UN2789",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P80Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20204",
+      "individualId" : "UN2821",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P75Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20201",
+      "individualId" : "UN2881",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P76Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20225",
+      "individualId" : "UN2988",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P49Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20252",
+      "individualId" : "UN2989",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P80Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20232",
+      "individualId" : "UN3001",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P76Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB21570",
+      "individualId" : "UN3003",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P51Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20216",
+      "individualId" : "UN3035",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P85Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20239",
+      "individualId" : "UN3051",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P84Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20229",
+      "individualId" : "UN3058",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P82Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20228",
+      "individualId" : "UN3110",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P74Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20200",
+      "individualId" : "UN3113",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P54Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20246",
+      "individualId" : "UN3126",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P55Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20233",
+      "individualId" : "UN3161",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P76Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20244",
+      "individualId" : "UN3191",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P76Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20221",
+      "individualId" : "UN3222",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P54Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20735",
+      "individualId" : "UN3226",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P77Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20196",
+      "individualId" : "UN3282",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P77Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20362",
+      "individualId" : "UN3331_EU377_",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P55Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009655",
+         "label" : "case"
+      },
+      "id" : "MB20363",
+      "individualId" : "UN426",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P77Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20227",
+      "individualId" : "UN437",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P75Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20734",
+      "individualId" : "UN547_EU237_",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P55Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20203",
+      "individualId" : "UN551",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P85Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20210",
+      "individualId" : "UN602",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P44Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20230",
+      "individualId" : "UN605",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P54Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB21569",
+      "individualId" : "UN702",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P80Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20205",
+      "individualId" : "UN75",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P55Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20213",
+      "individualId" : "UN775",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P79Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20251",
+      "individualId" : "UN850",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P50Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20689",
+      "individualId" : "UN851",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P79Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20512",
+      "individualId" : "UN906",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P76Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20472",
+      "individualId" : "UN917",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P78Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20480",
+      "individualId" : "UN930",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P47Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   },
+   {
+      "biosampleStatus" : {
+         "id" : "EFO:0009654",
+         "label" : "reference sample"
+      },
+      "id" : "MB20220",
+      "individualId" : "UN942",
+      "obtentionProcedure" : {
+         "ageAtProcedure" : {
+            "age" : {
+               "iso8601duration" : "P51Y0W"
+            }
+         },
+         "procedureCode" : {
+            "id" : "IDPROCEDURE:0",
+            "label" : "Unknown procedure"
+         }
+      },
+      "sampleOriginType" : {
+         "id" : "ID:0",
+         "label" : "Unknown"
+      }
+   }
+]
