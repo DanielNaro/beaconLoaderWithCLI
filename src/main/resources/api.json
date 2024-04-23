@@ -5728,8 +5728,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -5757,8 +5757,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -5796,8 +5796,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -5818,8 +5818,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -7572,6 +7572,17 @@
           "individual-resource"
         ],
         "operationId": "getAllIndividuals",
+        "parameters": [
+          {
+            "name": "eagerload",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -9057,8 +9068,8 @@
             "items": {
               "type": "string",
               "format": "uuid"
-            }
           }
+        }
 
         }
       },
@@ -9578,6 +9589,66 @@
           }
         }
       },
+      "Individual": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "age": {
+            "type": "string"
+          },
+          "sex": {
+            "type": "string"
+          },
+          "measures": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "phenotypicFeatureEvidences": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "analyses": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "biosamples": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "datasets": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "cohorts": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
       "PhenotypicFeatureEvidence": {
         "type": "object",
         "properties": {
@@ -9590,6 +9661,13 @@
           },
           "type": {
             "type": "string"
+          },
+          "individuals": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Individual"
+            }
           }
         }
       },
@@ -9773,49 +9851,6 @@
           }
         }
       },
-      "Individual": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "age": {
-            "type": "string"
-          },
-          "sex": {
-            "type": "string"
-          },
-          "analyses": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Analysis"
-            }
-          },
-          "biosamples": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Biosample"
-            }
-          },
-          "datasets": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Dataset"
-            }
-          },
-          "cohorts": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Cohort"
-            }
-          }
-        }
-      },
       "IndividualTreatment": {
         "type": "object",
         "properties": {
@@ -9823,8 +9858,12 @@
             "type": "integer",
             "format": "int64"
           },
-          "ageAtOnset": { "type": "string" },
-          "duration": { "type": "string" },
+          "ageAtOnset": {
+            "type": "string"
+          },
+          "duration": {
+            "type": "string"
+          },
           "dose": {
             "type": "string"
           },
@@ -9958,20 +9997,17 @@
         "properties": {
           "id": {
             "type": "string",
-            "format": "int64"
+            "format": "uuid"
           },
-          "ageAtProcedure": { "type": "string" },
+          "ageAtProcedure": {
+            "type": "string"
+          },
           "procedureDate": {
             "type": "string",
             "format": "date"
           },
-          "procedureDuration": { "type": "string" },
-          "biosamples": {
-            "type": "array",
-            "items": {
-              "type": "string",
-              "format": "uuid"
-            }
+          "procedureDuration": {
+            "type": "string"
           }
         }
       },

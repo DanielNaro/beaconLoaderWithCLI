@@ -7,6 +7,8 @@ public class ReadObtentionProcedure {
     private ReadProcedureCode procedureCode;
 
     public BiosampleObtentionProcedure getAPIRepresentation() {
-        return null;
+        BiosampleObtentionProcedure biosampleObtentionProcedure = new BiosampleObtentionProcedure();
+        biosampleObtentionProcedure.setAgeAtProcedure(ageAtProcedure.getAge().getIso8601duration());
+        return biosampleObtentionProcedure;
     }
 }

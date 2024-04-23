@@ -3,9 +3,7 @@ package edu.upc.dmag.beaconLoaderWithCLI;
 import org.openapitools.client.ApiException;
 import org.openapitools.client.api.BiosampleObtentionProcedureResourceApi;
 import org.openapitools.client.api.BiosampleStatusResourceApi;
-import org.openapitools.client.model.Biosample;
-import org.openapitools.client.model.BiosampleObtentionProcedure;
-import org.openapitools.client.model.BiosampleStatus;
+import org.openapitools.client.model.*;
 
 import java.util.Map;
 import java.util.UUID;
@@ -15,14 +13,14 @@ public class ReadBiosample {
     private String id;
     private String individualId;
     private ReadObtentionProcedure obtentionProcedure;
-    private ReadSampleOriginType sampleOriginType;
+    private ReadBiosampleOriginType biosampleOriginType;
 
-    public ReadBiosample(ReadBiosampleStatus biosampleStatus, String id, String individualId, ReadObtentionProcedure obtentionProcedure, ReadSampleOriginType sampleOriginType) {
+    public ReadBiosample(ReadBiosampleStatus biosampleStatus, String id, String individualId, ReadObtentionProcedure obtentionProcedure, ReadBiosampleOriginType sampleOriginType) {
         this.biosampleStatus = biosampleStatus;
         this.id = id;
         this.individualId = individualId;
         this.obtentionProcedure = obtentionProcedure;
-        this.sampleOriginType = sampleOriginType;
+        this.biosampleOriginType = sampleOriginType;
     }
 
     public ReadBiosampleStatus getBiosampleStatus() {
@@ -57,17 +55,18 @@ public class ReadBiosample {
         this.obtentionProcedure = obtentionProcedure;
     }
 
-    public ReadSampleOriginType getSampleOriginType() {
-        return sampleOriginType;
+    public ReadBiosampleOriginType getBiosampleOriginType() {
+        return biosampleOriginType;
     }
 
-    public void setSampleOriginType(ReadSampleOriginType sampleOriginType) {
-        this.sampleOriginType = sampleOriginType;
+    public void setBiosampleOriginType(ReadBiosampleOriginType biosampleOriginType) {
+        this.biosampleOriginType = biosampleOriginType;
     }
 
     public Biosample getAPIRepresentation(
             Map<ReadBiosampleStatus, UUID> createdBioSampleStatuses,
-            Map<ReadObtentionProcedure, Long> createdBiosampleObtenitionProcedures,
+            Map<ReadObtentionProcedure, UUID> createdBiosampleObtenitionProcedures,
+            Map<ReadBiosampleOriginType, BiosampleSampleOrigin> createdBiosampleOrigins,
             BiosampleStatusResourceApi biosampleStatusResourceApi,
             BiosampleObtentionProcedureResourceApi biosampleObtentionProcedureResourceApi
     ) throws ApiException {
@@ -80,13 +79,21 @@ public class ReadBiosample {
         }
         biosample.addBiosampleStatusItem(createdBioSampleStatuses.get(biosampleStatus));
 
-        if (!createdBiosampleObtenitionProcedures.containsKey(obtentionProcedure)) {
-            var createdBiosampleStatus = biosampleObtentionProcedureResourceApi.createBiosampleObtentionProcedure(obtentionProcedure.getAPIRepresentation());
-            createdBiosampleObtenitionProcedures.put(obtentionProcedure, createdBiosampleStatus.getId());
+        if (obtentionProcedure != null) {
+            if (!createdBiosampleObtenitionProcedures.containsKey(obtentionProcedure)) {
+                var createdBiosampleObtentionProcedure = biosampleObtentionProcedureResourceApi.createBiosampleObtentionProcedure(obtentionProcedure.getAPIRepresentation());
+                createdBiosampleObtenitionProcedures.put(obtentionProcedure, createdBiosampleObtentionProcedure.getId());
+            }
+            biosample.biosampleObtentionProcedure(createdBiosampleObtenitionProcedures.get(obtentionProcedure));
         }
-        biosample.setBiosampleObtentionProcedure();
-        biosample.addBiosampleObtentionProcedureItem(createdBiosampleObtenitionProcedures.get(obtentionProcedure));
 
+        if (biosampleOriginType != null) {
+            if (!createdBiosampleOrigins.containsKey(biosampleOriginType)){
+                biosample.setSampleOrigin(createdBiosampleOrigins.get(biosampleOriginType));
+            } else {
+                biosample.setSampleOrigin(biosampleOriginType.getAPIRepresentation());
+            }
+        }
         return biosample;
     }
 }

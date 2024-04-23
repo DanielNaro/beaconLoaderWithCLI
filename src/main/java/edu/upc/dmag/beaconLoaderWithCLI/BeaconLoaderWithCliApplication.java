@@ -43,15 +43,19 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		Map<String, Individual> createdIndividuals = new HashMap<>();
 		Map<String, Biosample> createdBiosamples = new HashMap<>();
 		Map<ReadBiosampleStatus, UUID> createdBioSampleStatuses = new HashMap<>();
+		Map<ReadObtentionProcedure, UUID> createdBiosampleObtenitionProcedures = new HashMap<>();
+		Map<ReadBiosampleOriginType, BiosampleSampleOrigin> createdBiosampleOrigins = new HashMap<>();
 		loadDatasets();
 		loadIndividuals(createdIndividuals);
-		loadBiosamples(createdIndividuals, createdBiosamples, createdBioSampleStatuses);
+		loadBiosamples(createdIndividuals, createdBiosamples, createdBioSampleStatuses, createdBiosampleObtenitionProcedures, createdBiosampleOrigins);
 	}
 
 	private void loadBiosamples(
 			Map<String, Individual> createdIndividuals,
 			Map<String, Biosample> createdBiosamples,
-			Map<ReadBiosampleStatus, UUID> createdBioSampleStatuses
+			Map<ReadBiosampleStatus, UUID> createdBioSampleStatuses,
+			Map<ReadObtentionProcedure, UUID> createdBiosampleObtenitionProcedures,
+			Map<ReadBiosampleOriginType, BiosampleSampleOrigin> createdBiosampleOrigins
 	) throws IOException, ApiException {
 		try (InputStreamReader jsonFileInputStream = new InputStreamReader(new FileInputStream("./src/main/resources/toLoad/biosamples.json"))){
 			Gson gson = new Gson();
@@ -61,9 +65,19 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 			biosampleResourceApi.setApiClient(getApiClient());
 			BiosampleStatusResourceApi biosampleStatusResourceApi = new BiosampleStatusResourceApi();
 			biosampleStatusResourceApi.setApiClient(getApiClient());
+			BiosampleObtentionProcedureResourceApi biosampleObtentionProcedureResourceApi = new BiosampleObtentionProcedureResourceApi();
+			biosampleObtentionProcedureResourceApi.setApiClient(getApiClient());
 
 			for(ReadBiosample readBiosample: readBiosamples){
-				loadReadBiosample(biosampleResourceApi, readBiosample, createdBioSampleStatuses, biosampleStatusResourceApi);
+				loadReadBiosample(
+						biosampleResourceApi,
+						readBiosample,
+						createdBioSampleStatuses,
+						createdBiosampleObtenitionProcedures,
+						createdBiosampleOrigins,
+						biosampleStatusResourceApi,
+						biosampleObtentionProcedureResourceApi
+				);
 			}
 		}
 	}
@@ -72,9 +86,24 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 			BiosampleResourceApi biosampleResourceApi,
 			ReadBiosample readBiosample,
 			Map<ReadBiosampleStatus, UUID> createdBioSampleStatuses,
-			BiosampleStatusResourceApi biosampleStatusResourceApi
+			Map<ReadObtentionProcedure, UUID> createdBiosampleObtenitionProcedures,
+			Map<ReadBiosampleOriginType, BiosampleSampleOrigin> createdBiosampleOrigins,
+			BiosampleStatusResourceApi biosampleStatusResourceApi,
+			BiosampleObtentionProcedureResourceApi BiosampleObtentionProcedureResourceApi
 	) throws ApiException {
-		biosampleResourceApi.createBiosample(readBiosample.getAPIRepresentation(createdBioSampleStatuses, biosampleStatusResourceApi));
+		var createdBioSample = biosampleResourceApi.createBiosample(readBiosample.getAPIRepresentation(
+				createdBioSampleStatuses,
+				createdBiosampleObtenitionProcedures,
+				createdBiosampleOrigins,
+				biosampleStatusResourceApi,
+				BiosampleObtentionProcedureResourceApi
+		));
+
+		if (readBiosample.getBiosampleOriginType() != null) {
+			if (!createdBiosampleOrigins.containsKey(readBiosample.getBiosampleOriginType())){
+				createdBiosampleOrigins.put(readBiosample.getBiosampleOriginType(), createdBioSample.getSampleOrigin());
+			}
+		}
 	}
 
 	private void loadIndividuals(Map<String, Individual> createdIndividuals) throws IOException, ApiException {
@@ -200,7 +229,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		IndividualResourceApi individualResourceApi = new IndividualResourceApi();
 		individualResourceApi.setApiClient(getApiClient());
 
-		var individuals = individualResourceApi.getAllIndividuals();
+		var individuals = individualResourceApi.getAllIndividuals(Boolean.FALSE);
 		var individualsUUIDs = individuals.stream().map(Individual::getId).collect(Collectors.toSet());
 
 		for (var individualUUID: individualsUUIDs){
