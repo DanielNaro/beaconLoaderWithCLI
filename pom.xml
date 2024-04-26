@@ -206,7 +206,7 @@
 							<inputSpec>${project.basedir}/src/main/resources/api.json</inputSpec>
 							<generatorName>java</generatorName>
 							<configOptions>
-								<sourceFolder>src/main/java/edu/upc/dmag/jHipsterClient</sourceFolder>
+								<sourceFolder>src/main/java/</sourceFolder>
 							</configOptions>
 						</configuration>
 					</execution>

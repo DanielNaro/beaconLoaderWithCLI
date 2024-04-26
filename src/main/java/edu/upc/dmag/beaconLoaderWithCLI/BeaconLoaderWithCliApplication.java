@@ -152,7 +152,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 
 	private static void deleteAll() throws ApiException {
 		deleteDatasets();
-		/*deleteIndividuals();
+		deleteIndividuals();
 		deleteRuns();
 		deleteBioSamples();
 		deleteCohort();
@@ -196,7 +196,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		deleteAnalysis();
 		deletePlatformModel();
 		deleteProcedure();
-		deleteSampleOrigin();*/
+		deleteSampleOrigin();
 	}
 
 	@NotNull
@@ -759,10 +759,10 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		biosampleStatusResourceApi.setApiClient(getApiClient());
 
 		var instances = biosampleStatusResourceApi.getAllBiosampleStatuses();
-		var instancesUUIDs = instances.stream().map(BiosampleStatus::getId).collect(Collectors.toSet());
+		var instancesIDs = instances.stream().map(BiosampleStatus::getId).collect(Collectors.toSet());
 
-		for (var instanceUUID: instancesUUIDs){
-			biosampleStatusResourceApi.deleteBiosampleStatus(instanceUUID);
+		for (var instanceID: instancesIDs){
+			biosampleStatusResourceApi.deleteBiosampleStatus(instanceID);
 		}
 	}
 

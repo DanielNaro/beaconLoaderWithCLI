@@ -9394,6 +9394,13 @@
               "format": "uuid"
             }
           },
+          "measures": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
           "runs": {
             "type": "array",
             "items": {
@@ -9808,7 +9815,20 @@
             "type": "string"
           },
           "ageAtMeasure": { "type": "string" },
-          "duration": { "type": "string" }
+          "duration": { "type": "string" },
+          "biosamples": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },"individuals": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
         }
       },
       "LibrarySource": {
@@ -10008,6 +10028,13 @@
           },
           "procedureDuration": {
             "type": "string"
+          },
+          "biosamples": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
           }
         }
       },
@@ -10017,6 +10044,9 @@
           "id": {
             "type": "string",
             "format": "uuid"
+          },
+          "idString": {
+            "type": "string"
           },
           "label": {
             "type": "string"
