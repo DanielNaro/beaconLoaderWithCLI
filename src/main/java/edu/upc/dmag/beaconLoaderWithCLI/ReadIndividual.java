@@ -17,7 +17,7 @@ public class ReadIndividual {
 
     public Individual getAPIRepresentation() {
         Individual result = new Individual();
-        result.setSex(sex.getLabel());
+        //result.setSex(sex.getLabel());
         return result;
     }
 

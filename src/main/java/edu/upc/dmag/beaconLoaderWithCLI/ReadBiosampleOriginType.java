@@ -1,7 +1,5 @@
 package edu.upc.dmag.beaconLoaderWithCLI;
 
-import org.openapitools.client.model.BiosampleSampleOrigin;
-
 public class ReadBiosampleOriginType {
     private String id;
     private String label;
@@ -27,9 +25,4 @@ public class ReadBiosampleOriginType {
         this.label = label;
     }
 
-    public BiosampleSampleOrigin getAPIRepresentation() {
-        BiosampleSampleOrigin result = new BiosampleSampleOrigin();
-        result.setLabel(label);
-        return result;
-    }
 }
