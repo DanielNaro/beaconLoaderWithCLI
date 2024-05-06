@@ -1,6 +1,11 @@
 package edu.upc.dmag.beaconLoaderWithCLI;
 
+import org.openapitools.client.api.MeasuresItemResourceApi;
 import org.openapitools.client.model.Individual;
+import org.openapitools.client.model.MeasuresItem;
+
+import java.lang.reflect.Array;
+import java.util.List;
 
 public class ReadIndividual {
     private String id;
@@ -17,7 +22,21 @@ public class ReadIndividual {
 
     public Individual getAPIRepresentation() {
         Individual result = new Individual();
-        //result.setSex(sex.getLabel());
+        result.setIdAsProvided(id);
+        result.setKaryotypicSex("");
+        result.setEthnicity(null);
+        result.setGeographicOrigins(List.of());
+        result.setPedigrees(null);
+        result.setPhenotypicFeatures(null);
+        result.setInterventionsOrProcedures(null);
+        result.setMeasures(new MeasuresItem());
+        result.setDiseases(null);
+        result.setExposures(List.of());
+        result.setTreatments(List.of());
+        result.setSequencingBioinformaticsAnalysisindividual(null);
+        result.setBiosampleindividual(null);
+        result.setRunindividual(null);
+
         return result;
     }
 

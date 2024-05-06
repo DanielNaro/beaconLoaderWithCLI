@@ -9721,6 +9721,26 @@
           "id": {
             "type": "integer",
             "format": "int64"
+          }, "interval": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "quantities": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "scheduleFrequencies": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "treatmentsItemdoseIntervals": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
           }
         }
       },
@@ -9736,6 +9756,54 @@
           },
           "karyotypicSex": {
             "type": "string"
+          },
+          "ethnicity": {
+            "$ref": "#/components/schemas/OntologyTerm"
+          },
+          "sex": {
+            "$ref": "#/components/schemas/OntologyTerm"
+          },
+          "geographicOrigins": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OntologyTerm"
+            }
+          },
+          "pedigrees": {
+            "$ref": "#/components/schemas/PedigreesItem"
+          },
+          "phenotypicFeatures": {
+            "$ref": "#/components/schemas/PhenotypicFeaturesItem"
+          },
+          "interventionsOrProcedures": {
+            "$ref": "#/components/schemas/InterventionsOrProceduresItem"
+          },
+          "measures": {
+            "$ref": "#/components/schemas/MeasuresItem"
+          },
+          "diseases": {
+            "$ref": "#/components/schemas/DiseasesItem"
+          },
+          "exposures": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExposuresItem"
+            }
+          },
+          "treatments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TreatmentsItem"
+            }
+          },
+          "sequencingBioinformaticsAnalysisindividual": {
+            "$ref": "#/components/schemas/SequencingBioinformaticsAnalysis"
+          },
+          "biosampleindividual": {
+            "$ref": "#/components/schemas/Biosample"
+          },
+          "runindividual": {
+            "$ref": "#/components/schemas/Run"
           }
         }
       },
@@ -10116,6 +10184,12 @@
               "type": "integer"
             }
           },
+          "references": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
           "phenotypicFeaturesItemevidence": {
             "type": "array",
             "items": {
@@ -10274,6 +10348,26 @@
           },
           "familyHistory": {
             "type": "boolean"
+          }, "stage": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "severity": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "diseaseCodes": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "pedigreesItemdisease": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
           }
         }
       },
@@ -10374,6 +10468,31 @@
           },
           "cohortType": {
             "type": "string"
+          }, "inclusionCriteria": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "exclusionCriteria": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "cohortDesigns": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "collectionEvents": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "cohortDataTypes": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
           }
         }
       },
@@ -10389,6 +10508,31 @@
           },
           "familyHistory": {
             "type": "boolean"
+          }, "diseaseCodes": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "stages": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "severities": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "inclusionCriteriadiseaseConditions": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "exclusionCriteriadiseaseConditions": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
           }
         }
       },
@@ -10404,6 +10548,26 @@
           },
           "familyHistory": {
             "type": "boolean"
+          }, "diseaseCode": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "stages": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "severities": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "individualdiseases": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
           }
         }
       },
@@ -10575,6 +10739,18 @@
           },
           "label": {
             "type": "string"
+          },
+          "exclusionCriteriaethnicities": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "inclusionCriteriaethnicities": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
           }
         }
       },
@@ -10609,6 +10785,16 @@
           },
           "label": {
             "type": "string"
+          }, "cohortcohortDataTypes": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "genomicVariantcohortDataTypes": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
           }
         }
       },
@@ -10637,6 +10823,56 @@
           "eventNum": {
             "type": "number",
             "format": "float"
+          }, "eventLocations": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "eventPhenotypes": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "eventGenders": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "eventTimeline": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "eventDataTypes": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "eventAgeRanges": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "eventDiseases": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "eventEthnicities": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "cohortcollectionEvents": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "genomicVariantcollectionEvents": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
           }
         }
       },
@@ -10818,6 +11054,16 @@
           "id": {
             "type": "integer",
             "format": "int64"
+          }, "duoDataUses": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          }, "datasetdataUseConditions": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
           }
         }
       },

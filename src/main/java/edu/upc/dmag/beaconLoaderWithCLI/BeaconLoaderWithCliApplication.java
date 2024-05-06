@@ -46,7 +46,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		Map<ReadObtentionProcedure, UUID> createdBiosampleObtenitionProcedures = new HashMap<>();
 		//Map<ReadBiosampleOriginType, BiosampleSampleOrigin> createdBiosampleOrigins = new HashMap<>();
 		loadDatasets();
-		//loadIndividuals(createdIndividuals);
+		loadIndividuals(createdIndividuals);
 		//loadBiosamples(createdIndividuals, createdBiosamples, createdBioSampleStatuses, createdBiosampleObtenitionProcedures, createdBiosampleOrigins);
 	}
 
@@ -106,28 +106,32 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		}
 	}*/
 
-	/*private void loadIndividuals(Map<String, Individual> createdIndividuals) throws IOException, ApiException {
+	private void loadIndividuals(Map<String, Individual> createdIndividuals) throws IOException, ApiException {
 		try (InputStreamReader jsonFileInputStream = new InputStreamReader(new FileInputStream("./src/main/resources/toLoad/individuals.json"))){
 			Gson gson = new Gson();
 			var readIndividuals = gson.fromJson(jsonFileInputStream, ReadIndividual[].class);
 
 			IndividualResourceApi individualResourceApi = new IndividualResourceApi();
 			individualResourceApi.setApiClient(getApiClient());
-			MeasureResourceApi measureResourceApi = new MeasureResourceApi();
+			MeasuresItemResourceApi measureResourceApi = new MeasuresItemResourceApi();
 			measureResourceApi.setApiClient(getApiClient());
 
 			for(ReadIndividual readIndividual: readIndividuals){
 				loadReadIndividual(individualResourceApi, measureResourceApi, readIndividual, createdIndividuals);
 			}
 		}
-	}*/
+	}
 
-	/*private void loadReadIndividual(IndividualResourceApi individualResourceApi, MeasureResourceApi measureResourceApi, ReadIndividual readIndividual, Map<String, Individual> createdIndividuals) throws ApiException {
+	private void loadReadIndividual(IndividualResourceApi individualResourceApi, MeasuresItemResourceApi measureResourceApi, ReadIndividual readIndividual, Map<String, Individual> createdIndividuals) throws ApiException {
 		Individual createdIndividual = individualResourceApi.createIndividual(
 				readIndividual.getAPIRepresentation()
 		);
 		createdIndividuals.put(readIndividual.getId(), createdIndividual);
-	}*/
+
+		for(var readMeasure: readIndividual.getMeasures()){
+			System.out.println(readMeasure);
+		}
+	}
 
 	private void loadDatasets() throws IOException, ApiException {
 		try (InputStreamReader jsonFileInputStream = new InputStreamReader(new FileInputStream("./src/main/resources/toLoad/datasets.json"))){
