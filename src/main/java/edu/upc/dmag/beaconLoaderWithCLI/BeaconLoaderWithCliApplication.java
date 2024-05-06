@@ -115,17 +115,55 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 			individualResourceApi.setApiClient(getApiClient());
 			MeasuresItemResourceApi measureResourceApi = new MeasuresItemResourceApi();
 			measureResourceApi.setApiClient(getApiClient());
+			OntologyTermResourceApi ontologyTermResourceApi = new OntologyTermResourceApi();
+			ontologyTermResourceApi.setApiClient(getApiClient());
+			Map<String, OntologyTerm> createdSexes = new HashMap<>();
+			Map<String, OntologyTerm> createdAssayCodes = new HashMap<>();
 
 			for(ReadIndividual readIndividual: readIndividuals){
-				loadReadIndividual(individualResourceApi, measureResourceApi, readIndividual, createdIndividuals);
+				loadReadIndividual(
+					individualResourceApi,
+					measureResourceApi,
+					ontologyTermResourceApi,
+					readIndividual,
+					createdIndividuals,
+					createdSexes,
+					createdAssayCodes
+				);
 			}
 		}
 	}
 
-	private void loadReadIndividual(IndividualResourceApi individualResourceApi, MeasuresItemResourceApi measureResourceApi, ReadIndividual readIndividual, Map<String, Individual> createdIndividuals) throws ApiException {
+	private void loadReadIndividual(
+			IndividualResourceApi individualResourceApi,
+			MeasuresItemResourceApi measureResourceApi,
+			OntologyTermResourceApi ontologyTermResourceApi,
+			ReadIndividual readIndividual,
+			Map<String, Individual> createdIndividuals,
+			Map<String, OntologyTerm> createdSexes,
+			Map<String, OntologyTerm> createdAssayCodes,
+			Map<String, Procedure> createdProcedures
+	) throws ApiException {
+		if (!createdSexes.containsKey(readIndividual.getSex().getId())){
+			OntologyTerm sexOntologyTerm = ontologyTermResourceApi.createOntologyTerm(readIndividual.getSex().toAPIRepresentation());
+			createdSexes.put(readIndividual.getSex().getId(), sexOntologyTerm);
+		}
+
+		for (var readMeasure : readIndividual.getMeasures()) {
+			if (!createdAssayCodes.containsKey(readMeasure.getAssayCode().getId())) {
+				OntologyTerm toCreateAssayCodeToCreate = new OntologyTerm();
+				toCreateAssayCodeToCreate.setIdAsProvided(readMeasure.getAssayCode().getId());
+				toCreateAssayCodeToCreate.setLabel(readMeasure.getAssayCode().getLabel());
+
+				OntologyTerm createdAssayCodeToCreate = ontologyTermResourceApi.createOntologyTerm(toCreateAssayCodeToCreate);
+				createdAssayCodes.put(readMeasure.getAssayCode().getId(), createdAssayCodeToCreate);
+			}
+		}
+
 		Individual createdIndividual = individualResourceApi.createIndividual(
-				readIndividual.getAPIRepresentation()
+				readIndividual.getAPIRepresentation(createdSexes, createdAssayCodes)
 		);
+		readIndividual.getMeasures(measureResourceApi, createdIndividual);
 		createdIndividuals.put(readIndividual.getId(), createdIndividual);
 
 		for(var readMeasure: readIndividual.getMeasures()){
@@ -189,6 +227,8 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		deleteCollectionEventsItems();
 		deleteCohorts();
 		deleteCohortDataTypesItems();
+		//deleteIndividuals();
+		deleteOntologyTerm();
 	}
 
 	@NotNull
@@ -203,6 +243,17 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 				"web_app",
 				parameters
 		);
+	}
+
+	private static void deleteOntologyTerm() throws ApiException { OntologyTermResourceApi ontologyTermResourceApi = new OntologyTermResourceApi();
+		ontologyTermResourceApi.setApiClient(getApiClient());
+
+		var instances = ontologyTermResourceApi.getAllOntologyTerms("");
+		var instancesUUIDs = instances.stream().map(OntologyTerm::getId).collect(Collectors.toSet());
+
+		for (var instanceUUID: instancesUUIDs){
+			ontologyTermResourceApi.deleteOntologyTerm(instanceUUID);
+		}
 	}
 
 	private static void deleteTreatmentsItem() throws ApiException { TreatmentsItemResourceApi treatmentsItemResourceApi = new TreatmentsItemResourceApi();
@@ -551,6 +602,18 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 
 		for (var instanceUUID: instancesUUIDs){
 			cohortDataTypesItemResourceApi.deleteCohortDataTypesItem(instanceUUID);
+		}
+	}
+
+	private static void deleteIndividuals() throws ApiException {
+		IndividualResourceApi individualResourceApi = new IndividualResourceApi();
+		individualResourceApi.setApiClient(getApiClient());
+
+		var instances = individualResourceApi.getAllIndividuals("",true);
+		var instancesUUIDs = instances.stream().map(Individual::getId).collect(Collectors.toSet());
+
+		for (var instanceUUID: instancesUUIDs){
+			individualResourceApi.deleteIndividual(instanceUUID);
 		}
 	}
 }

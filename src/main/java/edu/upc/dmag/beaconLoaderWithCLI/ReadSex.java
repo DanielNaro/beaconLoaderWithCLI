@@ -1,5 +1,7 @@
 package edu.upc.dmag.beaconLoaderWithCLI;
 
+import org.openapitools.client.model.OntologyTerm;
+
 public class ReadSex {
     private String id;
     private String label;
@@ -23,5 +25,12 @@ public class ReadSex {
 
     public void setLabel(String label) {
         this.label = label;
+    }
+
+    public OntologyTerm toAPIRepresentation() {
+        OntologyTerm ontologyTerm = new OntologyTerm();
+        ontologyTerm.setLabel(label);
+        ontologyTerm.setIdAsProvided(id);
+        return ontologyTerm;
     }
 }

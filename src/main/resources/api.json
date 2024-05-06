@@ -9665,22 +9665,22 @@
           "label": {
             "type": "string"
           },
-          "unnamedEntitymodifiers": {
+          "unnamedEntitymodifiers":{
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/UnnamedEntity"
             }
           },
-          "phenotypicFeaturesItemmodifiers": {
+          "phenotypicFeaturesItemmodifiers":{
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/PhenotypicFeaturesItem"
             }
           },
-          "phenotypicConditionsItemmodifiers": {
+          "phenotypicConditionsItemmodifiers":{
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/PhenotypicConditionsItem"
             }
           }
         }
@@ -9721,25 +9721,26 @@
           "id": {
             "type": "integer",
             "format": "int64"
-          }, "interval": {
+          },
+          "interval": {
+            "$ref": "#/components/schemas/TimeInterval"
+          },
+          "quantities": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/Quantity"
             }
-          }, "quantities": {
+          },
+          "scheduleFrequencies": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/OntologyTerm"
             }
-          }, "scheduleFrequencies": {
+          },
+          "treatmentsItemdoseIntervals": {
             "type": "array",
             "items": {
-              "type": "integer"
-            }
-          }, "treatmentsItemdoseIntervals": {
-            "type": "array",
-            "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/TreatmentsItem"
             }
           }
         }
@@ -9779,7 +9780,10 @@
             "$ref": "#/components/schemas/InterventionsOrProceduresItem"
           },
           "measures": {
-            "$ref": "#/components/schemas/MeasuresItem"
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MeasuresItem"
+            }
           },
           "diseases": {
             "$ref": "#/components/schemas/DiseasesItem"
@@ -9818,6 +9822,102 @@
             "type": "string"
           },
           "label": {
+            "type": "string"
+          },
+          "individualsexes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OntologyTerm"
+            }
+          },"individualethnicity": {
+            "$ref": "#/components/schemas/OntologyTerm"
+          },"measuresItemassayCode":{
+            "$ref": "#/components/schemas/MeasuresItem"
+          },"runplatformModel":{
+            "$ref": "#/components/schemas/Run"
+          },"diseasestage":{
+            "$ref": "#/components/schemas/Disease"
+          },"membersItemrole":{
+            "$ref": "#/components/schemas/MembersItem"
+          },"interventionsOrProceduresItemprocedureCode":{
+            "$ref": "#/components/schemas/InterventionsOrProceduresItem"
+          },"diseasesItemdiseaseCode":{
+            "$ref": "#/components/schemas/DiseasesItem"
+          },"runlibrarySource":{
+            "$ref": "#/components/schemas/Run"
+          },"quantityunit":{
+            "$ref": "#/components/schemas/Quantity"
+          },"diseaseseverity":{
+            "$ref": "#/components/schemas/Disease"
+          },"referenceRangeunit":{
+            "$ref": "#/components/schemas/ReferenceRange"
+          },"duoDataUseOntologyTerm":{
+            "$ref": "#/components/schemas/DuoDataUse"
+          },"exposuresItemunit":{
+            "$ref": "#/components/schemas/ExposuresItem"
+          },"diseaseConditionsItemdiseaseCode":{
+            "$ref": "#/components/schemas/DiseaseConditionsItem"
+          },"biosamplesampleStorage":{
+            "$ref": "#/components/schemas/Biosample"
+          },"treatmentsItemrouteOfAdministration":{
+            "$ref": "#/components/schemas/TreatmentsItem"
+          },"biosamplesampleOriginDetail":{
+            "$ref": "#/components/schemas/Biosample"
+          },"individualgeographicOrigin":{
+            "$ref": "#/components/schemas/Individual"
+          },"biosamplepathologicalStage":{
+            "$ref": "#/components/schemas/Biosample"
+          },"procedurebodySite":{
+            "$ref": "#/components/schemas/Procedure"
+          },"biosampletumorGrade":{
+            "$ref": "#/components/schemas/Biosample"
+          },"evidenceevidenceCode":{
+            "$ref": "#/components/schemas/Evidence"
+          },"diseasesItemstage":{
+            "$ref": "#/components/schemas/DiseasesItem"
+          },"diseasesItemseverity":{
+            "$ref": "#/components/schemas/DiseasesItem"
+          },"phenotypicConditionsItemfeatureType":{
+            "$ref": "#/components/schemas/PhenotypicConditionsItem"
+          },"phenotypicConditionsItemseverity":{
+            "$ref": "#/components/schemas/PhenotypicConditionsItem"
+          },"biosamplebiosampleStatus":{
+            "$ref": "#/components/schemas/Biosample"
+          },"biosampletumorProgression":{
+            "$ref": "#/components/schemas/Biosample"
+          },"phenotypicFeaturesItemfeatureType":{
+            "$ref": "#/components/schemas/PhenotypicFeaturesItem"
+          },"doseIntervalsItemscheduleFrequency":{
+            "$ref": "#/components/schemas/DoseIntervalsItem"
+          },"diseaseConditionsItemstage":{
+            "$ref": "#/components/schemas/DiseaseConditionsItem"
+          },"diseaseConditionsItemseverity":{
+            "$ref": "#/components/schemas/DiseaseConditionsItem"
+          },"measurementsItemassayCode":{
+            "$ref": "#/components/schemas/MeasurementsItem"
+          },"exposuresItemexposureCode":{
+            "$ref": "#/components/schemas/ExposuresItem"
+          },"biosamplesampleProcessing":{
+            "$ref": "#/components/schemas/Biosample"
+          },"genomicVariantcohortDesign":{
+            "$ref": "#/components/schemas/GenomicVariant"
+          },"phenotypicFeaturesItemseverity":{
+            "$ref": "#/components/schemas/PhenotypicFeaturesItem"
+          },"biosamplehistologicalDiagnosis":{
+            "$ref": "#/components/schemas/Biosample"
+          },"biosamplesampleOriginType":{
+            "$ref": "#/components/schemas/Biosample"
+          },"cohortcohortDesign":{
+            "$ref": "#/components/schemas/Cohort"
+          },"procedureprocedureCode":{
+            "$ref": "#/components/schemas/Procedure"
+          },"diseasediseaseCode":{
+            "$ref": "#/components/schemas/Disease"
+          },"treatmentsItemtreatmentCode":{
+            "$ref": "#/components/schemas/TreatmentsItem"
+          },"interventionsOrProceduresItembodySite":{
+            "$ref": "#/components/schemas/InterventionsOrProceduresItem"
+          },"karyotypicSex":{
             "type": "string"
           }
         }
@@ -10084,16 +10184,10 @@
             "type": "string"
           },
           "procedures": {
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
+            "$ref": "#/components/schemas/Procedure"
           },
           "assayCodes": {
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
+            "$ref": "#/components/schemas/OntologyTerm"
           },
           "biosamplemeasurements": {
             "type": "array",
@@ -10116,22 +10210,22 @@
           "notes": {
             "type": "string"
           },
-          "procedures": {
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
+          "procedure": {
+            "$ref": "#/components/schemas/Procedure"
           },
-          "assayCodes": {
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
+          "assayCode": {
+            "$ref": "#/components/schemas/OntologyTerm"
           },
           "biosamplemeasurements": {
             "type": "array",
             "items": {
               "type": "integer"
+            }
+          },
+          "individualmeasures": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Individual"
             }
           }
         }
