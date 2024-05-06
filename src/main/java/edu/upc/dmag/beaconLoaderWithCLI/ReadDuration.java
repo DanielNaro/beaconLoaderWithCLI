@@ -1,17 +1,12 @@
 package edu.upc.dmag.beaconLoaderWithCLI;
 
-import java.time.Duration;
-import java.time.temporal.TemporalAmount;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
-
 import static edu.upc.dmag.beaconLoaderWithCLI.ConvertDuration.getDuration;
 
-public class ReadAge {
+public class ReadDuration {
     private String iso8601duration;
 
 
-    public ReadAge(String iso8601duration) {
+    public ReadDuration(String iso8601duration) {
         this.iso8601duration = getDuration(iso8601duration).toString();
     }
 
