@@ -29,13 +29,23 @@ public class ReadIndividual {
         Map<String, OntologyTerm> createdAssayCodes) throws ApiException {
         List<MeasuresItem> measures = new ArrayList<>();
         for(var readMeasure: this.getMeasures()){
+
+
             MeasuresItem newMeasure = new MeasuresItem();
+            newMeasure.setDate(readMeasure.getDate());
+            readMeasure.get
+            instanceof
+
+            newMeasure.
             newMeasure.setAssayCode(createdAssayCodes.get(readMeasure.getAssayCode().getId()));
             newMeasure.setBiosamplemeasurements();readMeasure.getMeasurementValue().getAPIRepresentation();
+
+            measures.add(newMeasure);
         }
 
         Individual result = new Individual();
-        result.setIdAsProvided(id);
+        result.setMeasures();
+        /*result.setIdAsProvided(id);
         result.setKaryotypicSex("");
         result.setEthnicity(null);
         result.setGeographicOrigins(List.of());
@@ -49,7 +59,7 @@ public class ReadIndividual {
         result.setSequencingBioinformaticsAnalysisindividual(null);
         result.setBiosampleindividual(null);
         result.setRunindividual(null);
-        result.setSex(createdSexes.get(sex.getId()));
+        result.setSex(createdSexes.get(sex.getId()));*/
 
         return result;
     }
@@ -58,7 +68,7 @@ public class ReadIndividual {
         List<MeasuresItem> toAdd = Arrays.stream(this.measures).map(it -> {
             MeasuresItem measuresItem = new MeasuresItem();
             measuresItem.setDate(it.getDate());
-            measuresItem.setIndividualmeasures(List.of(createdIndividual));
+            //measuresItem.setIndividualmeasures(List.of(createdIndividual));
             return measuresItem;
         }).toList();
 

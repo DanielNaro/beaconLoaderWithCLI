@@ -35,7 +35,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	public void run(String... args) throws ApiException, IOException {
 		LOG.info("EXECUTING : command line runner");
 
-		deleteAll();
+		//deleteAll();
 		loadData();
 	}
 
@@ -119,6 +119,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 			ontologyTermResourceApi.setApiClient(getApiClient());
 			Map<String, OntologyTerm> createdSexes = new HashMap<>();
 			Map<String, OntologyTerm> createdAssayCodes = new HashMap<>();
+			Map<String, Procedure> createdProcedures = new HashMap<>();
 
 			for(ReadIndividual readIndividual: readIndividuals){
 				loadReadIndividual(
@@ -128,7 +129,8 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 					readIndividual,
 					createdIndividuals,
 					createdSexes,
-					createdAssayCodes
+					createdAssayCodes,
+					createdProcedures
 				);
 			}
 		}
@@ -192,7 +194,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	}
 
 
-	private static void deleteAll() throws ApiException {
+	/*private static void deleteAll() throws ApiException {
 		deleteTreatmentsItem();
 		deleteAnalysis();
 		deleteRuns();
@@ -229,7 +231,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		deleteCohortDataTypesItems();
 		//deleteIndividuals();
 		deleteOntologyTerm();
-	}
+	}*/
 
 	@NotNull
 	private static ApiClient getApiClient() {
@@ -245,7 +247,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		);
 	}
 
-	private static void deleteOntologyTerm() throws ApiException { OntologyTermResourceApi ontologyTermResourceApi = new OntologyTermResourceApi();
+	/*private static void deleteOntologyTerm() throws ApiException { OntologyTermResourceApi ontologyTermResourceApi = new OntologyTermResourceApi();
 		ontologyTermResourceApi.setApiClient(getApiClient());
 
 		var instances = ontologyTermResourceApi.getAllOntologyTerms("");
@@ -615,5 +617,5 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		for (var instanceUUID: instancesUUIDs){
 			individualResourceApi.deleteIndividual(instanceUUID);
 		}
-	}
+	}*/
 }

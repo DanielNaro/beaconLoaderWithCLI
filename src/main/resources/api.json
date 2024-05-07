@@ -9665,18 +9665,6 @@
           "id": {
             "type": "integer",
             "format": "int64"
-          },
-          "unnamedChild": {
-            "$ref": "#/components/schemas/UnnamedEntity"
-          },
-          "ontologyTerm": {
-            "$ref": "#/components/schemas/OntologyTerm"
-          },
-          "dataUseConditionsduoDataUses": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DataUseConditions"
-            }
           }
         }
       },
@@ -9688,24 +9676,6 @@
           },
           "label": {
             "type": "string"
-          },
-          "unnamedEntitymodifiers": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/UnnamedEntity"
-            }
-          },
-          "phenotypicFeaturesItemmodifiers": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PhenotypicFeaturesItem"
-            }
-          },
-          "phenotypicConditionsItemmodifiers": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PhenotypicConditionsItem"
-            }
           }
         }
       },
@@ -9740,30 +9710,6 @@
           },
           "iso8601duration": {
             "type": "string"
-          },
-          "ageRangeends": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AgeRange"
-            }
-          },
-          "treatmentsItemageAtOnsets": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TreatmentsItem"
-            }
-          },
-          "ageRangestarts": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AgeRange"
-            }
-          },
-          "exposuresItemageAtExposures": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ExposuresItem"
-            }
           }
         }
       },
@@ -9773,27 +9719,6 @@
           "id": {
             "type": "integer",
             "format": "int64"
-          },
-          "interval": {
-            "$ref": "#/components/schemas/TimeInterval"
-          },
-          "quantities": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Quantity"
-            }
-          },
-          "scheduleFrequencies": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "treatmentsItemdoseIntervals": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TreatmentsItem"
-            }
           }
         }
       },
@@ -10170,24 +10095,6 @@
           "value": {
             "type": "number",
             "format": "float"
-          },
-          "referenceRange": {
-            "$ref": "#/components/schemas/ReferenceRange"
-          },
-          "unit": {
-            "$ref": "#/components/schemas/OntologyTerm"
-          },
-          "treatmentsItemcumulativeDoses": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TreatmentsItem"
-            }
-          },
-          "doseIntervalsItemquantities": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DoseIntervalsItem"
-            }
           }
         }
       },
@@ -10278,78 +10185,6 @@
           },
           "collectionDate": {
             "type": "string"
-          },
-          "individual": {
-            "$ref": "#/components/schemas/Individual"
-          },
-          "obtentionProcedure": {
-            "$ref": "#/components/schemas/Procedure"
-          },
-          "diagnosticMarkers": {
-            "$ref": "#/components/schemas/DiagnosticMarkersItem"
-          },
-          "phenotypicFeatures": {
-            "$ref": "#/components/schemas/PhenotypicFeaturesItem"
-          },
-          "pathologicalTnmFindings": {
-            "$ref": "#/components/schemas/PathologicalTnmFindingItem"
-          },
-          "measurements": {
-            "$ref": "#/components/schemas/MeasurementsItem"
-          },
-          "sampleStorages": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "sampleOriginDetails": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "pathologicalStages": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "tumorGrades": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "biosampleStatuses": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "tumorProgressions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "sampleProcessings": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "histologicalDiagnoses": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "sampleOriginTypes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
           }
         }
       },
@@ -10464,15 +10299,6 @@
           },
           "notes": {
             "type": "string"
-          },
-          "assayCode": {
-            "$ref": "#/components/schemas/OntologyTerm"
-          },
-          "procedure": {
-            "$ref": "#/components/schemas/Procedure"
-          },
-          "individualmeasures": {
-            "$ref": "#/components/schemas/Individual"
           }
         }
       },
@@ -10550,13 +10376,6 @@
               "$ref": "#/components/schemas/OntologyTerm"
             }
           },
-          "evidences": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Evidence"
-            }
-          },
           "individualphenotypicFeatures": {
             "uniqueItems": true,
             "type": "array",
@@ -10579,42 +10398,6 @@
           "id": {
             "type": "integer",
             "format": "int64"
-          },
-          "ageRange": {
-            "$ref": "#/components/schemas/AgeRange"
-          },
-          "phenotypicConditions": {
-            "$ref": "#/components/schemas/PhenotypicConditionsItem"
-          },
-          "ethnicities": {
-            "$ref": "#/components/schemas/EthnicitiesItem"
-          },
-          "genders": {
-            "$ref": "#/components/schemas/GendersItem"
-          },
-          "locations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/LocationsItem"
-            }
-          },
-          "diseaseConditions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DiseaseConditionsItem"
-            }
-          },
-          "cohortexclusionCriteria": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Cohort"
-            }
-          },
-          "genomicVariantexclusionCriteria": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/GenomicVariant"
-            }
           }
         }
       },
@@ -10624,42 +10407,6 @@
           "id": {
             "type": "integer",
             "format": "int64"
-          },
-          "ageRange": {
-            "$ref": "#/components/schemas/AgeRange"
-          },
-          "diseaseConditions": {
-            "$ref": "#/components/schemas/DiseaseConditionsItem"
-          },
-          "locations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/LocationsItem"
-            }
-          },
-          "phenotypicConditions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PhenotypicConditionsItem"
-            }
-          },
-          "ethnicities": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EthnicitiesItem"
-            }
-          },
-          "genders": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/GendersItem"
-            }
-          },
-          "genomicVariantinclusionCriteria": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/GenomicVariant"
-            }
           }
         }
       },
@@ -10725,24 +10472,6 @@
           },
           "familyHistory": {
             "type": "boolean"
-          },
-          "stage": {
-            "$ref": "#/components/schemas/OntologyTerm"
-          },
-          "severity": {
-            "$ref": "#/components/schemas/OntologyTerm"
-          },
-          "diseaseCodes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "pedigreesItemdisease": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PedigreesItem"
-            }
           }
         }
       },
@@ -10758,15 +10487,6 @@
           },
           "memberId": {
             "type": "string"
-          },
-          "role": {
-            "$ref": "#/components/schemas/OntologyTerm"
-          },
-          "pedigreesItemmembers": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PedigreesItem"
-            }
           }
         }
       },
@@ -10840,36 +10560,6 @@
           },
           "cohortType": {
             "type": "string"
-          },
-          "inclusionCriteria": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/InclusionCriteria"
-            }
-          },
-          "exclusionCriteria": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ExclusionCriteria"
-            }
-          },
-          "collectionEvents": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CollectionEventsItem"
-            }
-          },
-          "cohortDesigns": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "cohortDataTypes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CohortDataTypesItem"
-            }
           }
         }
       },
@@ -10885,36 +10575,6 @@
           },
           "familyHistory": {
             "type": "boolean"
-          },
-          "diseaseCodes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "stages": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "severities": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "inclusionCriteriadiseaseConditions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/InclusionCriteria"
-            }
-          },
-          "exclusionCriteriadiseaseConditions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ExclusionCriteria"
-            }
           }
         }
       },
@@ -10930,27 +10590,6 @@
           },
           "familyHistory": {
             "type": "boolean"
-          },
-          "diseaseCode": {
-            "$ref": "#/components/schemas/OntologyTerm"
-          },
-          "stages": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "severities": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "individualdiseases": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Individual"
-            }
           }
         }
       },
@@ -10960,12 +10599,6 @@
           "id": {
             "type": "integer",
             "format": "int64"
-          },
-          "evidenceCodes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
           }
         }
       },
@@ -10985,27 +10618,6 @@
           "value": {
             "type": "number",
             "format": "float"
-          },
-          "unit": {
-            "$ref": "#/components/schemas/OntologyTerm"
-          },
-          "ageAtExposures": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Age"
-            }
-          },
-          "exposureCodes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "individualexposures": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Individual"
-            }
           }
         }
       },
@@ -11028,24 +10640,6 @@
           },
           "cohortType": {
             "type": "string"
-          },
-          "exclusionCriteria": {
-            "$ref": "#/components/schemas/ExclusionCriteria"
-          },
-          "inclusionCriteria": {
-            "$ref": "#/components/schemas/InclusionCriteria"
-          },
-          "cohortDesigns": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "cohortDataTypes": {
-            "$ref": "#/components/schemas/CohortDataTypesItem"
-          },
-          "collectionEvents": {
-            "$ref": "#/components/schemas/CollectionEventsItem"
           }
         }
       },
@@ -11058,21 +10652,6 @@
           },
           "dateOfProcedure": {
             "type": "string"
-          },
-          "procedureCode": {
-            "$ref": "#/components/schemas/OntologyTerm"
-          },
-          "bodySites": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "individualinterventionsOrProcedures": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Individual"
-            }
           }
         }
       },
@@ -11088,18 +10667,6 @@
           },
           "notes": {
             "type": "string"
-          },
-          "assayCodes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "biosamplemeasurements": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Biosample"
-            }
           }
         }
       },
@@ -11134,24 +10701,6 @@
           "id": {
             "type": "integer",
             "format": "int64"
-          },
-          "end": {
-            "$ref": "#/components/schemas/Age"
-          },
-          "start": {
-            "$ref": "#/components/schemas/Age"
-          },
-          "exclusionCriteriaageRanges": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ExclusionCriteria"
-            }
-          },
-          "inclusionCriteriaageRanges": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/InclusionCriteria"
-            }
           }
         }
       },
@@ -11163,18 +10712,6 @@
           },
           "label": {
             "type": "string"
-          },
-          "exclusionCriteriaethnicities": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ExclusionCriteria"
-            }
-          },
-          "inclusionCriteriaethnicities": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/InclusionCriteria"
-            }
           }
         }
       },
@@ -11186,18 +10723,6 @@
           },
           "label": {
             "type": "string"
-          },
-          "exclusionCriteriagenders": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ExclusionCriteria"
-            }
-          },
-          "inclusionCriteriagenders": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/InclusionCriteria"
-            }
           }
         }
       },
@@ -11209,18 +10734,6 @@
           },
           "label": {
             "type": "string"
-          },
-          "cohortcohortDataTypes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Cohort"
-            }
-          },
-          "genomicVariantcohortDataTypes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/GenomicVariant"
-            }
           }
         }
       },
@@ -11249,60 +10762,6 @@
           "eventNum": {
             "type": "number",
             "format": "float"
-          },
-          "eventLocations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EventLocations"
-            }
-          },
-          "eventPhenotypes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EventPhenotypes"
-            }
-          },
-          "eventGenders": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EventGenders"
-            }
-          },
-          "eventTimeline": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EventTimeline"
-            }
-          },
-          "eventDataTypes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EventDataTypes"
-            }
-          },
-          "eventAgeRanges": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EventAgeRange"
-            }
-          },
-          "eventDiseases": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EventDiseases"
-            }
-          },
-          "cohortcollectionEvents": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Cohort"
-            }
-          },
-          "genomicVariantcollectionEvents": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/GenomicVariant"
-            }
           }
         }
       },
@@ -11506,18 +10965,6 @@
           "id": {
             "type": "integer",
             "format": "int64"
-          },
-          "duoDataUses": {
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
-          },
-          "datasetdataUseConditions": {
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
           }
         }
       },
