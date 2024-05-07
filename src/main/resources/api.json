@@ -6790,16 +6790,6 @@
           "unnamed-entity-resource"
         ],
         "operationId": "getAllUnnamedEntities",
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -6913,16 +6903,6 @@
           "time-interval-resource"
         ],
         "operationId": "getAllTimeIntervals",
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -7076,16 +7056,6 @@
           "reference-range-resource"
         ],
         "operationId": "getAllReferenceRanges",
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -7190,11 +7160,12 @@
         "operationId": "getAllProcedures",
         "parameters": [
           {
-            "name": "filter",
+            "name": "eagerload",
             "in": "query",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "boolean",
+              "default": true
             }
           }
         ],
@@ -7486,16 +7457,6 @@
           "ontology-term-resource"
         ],
         "operationId": "getAllOntologyTerms",
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -7700,6 +7661,17 @@
           "measurements-item-resource"
         ],
         "operationId": "getAllMeasurementsItems",
+        "parameters": [
+          {
+            "name": "eagerload",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -7822,6 +7794,17 @@
           "interventions-or-procedures-item-resource"
         ],
         "operationId": "getAllInterventionsOrProceduresItems",
+        "parameters": [
+          {
+            "name": "eagerload",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -7874,14 +7857,6 @@
         ],
         "operationId": "getAllIndividuals",
         "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
           {
             "name": "eagerload",
             "in": "query",
@@ -7945,14 +7920,6 @@
         "operationId": "getAllInclusionCriteria",
         "parameters": [
           {
-            "name": "filter",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "eagerload",
             "in": "query",
             "required": false,
@@ -8013,6 +7980,17 @@
           "genomic-variant-resource"
         ],
         "operationId": "getAllGenomicVariants",
+        "parameters": [
+          {
+            "name": "eagerload",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -8166,6 +8144,17 @@
           "exposures-item-resource"
         ],
         "operationId": "getAllExposuresItems",
+        "parameters": [
+          {
+            "name": "eagerload",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -8218,14 +8207,6 @@
         ],
         "operationId": "getAllExclusionCriteria",
         "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
           {
             "name": "eagerload",
             "in": "query",
@@ -8287,6 +8268,17 @@
           "evidence-resource"
         ],
         "operationId": "getAllEvidences",
+        "parameters": [
+          {
+            "name": "eagerload",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -8338,16 +8330,6 @@
           "event-timeline-resource"
         ],
         "operationId": "getAllEventTimelines",
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -8399,16 +8381,6 @@
           "event-phenotypes-resource"
         ],
         "operationId": "getAllEventPhenotypes",
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -8460,16 +8432,6 @@
           "event-locations-resource"
         ],
         "operationId": "getAllEventLocations",
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -8521,16 +8483,6 @@
           "event-genders-resource"
         ],
         "operationId": "getAllEventGenders",
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -8888,6 +8840,17 @@
           "dose-intervals-item-resource"
         ],
         "operationId": "getAllDoseIntervalsItems",
+        "parameters": [
+          {
+            "name": "eagerload",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -8939,6 +8902,17 @@
           "disease-resource"
         ],
         "operationId": "getAllDiseases",
+        "parameters": [
+          {
+            "name": "eagerload",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -8990,6 +8964,17 @@
           "diseases-item-resource"
         ],
         "operationId": "getAllDiseasesItems",
+        "parameters": [
+          {
+            "name": "eagerload",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -9041,6 +9026,17 @@
           "disease-conditions-item-resource"
         ],
         "operationId": "getAllDiseaseConditionsItems",
+        "parameters": [
+          {
+            "name": "eagerload",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -9143,6 +9139,17 @@
           "dataset-resource"
         ],
         "operationId": "getAllDatasets",
+        "parameters": [
+          {
+            "name": "eagerload",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -9194,6 +9201,17 @@
           "data-use-conditions-resource"
         ],
         "operationId": "getAllDataUseConditions",
+        "parameters": [
+          {
+            "name": "eagerload",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -9245,6 +9263,17 @@
           "collection-events-item-resource"
         ],
         "operationId": "getAllCollectionEventsItems",
+        "parameters": [
+          {
+            "name": "eagerload",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -9296,6 +9325,17 @@
           "cohort-resource"
         ],
         "operationId": "getAllCohorts",
+        "parameters": [
+          {
+            "name": "eagerload",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -9400,14 +9440,6 @@
         "operationId": "getAllBiosamples",
         "parameters": [
           {
-            "name": "filter",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "eagerload",
             "in": "query",
             "required": false,
@@ -9468,16 +9500,6 @@
           "age-resource"
         ],
         "operationId": "getAllAges",
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -9529,16 +9551,6 @@
           "age-range-resource"
         ],
         "operationId": "getAllAgeRanges",
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -9653,6 +9665,18 @@
           "id": {
             "type": "integer",
             "format": "int64"
+          },
+          "unnamedChild": {
+            "$ref": "#/components/schemas/UnnamedEntity"
+          },
+          "ontologyTerm": {
+            "$ref": "#/components/schemas/OntologyTerm"
+          },
+          "dataUseConditionsduoDataUses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataUseConditions"
+            }
           }
         }
       },
@@ -9665,19 +9689,19 @@
           "label": {
             "type": "string"
           },
-          "unnamedEntitymodifiers":{
+          "unnamedEntitymodifiers": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/UnnamedEntity"
             }
           },
-          "phenotypicFeaturesItemmodifiers":{
+          "phenotypicFeaturesItemmodifiers": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PhenotypicFeaturesItem"
             }
           },
-          "phenotypicConditionsItemmodifiers":{
+          "phenotypicConditionsItemmodifiers": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PhenotypicConditionsItem"
@@ -9698,8 +9722,12 @@
           "modifiers": {
             "$ref": "#/components/schemas/ModifiersItem"
           },
-          "duoDataUseunnamedChild": {
-            "$ref": "#/components/schemas/DuoDataUse"
+          "duoDataUseunnamedChildren": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DuoDataUse"
+            }
           }
         }
       },
@@ -9712,6 +9740,30 @@
           },
           "iso8601duration": {
             "type": "string"
+          },
+          "ageRangeends": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgeRange"
+            }
+          },
+          "treatmentsItemageAtOnsets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TreatmentsItem"
+            }
+          },
+          "ageRangestarts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgeRange"
+            }
+          },
+          "exposuresItemageAtExposures": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExposuresItem"
+            }
           }
         }
       },
@@ -9800,14 +9852,23 @@
               "$ref": "#/components/schemas/TreatmentsItem"
             }
           },
-          "sequencingBioinformaticsAnalysisindividual": {
-            "$ref": "#/components/schemas/SequencingBioinformaticsAnalysis"
+          "sequencingBioinformaticsAnalysisindividuals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SequencingBioinformaticsAnalysis"
+            }
           },
-          "biosampleindividual": {
-            "$ref": "#/components/schemas/Biosample"
+          "biosampleindividuals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Biosample"
+            }
           },
-          "runindividual": {
-            "$ref": "#/components/schemas/Run"
+          "runindividuals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Run"
+            }
           }
         }
       },
@@ -9829,95 +9890,272 @@
             "items": {
               "$ref": "#/components/schemas/OntologyTerm"
             }
-          },"individualethnicity": {
-            "$ref": "#/components/schemas/OntologyTerm"
-          },"measuresItemassayCode":{
-            "$ref": "#/components/schemas/MeasuresItem"
-          },"runplatformModel":{
-            "$ref": "#/components/schemas/Run"
-          },"diseasestage":{
-            "$ref": "#/components/schemas/Disease"
-          },"membersItemrole":{
-            "$ref": "#/components/schemas/MembersItem"
-          },"interventionsOrProceduresItemprocedureCode":{
-            "$ref": "#/components/schemas/InterventionsOrProceduresItem"
-          },"diseasesItemdiseaseCode":{
-            "$ref": "#/components/schemas/DiseasesItem"
-          },"runlibrarySource":{
-            "$ref": "#/components/schemas/Run"
-          },"quantityunit":{
-            "$ref": "#/components/schemas/Quantity"
-          },"diseaseseverity":{
-            "$ref": "#/components/schemas/Disease"
-          },"referenceRangeunit":{
-            "$ref": "#/components/schemas/ReferenceRange"
-          },"duoDataUseOntologyTerm":{
-            "$ref": "#/components/schemas/DuoDataUse"
-          },"exposuresItemunit":{
-            "$ref": "#/components/schemas/ExposuresItem"
-          },"diseaseConditionsItemdiseaseCode":{
-            "$ref": "#/components/schemas/DiseaseConditionsItem"
-          },"biosamplesampleStorage":{
-            "$ref": "#/components/schemas/Biosample"
-          },"treatmentsItemrouteOfAdministration":{
-            "$ref": "#/components/schemas/TreatmentsItem"
-          },"biosamplesampleOriginDetail":{
-            "$ref": "#/components/schemas/Biosample"
-          },"individualgeographicOrigin":{
-            "$ref": "#/components/schemas/Individual"
-          },"biosamplepathologicalStage":{
-            "$ref": "#/components/schemas/Biosample"
-          },"procedurebodySite":{
-            "$ref": "#/components/schemas/Procedure"
-          },"biosampletumorGrade":{
-            "$ref": "#/components/schemas/Biosample"
-          },"evidenceevidenceCode":{
-            "$ref": "#/components/schemas/Evidence"
-          },"diseasesItemstage":{
-            "$ref": "#/components/schemas/DiseasesItem"
-          },"diseasesItemseverity":{
-            "$ref": "#/components/schemas/DiseasesItem"
-          },"phenotypicConditionsItemfeatureType":{
-            "$ref": "#/components/schemas/PhenotypicConditionsItem"
-          },"phenotypicConditionsItemseverity":{
-            "$ref": "#/components/schemas/PhenotypicConditionsItem"
-          },"biosamplebiosampleStatus":{
-            "$ref": "#/components/schemas/Biosample"
-          },"biosampletumorProgression":{
-            "$ref": "#/components/schemas/Biosample"
-          },"phenotypicFeaturesItemfeatureType":{
-            "$ref": "#/components/schemas/PhenotypicFeaturesItem"
-          },"doseIntervalsItemscheduleFrequency":{
-            "$ref": "#/components/schemas/DoseIntervalsItem"
-          },"diseaseConditionsItemstage":{
-            "$ref": "#/components/schemas/DiseaseConditionsItem"
-          },"diseaseConditionsItemseverity":{
-            "$ref": "#/components/schemas/DiseaseConditionsItem"
-          },"measurementsItemassayCode":{
-            "$ref": "#/components/schemas/MeasurementsItem"
-          },"exposuresItemexposureCode":{
-            "$ref": "#/components/schemas/ExposuresItem"
-          },"biosamplesampleProcessing":{
-            "$ref": "#/components/schemas/Biosample"
-          },"genomicVariantcohortDesign":{
-            "$ref": "#/components/schemas/GenomicVariant"
-          },"phenotypicFeaturesItemseverity":{
-            "$ref": "#/components/schemas/PhenotypicFeaturesItem"
-          },"biosamplehistologicalDiagnosis":{
-            "$ref": "#/components/schemas/Biosample"
-          },"biosamplesampleOriginType":{
-            "$ref": "#/components/schemas/Biosample"
-          },"cohortcohortDesign":{
-            "$ref": "#/components/schemas/Cohort"
-          },"procedureprocedureCode":{
-            "$ref": "#/components/schemas/Procedure"
-          },"diseasediseaseCode":{
-            "$ref": "#/components/schemas/Disease"
-          },"treatmentsItemtreatmentCode":{
-            "$ref": "#/components/schemas/TreatmentsItem"
-          },"interventionsOrProceduresItembodySite":{
-            "$ref": "#/components/schemas/InterventionsOrProceduresItem"
-          },"karyotypicSex":{
+          },
+          "individualethnicities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OntologyTerm"
+            }
+          },
+          "measuresItemassayCodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MeasuresItem"
+            }
+          },
+          "runplatformModels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Run"
+            }
+          },
+          "diseasestages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Disease"
+            }
+          },
+          "membersItemroles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MembersItem"
+            }
+          },
+          "interventionsOrProceduresItemprocedureCodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InterventionsOrProceduresItem"
+            }
+          },
+          "diseasesItemdiseaseCodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiseasesItem"
+            }
+          },
+          "runlibrarySources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Run"
+            }
+          },
+          "quantityunits": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Quantity"
+            }
+          },
+          "diseaseseverities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Disease"
+            }
+          },
+          "referenceRangeunits": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReferenceRange"
+            }
+          },
+          "duoDataUseOntologyTerms": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DuoDataUse"
+            }
+          },
+          "exposuresItemunits": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExposuresItem"
+            }
+          },
+          "diseaseConditionsItemdiseaseCodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiseaseConditionsItem"
+            }
+          },
+          "biosamplesampleStorages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Biosample"
+            }
+          },
+          "treatmentsItemrouteOfAdministrations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TreatmentsItem"
+            }
+          },
+          "biosamplesampleOriginDetails": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Biosample"
+            }
+          },
+          "individualgeographicOrigins": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Individual"
+            }
+          },
+          "biosamplepathologicalStages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Biosample"
+            }
+          },
+          "procedurebodySites": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Procedure"
+            }
+          },
+          "biosampletumorGrades": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Biosample"
+            }
+          },
+          "evidenceevidenceCodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Evidence"
+            }
+          },
+          "diseasesItemstages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiseasesItem"
+            }
+          },
+          "diseasesItemseverities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiseasesItem"
+            }
+          },
+          "phenotypicConditionsItemfeatureTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhenotypicConditionsItem"
+            }
+          },
+          "phenotypicConditionsItemseverities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhenotypicConditionsItem"
+            }
+          },
+          "biosamplebiosampleStatuses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Biosample"
+            }
+          },
+          "biosampletumorProgressions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Biosample"
+            }
+          },
+          "phenotypicFeaturesItemfeatureTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhenotypicFeaturesItem"
+            }
+          },
+          "doseIntervalsItemscheduleFrequencies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DoseIntervalsItem"
+            }
+          },
+          "diseaseConditionsItemstages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiseaseConditionsItem"
+            }
+          },
+          "diseaseConditionsItemseverities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiseaseConditionsItem"
+            }
+          },
+          "measurementsItemassayCodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MeasurementsItem"
+            }
+          },
+          "exposuresItemexposureCodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExposuresItem"
+            }
+          },
+          "biosamplesampleProcessings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Biosample"
+            }
+          },
+          "genomicVariantcohortDesigns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GenomicVariant"
+            }
+          },
+          "phenotypicFeaturesItemseverities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhenotypicFeaturesItem"
+            }
+          },
+          "biosamplehistologicalDiagnoses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Biosample"
+            }
+          },
+          "biosamplesampleOriginTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Biosample"
+            }
+          },
+          "cohortcohortDesigns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Cohort"
+            }
+          },
+          "procedureprocedureCodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Procedure"
+            }
+          },
+          "diseasediseaseCodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Disease"
+            }
+          },
+          "treatmentsItemtreatmentCodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TreatmentsItem"
+            }
+          },
+          "interventionsOrProceduresItembodySites": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InterventionsOrProceduresItem"
+            }
+          },
+          "karyotypicSex": {
             "type": "string"
           }
         }
@@ -9934,27 +10172,21 @@
             "format": "float"
           },
           "referenceRange": {
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
+            "$ref": "#/components/schemas/ReferenceRange"
           },
           "unit": {
+            "$ref": "#/components/schemas/OntologyTerm"
+          },
+          "treatmentsItemcumulativeDoses": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/TreatmentsItem"
             }
           },
-          "treatmentsItemcumulativeDose": {
+          "doseIntervalsItemquantities": {
             "type": "array",
             "items": {
-              "type": "integer"
-            }
-          },
-          "doseIntervalsItemquantity": {
-            "type": "array",
-            "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/DoseIntervalsItem"
             }
           }
         }
@@ -9969,11 +10201,11 @@
           "ageAtOnset": {
             "$ref": "#/components/schemas/Age"
           },
-          "cumulativeDoses": {
+          "doseIntervals": {
             "uniqueItems": true,
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Quantity"
+              "$ref": "#/components/schemas/DoseIntervalsItem"
             }
           },
           "routeOfAdministrations": {
@@ -9990,11 +10222,11 @@
               "$ref": "#/components/schemas/OntologyTerm"
             }
           },
-          "doseIntervals": {
+          "cumulativeDoses": {
             "uniqueItems": true,
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/DoseIntervalsItem"
+              "$ref": "#/components/schemas/Quantity"
             }
           },
           "individualtreatments": {
@@ -10019,8 +10251,12 @@
           "end": {
             "type": "string"
           },
-          "doseIntervalsIteminterval": {
-            "$ref": "#/components/schemas/DoseIntervalsItem"
+          "doseIntervalsItemintervals": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DoseIntervalsItem"
+            }
           }
         }
       },
@@ -10042,67 +10278,77 @@
           },
           "collectionDate": {
             "type": "string"
-          }
-        }
-      },
-      "Run": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "librarySelection": {
-            "type": "string"
-          },
-          "runDate": {
-            "type": "string"
-          },
-          "idAsProvided": {
-            "type": "string"
-          },
-          "libraryStrategy": {
-            "type": "string"
-          },
-          "platform": {
-            "type": "string"
-          },
-          "libraryLayout": {
-            "type": "string"
-          },
-          "platformModel": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
-          },
-          "biosample": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
-          },
-          "librarySource": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
           },
           "individual": {
-            "uniqueItems": true,
+            "$ref": "#/components/schemas/Individual"
+          },
+          "obtentionProcedure": {
+            "$ref": "#/components/schemas/Procedure"
+          },
+          "diagnosticMarkers": {
+            "$ref": "#/components/schemas/DiagnosticMarkersItem"
+          },
+          "phenotypicFeatures": {
+            "$ref": "#/components/schemas/PhenotypicFeaturesItem"
+          },
+          "pathologicalTnmFindings": {
+            "$ref": "#/components/schemas/PathologicalTnmFindingItem"
+          },
+          "measurements": {
+            "$ref": "#/components/schemas/MeasurementsItem"
+          },
+          "sampleStorages": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/OntologyTerm"
             }
           },
-          "sequencingBioinformaticsAnalysisrun": {
-            "uniqueItems": true,
+          "sampleOriginDetails": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/OntologyTerm"
+            }
+          },
+          "pathologicalStages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OntologyTerm"
+            }
+          },
+          "tumorGrades": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OntologyTerm"
+            }
+          },
+          "biosampleStatuses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OntologyTerm"
+            }
+          },
+          "tumorProgressions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OntologyTerm"
+            }
+          },
+          "sampleProcessings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OntologyTerm"
+            }
+          },
+          "histologicalDiagnoses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OntologyTerm"
+            }
+          },
+          "sampleOriginTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OntologyTerm"
             }
           }
         }
@@ -10137,13 +10383,45 @@
           },
           "biosample": {
             "$ref": "#/components/schemas/Biosample"
+          }
+        }
+      },
+      "Run": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
           },
-          "runs": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Run"
-            }
+          "librarySelection": {
+            "type": "string"
+          },
+          "runDate": {
+            "type": "string"
+          },
+          "idAsProvided": {
+            "type": "string"
+          },
+          "libraryStrategy": {
+            "type": "string"
+          },
+          "platform": {
+            "type": "string"
+          },
+          "libraryLayout": {
+            "type": "string"
+          },
+          "platformModel": {
+            "$ref": "#/components/schemas/OntologyTerm"
+          },
+          "biosample": {
+            "$ref": "#/components/schemas/Biosample"
+          },
+          "librarySource": {
+            "$ref": "#/components/schemas/OntologyTerm"
+          },
+          "individual": {
+            "$ref": "#/components/schemas/Individual"
           }
         }
       },
@@ -10165,34 +10443,11 @@
           "unit": {
             "$ref": "#/components/schemas/OntologyTerm"
           },
-          "quantityreferenceRange": {
-            "$ref": "#/components/schemas/Quantity"
-          }
-        }
-      },
-      "MeasurementsItem": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "date": {
-            "type": "string"
-          },
-          "notes": {
-            "type": "string"
-          },
-          "procedures": {
-            "$ref": "#/components/schemas/Procedure"
-          },
-          "assayCodes": {
-            "$ref": "#/components/schemas/OntologyTerm"
-          },
-          "biosamplemeasurements": {
+          "quantityreferenceRanges": {
+            "uniqueItems": true,
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/Quantity"
             }
           }
         }
@@ -10210,23 +10465,14 @@
           "notes": {
             "type": "string"
           },
-          "procedure": {
-            "$ref": "#/components/schemas/Procedure"
-          },
           "assayCode": {
             "$ref": "#/components/schemas/OntologyTerm"
           },
-          "biosamplemeasurements": {
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
+          "procedure": {
+            "$ref": "#/components/schemas/Procedure"
           },
           "individualmeasures": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Individual"
-            }
+            "$ref": "#/components/schemas/Individual"
           }
         }
       },
@@ -10254,46 +10500,18 @@
               "$ref": "#/components/schemas/OntologyTerm"
             }
           },
-          "biosampleobtentionProcedure": {
-            "$ref": "#/components/schemas/Biosample"
-          },
-          "measuresItemprocedure": {
-            "$ref": "#/components/schemas/MeasuresItem"
-          },
-          "measurementsItemprocedure": {
-            "$ref": "#/components/schemas/MeasurementsItem"
-          }
-        }
-      },
-      "Evidence": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "evidenceCodes": {
+          "biosampleobtentionProcedures": {
+            "uniqueItems": true,
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/Biosample"
             }
           },
-          "references": {
+          "measuresItemprocedures": {
+            "uniqueItems": true,
             "type": "array",
             "items": {
-              "type": "integer"
-            }
-          },
-          "phenotypicFeaturesItemevidence": {
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
-          },
-          "phenotypicConditionsItemevidence": {
-            "type": "array",
-            "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/MeasuresItem"
             }
           }
         }
@@ -10310,6 +10528,13 @@
           },
           "notes": {
             "type": "string"
+          },
+          "modifiers": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModifiersItem"
+            }
           },
           "featureTypes": {
             "uniqueItems": true,
@@ -10330,13 +10555,6 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Evidence"
-            }
-          },
-          "modifiers": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ModifiersItem"
             }
           },
           "individualphenotypicFeatures": {
@@ -10361,6 +10579,42 @@
           "id": {
             "type": "integer",
             "format": "int64"
+          },
+          "ageRange": {
+            "$ref": "#/components/schemas/AgeRange"
+          },
+          "phenotypicConditions": {
+            "$ref": "#/components/schemas/PhenotypicConditionsItem"
+          },
+          "ethnicities": {
+            "$ref": "#/components/schemas/EthnicitiesItem"
+          },
+          "genders": {
+            "$ref": "#/components/schemas/GendersItem"
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocationsItem"
+            }
+          },
+          "diseaseConditions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiseaseConditionsItem"
+            }
+          },
+          "cohortexclusionCriteria": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Cohort"
+            }
+          },
+          "genomicVariantexclusionCriteria": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GenomicVariant"
+            }
           }
         }
       },
@@ -10370,6 +10624,42 @@
           "id": {
             "type": "integer",
             "format": "int64"
+          },
+          "ageRange": {
+            "$ref": "#/components/schemas/AgeRange"
+          },
+          "diseaseConditions": {
+            "$ref": "#/components/schemas/DiseaseConditionsItem"
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocationsItem"
+            }
+          },
+          "phenotypicConditions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PhenotypicConditionsItem"
+            }
+          },
+          "ethnicities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EthnicitiesItem"
+            }
+          },
+          "genders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GendersItem"
+            }
+          },
+          "genomicVariantinclusionCriteria": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GenomicVariant"
+            }
           }
         }
       },
@@ -10386,6 +10676,13 @@
           "notes": {
             "type": "string"
           },
+          "modifiers": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModifiersItem"
+            }
+          },
           "featureTypes": {
             "uniqueItems": true,
             "type": "array",
@@ -10398,20 +10695,6 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "evidences": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Evidence"
-            }
-          },
-          "modifiers": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ModifiersItem"
             }
           },
           "exclusionCriteriaphenotypicConditions": {
@@ -10442,25 +10725,23 @@
           },
           "familyHistory": {
             "type": "boolean"
-          }, "stage": {
+          },
+          "stage": {
+            "$ref": "#/components/schemas/OntologyTerm"
+          },
+          "severity": {
+            "$ref": "#/components/schemas/OntologyTerm"
+          },
+          "diseaseCodes": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/OntologyTerm"
             }
-          }, "severity": {
+          },
+          "pedigreesItemdisease": {
             "type": "array",
             "items": {
-              "type": "integer"
-            }
-          }, "diseaseCodes": {
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
-          }, "pedigreesItemdisease": {
-            "type": "array",
-            "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/PedigreesItem"
             }
           }
         }
@@ -10479,15 +10760,12 @@
             "type": "string"
           },
           "role": {
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
+            "$ref": "#/components/schemas/OntologyTerm"
           },
           "pedigreesItemmembers": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/PedigreesItem"
             }
           }
         }
@@ -10502,18 +10780,18 @@
             "type": "number",
             "format": "float"
           },
-          "diseases": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Disease"
-            }
-          },
           "members": {
             "uniqueItems": true,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MembersItem"
+            }
+          },
+          "diseases": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Disease"
             }
           },
           "individualpedigrees": {
@@ -10562,30 +10840,35 @@
           },
           "cohortType": {
             "type": "string"
-          }, "inclusionCriteria": {
+          },
+          "inclusionCriteria": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/InclusionCriteria"
             }
-          }, "exclusionCriteria": {
+          },
+          "exclusionCriteria": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/ExclusionCriteria"
             }
-          }, "cohortDesigns": {
+          },
+          "collectionEvents": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/CollectionEventsItem"
             }
-          }, "collectionEvents": {
+          },
+          "cohortDesigns": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/OntologyTerm"
             }
-          }, "cohortDataTypes": {
+          },
+          "cohortDataTypes": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/CohortDataTypesItem"
             }
           }
         }
@@ -10602,30 +10885,35 @@
           },
           "familyHistory": {
             "type": "boolean"
-          }, "diseaseCodes": {
+          },
+          "diseaseCodes": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/OntologyTerm"
             }
-          }, "stages": {
+          },
+          "stages": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/OntologyTerm"
             }
-          }, "severities": {
+          },
+          "severities": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/OntologyTerm"
             }
-          }, "inclusionCriteriadiseaseConditions": {
+          },
+          "inclusionCriteriadiseaseConditions": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/InclusionCriteria"
             }
-          }, "exclusionCriteriadiseaseConditions": {
+          },
+          "exclusionCriteriadiseaseConditions": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/ExclusionCriteria"
             }
           }
         }
@@ -10642,25 +10930,41 @@
           },
           "familyHistory": {
             "type": "boolean"
-          }, "diseaseCode": {
+          },
+          "diseaseCode": {
+            "$ref": "#/components/schemas/OntologyTerm"
+          },
+          "stages": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/OntologyTerm"
             }
-          }, "stages": {
+          },
+          "severities": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/OntologyTerm"
             }
-          }, "severities": {
+          },
+          "individualdiseases": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/Individual"
             }
-          }, "individualdiseases": {
+          }
+        }
+      },
+      "Evidence": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "evidenceCodes": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/OntologyTerm"
             }
           }
         }
@@ -10683,27 +10987,24 @@
             "format": "float"
           },
           "unit": {
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
+            "$ref": "#/components/schemas/OntologyTerm"
           },
           "ageAtExposures": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/Age"
             }
           },
           "exposureCodes": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/OntologyTerm"
             }
           },
           "individualexposures": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/Individual"
             }
           }
         }
@@ -10729,34 +11030,22 @@
             "type": "string"
           },
           "exclusionCriteria": {
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
+            "$ref": "#/components/schemas/ExclusionCriteria"
           },
           "inclusionCriteria": {
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
+            "$ref": "#/components/schemas/InclusionCriteria"
           },
           "cohortDesigns": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/OntologyTerm"
             }
           },
           "cohortDataTypes": {
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
+            "$ref": "#/components/schemas/CohortDataTypesItem"
           },
           "collectionEvents": {
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
+            "$ref": "#/components/schemas/CollectionEventsItem"
           }
         }
       },
@@ -10771,24 +11060,47 @@
             "type": "string"
           },
           "procedureCode": {
-            "type": "array",
-            "items": {
-              "type": "integer"
-            }
+            "$ref": "#/components/schemas/OntologyTerm"
           },
           "bodySites": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/OntologyTerm"
             }
           },
           "individualinterventionsOrProcedures": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/Individual"
             }
           }
-
+        }
+      },
+      "MeasurementsItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "date": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "assayCodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OntologyTerm"
+            }
+          },
+          "biosamplemeasurements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Biosample"
+            }
+          }
         }
       },
       "LocationsItem": {
@@ -10822,6 +11134,24 @@
           "id": {
             "type": "integer",
             "format": "int64"
+          },
+          "end": {
+            "$ref": "#/components/schemas/Age"
+          },
+          "start": {
+            "$ref": "#/components/schemas/Age"
+          },
+          "exclusionCriteriaageRanges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExclusionCriteria"
+            }
+          },
+          "inclusionCriteriaageRanges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InclusionCriteria"
+            }
           }
         }
       },
@@ -10837,13 +11167,13 @@
           "exclusionCriteriaethnicities": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/ExclusionCriteria"
             }
           },
           "inclusionCriteriaethnicities": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/InclusionCriteria"
             }
           }
         }
@@ -10860,13 +11190,13 @@
           "exclusionCriteriagenders": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/ExclusionCriteria"
             }
           },
           "inclusionCriteriagenders": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/InclusionCriteria"
             }
           }
         }
@@ -10879,15 +11209,17 @@
           },
           "label": {
             "type": "string"
-          }, "cohortcohortDataTypes": {
+          },
+          "cohortcohortDataTypes": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/Cohort"
             }
-          }, "genomicVariantcohortDataTypes": {
+          },
+          "genomicVariantcohortDataTypes": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/GenomicVariant"
             }
           }
         }
@@ -10917,55 +11249,59 @@
           "eventNum": {
             "type": "number",
             "format": "float"
-          }, "eventLocations": {
+          },
+          "eventLocations": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/EventLocations"
             }
-          }, "eventPhenotypes": {
+          },
+          "eventPhenotypes": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/EventPhenotypes"
             }
-          }, "eventGenders": {
+          },
+          "eventGenders": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/EventGenders"
             }
-          }, "eventTimeline": {
+          },
+          "eventTimeline": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/EventTimeline"
             }
-          }, "eventDataTypes": {
+          },
+          "eventDataTypes": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/EventDataTypes"
             }
-          }, "eventAgeRanges": {
+          },
+          "eventAgeRanges": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/EventAgeRange"
             }
-          }, "eventDiseases": {
+          },
+          "eventDiseases": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/EventDiseases"
             }
-          }, "eventEthnicities": {
+          },
+          "cohortcollectionEvents": {
             "type": "array",
             "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/Cohort"
             }
-          }, "cohortcollectionEvents": {
+          },
+          "genomicVariantcollectionEvents": {
             "type": "array",
             "items": {
-              "type": "integer"
-            }
-          }, "genomicVariantcollectionEvents": {
-            "type": "array",
-            "items": {
-              "type": "integer"
+              "$ref": "#/components/schemas/GenomicVariant"
             }
           }
         }
@@ -10985,9 +11321,6 @@
           },
           "idAsProvided": {
             "type": "string"
-          },
-          "evidencereference": {
-            "$ref": "#/components/schemas/Evidence"
           }
         }
       },
@@ -11004,8 +11337,12 @@
           "end": {
             "type": "string"
           },
-          "collectionEventsItemeventTimeline": {
-            "$ref": "#/components/schemas/CollectionEventsItem"
+          "collectionEventsItemeventTimelines": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CollectionEventsItem"
+            }
           }
         }
       },
@@ -11024,7 +11361,11 @@
             "type": "boolean"
           },
           "collectionEventsItemeventPhenotypes": {
-            "$ref": "#/components/schemas/CollectionEventsItem"
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CollectionEventsItem"
+            }
           }
         }
       },
@@ -11043,7 +11384,11 @@
             "type": "boolean"
           },
           "collectionEventsItemeventLocations": {
-            "$ref": "#/components/schemas/CollectionEventsItem"
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CollectionEventsItem"
+            }
           }
         }
       },
@@ -11062,7 +11407,11 @@
             "type": "boolean"
           },
           "collectionEventsItemeventGenders": {
-            "$ref": "#/components/schemas/CollectionEventsItem"
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CollectionEventsItem"
+            }
           }
         }
       },
@@ -11079,9 +11428,6 @@
           },
           "availability": {
             "type": "boolean"
-          },
-          "collectionEventsItemeventEthnicities": {
-            "$ref": "#/components/schemas/CollectionEventsItem"
           }
         }
       },
@@ -11100,7 +11446,11 @@
             "type": "boolean"
           },
           "collectionEventsItemeventDiseases": {
-            "$ref": "#/components/schemas/CollectionEventsItem"
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CollectionEventsItem"
+            }
           }
         }
       },
@@ -11119,7 +11469,11 @@
             "type": "boolean"
           },
           "collectionEventsItemeventDataTypes": {
-            "$ref": "#/components/schemas/CollectionEventsItem"
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CollectionEventsItem"
+            }
           }
         }
       },
@@ -11137,8 +11491,12 @@
           "availability": {
             "type": "boolean"
           },
-          "collectionEventsItemeventAgeRange": {
-            "$ref": "#/components/schemas/CollectionEventsItem"
+          "collectionEventsItemeventAgeRanges": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CollectionEventsItem"
+            }
           }
         }
       },
@@ -11148,12 +11506,14 @@
           "id": {
             "type": "integer",
             "format": "int64"
-          }, "duoDataUses": {
+          },
+          "duoDataUses": {
             "type": "array",
             "items": {
               "type": "integer"
             }
-          }, "datasetdataUseConditions": {
+          },
+          "datasetdataUseConditions": {
             "type": "array",
             "items": {
               "type": "integer"
