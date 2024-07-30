@@ -16,6 +16,142 @@
     }
   ],
   "paths": {
+    "/api/value-entities/{id}": {
+      "get": {
+        "tags": [
+          "value-entity-resource"
+        ],
+        "operationId": "getValueEntity",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValueEntity"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "value-entity-resource"
+        ],
+        "operationId": "updateValueEntity",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValueEntity"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValueEntity"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "value-entity-resource"
+        ],
+        "operationId": "deleteValueEntity",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "value-entity-resource"
+        ],
+        "operationId": "partialUpdateValueEntity",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValueEntity"
+              }
+            },
+            "application/merge-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValueEntity"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValueEntity"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/unnamed-entities/{id}": {
       "get": {
         "tags": [
@@ -145,6 +281,142 @@
               "*/*": {
                 "schema": {
                   "$ref": "#/components/schemas/UnnamedEntity"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/typed-quantities-items/{id}": {
+      "get": {
+        "tags": [
+          "typed-quantities-item-resource"
+        ],
+        "operationId": "getTypedQuantitiesItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TypedQuantitiesItem"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "typed-quantities-item-resource"
+        ],
+        "operationId": "updateTypedQuantitiesItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TypedQuantitiesItem"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TypedQuantitiesItem"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "typed-quantities-item-resource"
+        ],
+        "operationId": "deleteTypedQuantitiesItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "typed-quantities-item-resource"
+        ],
+        "operationId": "partialUpdateTypedQuantitiesItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TypedQuantitiesItem"
+              }
+            },
+            "application/merge-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TypedQuantitiesItem"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TypedQuantitiesItem"
                 }
               }
             }
@@ -689,6 +961,142 @@
               "*/*": {
                 "schema": {
                   "$ref": "#/components/schemas/Run"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/resolutions/{id}": {
+      "get": {
+        "tags": [
+          "resolution-resource"
+        ],
+        "operationId": "getResolution",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resolution"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "resolution-resource"
+        ],
+        "operationId": "updateResolution",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Resolution"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resolution"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "resolution-resource"
+        ],
+        "operationId": "deleteResolution",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "resolution-resource"
+        ],
+        "operationId": "partialUpdateResolution",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Resolution"
+              }
+            },
+            "application/merge-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Resolution"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resolution"
                 }
               }
             }
@@ -1776,6 +2184,278 @@
         }
       }
     },
+    "/api/onsets/{id}": {
+      "get": {
+        "tags": [
+          "onset-resource"
+        ],
+        "operationId": "getOnset",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Onset"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "onset-resource"
+        ],
+        "operationId": "updateOnset",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Onset"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Onset"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "onset-resource"
+        ],
+        "operationId": "deleteOnset",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "onset-resource"
+        ],
+        "operationId": "partialUpdateOnset",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Onset"
+              }
+            },
+            "application/merge-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Onset"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Onset"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/observation-moments/{id}": {
+      "get": {
+        "tags": [
+          "observation-moment-resource"
+        ],
+        "operationId": "getObservationMoment",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObservationMoment"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "observation-moment-resource"
+        ],
+        "operationId": "updateObservationMoment",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObservationMoment"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObservationMoment"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "observation-moment-resource"
+        ],
+        "operationId": "deleteObservationMoment",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "observation-moment-resource"
+        ],
+        "operationId": "partialUpdateObservationMoment",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObservationMoment"
+              }
+            },
+            "application/merge-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObservationMoment"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObservationMoment"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/modifiers-items/{id}": {
       "get": {
         "tags": [
@@ -2316,6 +2996,142 @@
         }
       }
     },
+    "/api/measurement-values/{id}": {
+      "get": {
+        "tags": [
+          "measurement-value-resource"
+        ],
+        "operationId": "getMeasurementValue",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MeasurementValue"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "measurement-value-resource"
+        ],
+        "operationId": "updateMeasurementValue",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MeasurementValue"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MeasurementValue"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "measurement-value-resource"
+        ],
+        "operationId": "deleteMeasurementValue",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "measurement-value-resource"
+        ],
+        "operationId": "partialUpdateMeasurementValue",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MeasurementValue"
+              }
+            },
+            "application/merge-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MeasurementValue"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MeasurementValue"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/locations-items/{id}": {
       "get": {
         "tags": [
@@ -2849,6 +3665,142 @@
               "*/*": {
                 "schema": {
                   "$ref": "#/components/schemas/InclusionCriteria"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/gestational-ages/{id}": {
+      "get": {
+        "tags": [
+          "gestational-age-resource"
+        ],
+        "operationId": "getGestationalAge",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/GestationalAge"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "gestational-age-resource"
+        ],
+        "operationId": "updateGestationalAge",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GestationalAge"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/GestationalAge"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "gestational-age-resource"
+        ],
+        "operationId": "deleteGestationalAge",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "gestational-age-resource"
+        ],
+        "operationId": "partialUpdateGestationalAge",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GestationalAge"
+              }
+            },
+            "application/merge-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GestationalAge"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/GestationalAge"
                 }
               }
             }
@@ -5972,6 +6924,142 @@
         }
       }
     },
+    "/api/complex-values/{id}": {
+      "get": {
+        "tags": [
+          "complex-value-resource"
+        ],
+        "operationId": "getComplexValue",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComplexValue"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "complex-value-resource"
+        ],
+        "operationId": "updateComplexValue",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComplexValue"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComplexValue"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "complex-value-resource"
+        ],
+        "operationId": "deleteComplexValue",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "complex-value-resource"
+        ],
+        "operationId": "partialUpdateComplexValue",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComplexValue"
+              }
+            },
+            "application/merge-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComplexValue"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComplexValue"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/collection-events-items/{id}": {
       "get": {
         "tags": [
@@ -6784,12 +7872,346 @@
         }
       }
     },
+    "/api/age-of-onsets/{id}": {
+      "get": {
+        "tags": [
+          "age-of-onset-resource"
+        ],
+        "operationId": "getAgeOfOnset",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgeOfOnset"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "age-of-onset-resource"
+        ],
+        "operationId": "updateAgeOfOnset",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgeOfOnset"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgeOfOnset"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "age-of-onset-resource"
+        ],
+        "operationId": "deleteAgeOfOnset",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "age-of-onset-resource"
+        ],
+        "operationId": "partialUpdateAgeOfOnset",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgeOfOnset"
+              }
+            },
+            "application/merge-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgeOfOnset"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgeOfOnset"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/age-at-procedures/{id}": {
+      "get": {
+        "tags": [
+          "age-at-procedure-resource"
+        ],
+        "operationId": "getAgeAtProcedure",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgeAtProcedure"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "age-at-procedure-resource"
+        ],
+        "operationId": "updateAgeAtProcedure",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgeAtProcedure"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgeAtProcedure"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "age-at-procedure-resource"
+        ],
+        "operationId": "deleteAgeAtProcedure",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "age-at-procedure-resource"
+        ],
+        "operationId": "partialUpdateAgeAtProcedure",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgeAtProcedure"
+              }
+            },
+            "application/merge-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgeAtProcedure"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgeAtProcedure"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/value-entities": {
+      "get": {
+        "tags": [
+          "value-entity-resource"
+        ],
+        "operationId": "getAllValueEntities",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ValueEntity"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "value-entity-resource"
+        ],
+        "operationId": "createValueEntity",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValueEntity"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValueEntity"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/unnamed-entities": {
       "get": {
         "tags": [
           "unnamed-entity-resource"
         ],
         "operationId": "getAllUnnamedEntities",
+        "parameters": [
+          {
+            "name": "eagerload",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -6828,6 +8250,57 @@
               "*/*": {
                 "schema": {
                   "$ref": "#/components/schemas/UnnamedEntity"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/typed-quantities-items": {
+      "get": {
+        "tags": [
+          "typed-quantities-item-resource"
+        ],
+        "operationId": "getAllTypedQuantitiesItems",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TypedQuantitiesItem"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "typed-quantities-item-resource"
+        ],
+        "operationId": "createTypedQuantitiesItem",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TypedQuantitiesItem"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/TypedQuantitiesItem"
                 }
               }
             }
@@ -7050,6 +8523,57 @@
         }
       }
     },
+    "/api/resolutions": {
+      "get": {
+        "tags": [
+          "resolution-resource"
+        ],
+        "operationId": "getAllResolutions",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Resolution"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "resolution-resource"
+        ],
+        "operationId": "createResolution",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Resolution"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resolution"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/reference-ranges": {
       "get": {
         "tags": [
@@ -7158,17 +8682,6 @@
           "procedure-resource"
         ],
         "operationId": "getAllProcedures",
-        "parameters": [
-          {
-            "name": "eagerload",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": true
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -7502,6 +9015,108 @@
         }
       }
     },
+    "/api/onsets": {
+      "get": {
+        "tags": [
+          "onset-resource"
+        ],
+        "operationId": "getAllOnsets",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Onset"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "onset-resource"
+        ],
+        "operationId": "createOnset",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Onset"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/Onset"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/observation-moments": {
+      "get": {
+        "tags": [
+          "observation-moment-resource"
+        ],
+        "operationId": "getAllObservationMoments",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ObservationMoment"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "observation-moment-resource"
+        ],
+        "operationId": "createObservationMoment",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObservationMoment"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObservationMoment"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/modifiers-items": {
       "get": {
         "tags": [
@@ -7661,17 +9276,6 @@
           "measurements-item-resource"
         ],
         "operationId": "getAllMeasurementsItems",
-        "parameters": [
-          {
-            "name": "eagerload",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": true
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -7710,6 +9314,57 @@
               "*/*": {
                 "schema": {
                   "$ref": "#/components/schemas/MeasurementsItem"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/measurement-values": {
+      "get": {
+        "tags": [
+          "measurement-value-resource"
+        ],
+        "operationId": "getAllMeasurementValues",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MeasurementValue"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "measurement-value-resource"
+        ],
+        "operationId": "createMeasurementValue",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MeasurementValue"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/MeasurementValue"
                 }
               }
             }
@@ -7794,17 +9449,6 @@
           "interventions-or-procedures-item-resource"
         ],
         "operationId": "getAllInterventionsOrProceduresItems",
-        "parameters": [
-          {
-            "name": "eagerload",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": true
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -7967,6 +9611,57 @@
               "*/*": {
                 "schema": {
                   "$ref": "#/components/schemas/InclusionCriteria"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/gestational-ages": {
+      "get": {
+        "tags": [
+          "gestational-age-resource"
+        ],
+        "operationId": "getAllGestationalAges",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GestationalAge"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "gestational-age-resource"
+        ],
+        "operationId": "createGestationalAge",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GestationalAge"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/GestationalAge"
                 }
               }
             }
@@ -8144,17 +9839,6 @@
           "exposures-item-resource"
         ],
         "operationId": "getAllExposuresItems",
-        "parameters": [
-          {
-            "name": "eagerload",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": true
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -8268,17 +9952,6 @@
           "evidence-resource"
         ],
         "operationId": "getAllEvidences",
-        "parameters": [
-          {
-            "name": "eagerload",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": true
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -8840,17 +10513,6 @@
           "dose-intervals-item-resource"
         ],
         "operationId": "getAllDoseIntervalsItems",
-        "parameters": [
-          {
-            "name": "eagerload",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": true
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -8902,17 +10564,6 @@
           "disease-resource"
         ],
         "operationId": "getAllDiseases",
-        "parameters": [
-          {
-            "name": "eagerload",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": true
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -8964,17 +10615,6 @@
           "diseases-item-resource"
         ],
         "operationId": "getAllDiseasesItems",
-        "parameters": [
-          {
-            "name": "eagerload",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": true
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -9026,17 +10666,6 @@
           "disease-conditions-item-resource"
         ],
         "operationId": "getAllDiseaseConditionsItems",
-        "parameters": [
-          {
-            "name": "eagerload",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": true
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -9139,17 +10768,6 @@
           "dataset-resource"
         ],
         "operationId": "getAllDatasets",
-        "parameters": [
-          {
-            "name": "eagerload",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": true
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -9201,17 +10819,6 @@
           "data-use-conditions-resource"
         ],
         "operationId": "getAllDataUseConditions",
-        "parameters": [
-          {
-            "name": "eagerload",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": true
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -9257,12 +10864,12 @@
         }
       }
     },
-    "/api/collection-events-items": {
+    "/api/complex-values": {
       "get": {
         "tags": [
-          "collection-events-item-resource"
+          "complex-value-resource"
         ],
-        "operationId": "getAllCollectionEventsItems",
+        "operationId": "getAllComplexValues",
         "parameters": [
           {
             "name": "eagerload",
@@ -9274,6 +10881,57 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ComplexValue"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "complex-value-resource"
+        ],
+        "operationId": "createComplexValue",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ComplexValue"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComplexValue"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/collection-events-items": {
+      "get": {
+        "tags": [
+          "collection-events-item-resource"
+        ],
+        "operationId": "getAllCollectionEventsItems",
         "responses": {
           "200": {
             "description": "OK",
@@ -9596,6 +11254,108 @@
         }
       }
     },
+    "/api/age-of-onsets": {
+      "get": {
+        "tags": [
+          "age-of-onset-resource"
+        ],
+        "operationId": "getAllAgeOfOnsets",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AgeOfOnset"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "age-of-onset-resource"
+        ],
+        "operationId": "createAgeOfOnset",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgeOfOnset"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgeOfOnset"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/age-at-procedures": {
+      "get": {
+        "tags": [
+          "age-at-procedure-resource"
+        ],
+        "operationId": "getAllAgeAtProcedures",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AgeAtProcedure"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "age-at-procedure-resource"
+        ],
+        "operationId": "createAgeAtProcedure",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgeAtProcedure"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgeAtProcedure"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/authenticate": {
       "get": {
         "tags": [
@@ -9659,6 +11419,65 @@
   },
   "components": {
     "schemas": {
+      "MeasurementValue": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "OntologyTerm": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "idAsProvided": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          }
+        }
+      },
+      "Quantity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "value": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "ValueEntity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ontologyTerm": {
+            "$ref": "#/components/schemas/OntologyTerm"
+          },
+          "quantity": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "measurementValueValueEntities": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MeasurementValue"
+            }
+          }
+        }
+      },
       "DuoDataUse": {
         "type": "object",
         "properties": {
@@ -9690,13 +11509,48 @@
             "type": "string"
           },
           "modifiers": {
-            "$ref": "#/components/schemas/ModifiersItem"
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModifiersItem"
+            }
           },
           "duoDataUseunnamedChildren": {
             "uniqueItems": true,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DuoDataUse"
+            }
+          }
+        }
+      },
+      "ComplexValue": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "TypedQuantitiesItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "quantity": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "quantityType": {
+            "$ref": "#/components/schemas/OntologyTerm"
+          },
+          "complexValuetypedQuantities": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ComplexValue"
             }
           }
         }
@@ -9734,367 +11588,6 @@
           },
           "karyotypicSex": {
             "type": "string"
-          },
-          "ethnicity": {
-            "$ref": "#/components/schemas/OntologyTerm"
-          },
-          "sex": {
-            "$ref": "#/components/schemas/OntologyTerm"
-          },
-          "geographicOrigins": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "pedigrees": {
-            "$ref": "#/components/schemas/PedigreesItem"
-          },
-          "phenotypicFeatures": {
-            "$ref": "#/components/schemas/PhenotypicFeaturesItem"
-          },
-          "interventionsOrProcedures": {
-            "$ref": "#/components/schemas/InterventionsOrProceduresItem"
-          },
-          "measures": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MeasuresItem"
-            }
-          },
-          "diseases": {
-            "$ref": "#/components/schemas/DiseasesItem"
-          },
-          "exposures": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ExposuresItem"
-            }
-          },
-          "treatments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TreatmentsItem"
-            }
-          },
-          "sequencingBioinformaticsAnalysisindividuals": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SequencingBioinformaticsAnalysis"
-            }
-          },
-          "biosampleindividuals": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Biosample"
-            }
-          },
-          "runindividuals": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Run"
-            }
-          }
-        }
-      },
-      "OntologyTerm": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "idAsProvided": {
-            "type": "string"
-          },
-          "label": {
-            "type": "string"
-          },
-          "individualsexes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "individualethnicities": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "measuresItemassayCodes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MeasuresItem"
-            }
-          },
-          "runplatformModels": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Run"
-            }
-          },
-          "diseasestages": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Disease"
-            }
-          },
-          "membersItemroles": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MembersItem"
-            }
-          },
-          "interventionsOrProceduresItemprocedureCodes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/InterventionsOrProceduresItem"
-            }
-          },
-          "diseasesItemdiseaseCodes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DiseasesItem"
-            }
-          },
-          "runlibrarySources": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Run"
-            }
-          },
-          "quantityunits": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Quantity"
-            }
-          },
-          "diseaseseverities": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Disease"
-            }
-          },
-          "referenceRangeunits": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ReferenceRange"
-            }
-          },
-          "duoDataUseOntologyTerms": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DuoDataUse"
-            }
-          },
-          "exposuresItemunits": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ExposuresItem"
-            }
-          },
-          "diseaseConditionsItemdiseaseCodes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DiseaseConditionsItem"
-            }
-          },
-          "biosamplesampleStorages": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Biosample"
-            }
-          },
-          "treatmentsItemrouteOfAdministrations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TreatmentsItem"
-            }
-          },
-          "biosamplesampleOriginDetails": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Biosample"
-            }
-          },
-          "individualgeographicOrigins": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Individual"
-            }
-          },
-          "biosamplepathologicalStages": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Biosample"
-            }
-          },
-          "procedurebodySites": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Procedure"
-            }
-          },
-          "biosampletumorGrades": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Biosample"
-            }
-          },
-          "evidenceevidenceCodes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Evidence"
-            }
-          },
-          "diseasesItemstages": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DiseasesItem"
-            }
-          },
-          "diseasesItemseverities": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DiseasesItem"
-            }
-          },
-          "phenotypicConditionsItemfeatureTypes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PhenotypicConditionsItem"
-            }
-          },
-          "phenotypicConditionsItemseverities": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PhenotypicConditionsItem"
-            }
-          },
-          "biosamplebiosampleStatuses": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Biosample"
-            }
-          },
-          "biosampletumorProgressions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Biosample"
-            }
-          },
-          "phenotypicFeaturesItemfeatureTypes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PhenotypicFeaturesItem"
-            }
-          },
-          "doseIntervalsItemscheduleFrequencies": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DoseIntervalsItem"
-            }
-          },
-          "diseaseConditionsItemstages": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DiseaseConditionsItem"
-            }
-          },
-          "diseaseConditionsItemseverities": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DiseaseConditionsItem"
-            }
-          },
-          "measurementsItemassayCodes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MeasurementsItem"
-            }
-          },
-          "exposuresItemexposureCodes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ExposuresItem"
-            }
-          },
-          "biosamplesampleProcessings": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Biosample"
-            }
-          },
-          "genomicVariantcohortDesigns": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/GenomicVariant"
-            }
-          },
-          "phenotypicFeaturesItemseverities": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PhenotypicFeaturesItem"
-            }
-          },
-          "biosamplehistologicalDiagnoses": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Biosample"
-            }
-          },
-          "biosamplesampleOriginTypes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Biosample"
-            }
-          },
-          "cohortcohortDesigns": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Cohort"
-            }
-          },
-          "procedureprocedureCodes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Procedure"
-            }
-          },
-          "diseasediseaseCodes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Disease"
-            }
-          },
-          "treatmentsItemtreatmentCodes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TreatmentsItem"
-            }
-          },
-          "interventionsOrProceduresItembodySites": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/InterventionsOrProceduresItem"
-            }
-          },
-          "karyotypicSex": {
-            "type": "string"
-          }
-        }
-      },
-      "Quantity": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "value": {
-            "type": "number",
-            "format": "float"
           }
         }
       },
@@ -10105,8 +11598,17 @@
             "type": "integer",
             "format": "int64"
           },
+          "cumulativeDose": {
+            "$ref": "#/components/schemas/Quantity"
+          },
+          "routeOfAdministration": {
+            "$ref": "#/components/schemas/OntologyTerm"
+          },
           "ageAtOnset": {
             "$ref": "#/components/schemas/Age"
+          },
+          "treatmentCode": {
+            "$ref": "#/components/schemas/OntologyTerm"
           },
           "doseIntervals": {
             "uniqueItems": true,
@@ -10115,33 +11617,72 @@
               "$ref": "#/components/schemas/DoseIntervalsItem"
             }
           },
-          "routeOfAdministrations": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "treatmentCodes": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "cumulativeDoses": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Quantity"
-            }
-          },
           "individualtreatments": {
             "uniqueItems": true,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Individual"
             }
+          }
+        }
+      },
+      "AgeAtProcedure": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "string": {
+            "type": "string"
+          }
+        }
+      },
+      "AgeOfOnset": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "string": {
+            "type": "string"
+          }
+        }
+      },
+      "ObservationMoment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "string": {
+            "type": "string"
+          }
+        }
+      },
+      "Onset": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "string": {
+            "type": "string"
+          }
+        }
+      },
+      "Resolution": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "string": {
+            "type": "string"
           }
         }
       },
@@ -10158,11 +11699,46 @@
           "end": {
             "type": "string"
           },
+          "resolutionTimeIntervals": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Resolution"
+            }
+          },
+          "ageAtProcedureTimeIntervals": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgeAtProcedure"
+            }
+          },
           "doseIntervalsItemintervals": {
             "uniqueItems": true,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DoseIntervalsItem"
+            }
+          },
+          "onsetTimeIntervals": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Onset"
+            }
+          },
+          "observationMomentTimeIntervals": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObservationMoment"
+            }
+          },
+          "ageOfOnsetTimeIntervals": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgeOfOnset"
             }
           }
         }
@@ -10184,6 +11760,33 @@
             "type": "string"
           },
           "collectionDate": {
+            "type": "string"
+          }
+        }
+      },
+      "Run": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "librarySelection": {
+            "type": "string"
+          },
+          "runDate": {
+            "type": "string"
+          },
+          "idAsProvided": {
+            "type": "string"
+          },
+          "libraryStrategy": {
+            "type": "string"
+          },
+          "platform": {
+            "type": "string"
+          },
+          "libraryLayout": {
             "type": "string"
           }
         }
@@ -10218,45 +11821,65 @@
           },
           "biosample": {
             "$ref": "#/components/schemas/Biosample"
+          },
+          "run": {
+            "$ref": "#/components/schemas/Run"
           }
         }
       },
-      "Run": {
+      "AgeRange": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "GestationalAge": {
         "type": "object",
         "properties": {
           "id": {
             "type": "integer",
             "format": "int64"
           },
-          "librarySelection": {
+          "weeks": {
+            "type": "number",
+            "format": "float"
+          },
+          "days": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "PhenotypicConditionsItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "excluded": {
+            "type": "boolean"
+          },
+          "notes": {
             "type": "string"
+          }
+        }
+      },
+      "PhenotypicFeaturesItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
           },
-          "runDate": {
+          "excluded": {
+            "type": "boolean"
+          },
+          "notes": {
             "type": "string"
-          },
-          "idAsProvided": {
-            "type": "string"
-          },
-          "libraryStrategy": {
-            "type": "string"
-          },
-          "platform": {
-            "type": "string"
-          },
-          "libraryLayout": {
-            "type": "string"
-          },
-          "platformModel": {
-            "$ref": "#/components/schemas/OntologyTerm"
-          },
-          "biosample": {
-            "$ref": "#/components/schemas/Biosample"
-          },
-          "librarySource": {
-            "$ref": "#/components/schemas/OntologyTerm"
-          },
-          "individual": {
-            "$ref": "#/components/schemas/Individual"
           }
         }
       },
@@ -10287,6 +11910,21 @@
           }
         }
       },
+      "MeasurementsItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "date": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      },
       "MeasuresItem": {
         "type": "object",
         "properties": {
@@ -10312,19 +11950,14 @@
           "dateOfProcedure": {
             "type": "string"
           },
-          "bodySites": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
+          "bodySite": {
+            "$ref": "#/components/schemas/OntologyTerm"
           },
-          "procedureCodes": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
+          "ageAtProcedure": {
+            "$ref": "#/components/schemas/AgeAtProcedure"
+          },
+          "procedureCode": {
+            "$ref": "#/components/schemas/OntologyTerm"
           },
           "biosampleobtentionProcedures": {
             "uniqueItems": true,
@@ -10339,56 +11972,22 @@
             "items": {
               "$ref": "#/components/schemas/MeasuresItem"
             }
+          },
+          "measurementsItemprocedures": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MeasurementsItem"
+            }
           }
         }
       },
-      "PhenotypicFeaturesItem": {
+      "Evidence": {
         "type": "object",
         "properties": {
           "id": {
             "type": "integer",
             "format": "int64"
-          },
-          "excluded": {
-            "type": "boolean"
-          },
-          "notes": {
-            "type": "string"
-          },
-          "modifiers": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ModifiersItem"
-            }
-          },
-          "featureTypes": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "severities": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "individualphenotypicFeatures": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Individual"
-            }
-          },
-          "biosamplephenotypicFeatures": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Biosample"
-            }
           }
         }
       },
@@ -10407,56 +12006,6 @@
           "id": {
             "type": "integer",
             "format": "int64"
-          }
-        }
-      },
-      "PhenotypicConditionsItem": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "excluded": {
-            "type": "boolean"
-          },
-          "notes": {
-            "type": "string"
-          },
-          "modifiers": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ModifiersItem"
-            }
-          },
-          "featureTypes": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "severities": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OntologyTerm"
-            }
-          },
-          "exclusionCriteriaphenotypicConditions": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ExclusionCriteria"
-            }
-          },
-          "inclusionCriteriaphenotypicConditions": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/InclusionCriteria"
-            }
           }
         }
       },
@@ -10500,18 +12049,14 @@
             "type": "number",
             "format": "float"
           },
+          "disease": {
+            "$ref": "#/components/schemas/Disease"
+          },
           "members": {
             "uniqueItems": true,
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/MembersItem"
-            }
-          },
-          "diseases": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Disease"
             }
           },
           "individualpedigrees": {
@@ -10593,15 +12138,6 @@
           }
         }
       },
-      "Evidence": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
       "ExposuresItem": {
         "type": "object",
         "properties": {
@@ -10655,21 +12191,6 @@
           }
         }
       },
-      "MeasurementsItem": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "date": {
-            "type": "string"
-          },
-          "notes": {
-            "type": "string"
-          }
-        }
-      },
       "LocationsItem": {
         "type": "object",
         "properties": {
@@ -10692,15 +12213,6 @@
             "items": {
               "$ref": "#/components/schemas/ExclusionCriteria"
             }
-          }
-        }
-      },
-      "AgeRange": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
           }
         }
       },
@@ -10780,6 +12292,13 @@
           },
           "idAsProvided": {
             "type": "string"
+          },
+          "evidencereferences": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Evidence"
+            }
           }
         }
       },
@@ -10887,6 +12406,13 @@
           },
           "availability": {
             "type": "boolean"
+          },
+          "collectionEventsItemeventEthnicities": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CollectionEventsItem"
+            }
           }
         }
       },
@@ -11015,11 +12541,7 @@
             "type": "string"
           },
           "dataUseConditions": {
-            "uniqueItems": true,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DataUseConditions"
-            }
+            "$ref": "#/components/schemas/DataUseConditions"
           }
         }
       },

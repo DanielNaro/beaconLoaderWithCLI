@@ -26,7 +26,7 @@ public class ToApiRepresentation {
             System.out.println(object);
         };
 
-        result.setDataUseConditions(dataUseConditions);
+        //result.setDataUseConditions(dataUseConditions);
 
         return result;
     }

@@ -1,5 +1,7 @@
 package edu.upc.dmag.beaconLoaderWithCLI;
 
+import org.openapitools.client.model.DuoDataUse;
+
 public class ReadDuoDataUse {
     private String id;
     private String label;
@@ -15,5 +17,10 @@ public class ReadDuoDataUse {
 
     public String getVersion() {
         return version;
+    }
+
+    public DuoDataUse toApiRepresentation() {
+        DuoDataUse duoDataUse = new DuoDataUse();
+        return duoDataUse;
     }
 }

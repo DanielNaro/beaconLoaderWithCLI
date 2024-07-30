@@ -5,8 +5,131 @@ import com.google.gson.Gson;
 import org.jetbrains.annotations.NotNull;
 import org.openapitools.client.ApiClient;
 import org.openapitools.client.ApiException;
-import org.openapitools.client.api.*;
-import org.openapitools.client.model.*;
+import org.openapitools.client.api.AccountResourceApi;
+import org.openapitools.client.api.AgeAtProcedureResourceApi;
+import org.openapitools.client.api.AgeOfOnsetResourceApi;
+import org.openapitools.client.api.AgeRangeResourceApi;
+import org.openapitools.client.api.AgeResourceApi;
+import org.openapitools.client.api.AuthInfoResourceApi;
+import org.openapitools.client.api.BiosampleResourceApi;
+import org.openapitools.client.api.CohortDataTypesItemResourceApi;
+import org.openapitools.client.api.CohortResourceApi;
+import org.openapitools.client.api.CollectionEventsItemResourceApi;
+import org.openapitools.client.api.ComplexValueResourceApi;
+import org.openapitools.client.api.DatasetResourceApi;
+import org.openapitools.client.api.DataUseConditionsResourceApi;
+import org.openapitools.client.api.DiagnosticMarkersItemResourceApi;
+import org.openapitools.client.api.DiseaseConditionsItemResourceApi;
+import org.openapitools.client.api.DiseaseResourceApi;
+import org.openapitools.client.api.DiseasesItemResourceApi;
+import org.openapitools.client.api.DoseIntervalsItemResourceApi;
+import org.openapitools.client.api.DuoDataUseResourceApi;
+import org.openapitools.client.api.EthnicitiesItemResourceApi;
+import org.openapitools.client.api.EventAgeRangeResourceApi;
+import org.openapitools.client.api.EventDataTypesResourceApi;
+import org.openapitools.client.api.EventDiseasesResourceApi;
+import org.openapitools.client.api.EventEthnicitiesResourceApi;
+import org.openapitools.client.api.EventGendersResourceApi;
+import org.openapitools.client.api.EventLocationsResourceApi;
+import org.openapitools.client.api.EventPhenotypesResourceApi;
+import org.openapitools.client.api.EventTimelineResourceApi;
+import org.openapitools.client.api.EvidenceResourceApi;
+import org.openapitools.client.api.ExclusionCriteriaResourceApi;
+import org.openapitools.client.api.ExposuresItemResourceApi;
+import org.openapitools.client.api.ExternalReferenceResourceApi;
+import org.openapitools.client.api.GendersItemResourceApi;
+import org.openapitools.client.api.GenomicVariantResourceApi;
+import org.openapitools.client.api.GestationalAgeResourceApi;
+import org.openapitools.client.api.InclusionCriteriaResourceApi;
+import org.openapitools.client.api.IndividualResourceApi;
+import org.openapitools.client.api.InterventionsOrProceduresItemResourceApi;
+import org.openapitools.client.api.LocationsItemResourceApi;
+import org.openapitools.client.api.LogoutResourceApi;
+import org.openapitools.client.api.MeasurementsItemResourceApi;
+import org.openapitools.client.api.MeasurementValueResourceApi;
+import org.openapitools.client.api.MeasuresItemResourceApi;
+import org.openapitools.client.api.MembersItemResourceApi;
+import org.openapitools.client.api.ModifiersItemResourceApi;
+import org.openapitools.client.api.ObservationMomentResourceApi;
+import org.openapitools.client.api.OnsetResourceApi;
+import org.openapitools.client.api.OntologyTermResourceApi;
+import org.openapitools.client.api.PathologicalTnmFindingItemResourceApi;
+import org.openapitools.client.api.PedigreesItemResourceApi;
+import org.openapitools.client.api.PhenotypicConditionsItemResourceApi;
+import org.openapitools.client.api.PhenotypicFeaturesItemResourceApi;
+import org.openapitools.client.api.ProcedureResourceApi;
+import org.openapitools.client.api.QuantityResourceApi;
+import org.openapitools.client.api.ReferenceRangeResourceApi;
+import org.openapitools.client.api.ResolutionResourceApi;
+import org.openapitools.client.api.RunResourceApi;
+import org.openapitools.client.api.SequencingBioinformaticsAnalysisResourceApi;
+import org.openapitools.client.api.TimeIntervalResourceApi;
+import org.openapitools.client.api.TreatmentsItemResourceApi;
+import org.openapitools.client.api.TypedQuantitiesItemResourceApi;
+import org.openapitools.client.api.UnnamedEntityResourceApi;
+import org.openapitools.client.api.ValueEntityResourceApi;
+import org.openapitools.client.model.Age;
+import org.openapitools.client.model.AgeAtProcedure;
+import org.openapitools.client.model.AgeOfOnset;
+import org.openapitools.client.model.AgeRange;
+import org.openapitools.client.model.AuthInfoVM;
+import org.openapitools.client.model.Biosample;
+import org.openapitools.client.model.Cohort;
+import org.openapitools.client.model.CohortDataTypesItem;
+import org.openapitools.client.model.CollectionEventsItem;
+import org.openapitools.client.model.ComplexValue;
+import org.openapitools.client.model.Dataset;
+import org.openapitools.client.model.DataUseConditions;
+import org.openapitools.client.model.DiagnosticMarkersItem;
+import org.openapitools.client.model.Disease;
+import org.openapitools.client.model.DiseaseConditionsItem;
+import org.openapitools.client.model.DiseasesItem;
+import org.openapitools.client.model.DoseIntervalsItem;
+import org.openapitools.client.model.DuoDataUse;
+import org.openapitools.client.model.EthnicitiesItem;
+import org.openapitools.client.model.EventAgeRange;
+import org.openapitools.client.model.EventDataTypes;
+import org.openapitools.client.model.EventDiseases;
+import org.openapitools.client.model.EventEthnicities;
+import org.openapitools.client.model.EventGenders;
+import org.openapitools.client.model.EventLocations;
+import org.openapitools.client.model.EventPhenotypes;
+import org.openapitools.client.model.EventTimeline;
+import org.openapitools.client.model.Evidence;
+import org.openapitools.client.model.ExclusionCriteria;
+import org.openapitools.client.model.ExposuresItem;
+import org.openapitools.client.model.ExternalReference;
+import org.openapitools.client.model.GendersItem;
+import org.openapitools.client.model.GenomicVariant;
+import org.openapitools.client.model.GestationalAge;
+import org.openapitools.client.model.InclusionCriteria;
+import org.openapitools.client.model.Individual;
+import org.openapitools.client.model.InterventionsOrProceduresItem;
+import org.openapitools.client.model.LocationsItem;
+import org.openapitools.client.model.MeasurementsItem;
+import org.openapitools.client.model.MeasurementValue;
+import org.openapitools.client.model.MeasuresItem;
+import org.openapitools.client.model.MembersItem;
+import org.openapitools.client.model.ModifiersItem;
+import org.openapitools.client.model.ObservationMoment;
+import org.openapitools.client.model.Onset;
+import org.openapitools.client.model.OntologyTerm;
+import org.openapitools.client.model.PathologicalTnmFindingItem;
+import org.openapitools.client.model.PedigreesItem;
+import org.openapitools.client.model.PhenotypicConditionsItem;
+import org.openapitools.client.model.PhenotypicFeaturesItem;
+import org.openapitools.client.model.Procedure;
+import org.openapitools.client.model.Quantity;
+import org.openapitools.client.model.ReferenceRange;
+import org.openapitools.client.model.Resolution;
+import org.openapitools.client.model.Run;
+import org.openapitools.client.model.SequencingBioinformaticsAnalysis;
+import org.openapitools.client.model.TimeInterval;
+import org.openapitools.client.model.TreatmentsItem;
+import org.openapitools.client.model.TypedQuantitiesItem;
+import org.openapitools.client.model.UnnamedEntity;
+import org.openapitools.client.model.UserVM;
+import org.openapitools.client.model.ValueEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -35,7 +158,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	public void run(String... args) throws ApiException, IOException {
 		LOG.info("EXECUTING : command line runner");
 
-		//deleteAll();
+		deleteAll();
 		loadData();
 	}
 
@@ -180,21 +303,30 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 
 			DatasetResourceApi datasetResourceApi = new DatasetResourceApi();
 			datasetResourceApi.setApiClient(getApiClient());
+			DataUseConditionsResourceApi dataUseConditionsResourceApi = new DataUseConditionsResourceApi();
+			dataUseConditionsResourceApi.setApiClient(getApiClient());
+
 
 			for(ReadDataset readDataset: readDatasets){
-				loadReadDataset(datasetResourceApi, readDataset);
+				loadReadDataset(datasetResourceApi, dataUseConditionsResourceApi, readDataset);
 			}
 		}
 	}
 
-	private void loadReadDataset(DatasetResourceApi datasetResourceApi, ReadDataset readDataset) throws ApiException {
-		datasetResourceApi.createDataset(
-				readDataset.getAPIRepresentation()
-		);
+	private void loadReadDataset(
+			DatasetResourceApi datasetResourceApi,
+			DataUseConditionsResourceApi dataUseConditionsResourceApi,
+			ReadDataset readDataset
+	) throws ApiException {
+		ReadDataUseConditions toLoadDataUseConditions = readDataset.getDataUseConditions();
+
+		org.openapitools.client.model.DataUseConditions createdDataUseConditions = dataUseConditionsResourceApi.createDataUseConditions(toLoadDataUseConditions.toApiRepresentation());
+		org.openapitools.client.model.Dataset datasetToCreate = readDataset.getAPIRepresentation(createdDataUseConditions);
+		datasetResourceApi.createDataset(datasetToCreate);
 	}
 
 
-	/*private static void deleteAll() throws ApiException {
+	private static void deleteAll() throws ApiException {
 		deleteTreatmentsItem();
 		deleteAnalysis();
 		deleteRuns();
@@ -231,7 +363,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		deleteCohortDataTypesItems();
 		//deleteIndividuals();
 		deleteOntologyTerm();
-	}*/
+	}
 
 	@NotNull
 	private static ApiClient getApiClient() {
@@ -247,10 +379,10 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		);
 	}
 
-	/*private static void deleteOntologyTerm() throws ApiException { OntologyTermResourceApi ontologyTermResourceApi = new OntologyTermResourceApi();
+	private static void deleteOntologyTerm() throws ApiException { OntologyTermResourceApi ontologyTermResourceApi = new OntologyTermResourceApi();
 		ontologyTermResourceApi.setApiClient(getApiClient());
 
-		var instances = ontologyTermResourceApi.getAllOntologyTerms("");
+		var instances = ontologyTermResourceApi.getAllOntologyTerms();
 		var instancesUUIDs = instances.stream().map(OntologyTerm::getId).collect(Collectors.toSet());
 
 		for (var instanceUUID: instancesUUIDs){
@@ -407,7 +539,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	private static void deleteGenomicVariants() throws ApiException { GenomicVariantResourceApi genomicVariantResourceApi = new GenomicVariantResourceApi();
 		genomicVariantResourceApi.setApiClient(getApiClient());
 
-		var instances = genomicVariantResourceApi.getAllGenomicVariants();
+		var instances = genomicVariantResourceApi.getAllGenomicVariants(true);
 		var instancesUUIDs = instances.stream().map(GenomicVariant::getId).collect(Collectors.toSet());
 
 		for (var instanceUUID: instancesUUIDs){
@@ -559,7 +691,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	private static void deleteDatasets() throws ApiException { DatasetResourceApi datasetResourceApi = new DatasetResourceApi();
 		datasetResourceApi.setApiClient(getApiClient());
 
-		var instances = datasetResourceApi.getAllDatasets();
+		var instances = datasetResourceApi.getAllDatasets(true);
 		var instancesUUIDs = instances.stream().map(Dataset::getId).collect(Collectors.toSet());
 
 		for (var instanceUUID: instancesUUIDs){
@@ -589,7 +721,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	private static void deleteCohorts() throws ApiException { CohortResourceApi cohortResourceApi = new CohortResourceApi();
 		cohortResourceApi.setApiClient(getApiClient());
 
-		var instances = cohortResourceApi.getAllCohorts();
+		var instances = cohortResourceApi.getAllCohorts(true);
 		var instancesUUIDs = instances.stream().map(Cohort::getId).collect(Collectors.toSet());
 
 		for (var instanceUUID: instancesUUIDs){
@@ -611,11 +743,11 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		IndividualResourceApi individualResourceApi = new IndividualResourceApi();
 		individualResourceApi.setApiClient(getApiClient());
 
-		var instances = individualResourceApi.getAllIndividuals("",true);
+		var instances = individualResourceApi.getAllIndividuals(true);
 		var instancesUUIDs = instances.stream().map(Individual::getId).collect(Collectors.toSet());
 
 		for (var instanceUUID: instancesUUIDs){
 			individualResourceApi.deleteIndividual(instanceUUID);
 		}
-	}*/
+	}
 }
