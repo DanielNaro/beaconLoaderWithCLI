@@ -35,7 +35,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	public void run(String... args) throws ApiException, IOException {
 		LOG.info("EXECUTING : command line runner");
 
-		//deleteAll();
+		deleteAll();
 		loadData();
 	}
 
@@ -180,21 +180,30 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 
 			DatasetResourceApi datasetResourceApi = new DatasetResourceApi();
 			datasetResourceApi.setApiClient(getApiClient());
+			DataUseConditionsResourceApi dataUseConditionsResourceApi = new DataUseConditionsResourceApi();
+			dataUseConditionsResourceApi.setApiClient(getApiClient());
+
 
 			for(ReadDataset readDataset: readDatasets){
-				loadReadDataset(datasetResourceApi, readDataset);
+				loadReadDataset(datasetResourceApi, dataUseConditionsResourceApi, readDataset);
 			}
 		}
 	}
 
-	private void loadReadDataset(DatasetResourceApi datasetResourceApi, ReadDataset readDataset) throws ApiException {
-		datasetResourceApi.createDataset(
-				readDataset.getAPIRepresentation()
-		);
+	private void loadReadDataset(
+			DatasetResourceApi datasetResourceApi,
+			DataUseConditionsResourceApi dataUseConditionsResourceApi,
+			ReadDataset readDataset
+	) throws ApiException {
+		ReadDataUseConditions toLoadDataUseConditions = readDataset.getDataUseConditions();
+
+		org.openapitools.client.model.DataUseConditions createdDataUseConditions = dataUseConditionsResourceApi.createDataUseConditions(toLoadDataUseConditions.toApiRepresentation());
+		org.openapitools.client.model.Dataset datasetToCreate = readDataset.getAPIRepresentation(createdDataUseConditions);
+		datasetResourceApi.createDataset(datasetToCreate);
 	}
 
 
-	/*private static void deleteAll() throws ApiException {
+	private static void deleteAll() throws ApiException {
 		deleteTreatmentsItem();
 		deleteAnalysis();
 		deleteRuns();
@@ -231,7 +240,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		deleteCohortDataTypesItems();
 		//deleteIndividuals();
 		deleteOntologyTerm();
-	}*/
+	}
 
 	@NotNull
 	private static ApiClient getApiClient() {
@@ -247,10 +256,10 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		);
 	}
 
-	/*private static void deleteOntologyTerm() throws ApiException { OntologyTermResourceApi ontologyTermResourceApi = new OntologyTermResourceApi();
+	private static void deleteOntologyTerm() throws ApiException { OntologyTermResourceApi ontologyTermResourceApi = new OntologyTermResourceApi();
 		ontologyTermResourceApi.setApiClient(getApiClient());
 
-		var instances = ontologyTermResourceApi.getAllOntologyTerms("");
+		var instances = ontologyTermResourceApi.getAllOntologyTerms();
 		var instancesUUIDs = instances.stream().map(OntologyTerm::getId).collect(Collectors.toSet());
 
 		for (var instanceUUID: instancesUUIDs){
@@ -407,7 +416,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	private static void deleteGenomicVariants() throws ApiException { GenomicVariantResourceApi genomicVariantResourceApi = new GenomicVariantResourceApi();
 		genomicVariantResourceApi.setApiClient(getApiClient());
 
-		var instances = genomicVariantResourceApi.getAllGenomicVariants();
+		var instances = genomicVariantResourceApi.getAllGenomicVariants(true);
 		var instancesUUIDs = instances.stream().map(GenomicVariant::getId).collect(Collectors.toSet());
 
 		for (var instanceUUID: instancesUUIDs){
@@ -589,7 +598,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	private static void deleteCohorts() throws ApiException { CohortResourceApi cohortResourceApi = new CohortResourceApi();
 		cohortResourceApi.setApiClient(getApiClient());
 
-		var instances = cohortResourceApi.getAllCohorts();
+		var instances = cohortResourceApi.getAllCohorts(true);
 		var instancesUUIDs = instances.stream().map(Cohort::getId).collect(Collectors.toSet());
 
 		for (var instanceUUID: instancesUUIDs){
@@ -611,11 +620,11 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		IndividualResourceApi individualResourceApi = new IndividualResourceApi();
 		individualResourceApi.setApiClient(getApiClient());
 
-		var instances = individualResourceApi.getAllIndividuals("",true);
+		var instances = individualResourceApi.getAllIndividuals(true);
 		var instancesUUIDs = instances.stream().map(Individual::getId).collect(Collectors.toSet());
 
 		for (var instanceUUID: instancesUUIDs){
 			individualResourceApi.deleteIndividual(instanceUUID);
 		}
-	}*/
+	}
 }

@@ -31,7 +31,7 @@ public class ReadIndividual {
         for(var readMeasure: this.getMeasures()){
 
 
-            MeasuresItem newMeasure = new MeasuresItem();
+            /*MeasuresItem newMeasure = new MeasuresItem();
             newMeasure.setDate(readMeasure.getDate());
             readMeasure.get
             instanceof
@@ -40,11 +40,11 @@ public class ReadIndividual {
             newMeasure.setAssayCode(createdAssayCodes.get(readMeasure.getAssayCode().getId()));
             newMeasure.setBiosamplemeasurements();readMeasure.getMeasurementValue().getAPIRepresentation();
 
-            measures.add(newMeasure);
+            measures.add(newMeasure);*/
         }
 
         Individual result = new Individual();
-        result.setMeasures();
+        //result.setMeasures();
         /*result.setIdAsProvided(id);
         result.setKaryotypicSex("");
         result.setEthnicity(null);
