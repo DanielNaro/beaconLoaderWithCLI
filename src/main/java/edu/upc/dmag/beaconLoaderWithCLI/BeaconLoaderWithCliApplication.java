@@ -2,134 +2,11 @@ package edu.upc.dmag.beaconLoaderWithCLI;
 
 
 import com.google.gson.Gson;
+import com.google.gson.internal.bind.util.ISO8601Utils;
+import edu.upc.dmag.ToLoad.DatasetsSchema;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.Dataset;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.DatasetRepository;
 import org.jetbrains.annotations.NotNull;
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.api.AccountResourceApi;
-import org.openapitools.client.api.AgeAtProcedureResourceApi;
-import org.openapitools.client.api.AgeOfOnsetResourceApi;
-import org.openapitools.client.api.AgeRangeResourceApi;
-import org.openapitools.client.api.AgeResourceApi;
-import org.openapitools.client.api.AuthInfoResourceApi;
-import org.openapitools.client.api.BiosampleResourceApi;
-import org.openapitools.client.api.CohortDataTypesItemResourceApi;
-import org.openapitools.client.api.CohortResourceApi;
-import org.openapitools.client.api.CollectionEventsItemResourceApi;
-import org.openapitools.client.api.ComplexValueResourceApi;
-import org.openapitools.client.api.DatasetResourceApi;
-import org.openapitools.client.api.DataUseConditionsResourceApi;
-import org.openapitools.client.api.DiagnosticMarkersItemResourceApi;
-import org.openapitools.client.api.DiseaseConditionsItemResourceApi;
-import org.openapitools.client.api.DiseaseResourceApi;
-import org.openapitools.client.api.DiseasesItemResourceApi;
-import org.openapitools.client.api.DoseIntervalsItemResourceApi;
-import org.openapitools.client.api.DuoDataUseResourceApi;
-import org.openapitools.client.api.EthnicitiesItemResourceApi;
-import org.openapitools.client.api.EventAgeRangeResourceApi;
-import org.openapitools.client.api.EventDataTypesResourceApi;
-import org.openapitools.client.api.EventDiseasesResourceApi;
-import org.openapitools.client.api.EventEthnicitiesResourceApi;
-import org.openapitools.client.api.EventGendersResourceApi;
-import org.openapitools.client.api.EventLocationsResourceApi;
-import org.openapitools.client.api.EventPhenotypesResourceApi;
-import org.openapitools.client.api.EventTimelineResourceApi;
-import org.openapitools.client.api.EvidenceResourceApi;
-import org.openapitools.client.api.ExclusionCriteriaResourceApi;
-import org.openapitools.client.api.ExposuresItemResourceApi;
-import org.openapitools.client.api.ExternalReferenceResourceApi;
-import org.openapitools.client.api.GendersItemResourceApi;
-import org.openapitools.client.api.GenomicVariantResourceApi;
-import org.openapitools.client.api.GestationalAgeResourceApi;
-import org.openapitools.client.api.InclusionCriteriaResourceApi;
-import org.openapitools.client.api.IndividualResourceApi;
-import org.openapitools.client.api.InterventionsOrProceduresItemResourceApi;
-import org.openapitools.client.api.LocationsItemResourceApi;
-import org.openapitools.client.api.LogoutResourceApi;
-import org.openapitools.client.api.MeasurementsItemResourceApi;
-import org.openapitools.client.api.MeasurementValueResourceApi;
-import org.openapitools.client.api.MeasuresItemResourceApi;
-import org.openapitools.client.api.MembersItemResourceApi;
-import org.openapitools.client.api.ModifiersItemResourceApi;
-import org.openapitools.client.api.ObservationMomentResourceApi;
-import org.openapitools.client.api.OnsetResourceApi;
-import org.openapitools.client.api.OntologyTermResourceApi;
-import org.openapitools.client.api.PathologicalTnmFindingItemResourceApi;
-import org.openapitools.client.api.PedigreesItemResourceApi;
-import org.openapitools.client.api.PhenotypicConditionsItemResourceApi;
-import org.openapitools.client.api.PhenotypicFeaturesItemResourceApi;
-import org.openapitools.client.api.ProcedureResourceApi;
-import org.openapitools.client.api.QuantityResourceApi;
-import org.openapitools.client.api.ReferenceRangeResourceApi;
-import org.openapitools.client.api.ResolutionResourceApi;
-import org.openapitools.client.api.RunResourceApi;
-import org.openapitools.client.api.SequencingBioinformaticsAnalysisResourceApi;
-import org.openapitools.client.api.TimeIntervalResourceApi;
-import org.openapitools.client.api.TreatmentsItemResourceApi;
-import org.openapitools.client.api.TypedQuantitiesItemResourceApi;
-import org.openapitools.client.api.UnnamedEntityResourceApi;
-import org.openapitools.client.api.ValueEntityResourceApi;
-import org.openapitools.client.model.Age;
-import org.openapitools.client.model.AgeAtProcedure;
-import org.openapitools.client.model.AgeOfOnset;
-import org.openapitools.client.model.AgeRange;
-import org.openapitools.client.model.AuthInfoVM;
-import org.openapitools.client.model.Biosample;
-import org.openapitools.client.model.Cohort;
-import org.openapitools.client.model.CohortDataTypesItem;
-import org.openapitools.client.model.CollectionEventsItem;
-import org.openapitools.client.model.ComplexValue;
-import org.openapitools.client.model.Dataset;
-import org.openapitools.client.model.DataUseConditions;
-import org.openapitools.client.model.DiagnosticMarkersItem;
-import org.openapitools.client.model.Disease;
-import org.openapitools.client.model.DiseaseConditionsItem;
-import org.openapitools.client.model.DiseasesItem;
-import org.openapitools.client.model.DoseIntervalsItem;
-import org.openapitools.client.model.DuoDataUse;
-import org.openapitools.client.model.EthnicitiesItem;
-import org.openapitools.client.model.EventAgeRange;
-import org.openapitools.client.model.EventDataTypes;
-import org.openapitools.client.model.EventDiseases;
-import org.openapitools.client.model.EventEthnicities;
-import org.openapitools.client.model.EventGenders;
-import org.openapitools.client.model.EventLocations;
-import org.openapitools.client.model.EventPhenotypes;
-import org.openapitools.client.model.EventTimeline;
-import org.openapitools.client.model.Evidence;
-import org.openapitools.client.model.ExclusionCriteria;
-import org.openapitools.client.model.ExposuresItem;
-import org.openapitools.client.model.ExternalReference;
-import org.openapitools.client.model.GendersItem;
-import org.openapitools.client.model.GenomicVariant;
-import org.openapitools.client.model.GestationalAge;
-import org.openapitools.client.model.InclusionCriteria;
-import org.openapitools.client.model.Individual;
-import org.openapitools.client.model.InterventionsOrProceduresItem;
-import org.openapitools.client.model.LocationsItem;
-import org.openapitools.client.model.MeasurementsItem;
-import org.openapitools.client.model.MeasurementValue;
-import org.openapitools.client.model.MeasuresItem;
-import org.openapitools.client.model.MembersItem;
-import org.openapitools.client.model.ModifiersItem;
-import org.openapitools.client.model.ObservationMoment;
-import org.openapitools.client.model.Onset;
-import org.openapitools.client.model.OntologyTerm;
-import org.openapitools.client.model.PathologicalTnmFindingItem;
-import org.openapitools.client.model.PedigreesItem;
-import org.openapitools.client.model.PhenotypicConditionsItem;
-import org.openapitools.client.model.PhenotypicFeaturesItem;
-import org.openapitools.client.model.Procedure;
-import org.openapitools.client.model.Quantity;
-import org.openapitools.client.model.ReferenceRange;
-import org.openapitools.client.model.Resolution;
-import org.openapitools.client.model.Run;
-import org.openapitools.client.model.SequencingBioinformaticsAnalysis;
-import org.openapitools.client.model.TimeInterval;
-import org.openapitools.client.model.TreatmentsItem;
-import org.openapitools.client.model.TypedQuantitiesItem;
-import org.openapitools.client.model.UnnamedEntity;
-import org.openapitools.client.model.UserVM;
-import org.openapitools.client.model.ValueEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -137,9 +14,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.text.ParseException;
+import java.text.ParsePosition;
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @SpringBootApplication
@@ -147,6 +26,11 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 
 	private static Logger LOG = LoggerFactory
 			.getLogger(BeaconLoaderWithCliApplication.class);
+	private final DatasetRepository datasetRepository;
+
+	public BeaconLoaderWithCliApplication(DatasetRepository datasetRepository) {
+		this.datasetRepository = datasetRepository;
+	}
 
 	public static void main(String[] args) {
 		LOG.info("STARTING THE APPLICATION");
@@ -155,599 +39,46 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	}
 
 	@Override
-	public void run(String... args) throws ApiException, IOException {
+	public void run(String... args) throws IOException {
 		LOG.info("EXECUTING : command line runner");
 
-		deleteAll();
-		loadData();
-	}
-
-	private void loadData() throws IOException, ApiException {
-		Map<String, Individual> createdIndividuals = new HashMap<>();
-		Map<String, Biosample> createdBiosamples = new HashMap<>();
-		//Map<ReadBiosampleStatus, UUID> createdBioSampleStatuses = new HashMap<>();
-		Map<ReadObtentionProcedure, UUID> createdBiosampleObtenitionProcedures = new HashMap<>();
-		//Map<ReadBiosampleOriginType, BiosampleSampleOrigin> createdBiosampleOrigins = new HashMap<>();
+		//deleteAll();
+		//loadData();
 		loadDatasets();
-		loadIndividuals(createdIndividuals);
-		//loadBiosamples(createdIndividuals, createdBiosamples, createdBioSampleStatuses, createdBiosampleObtenitionProcedures, createdBiosampleOrigins);
 	}
 
-	/*private void loadBiosamples(
-			Map<String, Individual> createdIndividuals,
-			Map<String, Biosample> createdBiosamples,
-			Map<ReadBiosampleStatus, UUID> createdBioSampleStatuses,
-			Map<ReadObtentionProcedure, UUID> createdBiosampleObtenitionProcedures,
-			Map<ReadBiosampleOriginType, BiosampleSampleOrigin> createdBiosampleOrigins
-	) throws IOException, ApiException {
-		try (InputStreamReader jsonFileInputStream = new InputStreamReader(new FileInputStream("./src/main/resources/toLoad/biosamples.json"))){
-			Gson gson = new Gson();
-			var readBiosamples = gson.fromJson(jsonFileInputStream, ReadBiosample[].class);
-
-			BiosampleResourceApi biosampleResourceApi = new BiosampleResourceApi();
-			biosampleResourceApi.setApiClient(getApiClient());
-			BiosampleStatusResourceApi biosampleStatusResourceApi = new BiosampleStatusResourceApi();
-			biosampleStatusResourceApi.setApiClient(getApiClient());
-			BiosampleObtentionProcedureResourceApi biosampleObtentionProcedureResourceApi = new BiosampleObtentionProcedureResourceApi();
-			biosampleObtentionProcedureResourceApi.setApiClient(getApiClient());
-
-			for(ReadBiosample readBiosample: readBiosamples){
-				loadReadBiosample(
-						biosampleResourceApi,
-						readBiosample,
-						createdBioSampleStatuses,
-						createdBiosampleObtenitionProcedures,
-						createdBiosampleOrigins,
-						biosampleStatusResourceApi,
-						biosampleObtentionProcedureResourceApi
-				);
-			}
-		}
-	}*/
-
-	/*private void loadReadBiosample(
-			BiosampleResourceApi biosampleResourceApi,
-			ReadBiosample readBiosample,
-			Map<ReadBiosampleStatus, UUID> createdBioSampleStatuses,
-			Map<ReadObtentionProcedure, UUID> createdBiosampleObtenitionProcedures,
-			Map<ReadBiosampleOriginType, BiosampleSampleOrigin> createdBiosampleOrigins,
-			BiosampleStatusResourceApi biosampleStatusResourceApi,
-			BiosampleObtentionProcedureResourceApi BiosampleObtentionProcedureResourceApi
-	) throws ApiException {
-		var createdBioSample = biosampleResourceApi.createBiosample(readBiosample.getAPIRepresentation(
-				createdBioSampleStatuses,
-				createdBiosampleObtenitionProcedures,
-				createdBiosampleOrigins,
-				biosampleStatusResourceApi,
-				BiosampleObtentionProcedureResourceApi
-		));
-
-		if (readBiosample.getBiosampleOriginType() != null) {
-			if (!createdBiosampleOrigins.containsKey(readBiosample.getBiosampleOriginType())){
-				createdBiosampleOrigins.put(readBiosample.getBiosampleOriginType(), createdBioSample.getSampleOrigin());
-			}
-		}
-	}*/
-
-	private void loadIndividuals(Map<String, Individual> createdIndividuals) throws IOException, ApiException {
-		try (InputStreamReader jsonFileInputStream = new InputStreamReader(new FileInputStream("./src/main/resources/toLoad/individuals.json"))){
-			Gson gson = new Gson();
-			var readIndividuals = gson.fromJson(jsonFileInputStream, ReadIndividual[].class);
-
-			IndividualResourceApi individualResourceApi = new IndividualResourceApi();
-			individualResourceApi.setApiClient(getApiClient());
-			MeasuresItemResourceApi measureResourceApi = new MeasuresItemResourceApi();
-			measureResourceApi.setApiClient(getApiClient());
-			OntologyTermResourceApi ontologyTermResourceApi = new OntologyTermResourceApi();
-			ontologyTermResourceApi.setApiClient(getApiClient());
-			Map<String, OntologyTerm> createdSexes = new HashMap<>();
-			Map<String, OntologyTerm> createdAssayCodes = new HashMap<>();
-			Map<String, Procedure> createdProcedures = new HashMap<>();
-
-			for(ReadIndividual readIndividual: readIndividuals){
-				loadReadIndividual(
-					individualResourceApi,
-					measureResourceApi,
-					ontologyTermResourceApi,
-					readIndividual,
-					createdIndividuals,
-					createdSexes,
-					createdAssayCodes,
-					createdProcedures
-				);
-			}
-		}
-	}
-
-	private void loadReadIndividual(
-			IndividualResourceApi individualResourceApi,
-			MeasuresItemResourceApi measureResourceApi,
-			OntologyTermResourceApi ontologyTermResourceApi,
-			ReadIndividual readIndividual,
-			Map<String, Individual> createdIndividuals,
-			Map<String, OntologyTerm> createdSexes,
-			Map<String, OntologyTerm> createdAssayCodes,
-			Map<String, Procedure> createdProcedures
-	) throws ApiException {
-		if (!createdSexes.containsKey(readIndividual.getSex().getId())){
-			OntologyTerm sexOntologyTerm = ontologyTermResourceApi.createOntologyTerm(readIndividual.getSex().toAPIRepresentation());
-			createdSexes.put(readIndividual.getSex().getId(), sexOntologyTerm);
-		}
-
-		for (var readMeasure : readIndividual.getMeasures()) {
-			if (!createdAssayCodes.containsKey(readMeasure.getAssayCode().getId())) {
-				OntologyTerm toCreateAssayCodeToCreate = new OntologyTerm();
-				toCreateAssayCodeToCreate.setIdAsProvided(readMeasure.getAssayCode().getId());
-				toCreateAssayCodeToCreate.setLabel(readMeasure.getAssayCode().getLabel());
-
-				OntologyTerm createdAssayCodeToCreate = ontologyTermResourceApi.createOntologyTerm(toCreateAssayCodeToCreate);
-				createdAssayCodes.put(readMeasure.getAssayCode().getId(), createdAssayCodeToCreate);
-			}
-		}
-
-		Individual createdIndividual = individualResourceApi.createIndividual(
-				readIndividual.getAPIRepresentation(createdSexes, createdAssayCodes)
-		);
-		readIndividual.getMeasures(measureResourceApi, createdIndividual);
-		createdIndividuals.put(readIndividual.getId(), createdIndividual);
-
-		for(var readMeasure: readIndividual.getMeasures()){
-			System.out.println(readMeasure);
-		}
-	}
-
-	private void loadDatasets() throws IOException, ApiException {
+	private void loadDatasets() throws IOException {
 		try (InputStreamReader jsonFileInputStream = new InputStreamReader(new FileInputStream("./src/main/resources/toLoad/datasets.json"))){
 			Gson gson = new Gson();
-			var readDatasets = gson.fromJson(jsonFileInputStream, ReadDataset[].class);
-
-			DatasetResourceApi datasetResourceApi = new DatasetResourceApi();
-			datasetResourceApi.setApiClient(getApiClient());
-			DataUseConditionsResourceApi dataUseConditionsResourceApi = new DataUseConditionsResourceApi();
-			dataUseConditionsResourceApi.setApiClient(getApiClient());
+			var readDatasets = gson.fromJson(jsonFileInputStream, DatasetsSchema[].class);
 
 
-			for(ReadDataset readDataset: readDatasets){
-				loadReadDataset(datasetResourceApi, dataUseConditionsResourceApi, readDataset);
+			for(DatasetsSchema readDataset: readDatasets){
+				loadReadDataset(readDataset);
 			}
-		}
-	}
-
-	private void loadReadDataset(
-			DatasetResourceApi datasetResourceApi,
-			DataUseConditionsResourceApi dataUseConditionsResourceApi,
-			ReadDataset readDataset
-	) throws ApiException {
-		ReadDataUseConditions toLoadDataUseConditions = readDataset.getDataUseConditions();
-
-		org.openapitools.client.model.DataUseConditions createdDataUseConditions = dataUseConditionsResourceApi.createDataUseConditions(toLoadDataUseConditions.toApiRepresentation());
-		org.openapitools.client.model.Dataset datasetToCreate = readDataset.getAPIRepresentation(createdDataUseConditions);
-		datasetResourceApi.createDataset(datasetToCreate);
-	}
-
-
-	private static void deleteAll() throws ApiException {
-		deleteTreatmentsItem();
-		deleteAnalysis();
-		deleteRuns();
-		deleteQuantities();
-		deletePhenotypicFeaturesItems();
-		deletePhenotypicConditionsItems();
-		deletePedigreesItems();
-		deletePathologicalTnmFindingItems();
-		deleteModifiersItems();
-		deleteMembersItems();
-		deleteMeasuresItems();
-		deleteMeasurementsItems();
-		deleteLocationsItems();
-		deleteInterventionsOrProceduresItems();
-		deleteGenomicVariants();
-		deleteGendersItems();
-		deleteExternalReferences();
-		deleteExposureItems();
-		deleteEvidences();
-		deleteEventEthnicities();
-		deleteEventDiseases();
-		deleteEventDataTypes();
-		deleteEventAgeRanges();
-		deleteEthnicitiesItems();
-		deleteDoseIntervalsItems();
-		deleteDiseases();
-		deleteDiseasesItems();
-		deleteDiseaseConditionsItems();
-		deleteDiagnosticMarkersItems();
-		deleteDatasets();
-		deleteDataUseConditions();
-		deleteCollectionEventsItems();
-		deleteCohorts();
-		deleteCohortDataTypesItems();
-		//deleteIndividuals();
-		deleteOntologyTerm();
-	}
-
-	@NotNull
-	private static ApiClient getApiClient() {
-		Map<String, String> parameters = new HashMap<>();
-		parameters.put("username", "admin");
-		parameters.put("password","admin");
-
-        return new ApiClient(
-				"http://localhost:9080/realms/jhipster/protocol/openid-connect/token",
-				"web_app",
-				"web_app",
-				parameters
-		);
-	}
-
-	private static void deleteOntologyTerm() throws ApiException { OntologyTermResourceApi ontologyTermResourceApi = new OntologyTermResourceApi();
-		ontologyTermResourceApi.setApiClient(getApiClient());
-
-		var instances = ontologyTermResourceApi.getAllOntologyTerms();
-		var instancesUUIDs = instances.stream().map(OntologyTerm::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			ontologyTermResourceApi.deleteOntologyTerm(instanceUUID);
-		}
-	}
-
-	private static void deleteTreatmentsItem() throws ApiException { TreatmentsItemResourceApi treatmentsItemResourceApi = new TreatmentsItemResourceApi();
-		treatmentsItemResourceApi.setApiClient(getApiClient());
-
-		var instances = treatmentsItemResourceApi.getAllTreatmentsItems(false);
-		var instancesUUIDs = instances.stream().map(TreatmentsItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			treatmentsItemResourceApi.deleteTreatmentsItem(instanceUUID);
-		}
-	}
-
-	private static void deleteAnalysis() throws ApiException {
-		SequencingBioinformaticsAnalysisResourceApi analysiResourceApi = new SequencingBioinformaticsAnalysisResourceApi();
-		analysiResourceApi.setApiClient(getApiClient());
-
-		var instances = analysiResourceApi.getAllSequencingBioinformaticsAnalyses();
-		var instancesIDs = instances.stream().map(SequencingBioinformaticsAnalysis::getId).collect(Collectors.toSet());
-
-		for (var instanceID: instancesIDs){
-			analysiResourceApi.deleteSequencingBioinformaticsAnalysis(instanceID);
-		}
-	}
-	private static void deleteRuns() throws ApiException { RunResourceApi runResourceApi = new RunResourceApi();
-		runResourceApi.setApiClient(getApiClient());
-
-		var instances = runResourceApi.getAllRuns();
-		var instancesUUIDs = instances.stream().map(Run::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			runResourceApi.deleteRun(instanceUUID);
-		}
-	}
-
-	private static void deleteQuantities() throws ApiException { QuantityResourceApi quantitieResourceApi = new QuantityResourceApi();
-		quantitieResourceApi.setApiClient(getApiClient());
-
-		var instances = quantitieResourceApi.getAllQuantities();
-		var instancesUUIDs = instances.stream().map(Quantity::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			quantitieResourceApi.deleteQuantity(instanceUUID);
-		}
-	}
-
-	private static void deletePhenotypicFeaturesItems() throws ApiException { PhenotypicFeaturesItemResourceApi phenotypicFeaturesItemResourceApi = new PhenotypicFeaturesItemResourceApi();
-		phenotypicFeaturesItemResourceApi.setApiClient(getApiClient());
-
-		var instances = phenotypicFeaturesItemResourceApi.getAllPhenotypicFeaturesItems(false);
-		var instancesUUIDs = instances.stream().map(PhenotypicFeaturesItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			phenotypicFeaturesItemResourceApi.deletePhenotypicFeaturesItem(instanceUUID);
-		}
-	}
-	private static void deletePhenotypicConditionsItems() throws ApiException { PhenotypicConditionsItemResourceApi phenotypicConditionsItemResourceApi = new PhenotypicConditionsItemResourceApi();
-		phenotypicConditionsItemResourceApi.setApiClient(getApiClient());
-
-		var instances = phenotypicConditionsItemResourceApi.getAllPhenotypicConditionsItems(false);
-		var instancesUUIDs = instances.stream().map(PhenotypicConditionsItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			phenotypicConditionsItemResourceApi.deletePhenotypicConditionsItem(instanceUUID);
-		}
-	}
-	private static void deletePedigreesItems() throws ApiException { PedigreesItemResourceApi pedigreesItemResourceApi = new PedigreesItemResourceApi();
-		pedigreesItemResourceApi.setApiClient(getApiClient());
-
-		var instances = pedigreesItemResourceApi.getAllPedigreesItems(false);
-		var instancesUUIDs = instances.stream().map(PedigreesItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			pedigreesItemResourceApi.deletePedigreesItem(instanceUUID);
-		}
-	}
-	private static void deletePathologicalTnmFindingItems() throws ApiException { PathologicalTnmFindingItemResourceApi pathologicalTnmFindingItemResourceApi = new PathologicalTnmFindingItemResourceApi();
-		pathologicalTnmFindingItemResourceApi.setApiClient(getApiClient());
-
-		var instances = pathologicalTnmFindingItemResourceApi.getAllPathologicalTnmFindingItems();
-		var instancesUUIDs = instances.stream().map(PathologicalTnmFindingItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			pathologicalTnmFindingItemResourceApi.deletePathologicalTnmFindingItem(instanceUUID);
-		}
-	}
-
-	private static void deleteModifiersItems() throws ApiException { ModifiersItemResourceApi modifiersItemResourceApi = new ModifiersItemResourceApi();
-		modifiersItemResourceApi.setApiClient(getApiClient());
-
-		var instances = modifiersItemResourceApi.getAllModifiersItems();
-		var instancesUUIDs = instances.stream().map(ModifiersItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			modifiersItemResourceApi.deleteModifiersItem(instanceUUID);
-		}
-	}
-	private static void deleteMembersItems() throws ApiException { MembersItemResourceApi membersItemResourceApi = new MembersItemResourceApi();
-		membersItemResourceApi.setApiClient(getApiClient());
-
-		var instances = membersItemResourceApi.getAllMembersItems();
-		var instancesUUIDs = instances.stream().map(MembersItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			membersItemResourceApi.deleteMembersItem(instanceUUID);
-		}
-	}
-	private static void deleteMeasuresItems() throws ApiException { MeasuresItemResourceApi measuresItemResourceApi = new MeasuresItemResourceApi();
-		measuresItemResourceApi.setApiClient(getApiClient());
-
-		var instances = measuresItemResourceApi.getAllMeasuresItems();
-		var instancesUUIDs = instances.stream().map(MeasuresItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			measuresItemResourceApi.deleteMeasuresItem(instanceUUID);
-		}
-	}
-	private static void deleteMeasurementsItems() throws ApiException { MeasurementsItemResourceApi measurementsItemResourceApi = new MeasurementsItemResourceApi();
-		measurementsItemResourceApi.setApiClient(getApiClient());
-
-		var instances = measurementsItemResourceApi.getAllMeasurementsItems();
-		var instancesUUIDs = instances.stream().map(MeasurementsItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			measurementsItemResourceApi.deleteMeasurementsItem(instanceUUID);
-		}
-	}
-	private static void deleteLocationsItems() throws ApiException { LocationsItemResourceApi locationsItemResourceApi = new LocationsItemResourceApi();
-		locationsItemResourceApi.setApiClient(getApiClient());
-
-		var instances = locationsItemResourceApi.getAllLocationsItems();
-		var instancesUUIDs = instances.stream().map(LocationsItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			locationsItemResourceApi.deleteLocationsItem(instanceUUID);
-		}
-	}
-	private static void deleteInterventionsOrProceduresItems() throws ApiException { InterventionsOrProceduresItemResourceApi interventionsOrProceduresItemResourceApi = new InterventionsOrProceduresItemResourceApi();
-		interventionsOrProceduresItemResourceApi.setApiClient(getApiClient());
-
-		var instances = interventionsOrProceduresItemResourceApi.getAllInterventionsOrProceduresItems();
-		var instancesUUIDs = instances.stream().map(InterventionsOrProceduresItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			interventionsOrProceduresItemResourceApi.deleteInterventionsOrProceduresItem(instanceUUID);
-		}
-	}
-
-	private static void deleteGenomicVariants() throws ApiException { GenomicVariantResourceApi genomicVariantResourceApi = new GenomicVariantResourceApi();
-		genomicVariantResourceApi.setApiClient(getApiClient());
-
-		var instances = genomicVariantResourceApi.getAllGenomicVariants(true);
-		var instancesUUIDs = instances.stream().map(GenomicVariant::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			genomicVariantResourceApi.deleteGenomicVariant(instanceUUID);
-		}
-	}
-	private static void deleteGendersItems() throws ApiException { GendersItemResourceApi gendersItemResourceApi = new GendersItemResourceApi();
-		gendersItemResourceApi.setApiClient(getApiClient());
-
-		var instances = gendersItemResourceApi.getAllGendersItems();
-		var instancesUUIDs = instances.stream().map(GendersItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			gendersItemResourceApi.deleteGendersItem(instanceUUID);
-		}
-	}
-	private static void deleteExternalReferences() throws ApiException { ExternalReferenceResourceApi externalReferenceResourceApi = new ExternalReferenceResourceApi();
-		externalReferenceResourceApi.setApiClient(getApiClient());
-
-		var instances = externalReferenceResourceApi.getAllExternalReferences();
-		var instancesUUIDs = instances.stream().map(ExternalReference::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			externalReferenceResourceApi.deleteExternalReference(instanceUUID);
-		}
-	}
-	private static void deleteExposureItems() throws ApiException { ExposuresItemResourceApi exposureItemResourceApi = new ExposuresItemResourceApi();
-		exposureItemResourceApi.setApiClient(getApiClient());
-
-		var instances = exposureItemResourceApi.getAllExposuresItems();
-		var instancesUUIDs = instances.stream().map(ExposuresItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			exposureItemResourceApi.deleteExposuresItem(instanceUUID);
-		}
-	}
-
-	private static void deleteEvidences() throws ApiException { EvidenceResourceApi evidenceResourceApi = new EvidenceResourceApi();
-		evidenceResourceApi.setApiClient(getApiClient());
-
-		var instances = evidenceResourceApi.getAllEvidences();
-		var instancesUUIDs = instances.stream().map(Evidence::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			evidenceResourceApi.deleteEvidence(instanceUUID);
-		}
-	}
-
-	private static void deleteEventEthnicities() throws ApiException { EventEthnicitiesResourceApi eventEthnicitieResourceApi = new EventEthnicitiesResourceApi();
-		eventEthnicitieResourceApi.setApiClient(getApiClient());
-
-		var instances = eventEthnicitieResourceApi.getAllEventEthnicities();
-		var instancesUUIDs = instances.stream().map(EventEthnicities::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			eventEthnicitieResourceApi.deleteEventEthnicities(instanceUUID);
-		}
-	}
-	private static void deleteEventDiseases() throws ApiException { EventDiseasesResourceApi eventDiseaseResourceApi = new EventDiseasesResourceApi();
-		eventDiseaseResourceApi.setApiClient(getApiClient());
-
-		var instances = eventDiseaseResourceApi.getAllEventDiseases();
-		var instancesUUIDs = instances.stream().map(EventDiseases::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			eventDiseaseResourceApi.deleteEventDiseases(instanceUUID);
-		}
-	}
-	private static void deleteEventDataTypes() throws ApiException { EventDataTypesResourceApi eventDataTypeResourceApi = new EventDataTypesResourceApi();
-		eventDataTypeResourceApi.setApiClient(getApiClient());
-
-		var instances = eventDataTypeResourceApi.getAllEventDataTypes();
-		var instancesUUIDs = instances.stream().map(EventDataTypes::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			eventDataTypeResourceApi.deleteEventDataTypes(instanceUUID);
-		}
-	}
-	private static void deleteEventAgeRanges() throws ApiException { EventAgeRangeResourceApi eventAgeRangeResourceApi = new EventAgeRangeResourceApi();
-		eventAgeRangeResourceApi.setApiClient(getApiClient());
-
-		var instances = eventAgeRangeResourceApi.getAllEventAgeRanges();
-		var instancesUUIDs = instances.stream().map(EventAgeRange::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			eventAgeRangeResourceApi.deleteEventAgeRange(instanceUUID);
-		}
-	}
-	private static void deleteEthnicitiesItems() throws ApiException { EthnicitiesItemResourceApi ethnicitiesItemResourceApi = new EthnicitiesItemResourceApi();
-		ethnicitiesItemResourceApi.setApiClient(getApiClient());
-
-		var instances = ethnicitiesItemResourceApi.getAllEthnicitiesItems();
-		var instancesUUIDs = instances.stream().map(EthnicitiesItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			ethnicitiesItemResourceApi.deleteEthnicitiesItem(instanceUUID);
-		}
-	}
-	private static void deleteDoseIntervalsItems() throws ApiException { DoseIntervalsItemResourceApi doseIntervalsItemResourceApi = new DoseIntervalsItemResourceApi();
-		doseIntervalsItemResourceApi.setApiClient(getApiClient());
-
-		var instances = doseIntervalsItemResourceApi.getAllDoseIntervalsItems();
-		var instancesUUIDs = instances.stream().map(DoseIntervalsItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			doseIntervalsItemResourceApi.deleteDoseIntervalsItem(instanceUUID);
-		}
-	}
-	private static void deleteDiseases() throws ApiException { DiseaseResourceApi diseaseResourceApi = new DiseaseResourceApi();
-		diseaseResourceApi.setApiClient(getApiClient());
-
-		var instances = diseaseResourceApi.getAllDiseases();
-		var instancesUUIDs = instances.stream().map(Disease::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			diseaseResourceApi.deleteDisease(instanceUUID);
-		}
-	}
-	private static void deleteDiseasesItems() throws ApiException { DiseasesItemResourceApi diseasesItemResourceApi = new DiseasesItemResourceApi();
-		diseasesItemResourceApi.setApiClient(getApiClient());
-
-		var instances = diseasesItemResourceApi.getAllDiseasesItems();
-		var instancesUUIDs = instances.stream().map(DiseasesItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			diseasesItemResourceApi.deleteDiseasesItem(instanceUUID);
-		}
-	}
-	private static void deleteDiseaseConditionsItems() throws ApiException { DiseaseConditionsItemResourceApi diseaseConditionsItemResourceApi = new DiseaseConditionsItemResourceApi();
-		diseaseConditionsItemResourceApi.setApiClient(getApiClient());
-
-		var instances = diseaseConditionsItemResourceApi.getAllDiseaseConditionsItems();
-		var instancesUUIDs = instances.stream().map(DiseaseConditionsItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			diseaseConditionsItemResourceApi.deleteDiseaseConditionsItem(instanceUUID);
-		}
-	}
-	private static void deleteDiagnosticMarkersItems() throws ApiException { DiagnosticMarkersItemResourceApi diagnosticMarkersItemResourceApi = new DiagnosticMarkersItemResourceApi();
-		diagnosticMarkersItemResourceApi.setApiClient(getApiClient());
-
-		var instances = diagnosticMarkersItemResourceApi.getAllDiagnosticMarkersItems();
-		var instancesUUIDs = instances.stream().map(DiagnosticMarkersItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			diagnosticMarkersItemResourceApi.deleteDiagnosticMarkersItem(instanceUUID);
-		}
-	}
-	private static void deleteDatasets() throws ApiException { DatasetResourceApi datasetResourceApi = new DatasetResourceApi();
-		datasetResourceApi.setApiClient(getApiClient());
-
-		var instances = datasetResourceApi.getAllDatasets(true);
-		var instancesUUIDs = instances.stream().map(Dataset::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			datasetResourceApi.deleteDataset(instanceUUID);
-		}
-	}
-	private static void deleteDataUseConditions() throws ApiException { DataUseConditionsResourceApi dataUseConditionResourceApi = new DataUseConditionsResourceApi();
-		dataUseConditionResourceApi.setApiClient(getApiClient());
-
-		var instances = dataUseConditionResourceApi.getAllDataUseConditions();
-		var instancesUUIDs = instances.stream().map(DataUseConditions::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			dataUseConditionResourceApi.deleteDataUseConditions(instanceUUID);
-		}
-	}
-	private static void deleteCollectionEventsItems() throws ApiException { CollectionEventsItemResourceApi collectionEventsItemResourceApi = new CollectionEventsItemResourceApi();
-		collectionEventsItemResourceApi.setApiClient(getApiClient());
-
-		var instances = collectionEventsItemResourceApi.getAllCollectionEventsItems();
-		var instancesUUIDs = instances.stream().map(CollectionEventsItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			collectionEventsItemResourceApi.deleteCollectionEventsItem(instanceUUID);
-		}
-	}
-	private static void deleteCohorts() throws ApiException { CohortResourceApi cohortResourceApi = new CohortResourceApi();
-		cohortResourceApi.setApiClient(getApiClient());
-
-		var instances = cohortResourceApi.getAllCohorts(true);
-		var instancesUUIDs = instances.stream().map(Cohort::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			cohortResourceApi.deleteCohort(instanceUUID);
-		}
-	}
-	private static void deleteCohortDataTypesItems() throws ApiException { CohortDataTypesItemResourceApi cohortDataTypesItemResourceApi = new CohortDataTypesItemResourceApi();
-		cohortDataTypesItemResourceApi.setApiClient(getApiClient());
-
-		var instances = cohortDataTypesItemResourceApi.getAllCohortDataTypesItems();
-		var instancesUUIDs = instances.stream().map(CohortDataTypesItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			cohortDataTypesItemResourceApi.deleteCohortDataTypesItem(instanceUUID);
-		}
-	}
-
-	private static void deleteIndividuals() throws ApiException {
-		IndividualResourceApi individualResourceApi = new IndividualResourceApi();
-		individualResourceApi.setApiClient(getApiClient());
-
-		var instances = individualResourceApi.getAllIndividuals(true);
-		var instancesUUIDs = instances.stream().map(Individual::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			individualResourceApi.deleteIndividual(instanceUUID);
-		}
+		} catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+	private void loadReadDataset(DatasetsSchema readDataset) throws ParseException {
+		var dataset = new Dataset();
+		dataset.setId(readDataset.getId());
+		dataset.setName(readDataset.getName());
+		dataset.setDescription(readDataset.getDescription());
+		dataset.setVersion(readDataset.getVersion());
+		dataset.setExternalUrl(readDataset.getExternalUrl());
+		dataset.setCreateDateTime(ZonedDateTime.parse(readDataset.getCreateDateTime()));
+		dataset.setUpdateDateTime(ZonedDateTime.parse(readDataset.getUpdateDateTime()));
+		//readDataset.getDataUseConditions()
+		//readDataset.getAdditionalProperties()
+		//readDataset.getInfo()
+		datasetRepository.save(dataset);
+
+
+		dataset.setId("bla");
+		dataset.setName("blaName");
+		dataset.setDescription("blaDescription");
+		datasetRepository.save(dataset);
 	}
 }
