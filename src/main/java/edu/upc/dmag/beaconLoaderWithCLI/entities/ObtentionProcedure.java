@@ -1,6 +1,7 @@
 package edu.upc.dmag.beaconLoaderWithCLI.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
@@ -9,6 +10,7 @@ import java.time.Duration;
 @Entity
 public class ObtentionProcedure {
     @Id
+    @GeneratedValue
     private Long id;
 
     public void setId(Long id) {

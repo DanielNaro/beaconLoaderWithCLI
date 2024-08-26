@@ -1,11 +1,9 @@
 package edu.upc.dmag.beaconLoaderWithCLI.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 
 import java.time.ZonedDateTime;
+import java.util.Map;
 import java.util.Set;
 
 @Entity
@@ -26,7 +24,16 @@ public class Dataset {
     @ManyToMany
     Set<Individual> individuals;
 
-    String info_beacon_contact;
+    public Map<String, String> getInfo_beacon_contact() {
+        return info_beacon_contact;
+    }
+
+    @ElementCollection
+    @CollectionTable(name = "dataset_info_contact_mapping",
+            joinColumns = {@JoinColumn(name = "dataset_info_contact", referencedColumnName = "id")})
+    @MapKeyColumn(name = "property_name")
+    @Column(name = "property_value")
+    Map<String, String> info_beacon_contact;
     String info_beacon_mapping;
     String info_beacon_version;
 
@@ -116,14 +123,6 @@ public class Dataset {
 
     public void setIndividuals(Set<Individual> individuals) {
         this.individuals = individuals;
-    }
-
-    public String getInfo_beacon_contact() {
-        return info_beacon_contact;
-    }
-
-    public void setInfo_beacon_contact(String info_beacon_contact) {
-        this.info_beacon_contact = info_beacon_contact;
     }
 
     public String getInfo_beacon_mapping() {

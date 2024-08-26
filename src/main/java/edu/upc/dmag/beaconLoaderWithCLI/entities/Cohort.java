@@ -1,5 +1,6 @@
 package edu.upc.dmag.beaconLoaderWithCLI.entities;
 
+import edu.upc.dmag.ToLoad.CohortsSchema;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -11,8 +12,7 @@ public class Cohort {
     String name;
     @ManyToOne
     OntologyTerm cohortDesign;
-    @ManyToOne
-    CohortType cohortType;
+    CohortsSchema.CohortType cohortType;
     @ManyToMany
     Set<Individual> individuals;
     @OneToOne
@@ -44,11 +44,11 @@ public class Cohort {
         this.cohortDesign = cohortDesign;
     }
 
-    public CohortType getCohortType() {
+    public CohortsSchema.CohortType getCohortType() {
         return cohortType;
     }
 
-    public void setCohortType(CohortType cohortType) {
+    public void setCohortType(CohortsSchema.CohortType cohortType) {
         this.cohortType = cohortType;
     }
 

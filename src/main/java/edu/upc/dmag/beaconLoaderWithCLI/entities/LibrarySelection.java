@@ -1,11 +1,13 @@
 package edu.upc.dmag.beaconLoaderWithCLI.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 @Entity
 public class LibrarySelection {
     @Id
+    @GeneratedValue
     private Long id;
     private String name;
 

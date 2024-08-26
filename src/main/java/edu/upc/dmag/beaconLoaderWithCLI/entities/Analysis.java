@@ -9,7 +9,7 @@ import java.sql.Date;
 @Entity
 public class Analysis {
     @Id
-    private Long id;
+    private String id;
     String aligner;
     Date analysisDate;
     String pipelineName;
@@ -19,11 +19,11 @@ public class Analysis {
     Run run;
 
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 

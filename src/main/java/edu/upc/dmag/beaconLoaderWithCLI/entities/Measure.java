@@ -1,9 +1,6 @@
 package edu.upc.dmag.beaconLoaderWithCLI.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 
 import java.sql.Date;
 
@@ -15,6 +12,7 @@ public class Measure {
     @OneToOne
     MeasurementValue measurementValue;
     @Id
+    @GeneratedValue
     private Long id;
 
     public void setId(Long id) {
