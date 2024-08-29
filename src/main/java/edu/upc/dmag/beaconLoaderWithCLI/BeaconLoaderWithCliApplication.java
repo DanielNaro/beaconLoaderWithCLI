@@ -8,9 +8,16 @@ import edu.upc.dmag.ToLoad.DuoDataUse;
 import edu.upc.dmag.ToLoad.ObtentionProcedure;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.*;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.Age;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.ComplexValue;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.DataUseConditions;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.Measure;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.MeasurementValue;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.OntologyTerm;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.PhenotypicFeature;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.Quantity;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.ReferenceRange;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.Value;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -46,6 +53,11 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	private final PhenotypicFeatureRepository phenotypicFeatureRepository;
 	private final DataUseConditionsRepository dataUseConditionsRepository;
 	private final AgeRepository ageRepository;
+	private final MeasurementValueRepository measurementValueRepository;
+	private final ComplexValueRepository complexValueRepository;
+	private final ReferenceRangeRepository referenceRangeRepository;
+	private final QuantityRepository quantityRepository;
+	private final ValueRepository valueRepository;
 
 	public BeaconLoaderWithCliApplication(
 			DatasetRepository datasetRepository,
@@ -61,7 +73,12 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 			CohortRepository cohortRepository,
 			PhenotypicFeatureRepository phenotypicFeatureRepository,
 			DataUseConditionsRepository dataUseConditionsRepository,
-			AgeRepository ageRepository
+			AgeRepository ageRepository,
+			MeasurementValueRepository measurementValueRepository,
+			ComplexValueRepository complexValueRepository,
+			ReferenceRangeRepository referenceRangeRepository,
+			QuantityRepository quantityRepository,
+			ValueRepository valueRepository
 	) {
 		this.datasetRepository = datasetRepository;
 		this.biosampleRepository = biosampleRepository;
@@ -77,6 +94,11 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		this.phenotypicFeatureRepository = phenotypicFeatureRepository;
 		this.dataUseConditionsRepository = dataUseConditionsRepository;
 		this.ageRepository = ageRepository;
+		this.measurementValueRepository = measurementValueRepository;
+		this.complexValueRepository = complexValueRepository;
+		this.referenceRangeRepository = referenceRangeRepository;
+		this.quantityRepository = quantityRepository;
+		this.valueRepository = valueRepository;
 	}
 
 	public static void main(String[] args) {
@@ -365,12 +387,154 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		var measure = new Measure();
 		measure.setAssayCode(getOntologyTerm(it.getAssayCode()));
 		measure.setDate(Date.valueOf(it.getDate()));
+		measure.setMeasurementValue(getMeasurementValue(it.getMeasurementValue()));
 		measureRepository.save(measure);
 		return measure;
 	}
 
+	private MeasurementValue getMeasurementValue(edu.upc.dmag.ToLoad.MeasurementValue readMeasurementValue) {
+		var measurementValue = new MeasurementValue();
+		if (readMeasurementValue.getQuantity() != null){
+			var value = new Value();
+			if(readMeasurementValue.getQuantity().getOntologyTerm() != null){
+				value.setTermValue(getOntologyTerm(readMeasurementValue.getQuantity().getOntologyTerm()));
+			}else {
+				var quantity = getQuantity(readMeasurementValue.getQuantity());
+				value.setQuantity(quantity);
+			}
+			valueRepository.save(value);
+			measurementValue.setValue(value);
+		} else {
+			var complexValue = new ComplexValue();
+			complexValue.setQuantity(getQuantity(readMeasurementValue.getTypedQuantities().getQuantity()));
+			complexValue.setQuantityType(getQuantityType(readMeasurementValue.getTypedQuantities().getQuantityType()));
+			complexValueRepository.save(complexValue);
+			measurementValue.setComplexValue(complexValue);
+		}
+		measurementValueRepository.save(measurementValue);
+		return measurementValue;
+	}
+
+	private OntologyTerm getQuantityType(QuantityType readType) {
+		var foundTerm = ontologyTermRepository.findById(readType.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(readType.getId());
+			ontologyTerm.setLabel(readType.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private Quantity getQuantity(Quantity__1 readQuantity) {
+		var quantity = new Quantity();
+		quantity.setValue(readQuantity.getValue());
+		quantity.setUnit(getOntologyTerm(readQuantity.getUnit()));
+		if (quantity.getReferenceRange() != null){
+			var referenceRange = new ReferenceRange();
+			referenceRange.setLow(readQuantity.getReferenceRange().getLow());
+			referenceRange.setHigh(readQuantity.getReferenceRange().getHigh());
+			referenceRange.setUnit(getOntologyTerm(readQuantity.getReferenceRange().getUnit()));
+			quantity.setReferenceRange(referenceRange);
+		}
+		quantityRepository.save(quantity);
+		return quantity;
+	}
+
+	private OntologyTerm getOntologyTerm(Unit__4 unit) {
+		var foundTerm = ontologyTermRepository.findById(unit.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(unit.getId());
+			ontologyTerm.setLabel(unit.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(Unit__3 unit) {
+		var foundTerm = ontologyTermRepository.findById(unit.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(unit.getId());
+			ontologyTerm.setLabel(unit.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	@NotNull
+	private Quantity getQuantity(edu.upc.dmag.ToLoad.Quantity readQuantity) {
+		var quantity = new Quantity();
+		quantity.setValue(readQuantity.getValue());
+		quantity.setUnit(getOntologyTerm(readQuantity.getUnit()));
+		if (quantity.getReferenceRange() != null){
+			var referenceRange = new ReferenceRange();
+			referenceRange.setLow(readQuantity.getReferenceRange().getLow());
+			referenceRange.setHigh(readQuantity.getReferenceRange().getHigh());
+			referenceRange.setUnit(getOntologyTerm(readQuantity.getReferenceRange().getUnit()));
+			quantity.setReferenceRange(referenceRange);
+		}
+		quantityRepository.save(quantity);
+		return quantity;
+	}
+
+	private OntologyTerm getOntologyTerm(Unit__2 unit) {
+		var foundTerm = ontologyTermRepository.findById(unit.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(unit.getId());
+			ontologyTerm.setLabel(unit.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(Unit__1 unit) {
+		var foundTerm = ontologyTermRepository.findById(unit.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(unit.getId());
+			ontologyTerm.setLabel(unit.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(edu.upc.dmag.ToLoad.OntologyTerm readOntologyTerm) {
+		var foundTerm = ontologyTermRepository.findById(readOntologyTerm.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(readOntologyTerm.getId());
+			ontologyTerm.setLabel(readOntologyTerm.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
 	private OntologyTerm getOntologyTerm(AssayCode__1 assayCode) {
-		return null;
+		var foundTerm = ontologyTermRepository.findById(assayCode.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(assayCode.getId());
+			ontologyTerm.setLabel(assayCode.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
 	}
 
 	private Set<PhenotypicFeature> getPhenotypicFeatures(List<PhenotypicFeature__1> phenotypicFeatures) {
