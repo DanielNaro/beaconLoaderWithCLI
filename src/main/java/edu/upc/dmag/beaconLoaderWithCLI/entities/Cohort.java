@@ -2,6 +2,9 @@ package edu.upc.dmag.beaconLoaderWithCLI.entities;
 
 import edu.upc.dmag.ToLoad.CohortsSchema;
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcType;
+import org.hibernate.annotations.Type;
+import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
 import java.util.Set;
 
@@ -12,6 +15,7 @@ public class Cohort {
     String name;
     @ManyToOne
     OntologyTerm cohortDesign;
+    @Enumerated(EnumType.ORDINAL)
     CohortsSchema.CohortType cohortType;
     @ManyToMany
     Set<Individual> individuals;

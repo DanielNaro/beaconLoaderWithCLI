@@ -1,9 +1,6 @@
 package edu.upc.dmag.beaconLoaderWithCLI.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.time.Duration;
 
@@ -21,16 +18,17 @@ public class ObtentionProcedure {
         return id;
     }
 
-    Duration age;
+    @OneToOne
+    Age age;
 
     @ManyToOne
     OntologyTerm procedureCode;
 
-    public Duration getAge() {
+    public Age getAge() {
         return age;
     }
 
-    public void setAge(Duration age) {
+    public void setAge(Age age) {
         this.age = age;
     }
 

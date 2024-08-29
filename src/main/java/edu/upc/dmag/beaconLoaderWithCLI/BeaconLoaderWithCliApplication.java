@@ -3,12 +3,14 @@ package edu.upc.dmag.beaconLoaderWithCLI;
 
 import com.google.gson.Gson;
 import edu.upc.dmag.ToLoad.*;
+import edu.upc.dmag.ToLoad.AgeRange;
+import edu.upc.dmag.ToLoad.DuoDataUse;
 import edu.upc.dmag.ToLoad.ObtentionProcedure;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.*;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.Age;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.DataUseConditions;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.Measure;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.PhenotypicFeature;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToOne;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -42,6 +44,8 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	private final AgeRangeCriteriaRepository ageRangeCriteriaRepository;
 	private final CohortRepository cohortRepository;
 	private final PhenotypicFeatureRepository phenotypicFeatureRepository;
+	private final DataUseConditionsRepository dataUseConditionsRepository;
+	private final AgeRepository ageRepository;
 
 	public BeaconLoaderWithCliApplication(
 			DatasetRepository datasetRepository,
@@ -55,7 +59,9 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 			AnalysisRepository analysisRepository,
 			AgeRangeCriteriaRepository ageRangeCriteriaRepository,
 			CohortRepository cohortRepository,
-			PhenotypicFeatureRepository phenotypicFeatureRepository
+			PhenotypicFeatureRepository phenotypicFeatureRepository,
+			DataUseConditionsRepository dataUseConditionsRepository,
+			AgeRepository ageRepository
 	) {
 		this.datasetRepository = datasetRepository;
 		this.biosampleRepository = biosampleRepository;
@@ -69,6 +75,8 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		this.ageRangeCriteriaRepository = ageRangeCriteriaRepository;
 		this.cohortRepository = cohortRepository;
 		this.phenotypicFeatureRepository = phenotypicFeatureRepository;
+		this.dataUseConditionsRepository = dataUseConditionsRepository;
+		this.ageRepository = ageRepository;
 	}
 
 	public static void main(String[] args) {
@@ -84,8 +92,8 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		//deleteAll();
 		//loadData();
 		loadDatasets();
-		loadBiosamples();
 		loadIndividuals();
+		loadBiosamples();
 		loadRuns();
 		loadAnalyses();
 		loadCohorts();
@@ -114,7 +122,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		cohortRepository.save(cohort);
 	}
 
-	private AgeRangeCriteria getAgeRange(AgeRange__1 ageRange) {
+	private AgeRangeCriteria getAgeRange(AgeRange__2 ageRange) {
 		AgeRangeCriteria ageRangeCriteria = new AgeRangeCriteria();
 		ageRangeCriteria.setStart(ConvertDuration.getDuration(ageRange.getStart().getIso8601duration()));
 		ageRangeCriteria.setEnd(ConvertDuration.getDuration(ageRange.getEnd().getIso8601duration()));
@@ -263,6 +271,10 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		dataset.setExternalUrl(readDataset.getExternalUrl());
 		dataset.setCreateDateTime(ZonedDateTime.parse(readDataset.getCreateDateTime()));
 		dataset.setUpdateDateTime(ZonedDateTime.parse(readDataset.getUpdateDateTime()));
+		dataset.setDataUseConditions(getDatauseConditions(readDataset.getDataUseConditions()));
+		dataset.setInfo_beacon_version(readDataset.getInfo().getBeacon().getVersion());
+		dataset.setInfo_beacon_mapping(readDataset.getInfo().getBeacon().getMapping());
+		dataset.setInfo_beacon_contact(readDataset.getInfo().getBeacon().getContact());
 
 		//readDataset.getDataUseConditions()
 		//readDataset.getAdditionalProperties()
@@ -275,6 +287,28 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		String info_beacon_mapping;
 		String info_beacon_version;
 		datasetRepository.save(dataset);
+	}
+
+	private DataUseConditions getDatauseConditions(edu.upc.dmag.ToLoad.DataUseConditions readDataUseConditions) {
+		var dataUseConditions = new DataUseConditions();
+		dataUseConditions.setDuoDataUses(
+				readDataUseConditions.getDuoDataUse().stream().map(it -> getOntologyTerm(it)).collect(Collectors.toSet())
+		);
+		dataUseConditionsRepository.save(dataUseConditions);
+		return dataUseConditions;
+	}
+
+	private OntologyTerm getOntologyTerm(DuoDataUse it) {
+		var foundTerm = ontologyTermRepository.findById(it.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(it.getId());
+			ontologyTerm.setLabel(it.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
 	}
 
 	private void loadBiosamples() throws IOException {
@@ -408,6 +442,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		biosample.setObtentionProcedure(getObtentionProcedure(readBiosample.getObtentionProcedure()));
 		biosample.setBiosampleStatus(getOntologyTerm(readBiosample.getBiosampleStatus()));
 		biosample.setSampleOriginType(getOntologyTerm(readBiosample.getSampleOriginType()));
+		biosample.setIndividual(individualRepository.getReferenceById(readBiosample.getIndividualId()));
 		biosampleRepository.save(biosample);
 	}
 
@@ -427,9 +462,52 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	private edu.upc.dmag.beaconLoaderWithCLI.entities.ObtentionProcedure getObtentionProcedure(ObtentionProcedure readObtentionProcedure) {
 		var obtentionProcedure = new edu.upc.dmag.beaconLoaderWithCLI.entities.ObtentionProcedure();
 		obtentionProcedure.setProcedureCode(getOntologyTerm(readObtentionProcedure.getProcedureCode()));
-		//obtentionProcedure.setAge(getAgeAtProcedure(readObtentionProcedure.getAgeAtProcedure()));
+		if (readObtentionProcedure.getAgeAtProcedure().getAge() != null) {
+			obtentionProcedure.setAge(
+				getAgeDuration(ConvertDuration.getDuration(readObtentionProcedure.getAgeAtProcedure().getAge().getIso8601duration()))
+			);
+		} else if (readObtentionProcedure.getAgeAtProcedure().getAgeRange() != null){
+			obtentionProcedure.setAge(getAgeRange(readObtentionProcedure.getAgeAtProcedure().getAgeRange()));
+		} else if (readObtentionProcedure.getAgeAtProcedure().getGestationalAge() != null){
+			obtentionProcedure.setAge(
+					getGestionalAge(readObtentionProcedure.getAgeAtProcedure().getGestationalAge())
+			);
+		} else {
+			obtentionProcedure.setAge(
+				getAgeDatetime(readObtentionProcedure.getAgeAtProcedure().getDateTime().toString())
+			);
+		}
 		obtentionProcedureRepository.save(obtentionProcedure);
 		return obtentionProcedure;
+	}
+
+	private Age getAgeDatetime(String string) {
+		var ageDatetime = new AgeDatetime(string);
+		ageRepository.save(ageDatetime);
+		return ageDatetime;
+	}
+
+	private Age getGestionalAge(Integer readGestationalAge) {
+		var gestionalAge = new GestationalAge(readGestationalAge);
+		ageRepository.save(gestionalAge);
+		return gestionalAge;
+	}
+
+	private Age getAgeRange(AgeRange readAgeRange) {
+		var ageRange = new edu.upc.dmag.beaconLoaderWithCLI.entities.AgeRange(
+				ConvertDuration.getDuration(readAgeRange.getStart()),
+				ConvertDuration.getDuration(readAgeRange.getEnd())
+		);
+		ageRepository.save(ageRange);
+		return ageRange;
+	}
+
+	private Age getAgeDuration(Duration duration) {
+		var ageDuration = new AgeDuration(
+			duration
+		);
+		ageRepository.save(ageDuration);
+		return ageDuration;
 	}
 
 	private OntologyTerm getOntologyTerm(ProcedureCode__1 procedureCode) {

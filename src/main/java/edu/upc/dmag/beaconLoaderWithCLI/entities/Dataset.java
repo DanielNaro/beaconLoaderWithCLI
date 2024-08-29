@@ -24,16 +24,15 @@ public class Dataset {
     @ManyToMany
     Set<Individual> individuals;
 
-    public Map<String, String> getInfo_beacon_contact() {
+    public String getInfo_beacon_contact() {
         return info_beacon_contact;
     }
 
-    @ElementCollection
-    @CollectionTable(name = "dataset_info_contact_mapping",
-            joinColumns = {@JoinColumn(name = "dataset_info_contact", referencedColumnName = "id")})
-    @MapKeyColumn(name = "property_name")
-    @Column(name = "property_value")
-    Map<String, String> info_beacon_contact;
+    public void setInfo_beacon_contact(String info_beacon_contact) {
+        this.info_beacon_contact = info_beacon_contact;
+    }
+
+    String info_beacon_contact;
     String info_beacon_mapping;
     String info_beacon_version;
 

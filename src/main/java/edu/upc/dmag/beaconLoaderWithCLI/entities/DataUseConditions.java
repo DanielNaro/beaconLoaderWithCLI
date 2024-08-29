@@ -1,6 +1,7 @@
 package edu.upc.dmag.beaconLoaderWithCLI.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
@@ -12,20 +13,21 @@ import java.util.Set;
 public class DataUseConditions {
 
     @Id
+    @GeneratedValue
     private Long id;
 
     @OneToMany
-    Set<DuoDataUse> duoDataUses;
+    Set<OntologyTerm> duoDataUses;
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public Set<DuoDataUse> getDuoDataUses() {
+    public Set<OntologyTerm> getDuoDataUses() {
         return duoDataUses;
     }
 
-    public void setDuoDataUses(Set<DuoDataUse> duoDataUses) {
+    public void setDuoDataUses(Set<OntologyTerm> duoDataUses) {
         this.duoDataUses = duoDataUses;
     }
 
