@@ -551,9 +551,39 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	private PhenotypicFeature getPhenotypicFeature(PhenotypicFeature__1 readPhenotypicFeature) {
 		var phenotypicFeature = new PhenotypicFeature();
 		phenotypicFeature.setFeatureType(getOntologyTerm(readPhenotypicFeature.getFeatureType()));
-		phenotypicFeature.setModifiers(getOntologyTerms(readPhenotypicFeature.getModifiers()));
+		phenotypicFeature.setModifiers(getOntologyTermsModifiers(readPhenotypicFeature.getModifiers()));
 		phenotypicFeatureRepository.save(phenotypicFeature);
 		return phenotypicFeature;
+	}
+
+	private Set<OntologyTerm> getOntologyTermsModifiers(List<Modifier__3> modifiers) {
+		return modifiers.stream().map(this::getOntologyTerm).collect(Collectors.toSet());
+	}
+
+	private OntologyTerm getOntologyTerm(Modifier__3 modifier__3) {
+		var foundTerm = ontologyTermRepository.findById(modifier__3.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(modifier__3.getId());
+			ontologyTerm.setLabel(modifier__3.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(FeatureType__3 featureType) {
+		var foundTerm = ontologyTermRepository.findById(featureType.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(featureType.getId());
+			ontologyTerm.setLabel(featureType.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
 	}
 
 	private Set<OntologyTerm> getOntologyTerms(List<Modifier__5> modifiers) {
