@@ -8,7 +8,7 @@ import java.util.List;
 public class CaseLevelData {
     @Id
     @GeneratedValue
-    private Long id;
+    private int id;
 
     @ManyToOne
     private OntologyTerm alleleOrigin;
@@ -21,11 +21,51 @@ public class CaseLevelData {
     @ManyToOne
     private OntologyTerm zygosity;
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
+    }
+
+    public OntologyTerm getAlleleOrigin() {
+        return alleleOrigin;
+    }
+
+    public void setAlleleOrigin(OntologyTerm alleleOrigin) {
+        this.alleleOrigin = alleleOrigin;
+    }
+
+    public List<PhenotypicEffect> getClinicalInterpretations() {
+        return clinicalInterpretations;
+    }
+
+    public void setClinicalInterpretations(List<PhenotypicEffect> clinicalInterpretations) {
+        this.clinicalInterpretations = clinicalInterpretations;
+    }
+
+    public List<PhenotypicEffect> getPhenotypicEffects() {
+        return phenotypicEffects;
+    }
+
+    public void setPhenotypicEffects(List<PhenotypicEffect> phenotypicEffects) {
+        this.phenotypicEffects = phenotypicEffects;
+    }
+
+    public Analysis getAnalysis() {
+        return analysis;
+    }
+
+    public void setAnalysis(Analysis analysis) {
+        this.analysis = analysis;
+    }
+
+    public OntologyTerm getZygosity() {
+        return zygosity;
+    }
+
+    public void setZygosity(OntologyTerm zygosity) {
+        this.zygosity = zygosity;
     }
 }

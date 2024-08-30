@@ -4,19 +4,31 @@ package edu.upc.dmag.beaconLoaderWithCLI;
 import com.google.gson.Gson;
 import edu.upc.dmag.ToLoad.*;
 import edu.upc.dmag.ToLoad.AgeRange;
+import edu.upc.dmag.ToLoad.ClinicalInterpretation;
 import edu.upc.dmag.ToLoad.DuoDataUse;
+import edu.upc.dmag.ToLoad.FrequencyInPopulation;
 import edu.upc.dmag.ToLoad.ObtentionProcedure;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.*;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.Age;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.ComplexValue;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.DataUseConditions;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.GenomicFeature;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.Interval;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.Location;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.Measure;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.MeasurementValue;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.OntologyTerm;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.PhenotypicEffect;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.PhenotypicFeature;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.Quantity;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.ReferenceRange;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.Value;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.VariantAlternativeId;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.VariantLevelData;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.Variation;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,6 +70,17 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	private final ReferenceRangeRepository referenceRangeRepository;
 	private final QuantityRepository quantityRepository;
 	private final ValueRepository valueRepository;
+	private final GenomicVariationRepository genomicVariationRepository;
+	private final VariantAlternativeIdRepository variantAlternativeIdRepository;
+	private final PhenotypicEffectRepository phenotypicEffectRepository;
+	private final ClinicalInterpretationRepository clinicalInterpretationRepository;
+	private final VariantLevelDataRepository variantLevelDataRepository;
+	private final LocationRepository locationRepository;
+	private final VariationRepository variationRepository;
+	private final IntervalRepository intervalRepository;
+	private final CaseLevelDataRepository caseLevelDataRepository;
+	private final FrequencyInPopulationsRepository frequencyInPopulationsRepository;
+	private final FrequencyInPopulationRepository frequencyInPopulationRepository;
 
 	public BeaconLoaderWithCliApplication(
 			DatasetRepository datasetRepository,
@@ -78,8 +101,17 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 			ComplexValueRepository complexValueRepository,
 			ReferenceRangeRepository referenceRangeRepository,
 			QuantityRepository quantityRepository,
-			ValueRepository valueRepository
-	) {
+			ValueRepository valueRepository,
+			GenomicVariationRepository genomicVariationRepository,
+			VariantAlternativeIdRepository variantAlternativeIdRepository,
+			PhenotypicEffectRepository phenotypicEffectRepository,
+			ClinicalInterpretationRepository clinicalInterpretationRepository,
+			VariantLevelDataRepository variantLevelDataRepository,
+			LocationRepository locationRepository,
+			VariationRepository variationRepository,
+			IntervalRepository intervalRepository,
+			CaseLevelDataRepository caseLevelDataRepository,
+			FrequencyInPopulationsRepository frequencyInPopulationsRepository, FrequencyInPopulationRepository frequencyInPopulationRepository) {
 		this.datasetRepository = datasetRepository;
 		this.biosampleRepository = biosampleRepository;
 		this.ontologyTermRepository = ontologyTermRepository;
@@ -99,6 +131,17 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		this.referenceRangeRepository = referenceRangeRepository;
 		this.quantityRepository = quantityRepository;
 		this.valueRepository = valueRepository;
+		this.genomicVariationRepository = genomicVariationRepository;
+		this.variantAlternativeIdRepository = variantAlternativeIdRepository;
+		this.phenotypicEffectRepository = phenotypicEffectRepository;
+		this.clinicalInterpretationRepository = clinicalInterpretationRepository;
+		this.variationRepository = variationRepository;
+		this.intervalRepository = intervalRepository;
+		this.variantLevelDataRepository = variantLevelDataRepository;
+		this.locationRepository = locationRepository;
+		this.caseLevelDataRepository = caseLevelDataRepository;
+		this.frequencyInPopulationsRepository = frequencyInPopulationsRepository;
+		this.frequencyInPopulationRepository = frequencyInPopulationRepository;
 	}
 
 	public static void main(String[] args) {
@@ -119,6 +162,510 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		loadRuns();
 		loadAnalyses();
 		loadCohorts();
+		loadGenomicVariations();
+	}
+
+	private void loadGenomicVariations() throws IOException {
+		try (InputStreamReader jsonFileInputStream = new InputStreamReader(new FileInputStream("./src/main/resources/toLoad/genomicVariationsTruncated.json"))){
+			Gson gson = new Gson();
+			var readGenomicVariants = gson.fromJson(jsonFileInputStream, GenomicVariantsSchema[].class);
+
+
+			for(GenomicVariantsSchema genomicVariant: readGenomicVariants){
+				loadGenomicVariants(genomicVariant);
+			}
+		}
+	}
+
+	private void loadGenomicVariants(GenomicVariantsSchema readGenomicVariant) {
+		GenomicVariation genomicVariation = new GenomicVariation();
+
+		genomicVariation.setVariantInternalId(readGenomicVariant.getVariantInternalId());
+		genomicVariation.setCaseLevelData(getCaseLevelDataList(readGenomicVariant.getCaseLevelData()));
+		genomicVariation.setFrequencyInPopulationsList(getFrequencyInPopulationsList(readGenomicVariant.getFrequencyInPopulations()));
+
+		processGenomicVariationIdentifier(readGenomicVariant, genomicVariation);
+		processMolecularAttributes(readGenomicVariant, genomicVariation);
+
+		genomicVariation.setVariantLevelData(getVariantLevelData(readGenomicVariant.getVariantLevelData()));
+
+		genomicVariation.setVariation(getVariation(readGenomicVariant.getVariation()));
+
+		genomicVariationRepository.save(genomicVariation);
+	}
+
+	private Variation getVariation(edu.upc.dmag.ToLoad.Variation readVariation) {
+		var variation = new Variation();
+		variation.setVariantType(readVariation.getVariantType());
+		variation.setReferenceBases(readVariation.getReferenceBases());
+		variation.setAlternateBases(readVariation.getAlternateBases());
+		variation.setLocation(getLocation(readVariation.getLocation()));
+		//variation.setCopies(getCopies(readVariation.ge));
+		//variation.setMembers(getMembers(readVariation.g));
+		variationRepository.save(variation);
+		return variation;
+	}
+
+	private Location getLocation(Location__2 location) {
+		var result = new Location();
+		result.setSpecies_id(location.getSpeciesId());
+		result.setChr(location.getChr());
+		result.setInterval(getInterval(location.getInterval()));
+		locationRepository.save(result);
+		return result;
+	}
+
+	private Interval getInterval(edu.upc.dmag.ToLoad.Interval interval) {
+		var result = new Interval();
+		result.setType(interval.getType());
+		result.setStart(interval.getStart().getValue().toString());
+		result.setEnd(interval.getEnd().getValue().toString());
+		intervalRepository.save(result);
+		return result;
+	}
+
+	private VariantLevelData getVariantLevelData(edu.upc.dmag.ToLoad.VariantLevelData variantLevelData) {
+		if (variantLevelData == null){
+			return null;
+		}
+		var result = new VariantLevelData();
+
+		result.setClinicalInterpretations(getClinicalInterpretationsForVariantLevelData(variantLevelData.getClinicalInterpretations()));
+		result.setPhenotypicEffects(getPhenotypicEffectsForVariantLevelData(variantLevelData.getPhenotypicEffects()));
+		variantLevelDataRepository.save(result);
+		return result;
+	}
+
+	private List<edu.upc.dmag.beaconLoaderWithCLI.entities.ClinicalInterpretation> getPhenotypicEffectsForVariantLevelData(List<PhenotypicEffect__1> phenotypicEffects) {
+		return phenotypicEffects.stream().map(it -> getPhenotypicEffectForVariantLevelData(it)).toList();
+	}
+
+	private edu.upc.dmag.beaconLoaderWithCLI.entities.ClinicalInterpretation getPhenotypicEffectForVariantLevelData(PhenotypicEffect__1 it) {
+		var phenotypicEffect = new edu.upc.dmag.beaconLoaderWithCLI.entities.ClinicalInterpretation();
+		phenotypicEffect.setAnnotatedWithToolName(it.getAnnotatedWith().getToolName());
+		phenotypicEffect.setAnnotatedWithToolVersion(it.getAnnotatedWith().getVersion());
+		//phenotypicEffect.setAnnotationToolReference(it.getAnnotatedWith().getToolReferences());
+
+		phenotypicEffect.setCategory(getOntologyTerm(it.getCategory()));
+
+		phenotypicEffect.setClinicalRelevance(getClinicalRelevance(it.getClinicalRelevance()));
+		phenotypicEffect.setConditionId(it.getConditionId());
+		phenotypicEffect.setEffect(getOntologyTerm(it.getEffect()));
+		phenotypicEffect.setEvidenceType(getOntologyTerm(it.getEvidenceType()));
+
+		clinicalInterpretationRepository.save(phenotypicEffect);
+		return phenotypicEffect;
+	}
+
+	private ClinicalInterpretation.ClinicalRelevance getClinicalRelevance(PhenotypicEffect__1.ClinicalRelevance clinicalRelevance) {
+		if (clinicalRelevance == null) return null;
+		return ClinicalInterpretation.ClinicalRelevance.fromValue(clinicalRelevance.toString());
+	}
+
+	private OntologyTerm getOntologyTerm(EvidenceType__3 evidenceType) {
+		var foundTerm = ontologyTermRepository.findById(evidenceType.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(evidenceType.getId());
+			ontologyTerm.setLabel(evidenceType.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(Effect__3 effect) {
+		var foundTerm = ontologyTermRepository.findById(effect.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(effect.getId());
+			ontologyTerm.setLabel(effect.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(Category__3 category) {
+		var foundTerm = ontologyTermRepository.findById(category.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(category.getId());
+			ontologyTerm.setLabel(category.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private List<edu.upc.dmag.beaconLoaderWithCLI.entities.ClinicalInterpretation> getClinicalInterpretationsForVariantLevelData(List<ClinicalInterpretation__1> clinicalInterpretations) {
+		return clinicalInterpretations.stream().map(it -> getClinicalInterpretationsForVariantLevelDatum(it)).toList();
+	}
+
+	private edu.upc.dmag.beaconLoaderWithCLI.entities.ClinicalInterpretation getClinicalInterpretationsForVariantLevelDatum(ClinicalInterpretation__1 it) {
+		var result = new edu.upc.dmag.beaconLoaderWithCLI.entities.ClinicalInterpretation();
+		result.setAnnotatedWithToolVersion(it.getAnnotatedWith().getVersion());
+		result.setAnnotatedWithToolName(it.getAnnotatedWith().getToolName());
+		result.setCategory(getOntologyTerm(it.getCategory()));
+		result.setConditionId(it.getConditionId());
+		result.setEffect(getOntologyTerm(it.getEffect()));
+		result.setEvidenceType(getOntologyTerm(it.getEvidenceType()));
+		result.setClinicalRelevance(getClinicalRelevance(it.getClinicalRelevance()));
+		clinicalInterpretationRepository.save(result);
+		return result;
+	}
+
+	private PhenotypicEffect getClinicalInterpretation(ClinicalInterpretation__1 it) {
+		var phenotypicEffect = new PhenotypicEffect();
+		phenotypicEffect.setAnnotationToolName(it.getAnnotatedWith().getToolName());
+		phenotypicEffect.setAnnotationToolVersion(it.getAnnotatedWith().getVersion());
+		//phenotypicEffect.setAnnotationToolReference(it.getAnnotatedWith().getToolReferences());
+
+		phenotypicEffect.setCategory(getOntologyTerm(it.getCategory()));
+
+		phenotypicEffect.setClinicalRelevance(getClinicalRelevance(it.getClinicalRelevance()));
+		phenotypicEffect.setConditionId(it.getConditionId());
+		phenotypicEffect.setEffect(getOntologyTerm(it.getEffect()));
+		phenotypicEffect.setEvidenceType(getOntologyTerm(it.getEvidenceType()));
+
+		phenotypicEffectRepository.save(phenotypicEffect);
+		return phenotypicEffect;
+	}
+
+	private ClinicalInterpretation.ClinicalRelevance getClinicalRelevance(ClinicalInterpretation__1.ClinicalRelevance clinicalRelevance) {
+		if (clinicalRelevance == null) { return null; }
+		return ClinicalInterpretation.ClinicalRelevance.fromValue(clinicalRelevance.toString());
+	}
+
+	private OntologyTerm getOntologyTerm(EvidenceType__2 evidenceType) {
+		if (evidenceType == null){
+			return null;
+		}
+		var foundTerm = ontologyTermRepository.findById(evidenceType.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(evidenceType.getId());
+			ontologyTerm.setLabel(evidenceType.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(Effect__2 effect) {
+		var foundTerm = ontologyTermRepository.findById(effect.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(effect.getId());
+			ontologyTerm.setLabel(effect.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(Category__2 category) {
+		var foundTerm = ontologyTermRepository.findById(category.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(category.getId());
+			ontologyTerm.setLabel(category.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private List<FrequencyInPopulations> getFrequencyInPopulationsList(List<FrequencyInPopulation> frequencyInPopulations) {
+		return frequencyInPopulations.stream().map(it -> getFrequencyInPopulations(it)).toList();
+	}
+
+	private FrequencyInPopulations getFrequencyInPopulations(FrequencyInPopulation it) {
+		var result = new FrequencyInPopulations();
+
+		result.setSource(it.getSource());
+		result.setSourceReference(it.getSourceReference());
+		result.setVersion(it.getVersion());
+		result.setFrequencies(getFrequencies(it.getFrequencies()));
+
+		frequencyInPopulationsRepository.save(result);
+
+		return result;
+	}
+
+	private List<edu.upc.dmag.beaconLoaderWithCLI.entities.FrequencyInPopulation> getFrequencies(List<Frequency> frequencies) {
+		return frequencies.stream().map(this::getFrequencyInPopulation).toList();
+	}
+
+	private edu.upc.dmag.beaconLoaderWithCLI.entities.FrequencyInPopulation getFrequencyInPopulation(Frequency it) {
+		var frequency = new edu.upc.dmag.beaconLoaderWithCLI.entities.FrequencyInPopulation();
+		frequency.setFrequency(it.getAlleleFrequency());
+		frequency.setPopulation(it.getPopulation());
+		frequencyInPopulationRepository.save(frequency);
+		return frequency;
+	}
+
+	private List<CaseLevelData> getCaseLevelDataList(List<CaseLevelDatum> readCaseLevelData) {
+		return readCaseLevelData.stream().map(this::getReadCaseLevelData).collect(Collectors.toList());
+	}
+
+	private CaseLevelData getReadCaseLevelData(CaseLevelDatum caseLevelDatum) {
+		CaseLevelData caseLevelData = new CaseLevelData();
+		caseLevelData.setAlleleOrigin(getOntologyTerm(caseLevelDatum.getAlleleOrigin()));
+		if (caseLevelDatum.getAnalysisId() != null) {
+			caseLevelData.setAnalysis(analysisRepository.getReferenceById(caseLevelDatum.getAnalysisId()));
+		}
+		caseLevelData.setClinicalInterpretations(getClinicalInterpretations(caseLevelDatum.getClinicalInterpretations()));
+		caseLevelData.setPhenotypicEffects(getPhenotypicEffects(caseLevelDatum.getPhenotypicEffects()));
+		caseLevelData.setZygosity(getOntologyTerm(caseLevelDatum.getZygosity()));
+		caseLevelDataRepository.save(caseLevelData);
+		return caseLevelData;
+	}
+
+	private List<PhenotypicEffect> getPhenotypicEffects(List<edu.upc.dmag.ToLoad.PhenotypicEffect> phenotypicEffects) {
+		return phenotypicEffects.stream().map(this::PhenotypicEffect).collect(Collectors.toList());
+	}
+
+	private PhenotypicEffect PhenotypicEffect(edu.upc.dmag.ToLoad.PhenotypicEffect readPhenotypicEffect) {
+		var phenotypicEffect = new PhenotypicEffect();
+		phenotypicEffect.setAnnotationToolName(readPhenotypicEffect.getAnnotatedWith().getToolName());
+		phenotypicEffect.setAnnotationToolVersion(readPhenotypicEffect.getAnnotatedWith().getVersion());
+		//phenotypicEffect.setAnnotationToolReference(readPhenotypicEffect.getAnnotatedWith().getToolReferences());
+
+		phenotypicEffect.setCategory(getOntologyTerm(readPhenotypicEffect.getCategory()));
+
+		phenotypicEffect.setClinicalRelevance(getClinicalRelevance(readPhenotypicEffect.getClinicalRelevance()));
+		phenotypicEffect.setConditionId(readPhenotypicEffect.getConditionId());
+		phenotypicEffect.setEffect(getOntologyTerm(readPhenotypicEffect.getEffect()));
+		phenotypicEffect.setEvidenceType(getOntologyTerm(readPhenotypicEffect.getEvidenceType()));
+
+		phenotypicEffectRepository.save(phenotypicEffect);
+		return phenotypicEffect;
+	}
+
+	private ClinicalInterpretation.ClinicalRelevance getClinicalRelevance(edu.upc.dmag.ToLoad.PhenotypicEffect.ClinicalRelevance clinicalRelevance) {
+		if (clinicalRelevance == null) return null;
+		return ClinicalInterpretation.ClinicalRelevance.fromValue(clinicalRelevance.toString());
+	}
+
+	private OntologyTerm getOntologyTerm(EvidenceType__1 evidenceType) {
+		var foundTerm = ontologyTermRepository.findById(evidenceType.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(evidenceType.getId());
+			ontologyTerm.setLabel(evidenceType.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(Effect__1 effect) {
+		var foundTerm = ontologyTermRepository.findById(effect.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(effect.getId());
+			ontologyTerm.setLabel(effect.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(Category__1 category) {
+		var foundTerm = ontologyTermRepository.findById(category.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(category.getId());
+			ontologyTerm.setLabel(category.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private List<PhenotypicEffect> getClinicalInterpretations(List<ClinicalInterpretation> readClinicalInterpretations) {
+		return readClinicalInterpretations.stream().map(this::getClinicalInterpretation).collect(Collectors.toList());
+	}
+
+	private PhenotypicEffect getClinicalInterpretation(ClinicalInterpretation readClinicalInterpretation) {
+		var phenotypicEffect = new PhenotypicEffect();
+		phenotypicEffect.setAnnotationToolName(readClinicalInterpretation.getAnnotatedWith().getToolName());
+		phenotypicEffect.setAnnotationToolVersion(readClinicalInterpretation.getAnnotatedWith().getVersion());
+		//phenotypicEffect.setAnnotationToolReference(readClinicalInterpretation.getAnnotatedWith().getToolReferences());
+
+		phenotypicEffect.setCategory(getOntologyTerm(readClinicalInterpretation.getCategory()));
+
+		phenotypicEffect.setClinicalRelevance(readClinicalInterpretation.getClinicalRelevance());
+		phenotypicEffect.setConditionId(readClinicalInterpretation.getConditionId());
+		phenotypicEffect.setEffect(getOntologyTerm(readClinicalInterpretation.getEffect()));
+		phenotypicEffect.setEvidenceType(getOntologyTerm(readClinicalInterpretation.getEvidenceType()));
+
+		phenotypicEffectRepository.save(phenotypicEffect);
+		return phenotypicEffect;
+	}
+
+	private OntologyTerm getOntologyTerm(EvidenceType evidenceType) {
+		var foundTerm = ontologyTermRepository.findById(evidenceType.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(evidenceType.getId());
+			ontologyTerm.setLabel(evidenceType.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(Effect effect) {
+		var foundTerm = ontologyTermRepository.findById(effect.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(effect.getId());
+			ontologyTerm.setLabel(effect.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(Category category) {
+		var foundTerm = ontologyTermRepository.findById(category.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(category.getId());
+			ontologyTerm.setLabel(category.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(AlleleOrigin alleleOrigin) {
+		if (alleleOrigin == null){
+			return null;
+		}
+		var foundTerm = ontologyTermRepository.findById(alleleOrigin.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(alleleOrigin.getId());
+			ontologyTerm.setLabel(alleleOrigin.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(Zygosity zygosity) {
+		var foundTerm = ontologyTermRepository.findById(zygosity.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(zygosity.getId());
+			ontologyTerm.setLabel(zygosity.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private void processGenomicVariationIdentifier(GenomicVariantsSchema readGenomicVariant, GenomicVariation genomicVariation) {
+		genomicVariation.setClinvarVariantId(readGenomicVariant.getIdentifiers().getClinvarVariantId());
+		genomicVariation.setGenomicHGVSId(readGenomicVariant.getIdentifiers().getGenomicHGVSId());
+		genomicVariation.setProteinHGVSIds(readGenomicVariant.getIdentifiers().getProteinHGVSIds());
+		genomicVariation.setTranscriptHGVSIds(readGenomicVariant.getIdentifiers().getTranscriptHGVSIds());
+		genomicVariation.setVariantAlternativeIds(getVariantAlternativeIds(readGenomicVariant.getIdentifiers().getVariantAlternativeIds()));
+	}
+
+	private List<VariantAlternativeId> getVariantAlternativeIds(List<edu.upc.dmag.ToLoad.VariantAlternativeId> variantAlternativeIds) {
+		return variantAlternativeIds.stream().map(this::getVariantAlternativeId).collect(Collectors.toList());
+	}
+
+	private VariantAlternativeId getVariantAlternativeId(edu.upc.dmag.ToLoad.VariantAlternativeId readVariantAlternativeId) {
+		var variantAlternativeId = new VariantAlternativeId();
+		variantAlternativeId.setId(readVariantAlternativeId.getId());
+		variantAlternativeId.setNotes(readVariantAlternativeId.getNotes());
+		variantAlternativeId.setReference(readVariantAlternativeId.getReference());
+		variantAlternativeIdRepository.save(variantAlternativeId);
+		return variantAlternativeId;
+	}
+
+	private void processMolecularAttributes(GenomicVariantsSchema readGenomicVariant, GenomicVariation genomicVariation) {
+		genomicVariation.setAminoacidChanges(readGenomicVariant.getMolecularAttributes().getAminoacidChanges());
+		genomicVariation.setGeneIds(readGenomicVariant.getMolecularAttributes().getGeneIds());
+		genomicVariation.setGenomicFeatures(getGenomicFeatures(readGenomicVariant.getMolecularAttributes().getGenomicFeatures()));
+		genomicVariation.setMolecularEffects(getMolecularEffects(readGenomicVariant.getMolecularAttributes().getMolecularEffects()));
+	}
+
+	private List<OntologyTerm> getMolecularEffects(List<MolecularEffect> molecularEffects) {
+		return molecularEffects.stream().map(this::getOntologyTerm).toList();
+	}
+
+	private OntologyTerm getOntologyTerm(MolecularEffect it) {
+		var foundTerm = ontologyTermRepository.findById(it.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(it.getId());
+			ontologyTerm.setLabel(it.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+
+	private List<GenomicFeature> getGenomicFeatures(List<edu.upc.dmag.ToLoad.GenomicFeature> genomicFeatures) {
+		return genomicFeatures.stream().map(this::getGenomicFeature).toList();
+	}
+
+
+
+	private GenomicFeature getGenomicFeature(edu.upc.dmag.ToLoad.GenomicFeature readGenomicFeature) {
+		GenomicFeature genomicFeature = new GenomicFeature();
+		genomicFeature.setFeatureId(getOntologyTerm(readGenomicFeature.getFeatureID()));
+		genomicFeature.setFeatureClass(getOntologyTerm(readGenomicFeature.getFeatureClass()));
+
+		return genomicFeature;
+	}
+
+	private OntologyTerm getOntologyTerm(FeatureClass featureClass) {
+		var foundTerm = ontologyTermRepository.findById(featureClass.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(featureClass.getId());
+			ontologyTerm.setLabel(featureClass.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(FeatureID featureID) {
+		var foundTerm = ontologyTermRepository.findById(featureID.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(featureID.getId());
+			ontologyTerm.setLabel(featureID.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
 	}
 
 	private void loadCohorts() throws IOException {

@@ -25,4 +25,36 @@ public class FrequencyInPopulations {
     public Long getId() {
         return id;
     }
+
+    public List<FrequencyInPopulation> getFrequencies() {
+        return frequencies;
+    }
+
+    public void setFrequencies(List<FrequencyInPopulation> frequencies) {
+        this.frequencies = frequencies;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public String getSourceReference() {
+        return sourceReference;
+    }
+
+    public void setSourceReference(String sourceReference) {
+        this.sourceReference = sourceReference;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
 }

@@ -23,4 +23,20 @@ public class GenomicFeature {
     public Long getId() {
         return id;
     }
+
+    public OntologyTerm getFeatureClass() {
+        return featureClass;
+    }
+
+    public void setFeatureClass(OntologyTerm featureClass) {
+        this.featureClass = featureClass;
+    }
+
+    public OntologyTerm getFeatureId() {
+        return featureId;
+    }
+
+    public void setFeatureId(OntologyTerm featureId) {
+        this.featureId = featureId;
+    }
 }
