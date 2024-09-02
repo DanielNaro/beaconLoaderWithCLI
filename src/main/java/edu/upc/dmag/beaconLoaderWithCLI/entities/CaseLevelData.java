@@ -20,6 +20,7 @@ public class CaseLevelData {
     private Analysis analysis;
     @ManyToOne
     private OntologyTerm zygosity;
+    private int depth;
 
     public void setId(int id) {
         this.id = id;
@@ -67,5 +68,13 @@ public class CaseLevelData {
 
     public void setZygosity(OntologyTerm zygosity) {
         this.zygosity = zygosity;
+    }
+
+    public int getDepth() {
+        return depth;
+    }
+
+    public void setDepth(int depth) {
+        this.depth = depth;
     }
 }

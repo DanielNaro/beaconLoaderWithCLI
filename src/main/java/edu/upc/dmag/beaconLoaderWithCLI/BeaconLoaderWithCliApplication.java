@@ -154,7 +154,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	public void run(String... args) throws IOException {
 		LOG.info("EXECUTING : command line runner");
 
-		//deleteAll();
+		deleteAll();
 		//loadData();
 		loadDatasets();
 		loadIndividuals();
@@ -163,6 +163,41 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		loadAnalyses();
 		loadCohorts();
 		loadGenomicVariations();
+	}
+
+	private void deleteAll() {
+		System.out.println("deleting all");
+		datasetRepository.deleteAll();
+		biosampleRepository.deleteAll();
+		ontologyTermRepository.deleteAll();
+		obtentionProcedureRepository.deleteAll();
+		measureRepository.deleteAll();
+		individualRepository.deleteAll();
+		librarySelectionRepository.deleteAll();
+		runRepository.deleteAll();
+		analysisRepository.deleteAll();
+		ageRangeCriteriaRepository.deleteAll();
+		cohortRepository.deleteAll();
+		phenotypicFeatureRepository.deleteAll();
+		dataUseConditionsRepository.deleteAll();
+		ageRepository.deleteAll();
+		measurementValueRepository.deleteAll();
+		complexValueRepository.deleteAll();
+		referenceRangeRepository.deleteAll();
+		quantityRepository.deleteAll();
+		valueRepository.deleteAll();
+		genomicVariationRepository.deleteAll();
+		variantAlternativeIdRepository.deleteAll();
+		phenotypicEffectRepository.deleteAll();
+		clinicalInterpretationRepository.deleteAll();
+		variationRepository.deleteAll();
+		intervalRepository.deleteAll();
+		variantLevelDataRepository.deleteAll();
+		locationRepository.deleteAll();
+		caseLevelDataRepository.deleteAll();
+		frequencyInPopulationsRepository.deleteAll();
+		frequencyInPopulationRepository.deleteAll();
+		System.out.println("deleted all");
 	}
 
 	private void loadGenomicVariations() throws IOException {
@@ -424,6 +459,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		caseLevelData.setClinicalInterpretations(getClinicalInterpretations(caseLevelDatum.getClinicalInterpretations()));
 		caseLevelData.setPhenotypicEffects(getPhenotypicEffects(caseLevelDatum.getPhenotypicEffects()));
 		caseLevelData.setZygosity(getOntologyTerm(caseLevelDatum.getZygosity()));
+		caseLevelData.setDepth(caseLevelDatum.getDepth());
 		caseLevelDataRepository.save(caseLevelData);
 		return caseLevelData;
 	}

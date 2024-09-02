@@ -2733,7 +2733,8 @@
             ],
             "title": "Ontology Term",
             "type": "object"
-          }
+          },
+          "depth": {"type": "integer"}
         },
         "required": [
           "biosampleId"
