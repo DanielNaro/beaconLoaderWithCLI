@@ -2,11 +2,34 @@ package edu.upc.dmag.beaconLoaderWithCLI;
 
 
 import com.google.gson.Gson;
+import edu.upc.dmag.ToLoad.*;
+import edu.upc.dmag.ToLoad.AgeRange;
+import edu.upc.dmag.ToLoad.ClinicalInterpretation;
+import edu.upc.dmag.ToLoad.DuoDataUse;
+import edu.upc.dmag.ToLoad.FrequencyInPopulation;
+import edu.upc.dmag.ToLoad.ObtentionProcedure;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.*;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.Age;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.ComplexValue;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.DataUseConditions;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.GenomicFeature;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.Interval;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.Location;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.Measure;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.MeasurementValue;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.OntologyTerm;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.PhenotypicEffect;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.PhenotypicFeature;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.Quantity;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.ReferenceRange;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.Value;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.VariantAlternativeId;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.VariantLevelData;
+import edu.upc.dmag.beaconLoaderWithCLI.entities.Variation;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import org.jetbrains.annotations.NotNull;
-import org.openapitools.client.ApiClient;
-import org.openapitools.client.ApiException;
-import org.openapitools.client.api.*;
-import org.openapitools.client.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -14,9 +37,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.sql.Date;
+import java.text.ParseException;
+import java.time.Duration;
+import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @SpringBootApplication
@@ -24,6 +51,98 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 
 	private static Logger LOG = LoggerFactory
 			.getLogger(BeaconLoaderWithCliApplication.class);
+	private final DatasetRepository datasetRepository;
+	private final BiosampleRepository biosampleRepository;
+	private final OntologyTermRepository ontologyTermRepository;
+	private final ObtentionProcedureRepository obtentionProcedureRepository;
+	private final MeasureRepository measureRepository;
+	private final IndividualRepository individualRepository;
+	private final LibrarySelectionRepository librarySelectionRepository;
+	private final RunRepository runRepository;
+	private final AnalysisRepository analysisRepository;
+	private final AgeRangeCriteriaRepository ageRangeCriteriaRepository;
+	private final CohortRepository cohortRepository;
+	private final PhenotypicFeatureRepository phenotypicFeatureRepository;
+	private final DataUseConditionsRepository dataUseConditionsRepository;
+	private final AgeRepository ageRepository;
+	private final MeasurementValueRepository measurementValueRepository;
+	private final ComplexValueRepository complexValueRepository;
+	private final ReferenceRangeRepository referenceRangeRepository;
+	private final QuantityRepository quantityRepository;
+	private final ValueRepository valueRepository;
+	private final GenomicVariationRepository genomicVariationRepository;
+	private final VariantAlternativeIdRepository variantAlternativeIdRepository;
+	private final PhenotypicEffectRepository phenotypicEffectRepository;
+	private final ClinicalInterpretationRepository clinicalInterpretationRepository;
+	private final VariantLevelDataRepository variantLevelDataRepository;
+	private final LocationRepository locationRepository;
+	private final VariationRepository variationRepository;
+	private final IntervalRepository intervalRepository;
+	private final CaseLevelDataRepository caseLevelDataRepository;
+	private final FrequencyInPopulationsRepository frequencyInPopulationsRepository;
+	private final FrequencyInPopulationRepository frequencyInPopulationRepository;
+
+	public BeaconLoaderWithCliApplication(
+			DatasetRepository datasetRepository,
+			BiosampleRepository biosampleRepository,
+			OntologyTermRepository ontologyTermRepository,
+			ObtentionProcedureRepository obtentionProcedureRepository,
+			MeasureRepository measureRepository,
+			IndividualRepository individualRepository,
+			LibrarySelectionRepository librarySelectionRepository,
+			RunRepository runRepository,
+			AnalysisRepository analysisRepository,
+			AgeRangeCriteriaRepository ageRangeCriteriaRepository,
+			CohortRepository cohortRepository,
+			PhenotypicFeatureRepository phenotypicFeatureRepository,
+			DataUseConditionsRepository dataUseConditionsRepository,
+			AgeRepository ageRepository,
+			MeasurementValueRepository measurementValueRepository,
+			ComplexValueRepository complexValueRepository,
+			ReferenceRangeRepository referenceRangeRepository,
+			QuantityRepository quantityRepository,
+			ValueRepository valueRepository,
+			GenomicVariationRepository genomicVariationRepository,
+			VariantAlternativeIdRepository variantAlternativeIdRepository,
+			PhenotypicEffectRepository phenotypicEffectRepository,
+			ClinicalInterpretationRepository clinicalInterpretationRepository,
+			VariantLevelDataRepository variantLevelDataRepository,
+			LocationRepository locationRepository,
+			VariationRepository variationRepository,
+			IntervalRepository intervalRepository,
+			CaseLevelDataRepository caseLevelDataRepository,
+			FrequencyInPopulationsRepository frequencyInPopulationsRepository, FrequencyInPopulationRepository frequencyInPopulationRepository) {
+		this.datasetRepository = datasetRepository;
+		this.biosampleRepository = biosampleRepository;
+		this.ontologyTermRepository = ontologyTermRepository;
+		this.obtentionProcedureRepository = obtentionProcedureRepository;
+		this.measureRepository = measureRepository;
+		this.individualRepository = individualRepository;
+		this.librarySelectionRepository = librarySelectionRepository;
+		this.runRepository = runRepository;
+		this.analysisRepository = analysisRepository;
+		this.ageRangeCriteriaRepository = ageRangeCriteriaRepository;
+		this.cohortRepository = cohortRepository;
+		this.phenotypicFeatureRepository = phenotypicFeatureRepository;
+		this.dataUseConditionsRepository = dataUseConditionsRepository;
+		this.ageRepository = ageRepository;
+		this.measurementValueRepository = measurementValueRepository;
+		this.complexValueRepository = complexValueRepository;
+		this.referenceRangeRepository = referenceRangeRepository;
+		this.quantityRepository = quantityRepository;
+		this.valueRepository = valueRepository;
+		this.genomicVariationRepository = genomicVariationRepository;
+		this.variantAlternativeIdRepository = variantAlternativeIdRepository;
+		this.phenotypicEffectRepository = phenotypicEffectRepository;
+		this.clinicalInterpretationRepository = clinicalInterpretationRepository;
+		this.variationRepository = variationRepository;
+		this.intervalRepository = intervalRepository;
+		this.variantLevelDataRepository = variantLevelDataRepository;
+		this.locationRepository = locationRepository;
+		this.caseLevelDataRepository = caseLevelDataRepository;
+		this.frequencyInPopulationsRepository = frequencyInPopulationsRepository;
+		this.frequencyInPopulationRepository = frequencyInPopulationRepository;
+	}
 
 	public static void main(String[] args) {
 		LOG.info("STARTING THE APPLICATION");
@@ -32,599 +151,1165 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	}
 
 	@Override
-	public void run(String... args) throws ApiException, IOException {
+	public void run(String... args) throws IOException {
 		LOG.info("EXECUTING : command line runner");
 
 		deleteAll();
-		loadData();
-	}
-
-	private void loadData() throws IOException, ApiException {
-		Map<String, Individual> createdIndividuals = new HashMap<>();
-		Map<String, Biosample> createdBiosamples = new HashMap<>();
-		//Map<ReadBiosampleStatus, UUID> createdBioSampleStatuses = new HashMap<>();
-		Map<ReadObtentionProcedure, UUID> createdBiosampleObtenitionProcedures = new HashMap<>();
-		//Map<ReadBiosampleOriginType, BiosampleSampleOrigin> createdBiosampleOrigins = new HashMap<>();
+		//loadData();
 		loadDatasets();
-		loadIndividuals(createdIndividuals);
-		//loadBiosamples(createdIndividuals, createdBiosamples, createdBioSampleStatuses, createdBiosampleObtenitionProcedures, createdBiosampleOrigins);
+		loadIndividuals();
+		loadBiosamples();
+		loadRuns();
+		loadAnalyses();
+		loadCohorts();
+		loadGenomicVariations();
 	}
 
-	/*private void loadBiosamples(
-			Map<String, Individual> createdIndividuals,
-			Map<String, Biosample> createdBiosamples,
-			Map<ReadBiosampleStatus, UUID> createdBioSampleStatuses,
-			Map<ReadObtentionProcedure, UUID> createdBiosampleObtenitionProcedures,
-			Map<ReadBiosampleOriginType, BiosampleSampleOrigin> createdBiosampleOrigins
-	) throws IOException, ApiException {
-		try (InputStreamReader jsonFileInputStream = new InputStreamReader(new FileInputStream("./src/main/resources/toLoad/biosamples.json"))){
+	private void deleteAll() {
+		System.out.println("deleting all");
+		datasetRepository.deleteAll();
+		biosampleRepository.deleteAll();
+		ontologyTermRepository.deleteAll();
+		obtentionProcedureRepository.deleteAll();
+		measureRepository.deleteAll();
+		individualRepository.deleteAll();
+		librarySelectionRepository.deleteAll();
+		runRepository.deleteAll();
+		analysisRepository.deleteAll();
+		ageRangeCriteriaRepository.deleteAll();
+		cohortRepository.deleteAll();
+		phenotypicFeatureRepository.deleteAll();
+		dataUseConditionsRepository.deleteAll();
+		ageRepository.deleteAll();
+		measurementValueRepository.deleteAll();
+		complexValueRepository.deleteAll();
+		referenceRangeRepository.deleteAll();
+		quantityRepository.deleteAll();
+		valueRepository.deleteAll();
+		genomicVariationRepository.deleteAll();
+		variantAlternativeIdRepository.deleteAll();
+		phenotypicEffectRepository.deleteAll();
+		clinicalInterpretationRepository.deleteAll();
+		variationRepository.deleteAll();
+		intervalRepository.deleteAll();
+		variantLevelDataRepository.deleteAll();
+		locationRepository.deleteAll();
+		caseLevelDataRepository.deleteAll();
+		frequencyInPopulationsRepository.deleteAll();
+		frequencyInPopulationRepository.deleteAll();
+		System.out.println("deleted all");
+	}
+
+	private void loadGenomicVariations() throws IOException {
+		try (InputStreamReader jsonFileInputStream = new InputStreamReader(new FileInputStream("./src/main/resources/toLoad/genomicVariationsTruncated.json"))){
 			Gson gson = new Gson();
-			var readBiosamples = gson.fromJson(jsonFileInputStream, ReadBiosample[].class);
+			var readGenomicVariants = gson.fromJson(jsonFileInputStream, GenomicVariantsSchema[].class);
 
-			BiosampleResourceApi biosampleResourceApi = new BiosampleResourceApi();
-			biosampleResourceApi.setApiClient(getApiClient());
-			BiosampleStatusResourceApi biosampleStatusResourceApi = new BiosampleStatusResourceApi();
-			biosampleStatusResourceApi.setApiClient(getApiClient());
-			BiosampleObtentionProcedureResourceApi biosampleObtentionProcedureResourceApi = new BiosampleObtentionProcedureResourceApi();
-			biosampleObtentionProcedureResourceApi.setApiClient(getApiClient());
 
-			for(ReadBiosample readBiosample: readBiosamples){
-				loadReadBiosample(
-						biosampleResourceApi,
-						readBiosample,
-						createdBioSampleStatuses,
-						createdBiosampleObtenitionProcedures,
-						createdBiosampleOrigins,
-						biosampleStatusResourceApi,
-						biosampleObtentionProcedureResourceApi
-				);
+			for(GenomicVariantsSchema genomicVariant: readGenomicVariants){
+				loadGenomicVariants(genomicVariant);
 			}
 		}
-	}*/
+	}
 
-	/*private void loadReadBiosample(
-			BiosampleResourceApi biosampleResourceApi,
-			ReadBiosample readBiosample,
-			Map<ReadBiosampleStatus, UUID> createdBioSampleStatuses,
-			Map<ReadObtentionProcedure, UUID> createdBiosampleObtenitionProcedures,
-			Map<ReadBiosampleOriginType, BiosampleSampleOrigin> createdBiosampleOrigins,
-			BiosampleStatusResourceApi biosampleStatusResourceApi,
-			BiosampleObtentionProcedureResourceApi BiosampleObtentionProcedureResourceApi
-	) throws ApiException {
-		var createdBioSample = biosampleResourceApi.createBiosample(readBiosample.getAPIRepresentation(
-				createdBioSampleStatuses,
-				createdBiosampleObtenitionProcedures,
-				createdBiosampleOrigins,
-				biosampleStatusResourceApi,
-				BiosampleObtentionProcedureResourceApi
-		));
+	private void loadGenomicVariants(GenomicVariantsSchema readGenomicVariant) {
+		GenomicVariation genomicVariation = new GenomicVariation();
 
-		if (readBiosample.getBiosampleOriginType() != null) {
-			if (!createdBiosampleOrigins.containsKey(readBiosample.getBiosampleOriginType())){
-				createdBiosampleOrigins.put(readBiosample.getBiosampleOriginType(), createdBioSample.getSampleOrigin());
-			}
+		genomicVariation.setVariantInternalId(readGenomicVariant.getVariantInternalId());
+		genomicVariation.setCaseLevelData(getCaseLevelDataList(readGenomicVariant.getCaseLevelData()));
+		genomicVariation.setFrequencyInPopulationsList(getFrequencyInPopulationsList(readGenomicVariant.getFrequencyInPopulations()));
+
+		processGenomicVariationIdentifier(readGenomicVariant, genomicVariation);
+		processMolecularAttributes(readGenomicVariant, genomicVariation);
+
+		genomicVariation.setVariantLevelData(getVariantLevelData(readGenomicVariant.getVariantLevelData()));
+
+		genomicVariation.setVariation(getVariation(readGenomicVariant.getVariation()));
+
+		genomicVariationRepository.save(genomicVariation);
+	}
+
+	private Variation getVariation(edu.upc.dmag.ToLoad.Variation readVariation) {
+		var variation = new Variation();
+		variation.setVariantType(readVariation.getVariantType());
+		variation.setReferenceBases(readVariation.getReferenceBases());
+		variation.setAlternateBases(readVariation.getAlternateBases());
+		variation.setLocation(getLocation(readVariation.getLocation()));
+		//variation.setCopies(getCopies(readVariation.ge));
+		//variation.setMembers(getMembers(readVariation.g));
+		variationRepository.save(variation);
+		return variation;
+	}
+
+	private Location getLocation(Location__2 location) {
+		var result = new Location();
+		result.setSpecies_id(location.getSpeciesId());
+		result.setChr(location.getChr());
+		result.setInterval(getInterval(location.getInterval()));
+		locationRepository.save(result);
+		return result;
+	}
+
+	private Interval getInterval(edu.upc.dmag.ToLoad.Interval interval) {
+		var result = new Interval();
+		result.setType(interval.getType());
+		result.setStart(interval.getStart().getValue().toString());
+		result.setEnd(interval.getEnd().getValue().toString());
+		intervalRepository.save(result);
+		return result;
+	}
+
+	private VariantLevelData getVariantLevelData(edu.upc.dmag.ToLoad.VariantLevelData variantLevelData) {
+		if (variantLevelData == null){
+			return null;
 		}
-	}*/
+		var result = new VariantLevelData();
 
-	private void loadIndividuals(Map<String, Individual> createdIndividuals) throws IOException, ApiException {
-		try (InputStreamReader jsonFileInputStream = new InputStreamReader(new FileInputStream("./src/main/resources/toLoad/individuals.json"))){
+		result.setClinicalInterpretations(getClinicalInterpretationsForVariantLevelData(variantLevelData.getClinicalInterpretations()));
+		result.setPhenotypicEffects(getPhenotypicEffectsForVariantLevelData(variantLevelData.getPhenotypicEffects()));
+		variantLevelDataRepository.save(result);
+		return result;
+	}
+
+	private List<edu.upc.dmag.beaconLoaderWithCLI.entities.ClinicalInterpretation> getPhenotypicEffectsForVariantLevelData(List<PhenotypicEffect__1> phenotypicEffects) {
+		return phenotypicEffects.stream().map(it -> getPhenotypicEffectForVariantLevelData(it)).toList();
+	}
+
+	private edu.upc.dmag.beaconLoaderWithCLI.entities.ClinicalInterpretation getPhenotypicEffectForVariantLevelData(PhenotypicEffect__1 it) {
+		var phenotypicEffect = new edu.upc.dmag.beaconLoaderWithCLI.entities.ClinicalInterpretation();
+		phenotypicEffect.setAnnotatedWithToolName(it.getAnnotatedWith().getToolName());
+		phenotypicEffect.setAnnotatedWithToolVersion(it.getAnnotatedWith().getVersion());
+		//phenotypicEffect.setAnnotationToolReference(it.getAnnotatedWith().getToolReferences());
+
+		phenotypicEffect.setCategory(getOntologyTerm(it.getCategory()));
+
+		phenotypicEffect.setClinicalRelevance(getClinicalRelevance(it.getClinicalRelevance()));
+		phenotypicEffect.setConditionId(it.getConditionId());
+		phenotypicEffect.setEffect(getOntologyTerm(it.getEffect()));
+		phenotypicEffect.setEvidenceType(getOntologyTerm(it.getEvidenceType()));
+
+		clinicalInterpretationRepository.save(phenotypicEffect);
+		return phenotypicEffect;
+	}
+
+	private ClinicalInterpretation.ClinicalRelevance getClinicalRelevance(PhenotypicEffect__1.ClinicalRelevance clinicalRelevance) {
+		if (clinicalRelevance == null) return null;
+		return ClinicalInterpretation.ClinicalRelevance.fromValue(clinicalRelevance.toString());
+	}
+
+	private OntologyTerm getOntologyTerm(EvidenceType__3 evidenceType) {
+		var foundTerm = ontologyTermRepository.findById(evidenceType.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(evidenceType.getId());
+			ontologyTerm.setLabel(evidenceType.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(Effect__3 effect) {
+		var foundTerm = ontologyTermRepository.findById(effect.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(effect.getId());
+			ontologyTerm.setLabel(effect.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(Category__3 category) {
+		var foundTerm = ontologyTermRepository.findById(category.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(category.getId());
+			ontologyTerm.setLabel(category.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private List<edu.upc.dmag.beaconLoaderWithCLI.entities.ClinicalInterpretation> getClinicalInterpretationsForVariantLevelData(List<ClinicalInterpretation__1> clinicalInterpretations) {
+		return clinicalInterpretations.stream().map(it -> getClinicalInterpretationsForVariantLevelDatum(it)).toList();
+	}
+
+	private edu.upc.dmag.beaconLoaderWithCLI.entities.ClinicalInterpretation getClinicalInterpretationsForVariantLevelDatum(ClinicalInterpretation__1 it) {
+		var result = new edu.upc.dmag.beaconLoaderWithCLI.entities.ClinicalInterpretation();
+		result.setAnnotatedWithToolVersion(it.getAnnotatedWith().getVersion());
+		result.setAnnotatedWithToolName(it.getAnnotatedWith().getToolName());
+		result.setCategory(getOntologyTerm(it.getCategory()));
+		result.setConditionId(it.getConditionId());
+		result.setEffect(getOntologyTerm(it.getEffect()));
+		result.setEvidenceType(getOntologyTerm(it.getEvidenceType()));
+		result.setClinicalRelevance(getClinicalRelevance(it.getClinicalRelevance()));
+		clinicalInterpretationRepository.save(result);
+		return result;
+	}
+
+	private PhenotypicEffect getClinicalInterpretation(ClinicalInterpretation__1 it) {
+		var phenotypicEffect = new PhenotypicEffect();
+		phenotypicEffect.setAnnotationToolName(it.getAnnotatedWith().getToolName());
+		phenotypicEffect.setAnnotationToolVersion(it.getAnnotatedWith().getVersion());
+		//phenotypicEffect.setAnnotationToolReference(it.getAnnotatedWith().getToolReferences());
+
+		phenotypicEffect.setCategory(getOntologyTerm(it.getCategory()));
+
+		phenotypicEffect.setClinicalRelevance(getClinicalRelevance(it.getClinicalRelevance()));
+		phenotypicEffect.setConditionId(it.getConditionId());
+		phenotypicEffect.setEffect(getOntologyTerm(it.getEffect()));
+		phenotypicEffect.setEvidenceType(getOntologyTerm(it.getEvidenceType()));
+
+		phenotypicEffectRepository.save(phenotypicEffect);
+		return phenotypicEffect;
+	}
+
+	private ClinicalInterpretation.ClinicalRelevance getClinicalRelevance(ClinicalInterpretation__1.ClinicalRelevance clinicalRelevance) {
+		if (clinicalRelevance == null) { return null; }
+		return ClinicalInterpretation.ClinicalRelevance.fromValue(clinicalRelevance.toString());
+	}
+
+	private OntologyTerm getOntologyTerm(EvidenceType__2 evidenceType) {
+		if (evidenceType == null){
+			return null;
+		}
+		var foundTerm = ontologyTermRepository.findById(evidenceType.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(evidenceType.getId());
+			ontologyTerm.setLabel(evidenceType.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(Effect__2 effect) {
+		var foundTerm = ontologyTermRepository.findById(effect.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(effect.getId());
+			ontologyTerm.setLabel(effect.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(Category__2 category) {
+		var foundTerm = ontologyTermRepository.findById(category.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(category.getId());
+			ontologyTerm.setLabel(category.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private List<FrequencyInPopulations> getFrequencyInPopulationsList(List<FrequencyInPopulation> frequencyInPopulations) {
+		return frequencyInPopulations.stream().map(it -> getFrequencyInPopulations(it)).toList();
+	}
+
+	private FrequencyInPopulations getFrequencyInPopulations(FrequencyInPopulation it) {
+		var result = new FrequencyInPopulations();
+
+		result.setSource(it.getSource());
+		result.setSourceReference(it.getSourceReference());
+		result.setVersion(it.getVersion());
+		result.setFrequencies(getFrequencies(it.getFrequencies()));
+
+		frequencyInPopulationsRepository.save(result);
+
+		return result;
+	}
+
+	private List<edu.upc.dmag.beaconLoaderWithCLI.entities.FrequencyInPopulation> getFrequencies(List<Frequency> frequencies) {
+		return frequencies.stream().map(this::getFrequencyInPopulation).toList();
+	}
+
+	private edu.upc.dmag.beaconLoaderWithCLI.entities.FrequencyInPopulation getFrequencyInPopulation(Frequency it) {
+		var frequency = new edu.upc.dmag.beaconLoaderWithCLI.entities.FrequencyInPopulation();
+		frequency.setFrequency(it.getAlleleFrequency());
+		frequency.setPopulation(it.getPopulation());
+		frequencyInPopulationRepository.save(frequency);
+		return frequency;
+	}
+
+	private List<CaseLevelData> getCaseLevelDataList(List<CaseLevelDatum> readCaseLevelData) {
+		return readCaseLevelData.stream().map(this::getReadCaseLevelData).collect(Collectors.toList());
+	}
+
+	private CaseLevelData getReadCaseLevelData(CaseLevelDatum caseLevelDatum) {
+		CaseLevelData caseLevelData = new CaseLevelData();
+		caseLevelData.setAlleleOrigin(getOntologyTerm(caseLevelDatum.getAlleleOrigin()));
+		if (caseLevelDatum.getAnalysisId() != null) {
+			caseLevelData.setAnalysis(analysisRepository.getReferenceById(caseLevelDatum.getAnalysisId()));
+		}
+		caseLevelData.setClinicalInterpretations(getClinicalInterpretations(caseLevelDatum.getClinicalInterpretations()));
+		caseLevelData.setPhenotypicEffects(getPhenotypicEffects(caseLevelDatum.getPhenotypicEffects()));
+		caseLevelData.setZygosity(getOntologyTerm(caseLevelDatum.getZygosity()));
+		caseLevelData.setDepth(caseLevelDatum.getDepth());
+		caseLevelDataRepository.save(caseLevelData);
+		return caseLevelData;
+	}
+
+	private List<PhenotypicEffect> getPhenotypicEffects(List<edu.upc.dmag.ToLoad.PhenotypicEffect> phenotypicEffects) {
+		return phenotypicEffects.stream().map(this::PhenotypicEffect).collect(Collectors.toList());
+	}
+
+	private PhenotypicEffect PhenotypicEffect(edu.upc.dmag.ToLoad.PhenotypicEffect readPhenotypicEffect) {
+		var phenotypicEffect = new PhenotypicEffect();
+		phenotypicEffect.setAnnotationToolName(readPhenotypicEffect.getAnnotatedWith().getToolName());
+		phenotypicEffect.setAnnotationToolVersion(readPhenotypicEffect.getAnnotatedWith().getVersion());
+		//phenotypicEffect.setAnnotationToolReference(readPhenotypicEffect.getAnnotatedWith().getToolReferences());
+
+		phenotypicEffect.setCategory(getOntologyTerm(readPhenotypicEffect.getCategory()));
+
+		phenotypicEffect.setClinicalRelevance(getClinicalRelevance(readPhenotypicEffect.getClinicalRelevance()));
+		phenotypicEffect.setConditionId(readPhenotypicEffect.getConditionId());
+		phenotypicEffect.setEffect(getOntologyTerm(readPhenotypicEffect.getEffect()));
+		phenotypicEffect.setEvidenceType(getOntologyTerm(readPhenotypicEffect.getEvidenceType()));
+
+		phenotypicEffectRepository.save(phenotypicEffect);
+		return phenotypicEffect;
+	}
+
+	private ClinicalInterpretation.ClinicalRelevance getClinicalRelevance(edu.upc.dmag.ToLoad.PhenotypicEffect.ClinicalRelevance clinicalRelevance) {
+		if (clinicalRelevance == null) return null;
+		return ClinicalInterpretation.ClinicalRelevance.fromValue(clinicalRelevance.toString());
+	}
+
+	private OntologyTerm getOntologyTerm(EvidenceType__1 evidenceType) {
+		var foundTerm = ontologyTermRepository.findById(evidenceType.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(evidenceType.getId());
+			ontologyTerm.setLabel(evidenceType.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(Effect__1 effect) {
+		var foundTerm = ontologyTermRepository.findById(effect.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(effect.getId());
+			ontologyTerm.setLabel(effect.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(Category__1 category) {
+		var foundTerm = ontologyTermRepository.findById(category.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(category.getId());
+			ontologyTerm.setLabel(category.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private List<PhenotypicEffect> getClinicalInterpretations(List<ClinicalInterpretation> readClinicalInterpretations) {
+		return readClinicalInterpretations.stream().map(this::getClinicalInterpretation).collect(Collectors.toList());
+	}
+
+	private PhenotypicEffect getClinicalInterpretation(ClinicalInterpretation readClinicalInterpretation) {
+		var phenotypicEffect = new PhenotypicEffect();
+		phenotypicEffect.setAnnotationToolName(readClinicalInterpretation.getAnnotatedWith().getToolName());
+		phenotypicEffect.setAnnotationToolVersion(readClinicalInterpretation.getAnnotatedWith().getVersion());
+		//phenotypicEffect.setAnnotationToolReference(readClinicalInterpretation.getAnnotatedWith().getToolReferences());
+
+		phenotypicEffect.setCategory(getOntologyTerm(readClinicalInterpretation.getCategory()));
+
+		phenotypicEffect.setClinicalRelevance(readClinicalInterpretation.getClinicalRelevance());
+		phenotypicEffect.setConditionId(readClinicalInterpretation.getConditionId());
+		phenotypicEffect.setEffect(getOntologyTerm(readClinicalInterpretation.getEffect()));
+		phenotypicEffect.setEvidenceType(getOntologyTerm(readClinicalInterpretation.getEvidenceType()));
+
+		phenotypicEffectRepository.save(phenotypicEffect);
+		return phenotypicEffect;
+	}
+
+	private OntologyTerm getOntologyTerm(EvidenceType evidenceType) {
+		var foundTerm = ontologyTermRepository.findById(evidenceType.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(evidenceType.getId());
+			ontologyTerm.setLabel(evidenceType.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(Effect effect) {
+		var foundTerm = ontologyTermRepository.findById(effect.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(effect.getId());
+			ontologyTerm.setLabel(effect.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(Category category) {
+		var foundTerm = ontologyTermRepository.findById(category.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(category.getId());
+			ontologyTerm.setLabel(category.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(AlleleOrigin alleleOrigin) {
+		if (alleleOrigin == null){
+			return null;
+		}
+		var foundTerm = ontologyTermRepository.findById(alleleOrigin.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(alleleOrigin.getId());
+			ontologyTerm.setLabel(alleleOrigin.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(Zygosity zygosity) {
+		var foundTerm = ontologyTermRepository.findById(zygosity.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(zygosity.getId());
+			ontologyTerm.setLabel(zygosity.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private void processGenomicVariationIdentifier(GenomicVariantsSchema readGenomicVariant, GenomicVariation genomicVariation) {
+		genomicVariation.setClinvarVariantId(readGenomicVariant.getIdentifiers().getClinvarVariantId());
+		genomicVariation.setGenomicHGVSId(readGenomicVariant.getIdentifiers().getGenomicHGVSId());
+		genomicVariation.setProteinHGVSIds(readGenomicVariant.getIdentifiers().getProteinHGVSIds());
+		genomicVariation.setTranscriptHGVSIds(readGenomicVariant.getIdentifiers().getTranscriptHGVSIds());
+		genomicVariation.setVariantAlternativeIds(getVariantAlternativeIds(readGenomicVariant.getIdentifiers().getVariantAlternativeIds()));
+	}
+
+	private List<VariantAlternativeId> getVariantAlternativeIds(List<edu.upc.dmag.ToLoad.VariantAlternativeId> variantAlternativeIds) {
+		return variantAlternativeIds.stream().map(this::getVariantAlternativeId).collect(Collectors.toList());
+	}
+
+	private VariantAlternativeId getVariantAlternativeId(edu.upc.dmag.ToLoad.VariantAlternativeId readVariantAlternativeId) {
+		var variantAlternativeId = new VariantAlternativeId();
+		variantAlternativeId.setId(readVariantAlternativeId.getId());
+		variantAlternativeId.setNotes(readVariantAlternativeId.getNotes());
+		variantAlternativeId.setReference(readVariantAlternativeId.getReference());
+		variantAlternativeIdRepository.save(variantAlternativeId);
+		return variantAlternativeId;
+	}
+
+	private void processMolecularAttributes(GenomicVariantsSchema readGenomicVariant, GenomicVariation genomicVariation) {
+		genomicVariation.setAminoacidChanges(readGenomicVariant.getMolecularAttributes().getAminoacidChanges());
+		genomicVariation.setGeneIds(readGenomicVariant.getMolecularAttributes().getGeneIds());
+		genomicVariation.setGenomicFeatures(getGenomicFeatures(readGenomicVariant.getMolecularAttributes().getGenomicFeatures()));
+		genomicVariation.setMolecularEffects(getMolecularEffects(readGenomicVariant.getMolecularAttributes().getMolecularEffects()));
+	}
+
+	private List<OntologyTerm> getMolecularEffects(List<MolecularEffect> molecularEffects) {
+		return molecularEffects.stream().map(this::getOntologyTerm).toList();
+	}
+
+	private OntologyTerm getOntologyTerm(MolecularEffect it) {
+		var foundTerm = ontologyTermRepository.findById(it.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(it.getId());
+			ontologyTerm.setLabel(it.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+
+	private List<GenomicFeature> getGenomicFeatures(List<edu.upc.dmag.ToLoad.GenomicFeature> genomicFeatures) {
+		return genomicFeatures.stream().map(this::getGenomicFeature).toList();
+	}
+
+
+
+	private GenomicFeature getGenomicFeature(edu.upc.dmag.ToLoad.GenomicFeature readGenomicFeature) {
+		GenomicFeature genomicFeature = new GenomicFeature();
+		genomicFeature.setFeatureId(getOntologyTerm(readGenomicFeature.getFeatureID()));
+		genomicFeature.setFeatureClass(getOntologyTerm(readGenomicFeature.getFeatureClass()));
+
+		return genomicFeature;
+	}
+
+	private OntologyTerm getOntologyTerm(FeatureClass featureClass) {
+		var foundTerm = ontologyTermRepository.findById(featureClass.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(featureClass.getId());
+			ontologyTerm.setLabel(featureClass.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(FeatureID featureID) {
+		var foundTerm = ontologyTermRepository.findById(featureID.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(featureID.getId());
+			ontologyTerm.setLabel(featureID.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private void loadCohorts() throws IOException {
+		try (InputStreamReader jsonFileInputStream = new InputStreamReader(new FileInputStream("./src/main/resources/toLoad/cohorts.json"))){
 			Gson gson = new Gson();
-			var readIndividuals = gson.fromJson(jsonFileInputStream, ReadIndividual[].class);
+			var readCohorts = gson.fromJson(jsonFileInputStream, CohortsSchema[].class);
 
-			IndividualResourceApi individualResourceApi = new IndividualResourceApi();
-			individualResourceApi.setApiClient(getApiClient());
-			MeasuresItemResourceApi measureResourceApi = new MeasuresItemResourceApi();
-			measureResourceApi.setApiClient(getApiClient());
-			OntologyTermResourceApi ontologyTermResourceApi = new OntologyTermResourceApi();
-			ontologyTermResourceApi.setApiClient(getApiClient());
-			Map<String, OntologyTerm> createdSexes = new HashMap<>();
-			Map<String, OntologyTerm> createdAssayCodes = new HashMap<>();
-			Map<String, Procedure> createdProcedures = new HashMap<>();
 
-			for(ReadIndividual readIndividual: readIndividuals){
-				loadReadIndividual(
-					individualResourceApi,
-					measureResourceApi,
-					ontologyTermResourceApi,
-					readIndividual,
-					createdIndividuals,
-					createdSexes,
-					createdAssayCodes,
-					createdProcedures
-				);
+			for(CohortsSchema readCohort: readCohorts){
+				loadReadCohort(readCohort);
 			}
+		}
+    }
+
+	private void loadReadCohort(CohortsSchema readCohort) {
+		Cohort cohort = new Cohort();
+		cohort.setId(readCohort.getId());
+		cohort.setName(readCohort.getName());
+		cohort.setCohortDesign(getOntologyTerm(readCohort.getCohortDesign()));
+		cohort.setCohortType(readCohort.getCohortType());
+		cohort.setGendersInclusionCriteria(getOntologyTermsGenderInclusion(readCohort.getInclusionCriteria().getGenders()));
+		cohort.setAgeRangeInclusionCriteria(getAgeRange(readCohort.getInclusionCriteria().getAgeRange()));
+		cohortRepository.save(cohort);
+	}
+
+	private AgeRangeCriteria getAgeRange(AgeRange__2 ageRange) {
+		AgeRangeCriteria ageRangeCriteria = new AgeRangeCriteria();
+		ageRangeCriteria.setStart(ConvertDuration.getDuration(ageRange.getStart().getIso8601duration()));
+		ageRangeCriteria.setEnd(ConvertDuration.getDuration(ageRange.getEnd().getIso8601duration()));
+		ageRangeCriteriaRepository.save(ageRangeCriteria);
+		return ageRangeCriteria;
+	}
+
+	private Set<OntologyTerm> getOntologyTermsGenderInclusion(List<Gender__1> genders) {
+		return genders.stream().map(this::getOntologyTerm).collect(Collectors.toSet());
+	}
+
+	private OntologyTerm getOntologyTerm(Gender__1 it) {
+		var foundTerm = ontologyTermRepository.findById(it.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(it.getId());
+			ontologyTerm.setLabel(it.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
 		}
 	}
 
-	private void loadReadIndividual(
-			IndividualResourceApi individualResourceApi,
-			MeasuresItemResourceApi measureResourceApi,
-			OntologyTermResourceApi ontologyTermResourceApi,
-			ReadIndividual readIndividual,
-			Map<String, Individual> createdIndividuals,
-			Map<String, OntologyTerm> createdSexes,
-			Map<String, OntologyTerm> createdAssayCodes,
-			Map<String, Procedure> createdProcedures
-	) throws ApiException {
-		if (!createdSexes.containsKey(readIndividual.getSex().getId())){
-			OntologyTerm sexOntologyTerm = ontologyTermResourceApi.createOntologyTerm(readIndividual.getSex().toAPIRepresentation());
-			createdSexes.put(readIndividual.getSex().getId(), sexOntologyTerm);
-		}
-
-		for (var readMeasure : readIndividual.getMeasures()) {
-			if (!createdAssayCodes.containsKey(readMeasure.getAssayCode().getId())) {
-				OntologyTerm toCreateAssayCodeToCreate = new OntologyTerm();
-				toCreateAssayCodeToCreate.setIdAsProvided(readMeasure.getAssayCode().getId());
-				toCreateAssayCodeToCreate.setLabel(readMeasure.getAssayCode().getLabel());
-
-				OntologyTerm createdAssayCodeToCreate = ontologyTermResourceApi.createOntologyTerm(toCreateAssayCodeToCreate);
-				createdAssayCodes.put(readMeasure.getAssayCode().getId(), createdAssayCodeToCreate);
-			}
-		}
-
-		Individual createdIndividual = individualResourceApi.createIndividual(
-				readIndividual.getAPIRepresentation(createdSexes, createdAssayCodes)
-		);
-		readIndividual.getMeasures(measureResourceApi, createdIndividual);
-		createdIndividuals.put(readIndividual.getId(), createdIndividual);
-
-		for(var readMeasure: readIndividual.getMeasures()){
-			System.out.println(readMeasure);
+	private OntologyTerm getOntologyTerm(CohortDesign cohortDesign) {
+		var foundTerm = ontologyTermRepository.findById(cohortDesign.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(cohortDesign.getId());
+			ontologyTerm.setLabel(cohortDesign.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
 		}
 	}
 
-	private void loadDatasets() throws IOException, ApiException {
+	private void loadDatasets() throws IOException {
 		try (InputStreamReader jsonFileInputStream = new InputStreamReader(new FileInputStream("./src/main/resources/toLoad/datasets.json"))){
 			Gson gson = new Gson();
-			var readDatasets = gson.fromJson(jsonFileInputStream, ReadDataset[].class);
-
-			DatasetResourceApi datasetResourceApi = new DatasetResourceApi();
-			datasetResourceApi.setApiClient(getApiClient());
-			DataUseConditionsResourceApi dataUseConditionsResourceApi = new DataUseConditionsResourceApi();
-			dataUseConditionsResourceApi.setApiClient(getApiClient());
+			var readDatasets = gson.fromJson(jsonFileInputStream, DatasetsSchema[].class);
 
 
-			for(ReadDataset readDataset: readDatasets){
-				loadReadDataset(datasetResourceApi, dataUseConditionsResourceApi, readDataset);
+			for(DatasetsSchema readDataset: readDatasets){
+				loadReadDataset(readDataset);
+			}
+		} catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+	private void loadRuns() throws IOException {
+		try (InputStreamReader jsonFileInputStream = new InputStreamReader(new FileInputStream("./src/main/resources/toLoad/runs.json"))){
+			Gson gson = new Gson();
+			var readRuns = gson.fromJson(jsonFileInputStream, RunsSchema[].class);
+
+
+			for(RunsSchema readRun: readRuns){
+				loadReadRun(readRun);
+			}
+		}
+    }
+
+	private void loadAnalyses() throws IOException {
+		try (InputStreamReader jsonFileInputStream = new InputStreamReader(new FileInputStream("./src/main/resources/toLoad/analyses.json"))){
+			Gson gson = new Gson();
+			var readAnalyses = gson.fromJson(jsonFileInputStream, AnalysesSchema[].class);
+
+
+			for(AnalysesSchema readAnalysis: readAnalyses){
+				loadReadAnalysis(readAnalysis);
 			}
 		}
 	}
 
-	private void loadReadDataset(
-			DatasetResourceApi datasetResourceApi,
-			DataUseConditionsResourceApi dataUseConditionsResourceApi,
-			ReadDataset readDataset
-	) throws ApiException {
-		ReadDataUseConditions toLoadDataUseConditions = readDataset.getDataUseConditions();
-
-		org.openapitools.client.model.DataUseConditions createdDataUseConditions = dataUseConditionsResourceApi.createDataUseConditions(toLoadDataUseConditions.toApiRepresentation());
-		org.openapitools.client.model.Dataset datasetToCreate = readDataset.getAPIRepresentation(createdDataUseConditions);
-		datasetResourceApi.createDataset(datasetToCreate);
+	private void loadReadAnalysis(AnalysesSchema readAnalysis) {
+		Analysis analysis = new Analysis();
+		analysis.setId(readAnalysis.getId());
+		analysis.setAligner(readAnalysis.getAligner());
+		analysis.setAnalysisDate(Date.valueOf(readAnalysis.getAnalysisDate()));
+		analysis.setPipelineName(readAnalysis.getPipelineName());
+		analysis.setPipelineRef(readAnalysis.getPipelineRef());
+		analysis.setVariantCaller(readAnalysis.getVariantCaller());
+		analysis.setRun(runRepository.getReferenceById(readAnalysis.getRunId()));
+		analysisRepository.save(analysis);
 	}
 
+	private void loadReadRun(RunsSchema readRun) {
+		var run = new Run();
+		run.setId(readRun.getId());
+		run.setRunDate(Date.valueOf(readRun.getRunDate()));
+		run.setPlatformModel(getOntologyTerm(readRun.getPlatformModel()));
+		run.setLibraryStrategy(readRun.getLibraryStrategy());
+		run.setPlatform(readRun.getPlatform());
+		run.setLibraryLayout(readRun.getLibraryLayout());
+		run.setLibrarySelection(getLibrarySelection(readRun.getLibrarySelection()));
+		run.setLibrarySource(getOntologyTerm(readRun.getLibrarySource()));
+		run.setBiosample(biosampleRepository.getReferenceById(readRun.getBiosampleId()));
+		runRepository.save(run);
+	}
 
-	private static void deleteAll() throws ApiException {
-		deleteTreatmentsItem();
-		deleteAnalysis();
-		deleteRuns();
-		deleteQuantities();
-		deletePhenotypicFeaturesItems();
-		deletePhenotypicConditionsItems();
-		deletePedigreesItems();
-		deletePathologicalTnmFindingItems();
-		deleteModifiersItems();
-		deleteMembersItems();
-		deleteMeasuresItems();
-		deleteMeasurementsItems();
-		deleteLocationsItems();
-		deleteInterventionsOrProceduresItems();
-		deleteGenomicVariants();
-		deleteGendersItems();
-		deleteExternalReferences();
-		deleteExposureItems();
-		deleteEvidences();
-		deleteEventEthnicities();
-		deleteEventDiseases();
-		deleteEventDataTypes();
-		deleteEventAgeRanges();
-		deleteEthnicitiesItems();
-		deleteDoseIntervalsItems();
-		deleteDiseases();
-		deleteDiseasesItems();
-		deleteDiseaseConditionsItems();
-		deleteDiagnosticMarkersItems();
-		deleteDatasets();
-		deleteDataUseConditions();
-		deleteCollectionEventsItems();
-		deleteCohorts();
-		deleteCohortDataTypesItems();
-		//deleteIndividuals();
-		deleteOntologyTerm();
+	private OntologyTerm getOntologyTerm(LibrarySource librarySource) {
+		var foundTerm = ontologyTermRepository.findById(librarySource.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(librarySource.getId());
+			ontologyTerm.setLabel(librarySource.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private LibrarySelection getLibrarySelection(String librarySelectionName) {
+		var foundLibrarySelection = librarySelectionRepository.findByName(librarySelectionName);
+		if (foundLibrarySelection.isPresent()) {
+			return foundLibrarySelection.get();
+		} else {
+			LibrarySelection newLibrarySelection = new LibrarySelection();
+			newLibrarySelection.setName(librarySelectionName);
+			librarySelectionRepository.save(newLibrarySelection);
+			return newLibrarySelection;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(PlatformModel platformModel) {
+		var foundTerm = ontologyTermRepository.findById(platformModel.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(platformModel.getId());
+			ontologyTerm.setLabel(platformModel.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private void loadReadDataset(DatasetsSchema readDataset) throws ParseException {
+		var dataset = new Dataset();
+		dataset.setId(readDataset.getId());
+		dataset.setName(readDataset.getName());
+		dataset.setDescription(readDataset.getDescription());
+		dataset.setVersion(readDataset.getVersion());
+		dataset.setExternalUrl(readDataset.getExternalUrl());
+		dataset.setCreateDateTime(ZonedDateTime.parse(readDataset.getCreateDateTime()));
+		dataset.setUpdateDateTime(ZonedDateTime.parse(readDataset.getUpdateDateTime()));
+		dataset.setDataUseConditions(getDatauseConditions(readDataset.getDataUseConditions()));
+		dataset.setInfo_beacon_version(readDataset.getInfo().getBeacon().getVersion());
+		dataset.setInfo_beacon_mapping(readDataset.getInfo().getBeacon().getMapping());
+		dataset.setInfo_beacon_contact(readDataset.getInfo().getBeacon().getContact());
+
+		//readDataset.getDataUseConditions()
+		//readDataset.getAdditionalProperties()
+		//readDataset.getInfo()
+
+		//readDataset.getInfo().getAdditionalProperties();
+		//dataset.getInfo_beacon_contact()
+		//dataset.setInfo_beacon_contact(readDataset.getInfo().ge);
+		String info_beacon_contact;
+		String info_beacon_mapping;
+		String info_beacon_version;
+		datasetRepository.save(dataset);
+	}
+
+	private DataUseConditions getDatauseConditions(edu.upc.dmag.ToLoad.DataUseConditions readDataUseConditions) {
+		var dataUseConditions = new DataUseConditions();
+		dataUseConditions.setDuoDataUses(
+				readDataUseConditions.getDuoDataUse().stream().map(it -> getOntologyTerm(it)).collect(Collectors.toSet())
+		);
+		dataUseConditionsRepository.save(dataUseConditions);
+		return dataUseConditions;
+	}
+
+	private OntologyTerm getOntologyTerm(DuoDataUse it) {
+		var foundTerm = ontologyTermRepository.findById(it.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(it.getId());
+			ontologyTerm.setLabel(it.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private void loadBiosamples() throws IOException {
+		try (InputStreamReader jsonFileInputStream = new InputStreamReader(new FileInputStream("./src/main/resources/toLoad/biosamples.json"))){
+			Gson gson = new Gson();
+			var readBiosamples = gson.fromJson(jsonFileInputStream, BiosamplesSchema[].class);
+
+
+			for(BiosamplesSchema readBiosample: readBiosamples){
+				System.out.println(readBiosample.getId()+"\t"+readBiosample.getIndividualId());
+				loadReadBiosample(readBiosample);
+			}
+		}
+    }
+
+	private void loadIndividuals() throws IOException {
+		try (InputStreamReader jsonFileInputStream = new InputStreamReader(new FileInputStream("./src/main/resources/toLoad/individuals.json"))){
+			Gson gson = new Gson();
+			var readIndividuals = gson.fromJson(jsonFileInputStream, IndividualsSchema[].class);
+
+
+			for(IndividualsSchema readIndividual: readIndividuals){
+				loadReadIndividual(readIndividual);
+			}
+		}
+	}
+
+	private void loadReadIndividual(IndividualsSchema readIndividual) {
+		var individual = new Individual();
+		individual.setId(readIndividual.getId());
+		//individual.setDiseases
+		//individual.setEthnicity
+		//individual.setExposures
+		//individual.setGeographicOrigin
+		//individual.setInfo
+		//individual.setInterventionsOrProcedures
+		//individual.setKaryotypicSex
+		individual.setMeasures(getMeasures(readIndividual.getMeasures()));
+		//individual.setPedigrees
+		individual.setPhenotypicFeatures(getPhenotypicFeatures(readIndividual.getPhenotypicFeatures()));
+		individual.setSex(getOntologyTerm(readIndividual.getSex()));
+		//individual.setTreatment
+
+
+
+		individualRepository.save(individual);
+	}
+
+	private Set<Measure> getMeasures(List<edu.upc.dmag.ToLoad.Measure> measures) {
+		return measures.stream().map(it -> getMeasure(it)).collect(Collectors.toSet());
+	}
+
+	private Measure getMeasure(edu.upc.dmag.ToLoad.Measure it) {
+		var measure = new Measure();
+		measure.setAssayCode(getOntologyTerm(it.getAssayCode()));
+		measure.setDate(Date.valueOf(it.getDate()));
+		measure.setMeasurementValue(getMeasurementValue(it.getMeasurementValue()));
+		measureRepository.save(measure);
+		return measure;
+	}
+
+	private MeasurementValue getMeasurementValue(edu.upc.dmag.ToLoad.MeasurementValue readMeasurementValue) {
+		var measurementValue = new MeasurementValue();
+		if (readMeasurementValue.getQuantity() != null){
+			var value = new Value();
+			if(readMeasurementValue.getQuantity().getOntologyTerm() != null){
+				value.setTermValue(getOntologyTerm(readMeasurementValue.getQuantity().getOntologyTerm()));
+			}else {
+				var quantity = getQuantity(readMeasurementValue.getQuantity());
+				value.setQuantity(quantity);
+			}
+			valueRepository.save(value);
+			measurementValue.setValue(value);
+		} else {
+			var complexValue = new ComplexValue();
+			complexValue.setQuantity(getQuantity(readMeasurementValue.getTypedQuantities().getQuantity()));
+			complexValue.setQuantityType(getQuantityType(readMeasurementValue.getTypedQuantities().getQuantityType()));
+			complexValueRepository.save(complexValue);
+			measurementValue.setComplexValue(complexValue);
+		}
+		measurementValueRepository.save(measurementValue);
+		return measurementValue;
+	}
+
+	private OntologyTerm getQuantityType(QuantityType readType) {
+		var foundTerm = ontologyTermRepository.findById(readType.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(readType.getId());
+			ontologyTerm.setLabel(readType.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private Quantity getQuantity(Quantity__1 readQuantity) {
+		var quantity = new Quantity();
+		quantity.setValue(readQuantity.getValue());
+		quantity.setUnit(getOntologyTerm(readQuantity.getUnit()));
+		if (quantity.getReferenceRange() != null){
+			var referenceRange = new ReferenceRange();
+			referenceRange.setLow(readQuantity.getReferenceRange().getLow());
+			referenceRange.setHigh(readQuantity.getReferenceRange().getHigh());
+			referenceRange.setUnit(getOntologyTerm(readQuantity.getReferenceRange().getUnit()));
+			quantity.setReferenceRange(referenceRange);
+		}
+		quantityRepository.save(quantity);
+		return quantity;
+	}
+
+	private OntologyTerm getOntologyTerm(Unit__4 unit) {
+		var foundTerm = ontologyTermRepository.findById(unit.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(unit.getId());
+			ontologyTerm.setLabel(unit.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(Unit__3 unit) {
+		var foundTerm = ontologyTermRepository.findById(unit.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(unit.getId());
+			ontologyTerm.setLabel(unit.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
 	}
 
 	@NotNull
-	private static ApiClient getApiClient() {
-		Map<String, String> parameters = new HashMap<>();
-		parameters.put("username", "admin");
-		parameters.put("password","admin");
+	private Quantity getQuantity(edu.upc.dmag.ToLoad.Quantity readQuantity) {
+		var quantity = new Quantity();
+		quantity.setValue(readQuantity.getValue());
+		quantity.setUnit(getOntologyTerm(readQuantity.getUnit()));
+		if (quantity.getReferenceRange() != null){
+			var referenceRange = new ReferenceRange();
+			referenceRange.setLow(readQuantity.getReferenceRange().getLow());
+			referenceRange.setHigh(readQuantity.getReferenceRange().getHigh());
+			referenceRange.setUnit(getOntologyTerm(readQuantity.getReferenceRange().getUnit()));
+			quantity.setReferenceRange(referenceRange);
+		}
+		quantityRepository.save(quantity);
+		return quantity;
+	}
 
-        return new ApiClient(
-				"http://localhost:9080/realms/jhipster/protocol/openid-connect/token",
-				"web_app",
-				"web_app",
-				parameters
+	private OntologyTerm getOntologyTerm(Unit__2 unit) {
+		var foundTerm = ontologyTermRepository.findById(unit.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(unit.getId());
+			ontologyTerm.setLabel(unit.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(Unit__1 unit) {
+		var foundTerm = ontologyTermRepository.findById(unit.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(unit.getId());
+			ontologyTerm.setLabel(unit.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(edu.upc.dmag.ToLoad.OntologyTerm readOntologyTerm) {
+		var foundTerm = ontologyTermRepository.findById(readOntologyTerm.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(readOntologyTerm.getId());
+			ontologyTerm.setLabel(readOntologyTerm.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(AssayCode__1 assayCode) {
+		var foundTerm = ontologyTermRepository.findById(assayCode.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(assayCode.getId());
+			ontologyTerm.setLabel(assayCode.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private Set<PhenotypicFeature> getPhenotypicFeatures(List<PhenotypicFeature__1> phenotypicFeatures) {
+		var result = new HashSet<PhenotypicFeature>();
+
+		for (var phenotypicFeature : phenotypicFeatures){
+			result.add(getPhenotypicFeature(phenotypicFeature));
+		}
+
+		return result;
+
+	}
+
+	private PhenotypicFeature getPhenotypicFeature(PhenotypicFeature__1 readPhenotypicFeature) {
+		var phenotypicFeature = new PhenotypicFeature();
+		phenotypicFeature.setFeatureType(getOntologyTerm(readPhenotypicFeature.getFeatureType()));
+		phenotypicFeature.setModifiers(getOntologyTermsModifiers(readPhenotypicFeature.getModifiers()));
+		phenotypicFeatureRepository.save(phenotypicFeature);
+		return phenotypicFeature;
+	}
+
+	private Set<OntologyTerm> getOntologyTermsModifiers(List<Modifier__3> modifiers) {
+		return modifiers.stream().map(this::getOntologyTerm).collect(Collectors.toSet());
+	}
+
+	private OntologyTerm getOntologyTerm(Modifier__3 modifier__3) {
+		var foundTerm = ontologyTermRepository.findById(modifier__3.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(modifier__3.getId());
+			ontologyTerm.setLabel(modifier__3.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(FeatureType__3 featureType) {
+		var foundTerm = ontologyTermRepository.findById(featureType.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(featureType.getId());
+			ontologyTerm.setLabel(featureType.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private Set<OntologyTerm> getOntologyTerms(List<Modifier__5> modifiers) {
+		return modifiers.stream().map(this::getOntologyTerm).collect(Collectors.toSet());
+
+	}
+
+	private OntologyTerm getOntologyTerm(Modifier__5 readModifier) {
+		var foundTerm = ontologyTermRepository.findById(readModifier.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(readModifier.getId());
+			ontologyTerm.setLabel(readModifier.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(FeatureType__5 featureType) {
+		var foundTerm = ontologyTermRepository.findById(featureType.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(featureType.getId());
+			ontologyTerm.setLabel(featureType.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private OntologyTerm getOntologyTerm(Sex sex) {
+		var foundTerm = ontologyTermRepository.findById(sex.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(sex.getId());
+			ontologyTerm.setLabel(sex.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private void loadReadBiosample(BiosamplesSchema readBiosample) {
+		var biosample = new Biosample();
+		biosample.setId(readBiosample.getId());
+		biosample.setObtentionProcedure(getObtentionProcedure(readBiosample.getObtentionProcedure()));
+		biosample.setBiosampleStatus(getOntologyTerm(readBiosample.getBiosampleStatus()));
+		biosample.setSampleOriginType(getOntologyTerm(readBiosample.getSampleOriginType()));
+		biosample.setIndividual(individualRepository.getReferenceById(readBiosample.getIndividualId()));
+		biosampleRepository.save(biosample);
+	}
+
+	private OntologyTerm getOntologyTerm(SampleOriginType sampleOriginType) {
+		var foundTerm = ontologyTermRepository.findById(sampleOriginType.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(sampleOriginType.getId());
+			ontologyTerm.setLabel(sampleOriginType.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
+		}
+	}
+
+	private edu.upc.dmag.beaconLoaderWithCLI.entities.ObtentionProcedure getObtentionProcedure(ObtentionProcedure readObtentionProcedure) {
+		var obtentionProcedure = new edu.upc.dmag.beaconLoaderWithCLI.entities.ObtentionProcedure();
+		obtentionProcedure.setProcedureCode(getOntologyTerm(readObtentionProcedure.getProcedureCode()));
+		if (readObtentionProcedure.getAgeAtProcedure().getAge() != null) {
+			obtentionProcedure.setAge(
+				getAgeDuration(ConvertDuration.getDuration(readObtentionProcedure.getAgeAtProcedure().getAge().getIso8601duration()))
+			);
+		} else if (readObtentionProcedure.getAgeAtProcedure().getAgeRange() != null){
+			obtentionProcedure.setAge(getAgeRange(readObtentionProcedure.getAgeAtProcedure().getAgeRange()));
+		} else if (readObtentionProcedure.getAgeAtProcedure().getGestationalAge() != null){
+			obtentionProcedure.setAge(
+					getGestionalAge(readObtentionProcedure.getAgeAtProcedure().getGestationalAge())
+			);
+		} else {
+			obtentionProcedure.setAge(
+				getAgeDatetime(readObtentionProcedure.getAgeAtProcedure().getDateTime().toString())
+			);
+		}
+		obtentionProcedureRepository.save(obtentionProcedure);
+		return obtentionProcedure;
+	}
+
+	private Age getAgeDatetime(String string) {
+		var ageDatetime = new AgeDatetime(string);
+		ageRepository.save(ageDatetime);
+		return ageDatetime;
+	}
+
+	private Age getGestionalAge(Integer readGestationalAge) {
+		var gestionalAge = new GestationalAge(readGestationalAge);
+		ageRepository.save(gestionalAge);
+		return gestionalAge;
+	}
+
+	private Age getAgeRange(AgeRange readAgeRange) {
+		var ageRange = new edu.upc.dmag.beaconLoaderWithCLI.entities.AgeRange(
+				ConvertDuration.getDuration(readAgeRange.getStart()),
+				ConvertDuration.getDuration(readAgeRange.getEnd())
 		);
+		ageRepository.save(ageRange);
+		return ageRange;
 	}
 
-	private static void deleteOntologyTerm() throws ApiException { OntologyTermResourceApi ontologyTermResourceApi = new OntologyTermResourceApi();
-		ontologyTermResourceApi.setApiClient(getApiClient());
+	private Age getAgeDuration(Duration duration) {
+		var ageDuration = new AgeDuration(
+			duration
+		);
+		ageRepository.save(ageDuration);
+		return ageDuration;
+	}
 
-		var instances = ontologyTermResourceApi.getAllOntologyTerms();
-		var instancesUUIDs = instances.stream().map(OntologyTerm::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			ontologyTermResourceApi.deleteOntologyTerm(instanceUUID);
+	private OntologyTerm getOntologyTerm(ProcedureCode__1 procedureCode) {
+		var foundTerm = ontologyTermRepository.findById(procedureCode.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(procedureCode.getId());
+			ontologyTerm.setLabel(procedureCode.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
 		}
 	}
 
-	private static void deleteTreatmentsItem() throws ApiException { TreatmentsItemResourceApi treatmentsItemResourceApi = new TreatmentsItemResourceApi();
-		treatmentsItemResourceApi.setApiClient(getApiClient());
-
-		var instances = treatmentsItemResourceApi.getAllTreatmentsItems(false);
-		var instancesUUIDs = instances.stream().map(TreatmentsItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			treatmentsItemResourceApi.deleteTreatmentsItem(instanceUUID);
-		}
-	}
-
-	private static void deleteAnalysis() throws ApiException {
-		SequencingBioinformaticsAnalysisResourceApi analysiResourceApi = new SequencingBioinformaticsAnalysisResourceApi();
-		analysiResourceApi.setApiClient(getApiClient());
-
-		var instances = analysiResourceApi.getAllSequencingBioinformaticsAnalyses();
-		var instancesIDs = instances.stream().map(SequencingBioinformaticsAnalysis::getId).collect(Collectors.toSet());
-
-		for (var instanceID: instancesIDs){
-			analysiResourceApi.deleteSequencingBioinformaticsAnalysis(instanceID);
-		}
-	}
-	private static void deleteRuns() throws ApiException { RunResourceApi runResourceApi = new RunResourceApi();
-		runResourceApi.setApiClient(getApiClient());
-
-		var instances = runResourceApi.getAllRuns();
-		var instancesUUIDs = instances.stream().map(Run::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			runResourceApi.deleteRun(instanceUUID);
-		}
-	}
-
-	private static void deleteQuantities() throws ApiException { QuantityResourceApi quantitieResourceApi = new QuantityResourceApi();
-		quantitieResourceApi.setApiClient(getApiClient());
-
-		var instances = quantitieResourceApi.getAllQuantities();
-		var instancesUUIDs = instances.stream().map(Quantity::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			quantitieResourceApi.deleteQuantity(instanceUUID);
-		}
-	}
-
-	private static void deletePhenotypicFeaturesItems() throws ApiException { PhenotypicFeaturesItemResourceApi phenotypicFeaturesItemResourceApi = new PhenotypicFeaturesItemResourceApi();
-		phenotypicFeaturesItemResourceApi.setApiClient(getApiClient());
-
-		var instances = phenotypicFeaturesItemResourceApi.getAllPhenotypicFeaturesItems(false);
-		var instancesUUIDs = instances.stream().map(PhenotypicFeaturesItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			phenotypicFeaturesItemResourceApi.deletePhenotypicFeaturesItem(instanceUUID);
-		}
-	}
-	private static void deletePhenotypicConditionsItems() throws ApiException { PhenotypicConditionsItemResourceApi phenotypicConditionsItemResourceApi = new PhenotypicConditionsItemResourceApi();
-		phenotypicConditionsItemResourceApi.setApiClient(getApiClient());
-
-		var instances = phenotypicConditionsItemResourceApi.getAllPhenotypicConditionsItems(false);
-		var instancesUUIDs = instances.stream().map(PhenotypicConditionsItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			phenotypicConditionsItemResourceApi.deletePhenotypicConditionsItem(instanceUUID);
-		}
-	}
-	private static void deletePedigreesItems() throws ApiException { PedigreesItemResourceApi pedigreesItemResourceApi = new PedigreesItemResourceApi();
-		pedigreesItemResourceApi.setApiClient(getApiClient());
-
-		var instances = pedigreesItemResourceApi.getAllPedigreesItems(false);
-		var instancesUUIDs = instances.stream().map(PedigreesItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			pedigreesItemResourceApi.deletePedigreesItem(instanceUUID);
-		}
-	}
-	private static void deletePathologicalTnmFindingItems() throws ApiException { PathologicalTnmFindingItemResourceApi pathologicalTnmFindingItemResourceApi = new PathologicalTnmFindingItemResourceApi();
-		pathologicalTnmFindingItemResourceApi.setApiClient(getApiClient());
-
-		var instances = pathologicalTnmFindingItemResourceApi.getAllPathologicalTnmFindingItems();
-		var instancesUUIDs = instances.stream().map(PathologicalTnmFindingItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			pathologicalTnmFindingItemResourceApi.deletePathologicalTnmFindingItem(instanceUUID);
-		}
-	}
-
-	private static void deleteModifiersItems() throws ApiException { ModifiersItemResourceApi modifiersItemResourceApi = new ModifiersItemResourceApi();
-		modifiersItemResourceApi.setApiClient(getApiClient());
-
-		var instances = modifiersItemResourceApi.getAllModifiersItems();
-		var instancesUUIDs = instances.stream().map(ModifiersItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			modifiersItemResourceApi.deleteModifiersItem(instanceUUID);
-		}
-	}
-	private static void deleteMembersItems() throws ApiException { MembersItemResourceApi membersItemResourceApi = new MembersItemResourceApi();
-		membersItemResourceApi.setApiClient(getApiClient());
-
-		var instances = membersItemResourceApi.getAllMembersItems();
-		var instancesUUIDs = instances.stream().map(MembersItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			membersItemResourceApi.deleteMembersItem(instanceUUID);
-		}
-	}
-	private static void deleteMeasuresItems() throws ApiException { MeasuresItemResourceApi measuresItemResourceApi = new MeasuresItemResourceApi();
-		measuresItemResourceApi.setApiClient(getApiClient());
-
-		var instances = measuresItemResourceApi.getAllMeasuresItems();
-		var instancesUUIDs = instances.stream().map(MeasuresItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			measuresItemResourceApi.deleteMeasuresItem(instanceUUID);
-		}
-	}
-	private static void deleteMeasurementsItems() throws ApiException { MeasurementsItemResourceApi measurementsItemResourceApi = new MeasurementsItemResourceApi();
-		measurementsItemResourceApi.setApiClient(getApiClient());
-
-		var instances = measurementsItemResourceApi.getAllMeasurementsItems();
-		var instancesUUIDs = instances.stream().map(MeasurementsItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			measurementsItemResourceApi.deleteMeasurementsItem(instanceUUID);
-		}
-	}
-	private static void deleteLocationsItems() throws ApiException { LocationsItemResourceApi locationsItemResourceApi = new LocationsItemResourceApi();
-		locationsItemResourceApi.setApiClient(getApiClient());
-
-		var instances = locationsItemResourceApi.getAllLocationsItems();
-		var instancesUUIDs = instances.stream().map(LocationsItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			locationsItemResourceApi.deleteLocationsItem(instanceUUID);
-		}
-	}
-	private static void deleteInterventionsOrProceduresItems() throws ApiException { InterventionsOrProceduresItemResourceApi interventionsOrProceduresItemResourceApi = new InterventionsOrProceduresItemResourceApi();
-		interventionsOrProceduresItemResourceApi.setApiClient(getApiClient());
-
-		var instances = interventionsOrProceduresItemResourceApi.getAllInterventionsOrProceduresItems();
-		var instancesUUIDs = instances.stream().map(InterventionsOrProceduresItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			interventionsOrProceduresItemResourceApi.deleteInterventionsOrProceduresItem(instanceUUID);
-		}
-	}
-
-	private static void deleteGenomicVariants() throws ApiException { GenomicVariantResourceApi genomicVariantResourceApi = new GenomicVariantResourceApi();
-		genomicVariantResourceApi.setApiClient(getApiClient());
-
-		var instances = genomicVariantResourceApi.getAllGenomicVariants(true);
-		var instancesUUIDs = instances.stream().map(GenomicVariant::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			genomicVariantResourceApi.deleteGenomicVariant(instanceUUID);
-		}
-	}
-	private static void deleteGendersItems() throws ApiException { GendersItemResourceApi gendersItemResourceApi = new GendersItemResourceApi();
-		gendersItemResourceApi.setApiClient(getApiClient());
-
-		var instances = gendersItemResourceApi.getAllGendersItems();
-		var instancesUUIDs = instances.stream().map(GendersItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			gendersItemResourceApi.deleteGendersItem(instanceUUID);
-		}
-	}
-	private static void deleteExternalReferences() throws ApiException { ExternalReferenceResourceApi externalReferenceResourceApi = new ExternalReferenceResourceApi();
-		externalReferenceResourceApi.setApiClient(getApiClient());
-
-		var instances = externalReferenceResourceApi.getAllExternalReferences();
-		var instancesUUIDs = instances.stream().map(ExternalReference::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			externalReferenceResourceApi.deleteExternalReference(instanceUUID);
-		}
-	}
-	private static void deleteExposureItems() throws ApiException { ExposuresItemResourceApi exposureItemResourceApi = new ExposuresItemResourceApi();
-		exposureItemResourceApi.setApiClient(getApiClient());
-
-		var instances = exposureItemResourceApi.getAllExposuresItems();
-		var instancesUUIDs = instances.stream().map(ExposuresItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			exposureItemResourceApi.deleteExposuresItem(instanceUUID);
-		}
-	}
-
-	private static void deleteEvidences() throws ApiException { EvidenceResourceApi evidenceResourceApi = new EvidenceResourceApi();
-		evidenceResourceApi.setApiClient(getApiClient());
-
-		var instances = evidenceResourceApi.getAllEvidences();
-		var instancesUUIDs = instances.stream().map(Evidence::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			evidenceResourceApi.deleteEvidence(instanceUUID);
-		}
-	}
-
-	private static void deleteEventEthnicities() throws ApiException { EventEthnicitiesResourceApi eventEthnicitieResourceApi = new EventEthnicitiesResourceApi();
-		eventEthnicitieResourceApi.setApiClient(getApiClient());
-
-		var instances = eventEthnicitieResourceApi.getAllEventEthnicities();
-		var instancesUUIDs = instances.stream().map(EventEthnicities::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			eventEthnicitieResourceApi.deleteEventEthnicities(instanceUUID);
-		}
-	}
-	private static void deleteEventDiseases() throws ApiException { EventDiseasesResourceApi eventDiseaseResourceApi = new EventDiseasesResourceApi();
-		eventDiseaseResourceApi.setApiClient(getApiClient());
-
-		var instances = eventDiseaseResourceApi.getAllEventDiseases();
-		var instancesUUIDs = instances.stream().map(EventDiseases::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			eventDiseaseResourceApi.deleteEventDiseases(instanceUUID);
-		}
-	}
-	private static void deleteEventDataTypes() throws ApiException { EventDataTypesResourceApi eventDataTypeResourceApi = new EventDataTypesResourceApi();
-		eventDataTypeResourceApi.setApiClient(getApiClient());
-
-		var instances = eventDataTypeResourceApi.getAllEventDataTypes();
-		var instancesUUIDs = instances.stream().map(EventDataTypes::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			eventDataTypeResourceApi.deleteEventDataTypes(instanceUUID);
-		}
-	}
-	private static void deleteEventAgeRanges() throws ApiException { EventAgeRangeResourceApi eventAgeRangeResourceApi = new EventAgeRangeResourceApi();
-		eventAgeRangeResourceApi.setApiClient(getApiClient());
-
-		var instances = eventAgeRangeResourceApi.getAllEventAgeRanges();
-		var instancesUUIDs = instances.stream().map(EventAgeRange::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			eventAgeRangeResourceApi.deleteEventAgeRange(instanceUUID);
-		}
-	}
-	private static void deleteEthnicitiesItems() throws ApiException { EthnicitiesItemResourceApi ethnicitiesItemResourceApi = new EthnicitiesItemResourceApi();
-		ethnicitiesItemResourceApi.setApiClient(getApiClient());
-
-		var instances = ethnicitiesItemResourceApi.getAllEthnicitiesItems();
-		var instancesUUIDs = instances.stream().map(EthnicitiesItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			ethnicitiesItemResourceApi.deleteEthnicitiesItem(instanceUUID);
-		}
-	}
-	private static void deleteDoseIntervalsItems() throws ApiException { DoseIntervalsItemResourceApi doseIntervalsItemResourceApi = new DoseIntervalsItemResourceApi();
-		doseIntervalsItemResourceApi.setApiClient(getApiClient());
-
-		var instances = doseIntervalsItemResourceApi.getAllDoseIntervalsItems();
-		var instancesUUIDs = instances.stream().map(DoseIntervalsItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			doseIntervalsItemResourceApi.deleteDoseIntervalsItem(instanceUUID);
-		}
-	}
-	private static void deleteDiseases() throws ApiException { DiseaseResourceApi diseaseResourceApi = new DiseaseResourceApi();
-		diseaseResourceApi.setApiClient(getApiClient());
-
-		var instances = diseaseResourceApi.getAllDiseases();
-		var instancesUUIDs = instances.stream().map(Disease::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			diseaseResourceApi.deleteDisease(instanceUUID);
-		}
-	}
-	private static void deleteDiseasesItems() throws ApiException { DiseasesItemResourceApi diseasesItemResourceApi = new DiseasesItemResourceApi();
-		diseasesItemResourceApi.setApiClient(getApiClient());
-
-		var instances = diseasesItemResourceApi.getAllDiseasesItems();
-		var instancesUUIDs = instances.stream().map(DiseasesItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			diseasesItemResourceApi.deleteDiseasesItem(instanceUUID);
-		}
-	}
-	private static void deleteDiseaseConditionsItems() throws ApiException { DiseaseConditionsItemResourceApi diseaseConditionsItemResourceApi = new DiseaseConditionsItemResourceApi();
-		diseaseConditionsItemResourceApi.setApiClient(getApiClient());
-
-		var instances = diseaseConditionsItemResourceApi.getAllDiseaseConditionsItems();
-		var instancesUUIDs = instances.stream().map(DiseaseConditionsItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			diseaseConditionsItemResourceApi.deleteDiseaseConditionsItem(instanceUUID);
-		}
-	}
-	private static void deleteDiagnosticMarkersItems() throws ApiException { DiagnosticMarkersItemResourceApi diagnosticMarkersItemResourceApi = new DiagnosticMarkersItemResourceApi();
-		diagnosticMarkersItemResourceApi.setApiClient(getApiClient());
-
-		var instances = diagnosticMarkersItemResourceApi.getAllDiagnosticMarkersItems();
-		var instancesUUIDs = instances.stream().map(DiagnosticMarkersItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			diagnosticMarkersItemResourceApi.deleteDiagnosticMarkersItem(instanceUUID);
-		}
-	}
-	private static void deleteDatasets() throws ApiException { DatasetResourceApi datasetResourceApi = new DatasetResourceApi();
-		datasetResourceApi.setApiClient(getApiClient());
-
-		var instances = datasetResourceApi.getAllDatasets();
-		var instancesUUIDs = instances.stream().map(Dataset::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			datasetResourceApi.deleteDataset(instanceUUID);
-		}
-	}
-	private static void deleteDataUseConditions() throws ApiException { DataUseConditionsResourceApi dataUseConditionResourceApi = new DataUseConditionsResourceApi();
-		dataUseConditionResourceApi.setApiClient(getApiClient());
-
-		var instances = dataUseConditionResourceApi.getAllDataUseConditions();
-		var instancesUUIDs = instances.stream().map(DataUseConditions::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			dataUseConditionResourceApi.deleteDataUseConditions(instanceUUID);
-		}
-	}
-	private static void deleteCollectionEventsItems() throws ApiException { CollectionEventsItemResourceApi collectionEventsItemResourceApi = new CollectionEventsItemResourceApi();
-		collectionEventsItemResourceApi.setApiClient(getApiClient());
-
-		var instances = collectionEventsItemResourceApi.getAllCollectionEventsItems();
-		var instancesUUIDs = instances.stream().map(CollectionEventsItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			collectionEventsItemResourceApi.deleteCollectionEventsItem(instanceUUID);
-		}
-	}
-	private static void deleteCohorts() throws ApiException { CohortResourceApi cohortResourceApi = new CohortResourceApi();
-		cohortResourceApi.setApiClient(getApiClient());
-
-		var instances = cohortResourceApi.getAllCohorts(true);
-		var instancesUUIDs = instances.stream().map(Cohort::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			cohortResourceApi.deleteCohort(instanceUUID);
-		}
-	}
-	private static void deleteCohortDataTypesItems() throws ApiException { CohortDataTypesItemResourceApi cohortDataTypesItemResourceApi = new CohortDataTypesItemResourceApi();
-		cohortDataTypesItemResourceApi.setApiClient(getApiClient());
-
-		var instances = cohortDataTypesItemResourceApi.getAllCohortDataTypesItems();
-		var instancesUUIDs = instances.stream().map(CohortDataTypesItem::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			cohortDataTypesItemResourceApi.deleteCohortDataTypesItem(instanceUUID);
-		}
-	}
-
-	private static void deleteIndividuals() throws ApiException {
-		IndividualResourceApi individualResourceApi = new IndividualResourceApi();
-		individualResourceApi.setApiClient(getApiClient());
-
-		var instances = individualResourceApi.getAllIndividuals(true);
-		var instancesUUIDs = instances.stream().map(Individual::getId).collect(Collectors.toSet());
-
-		for (var instanceUUID: instancesUUIDs){
-			individualResourceApi.deleteIndividual(instanceUUID);
+	private OntologyTerm getOntologyTerm(BiosampleStatus biosampleStatus) {
+		var foundTerm = ontologyTermRepository.findById(biosampleStatus.getId());
+		if (foundTerm.isPresent()) {
+			return foundTerm.get();
+		} else {
+			OntologyTerm ontologyTerm = new OntologyTerm();
+			ontologyTerm.setId(biosampleStatus.getId());
+			ontologyTerm.setLabel(biosampleStatus.getLabel());
+			ontologyTermRepository.save(ontologyTerm);
+			return ontologyTerm;
 		}
 	}
 }

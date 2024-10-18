@@ -171,6 +171,10 @@
 			<artifactId>codemodel</artifactId>
 			<version>LATEST</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
 
 
 	</dependencies>
@@ -201,12 +205,11 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 
+			<!--
 			<plugin>
 				<groupId>org.openapitools</groupId>
 				<artifactId>openapi-generator-maven-plugin</artifactId>
-				<!-- RELEASE_VERSION -->
 				<version>7.5.0</version>
-				<!-- /RELEASE_VERSION -->
 				<executions>
 					<execution>
 						<goals>
@@ -226,6 +229,7 @@
 					</execution>
 				</executions>
 			</plugin>
+			-->
 
 			<plugin>
 				<groupId>org.jsonschema2pojo</groupId>

@@ -869,84 +869,152 @@
           },
           "measurementValue": {
             "description": "The result of the measurement",
-            "oneOf": [
-              {
-                "$schema": "https://json-schema.org/draft/2020-12/schema",
-                "description": "Definition of a value class. Provenance: GA4GH Phenopackets v2 `Value`",
-                "oneOf": [
-                  {
+            "type": "object",
+            "properties": {
+              "quantity": {
+                "type": "object",
+                "properties": {
+                  "ontologyTerm": {
+                    "$schema": "https://json-schema.org/draft/2020-12/schema",
+                    "definitions": {
+                      "CURIE": {
+                        "description": "A CURIE identifier for an ontology term.",
+                        "examples": [
+                          "ga4gh:GA.01234abcde",
+                          "DUO:0000004",
+                          "orcid:0000-0003-3463-0775",
+                          "PMID:15254584"
+                        ],
+                        "pattern": "^\\w[^:]+:.+$",
+                        "type": "string"
+                      }
+                    },
+                    "description": "Definition of an ontology term.",
+                    "properties": {
+                      "id": {
+                        "description": "A CURIE identifier for an ontology term.",
+                        "examples": [
+                          "ga4gh:GA.01234abcde",
+                          "DUO:0000004",
+                          "orcid:0000-0003-3463-0775",
+                          "PMID:15254584"
+                        ],
+                        "pattern": "^\\w[^:]+:.+$",
+                        "type": "string"
+                      },
+                      "label": {
+                        "description": "The text that describes the term. By default it could be the preferred text of the term, but is it acceptable to customize it for a clearer description and understanding of the term in an specific context.",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id"
+                    ],
+                    "title": "Ontology Term",
+                    "type": "object"
+                  },
+                  "unit": {
                     "$schema": "https://json-schema.org/draft/2020-12/schema",
                     "additionalProperties": true,
-                    "description": "Definition of a quantity class. Provenance: GA4GH Phenopackets v2 `Quantity`",
+                    "definitions": {
+                      "CURIE": {
+                        "description": "A CURIE identifier for an ontology term.",
+                        "examples": [
+                          "ga4gh:GA.01234abcde",
+                          "DUO:0000004",
+                          "orcid:0000-0003-3463-0775",
+                          "PMID:15254584"
+                        ],
+                        "pattern": "^\\w[^:]+:.+$",
+                        "type": "string"
+                      }
+                    },
+                    "description": "Definition of an ontology term.",
                     "properties": {
-                      "referenceRange": {
+                      "id": {
+                        "description": "A CURIE identifier for an ontology term.",
+                        "examples": [
+                          "ga4gh:GA.01234abcde",
+                          "DUO:0000004",
+                          "orcid:0000-0003-3463-0775",
+                          "PMID:15254584"
+                        ],
+                        "pattern": "^\\w[^:]+:.+$",
+                        "type": "string"
+                      },
+                      "label": {
+                        "description": "The text that describes the term. By default it could be the preferred text of the term, but is it acceptable to customize it for a clearer description and understanding of the term in an specific context.",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id"
+                    ],
+                    "title": "Ontology Term",
+                    "type": "object"
+                  },
+                  "value": {
+                    "type": "number"
+                  },
+                  "referenceRange": {
+                    "type": "object",
+                    "properties": {
+                      "high": {
+                        "type": "number"
+                      },
+                      "low": {
+                        "type": "number"
+                      },
+                      "unit": {
                         "$schema": "https://json-schema.org/draft/2020-12/schema",
                         "additionalProperties": true,
-                        "description": "Definition of a range class.",
+                        "definitions": {
+                          "CURIE": {
+                            "description": "A CURIE identifier for an ontology term.",
+                            "examples": [
+                              "ga4gh:GA.01234abcde",
+                              "DUO:0000004",
+                              "orcid:0000-0003-3463-0775",
+                              "PMID:15254584"
+                            ],
+                            "pattern": "^\\w[^:]+:.+$",
+                            "type": "string"
+                          }
+                        },
+                        "description": "Definition of an ontology term.",
                         "properties": {
-                          "high": {
-                            "description": "Upper range end of normal",
+                          "id": {
+                            "description": "A CURIE identifier for an ontology term.",
                             "examples": [
-                              135
+                              "ga4gh:GA.01234abcde",
+                              "DUO:0000004",
+                              "orcid:0000-0003-3463-0775",
+                              "PMID:15254584"
                             ],
-                            "type": "number"
+                            "pattern": "^\\w[^:]+:.+$",
+                            "type": "string"
                           },
-                          "low": {
-                            "description": "Lower range end of normal",
-                            "examples": [
-                              85
-                            ],
-                            "type": "number"
-                          },
-                          "unit": {
-                            "$schema": "https://json-schema.org/draft/2020-12/schema",
-                            "additionalProperties": true,
-                            "definitions": {
-                              "CURIE": {
-                                "description": "A CURIE identifier for an ontology term.",
-                                "examples": [
-                                  "ga4gh:GA.01234abcde",
-                                  "DUO:0000004",
-                                  "orcid:0000-0003-3463-0775",
-                                  "PMID:15254584"
-                                ],
-                                "pattern": "^\\w[^:]+:.+$",
-                                "type": "string"
-                              }
-                            },
-                            "description": "Definition of an ontology term.",
-                            "properties": {
-                              "id": {
-                                "description": "A CURIE identifier for an ontology term.",
-                                "examples": [
-                                  "ga4gh:GA.01234abcde",
-                                  "DUO:0000004",
-                                  "orcid:0000-0003-3463-0775",
-                                  "PMID:15254584"
-                                ],
-                                "pattern": "^\\w[^:]+:.+$",
-                                "type": "string"
-                              },
-                              "label": {
-                                "description": "The text that describes the term. By default it could be the preferred text of the term, but is it acceptable to customize it for a clearer description and understanding of the term in an specific context.",
-                                "type": "string"
-                              }
-                            },
-                            "required": [
-                              "id"
-                            ],
-                            "title": "Ontology Term",
-                            "type": "object"
+                          "label": {
+                            "description": "The text that describes the term. By default it could be the preferred text of the term, but is it acceptable to customize it for a clearer description and understanding of the term in an specific context.",
+                            "type": "string"
                           }
                         },
                         "required": [
-                          "unit",
-                          "low",
-                          "high"
+                          "id"
                         ],
-                        "title": "ReferenceRange",
+                        "title": "Ontology Term",
                         "type": "object"
-                      },
+                      }
+                    }
+                  }
+                }
+              },
+              "typedQuantities": {
+                "type": "object",
+                "properties": {
+                  "quantity": {
+                    "type": "object",
+                    "properties": {
                       "unit": {
                         "$schema": "https://json-schema.org/draft/2020-12/schema",
                         "additionalProperties": true,
@@ -988,20 +1056,62 @@
                         "type": "object"
                       },
                       "value": {
-                        "description": "The value of the quantity in the units",
                         "type": "number"
+                      },
+                      "referenceRange": {
+                        "type": "object",
+                        "properties": {
+                          "high": {
+                            "type": "number"
+                          },
+                          "low": {
+                            "type": "number"
+                          },
+                          "unit": {
+                            "$schema": "https://json-schema.org/draft/2020-12/schema",
+                            "definitions": {
+                              "CURIE": {
+                                "description": "A CURIE identifier for an ontology term.",
+                                "examples": [
+                                  "ga4gh:GA.01234abcde",
+                                  "DUO:0000004",
+                                  "orcid:0000-0003-3463-0775",
+                                  "PMID:15254584"
+                                ],
+                                "pattern": "^\\w[^:]+:.+$",
+                                "type": "string"
+                              }
+                            },
+                            "description": "Definition of an ontology term.",
+                            "properties": {
+                              "id": {
+                                "description": "A CURIE identifier for an ontology term.",
+                                "examples": [
+                                  "ga4gh:GA.01234abcde",
+                                  "DUO:0000004",
+                                  "orcid:0000-0003-3463-0775",
+                                  "PMID:15254584"
+                                ],
+                                "pattern": "^\\w[^:]+:.+$",
+                                "type": "string"
+                              },
+                              "label": {
+                                "description": "The text that describes the term. By default it could be the preferred text of the term, but is it acceptable to customize it for a clearer description and understanding of the term in an specific context.",
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "id"
+                            ],
+                            "title": "Ontology Term",
+                            "type": "object"
+                          }
+                        }
                       }
-                    },
-                    "required": [
-                      "unit",
-                      "value"
-                    ],
-                    "title": "Quantity",
-                    "type": "object"
+                    }
                   },
-                  {
+                  "quantityType": {
                     "$schema": "https://json-schema.org/draft/2020-12/schema",
-                    "additionalProperties": true,
                     "definitions": {
                       "CURIE": {
                         "description": "A CURIE identifier for an ontology term.",
@@ -1039,371 +1149,9 @@
                     "title": "Ontology Term",
                     "type": "object"
                   }
-                ],
-                "title": "Value",
-                "type": "object"
-              },
-              {
-                "$schema": "https://json-schema.org/draft/2020-12/schema",
-                "definitions": {
-                  "TypedQuantity": {
-                    "properties": {
-                      "quantity": {
-                        "$schema": "https://json-schema.org/draft/2020-12/schema",
-                        "additionalProperties": true,
-                        "description": "Definition of a quantity class. Provenance: GA4GH Phenopackets v2 `Quantity`",
-                        "properties": {
-                          "referenceRange": {
-                            "$schema": "https://json-schema.org/draft/2020-12/schema",
-                            "additionalProperties": true,
-                            "description": "Definition of a range class.",
-                            "properties": {
-                              "high": {
-                                "description": "Upper range end of normal",
-                                "examples": [
-                                  135
-                                ],
-                                "type": "number"
-                              },
-                              "low": {
-                                "description": "Lower range end of normal",
-                                "examples": [
-                                  85
-                                ],
-                                "type": "number"
-                              },
-                              "unit": {
-                                "$schema": "https://json-schema.org/draft/2020-12/schema",
-                                "additionalProperties": true,
-                                "definitions": {
-                                  "CURIE": {
-                                    "description": "A CURIE identifier for an ontology term.",
-                                    "examples": [
-                                      "ga4gh:GA.01234abcde",
-                                      "DUO:0000004",
-                                      "orcid:0000-0003-3463-0775",
-                                      "PMID:15254584"
-                                    ],
-                                    "pattern": "^\\w[^:]+:.+$",
-                                    "type": "string"
-                                  }
-                                },
-                                "description": "Definition of an ontology term.",
-                                "properties": {
-                                  "id": {
-                                    "description": "A CURIE identifier for an ontology term.",
-                                    "examples": [
-                                      "ga4gh:GA.01234abcde",
-                                      "DUO:0000004",
-                                      "orcid:0000-0003-3463-0775",
-                                      "PMID:15254584"
-                                    ],
-                                    "pattern": "^\\w[^:]+:.+$",
-                                    "type": "string"
-                                  },
-                                  "label": {
-                                    "description": "The text that describes the term. By default it could be the preferred text of the term, but is it acceptable to customize it for a clearer description and understanding of the term in an specific context.",
-                                    "type": "string"
-                                  }
-                                },
-                                "required": [
-                                  "id"
-                                ],
-                                "title": "Ontology Term",
-                                "type": "object"
-                              }
-                            },
-                            "required": [
-                              "unit",
-                              "low",
-                              "high"
-                            ],
-                            "title": "ReferenceRange",
-                            "type": "object"
-                          },
-                          "unit": {
-                            "$schema": "https://json-schema.org/draft/2020-12/schema",
-                            "additionalProperties": true,
-                            "definitions": {
-                              "CURIE": {
-                                "description": "A CURIE identifier for an ontology term.",
-                                "examples": [
-                                  "ga4gh:GA.01234abcde",
-                                  "DUO:0000004",
-                                  "orcid:0000-0003-3463-0775",
-                                  "PMID:15254584"
-                                ],
-                                "pattern": "^\\w[^:]+:.+$",
-                                "type": "string"
-                              }
-                            },
-                            "description": "Definition of an ontology term.",
-                            "properties": {
-                              "id": {
-                                "description": "A CURIE identifier for an ontology term.",
-                                "examples": [
-                                  "ga4gh:GA.01234abcde",
-                                  "DUO:0000004",
-                                  "orcid:0000-0003-3463-0775",
-                                  "PMID:15254584"
-                                ],
-                                "pattern": "^\\w[^:]+:.+$",
-                                "type": "string"
-                              },
-                              "label": {
-                                "description": "The text that describes the term. By default it could be the preferred text of the term, but is it acceptable to customize it for a clearer description and understanding of the term in an specific context.",
-                                "type": "string"
-                              }
-                            },
-                            "required": [
-                              "id"
-                            ],
-                            "title": "Ontology Term",
-                            "type": "object"
-                          },
-                          "value": {
-                            "description": "The value of the quantity in the units",
-                            "type": "number"
-                          }
-                        },
-                        "required": [
-                          "unit",
-                          "value"
-                        ],
-                        "title": "Quantity",
-                        "type": "object"
-                      },
-                      "quantityType": {
-                        "$schema": "https://json-schema.org/draft/2020-12/schema",
-                        "additionalProperties": true,
-                        "definitions": {
-                          "CURIE": {
-                            "description": "A CURIE identifier for an ontology term.",
-                            "examples": [
-                              "ga4gh:GA.01234abcde",
-                              "DUO:0000004",
-                              "orcid:0000-0003-3463-0775",
-                              "PMID:15254584"
-                            ],
-                            "pattern": "^\\w[^:]+:.+$",
-                            "type": "string"
-                          }
-                        },
-                        "description": "Definition of an ontology term.",
-                        "properties": {
-                          "id": {
-                            "description": "A CURIE identifier for an ontology term.",
-                            "examples": [
-                              "ga4gh:GA.01234abcde",
-                              "DUO:0000004",
-                              "orcid:0000-0003-3463-0775",
-                              "PMID:15254584"
-                            ],
-                            "pattern": "^\\w[^:]+:.+$",
-                            "type": "string"
-                          },
-                          "label": {
-                            "description": "The text that describes the term. By default it could be the preferred text of the term, but is it acceptable to customize it for a clearer description and understanding of the term in an specific context.",
-                            "type": "string"
-                          }
-                        },
-                        "required": [
-                          "id"
-                        ],
-                        "title": "Ontology Term",
-                        "type": "object"
-                      }
-                    },
-                    "required": [
-                      "quantityType",
-                      "quantity"
-                    ]
-                  }
-                },
-                "description": "Definition of a complex value class. Provenance: GA4GH Phenopackets v2 `TypedQuantity`",
-                "properties": {
-                  "typedQuantities": {
-                    "description": "List of quantities required to fully describe the complex value",
-                    "items": {
-                      "properties": {
-                        "quantity": {
-                          "$schema": "https://json-schema.org/draft/2020-12/schema",
-                          "additionalProperties": true,
-                          "description": "Definition of a quantity class. Provenance: GA4GH Phenopackets v2 `Quantity`",
-                          "properties": {
-                            "referenceRange": {
-                              "$schema": "https://json-schema.org/draft/2020-12/schema",
-                              "additionalProperties": true,
-                              "description": "Definition of a range class.",
-                              "properties": {
-                                "high": {
-                                  "description": "Upper range end of normal",
-                                  "examples": [
-                                    135
-                                  ],
-                                  "type": "number"
-                                },
-                                "low": {
-                                  "description": "Lower range end of normal",
-                                  "examples": [
-                                    85
-                                  ],
-                                  "type": "number"
-                                },
-                                "unit": {
-                                  "$schema": "https://json-schema.org/draft/2020-12/schema",
-                                  "additionalProperties": true,
-                                  "definitions": {
-                                    "CURIE": {
-                                      "description": "A CURIE identifier for an ontology term.",
-                                      "examples": [
-                                        "ga4gh:GA.01234abcde",
-                                        "DUO:0000004",
-                                        "orcid:0000-0003-3463-0775",
-                                        "PMID:15254584"
-                                      ],
-                                      "pattern": "^\\w[^:]+:.+$",
-                                      "type": "string"
-                                    }
-                                  },
-                                  "description": "Definition of an ontology term.",
-                                  "properties": {
-                                    "id": {
-                                      "description": "A CURIE identifier for an ontology term.",
-                                      "examples": [
-                                        "ga4gh:GA.01234abcde",
-                                        "DUO:0000004",
-                                        "orcid:0000-0003-3463-0775",
-                                        "PMID:15254584"
-                                      ],
-                                      "pattern": "^\\w[^:]+:.+$",
-                                      "type": "string"
-                                    },
-                                    "label": {
-                                      "description": "The text that describes the term. By default it could be the preferred text of the term, but is it acceptable to customize it for a clearer description and understanding of the term in an specific context.",
-                                      "type": "string"
-                                    }
-                                  },
-                                  "required": [
-                                    "id"
-                                  ],
-                                  "title": "Ontology Term",
-                                  "type": "object"
-                                }
-                              },
-                              "required": [
-                                "unit",
-                                "low",
-                                "high"
-                              ],
-                              "title": "ReferenceRange",
-                              "type": "object"
-                            },
-                            "unit": {
-                              "$schema": "https://json-schema.org/draft/2020-12/schema",
-                              "additionalProperties": true,
-                              "definitions": {
-                                "CURIE": {
-                                  "description": "A CURIE identifier for an ontology term.",
-                                  "examples": [
-                                    "ga4gh:GA.01234abcde",
-                                    "DUO:0000004",
-                                    "orcid:0000-0003-3463-0775",
-                                    "PMID:15254584"
-                                  ],
-                                  "pattern": "^\\w[^:]+:.+$",
-                                  "type": "string"
-                                }
-                              },
-                              "description": "Definition of an ontology term.",
-                              "properties": {
-                                "id": {
-                                  "description": "A CURIE identifier for an ontology term.",
-                                  "examples": [
-                                    "ga4gh:GA.01234abcde",
-                                    "DUO:0000004",
-                                    "orcid:0000-0003-3463-0775",
-                                    "PMID:15254584"
-                                  ],
-                                  "pattern": "^\\w[^:]+:.+$",
-                                  "type": "string"
-                                },
-                                "label": {
-                                  "description": "The text that describes the term. By default it could be the preferred text of the term, but is it acceptable to customize it for a clearer description and understanding of the term in an specific context.",
-                                  "type": "string"
-                                }
-                              },
-                              "required": [
-                                "id"
-                              ],
-                              "title": "Ontology Term",
-                              "type": "object"
-                            },
-                            "value": {
-                              "description": "The value of the quantity in the units",
-                              "type": "number"
-                            }
-                          },
-                          "required": [
-                            "unit",
-                            "value"
-                          ],
-                          "title": "Quantity",
-                          "type": "object"
-                        },
-                        "quantityType": {
-                          "$schema": "https://json-schema.org/draft/2020-12/schema",
-                          "additionalProperties": true,
-                          "definitions": {
-                            "CURIE": {
-                              "description": "A CURIE identifier for an ontology term.",
-                              "examples": [
-                                "ga4gh:GA.01234abcde",
-                                "DUO:0000004",
-                                "orcid:0000-0003-3463-0775",
-                                "PMID:15254584"
-                              ],
-                              "pattern": "^\\w[^:]+:.+$",
-                              "type": "string"
-                            }
-                          },
-                          "description": "Definition of an ontology term.",
-                          "properties": {
-                            "id": {
-                              "description": "A CURIE identifier for an ontology term.",
-                              "examples": [
-                                "ga4gh:GA.01234abcde",
-                                "DUO:0000004",
-                                "orcid:0000-0003-3463-0775",
-                                "PMID:15254584"
-                              ],
-                              "pattern": "^\\w[^:]+:.+$",
-                              "type": "string"
-                            },
-                            "label": {
-                              "description": "The text that describes the term. By default it could be the preferred text of the term, but is it acceptable to customize it for a clearer description and understanding of the term in an specific context.",
-                              "type": "string"
-                            }
-                          },
-                          "required": [
-                            "id"
-                          ],
-                          "title": "Ontology Term",
-                          "type": "object"
-                        }
-                      },
-                      "required": [
-                        "quantityType",
-                        "quantity"
-                      ]
-                    },
-                    "type": "array"
-                  }
-                },
-                "title": "Complex Value",
-                "type": "object"
+                }
               }
-            ]
+            }
           },
           "notes": {
             "description": "Unstructured text to describe this measurement. Addition compared to Phenopackets model.",
