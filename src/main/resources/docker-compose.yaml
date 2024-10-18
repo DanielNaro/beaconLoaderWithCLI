@@ -1,4 +1,14 @@
 services:
+  localhost:
+    image: alpine:latest
+    command: sleep infinity
+    ports:
+      - "5433:5433" # postgresql data port
+      - "5432:5432" # postgresql keycloak port
+      - "8086:8086" # Keycloak
+      - "8080:8080" # graphql engine
+      - "8081:8081" # data-connector-agent
+
   postgres:
     image: postgres:15
     restart: always
@@ -6,16 +16,45 @@ services:
       - db_data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: postgrespassword
+    network_mode: "service:localhost"
+    command: -p 5433
+
+  postgres-keycloak:
+    image: postgres:15
+    container_name: keycloak_postgres
+    environment:
+      POSTGRES_DB: keycloak-db
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak
+    network_mode: "service:localhost"
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:22.0
+    container_name: keycloak
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_DB: postgres
+      KC_DB_URL_HOST: localhost
+      KC_DB_URL_DATABASE: keycloak-db
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: keycloak
+    command:
+      - start-dev --import-realm --http-port=8086
+    volumes:
+      - ./realm:/opt/keycloak/data/import
+    depends_on:
+      - postgres
+    network_mode: "service:localhost"
+
   graphql-engine:
     image: hasura/graphql-engine:v2.42.0
-    ports:
-      - "8080:8080"
     restart: always
     environment:
       ## postgres database to store Hasura metadata
       HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
       ## this env var can be used to add the above postgres database to Hasura as a data source. this can be removed/updated based on your needs
-      PG_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
+      PG_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5433/postgres
       ## enable the console served by server
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
       ## enable debugging mode. It is recommended to disable this in production
@@ -29,11 +68,11 @@ services:
     depends_on:
       data-connector-agent:
         condition: service_healthy
+    network_mode: "service:localhost"
+
   data-connector-agent:
     image: hasura/graphql-data-connector:v2.42.0
     restart: always
-    ports:
-      - 8081:8081
     environment:
       QUARKUS_LOG_LEVEL: ERROR # FATAL, ERROR, WARN, INFO, DEBUG, TRACE
       ## https://quarkus.io/guides/opentelemetry#configuration-reference
@@ -45,5 +84,6 @@ services:
       timeout: 10s
       retries: 5
       start_period: 5s
+    network_mode: "service:localhost"
 volumes:
   db_data:
