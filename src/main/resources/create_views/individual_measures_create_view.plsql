@@ -17,7 +17,7 @@ BEGIN
             SELECT individual_measures.*
             from individual_measures
             inner join public.measure m on m.id = individual_measures.measures_id
-            WHERE m.assay_code_id=%s;', concat('Individual_measure', label), quote_literal(assay_code_id));
+            WHERE m.assay_code_id=%s;', concat('Individual_measure', replace(label,'-','_')), quote_literal(assay_code_id));
 
         -- Execute the dynamic SQL query to create the view
         EXECUTE create_view_query;
