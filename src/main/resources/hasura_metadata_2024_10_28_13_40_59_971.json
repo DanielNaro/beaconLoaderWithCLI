@@ -1,5 +1,5 @@
 {
-  "resource_version": 42,
+  "resource_version": 71,
   "metadata": {
     "version": 3,
     "sources": [
@@ -694,6 +694,29 @@
           },
           {
             "table": {
+              "name": "gene",
+              "schema": "public"
+            },
+            "array_relationships": [
+              {
+                "name": "zygosity",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "gene_id": "gene_id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "individual_zygosity_by_gene",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "table": {
               "name": "genomic_feature",
               "schema": "public"
             },
@@ -1137,6 +1160,59 @@
                 "name": "phenotypic_feature",
                 "using": {
                   "foreign_key_constraint_on": "phenotypic_features_id"
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "individual_zygosity_by_gene",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "genomic_variation",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "variation_id": "variation_id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "genomic_variation",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "individual",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "individual_id": "id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "individual",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "zygosity",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "zygosity_id": "id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "ontology_term",
+                      "schema": "public"
+                    }
+                  }
                 }
               }
             ]
@@ -2141,6 +2217,12 @@
                 }
               }
             ]
+          },
+          {
+            "table": {
+              "name": "zygosity_as_count_by_genomic_variation",
+              "schema": "public"
+            }
           }
         ],
         "configuration": {

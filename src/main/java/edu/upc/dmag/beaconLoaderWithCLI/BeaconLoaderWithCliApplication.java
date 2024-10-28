@@ -41,9 +41,7 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.time.Duration;
 import java.time.ZonedDateTime;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @SpringBootApplication
@@ -81,6 +79,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	private final CaseLevelDataRepository caseLevelDataRepository;
 	private final FrequencyInPopulationsRepository frequencyInPopulationsRepository;
 	private final FrequencyInPopulationRepository frequencyInPopulationRepository;
+	private final Map<String, String> biosampleIdToAnalysisId = new HashMap<>();
 
 	public BeaconLoaderWithCliApplication(
 			DatasetRepository datasetRepository,
@@ -213,6 +212,26 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	}
 
 	private void loadGenomicVariants(GenomicVariantsSchema readGenomicVariant) {
+		var foundGenomicVariant = genomicVariationRepository.findById(readGenomicVariant.getVariantInternalId());
+		if (foundGenomicVariant.isPresent()){
+			GenomicVariation genomicVariation = foundGenomicVariant.get();
+			genomicVariation.getCaseLevelData().addAll(getCaseLevelDataList(readGenomicVariant.getCaseLevelData()));
+			genomicVariation.getFrequencyInPopulationsList().addAll(getFrequencyInPopulationsList(readGenomicVariant.getFrequencyInPopulations()));
+			genomicVariation.getProteinHGVSIds().addAll(readGenomicVariant.getIdentifiers().getProteinHGVSIds());
+			genomicVariation.getTranscriptHGVSIds().addAll(readGenomicVariant.getIdentifiers().getTranscriptHGVSIds());
+			genomicVariation.getVariantAlternativeIds().addAll(getVariantAlternativeIds(readGenomicVariant.getIdentifiers().getVariantAlternativeIds()));
+			genomicVariation.getAminoacidChanges().addAll(readGenomicVariant.getMolecularAttributes().getAminoacidChanges());
+			genomicVariation.getGeneIds().addAll(readGenomicVariant.getMolecularAttributes().getGeneIds());
+			genomicVariation.getGenomicFeatures().addAll(getGenomicFeatures(readGenomicVariant.getMolecularAttributes().getGenomicFeatures()));
+			genomicVariation.getMolecularEffects().addAll(getMolecularEffects(readGenomicVariant.getMolecularAttributes().getMolecularEffects()));
+
+			var variantLevelData = getVariantLevelData(readGenomicVariant.getVariantLevelData());
+			genomicVariation.getVariantLevelData().getClinicalInterpretations().addAll(variantLevelData.getClinicalInterpretations());
+			genomicVariation.getVariantLevelData().getPhenotypicEffects().addAll(variantLevelData.getPhenotypicEffects());
+
+			genomicVariationRepository.save(genomicVariation);
+			return;
+		}
 		GenomicVariation genomicVariation = new GenomicVariation();
 
 		genomicVariation.setVariantInternalId(readGenomicVariant.getVariantInternalId());
@@ -455,6 +474,12 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		caseLevelData.setAlleleOrigin(getOntologyTerm(caseLevelDatum.getAlleleOrigin()));
 		if (caseLevelDatum.getAnalysisId() != null) {
 			caseLevelData.setAnalysis(analysisRepository.getReferenceById(caseLevelDatum.getAnalysisId()));
+		} else {
+			var tentativeAnalysisId = biosampleIdToAnalysisId.get(caseLevelDatum.getBiosampleId());
+			if (tentativeAnalysisId != null) {
+				var tentativeAnalysis = analysisRepository.findById(tentativeAnalysisId);
+				tentativeAnalysis.ifPresent(caseLevelData::setAnalysis);
+			}
 		}
 		caseLevelData.setClinicalInterpretations(getClinicalInterpretations(caseLevelDatum.getClinicalInterpretations()));
 		caseLevelData.setPhenotypicEffects(getPhenotypicEffects(caseLevelDatum.getPhenotypicEffects()));
@@ -606,12 +631,13 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	}
 
 	private OntologyTerm getOntologyTerm(Zygosity zygosity) {
-		var foundTerm = ontologyTermRepository.findById(zygosity.getId());
+		String convertedId = zygosity.getId()+"_"+zygosity.getLabel();
+		var foundTerm = ontologyTermRepository.findById(convertedId);
 		if (foundTerm.isPresent()) {
 			return foundTerm.get();
 		} else {
 			OntologyTerm ontologyTerm = new OntologyTerm();
-			ontologyTerm.setId(zygosity.getId());
+			ontologyTerm.setId(convertedId);
 			ontologyTerm.setLabel(zygosity.getLabel());
 			ontologyTermRepository.save(ontologyTerm);
 			return ontologyTerm;
@@ -627,16 +653,21 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	}
 
 	private List<VariantAlternativeId> getVariantAlternativeIds(List<edu.upc.dmag.ToLoad.VariantAlternativeId> variantAlternativeIds) {
-		return variantAlternativeIds.stream().map(this::getVariantAlternativeId).collect(Collectors.toList());
+		return variantAlternativeIds.stream().map(this::getVariantAlternativeId).collect(Collectors.toSet()).stream().toList();
 	}
 
 	private VariantAlternativeId getVariantAlternativeId(edu.upc.dmag.ToLoad.VariantAlternativeId readVariantAlternativeId) {
-		var variantAlternativeId = new VariantAlternativeId();
-		variantAlternativeId.setId(readVariantAlternativeId.getId());
-		variantAlternativeId.setNotes(readVariantAlternativeId.getNotes());
-		variantAlternativeId.setReference(readVariantAlternativeId.getReference());
-		variantAlternativeIdRepository.save(variantAlternativeId);
-		return variantAlternativeId;
+		var foundAlternativeId = variantAlternativeIdRepository.findById(readVariantAlternativeId.getId());
+		if (foundAlternativeId.isPresent()) {
+			return foundAlternativeId.get();
+		} else {
+			var variantAlternativeId = new VariantAlternativeId();
+			variantAlternativeId.setId(readVariantAlternativeId.getId());
+			variantAlternativeId.setNotes(readVariantAlternativeId.getNotes());
+			variantAlternativeId.setReference(readVariantAlternativeId.getReference());
+			variantAlternativeIdRepository.save(variantAlternativeId);
+			return variantAlternativeId;
+		}
 	}
 
 	private void processMolecularAttributes(GenomicVariantsSchema readGenomicVariant, GenomicVariation genomicVariation) {
@@ -917,6 +948,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	}
 
 	private void loadBiosamples() throws IOException {
+
 		try (InputStreamReader jsonFileInputStream = new InputStreamReader(new FileInputStream("./src/main/resources/toLoad/biosamples.json"))){
 			Gson gson = new Gson();
 			var readBiosamples = gson.fromJson(jsonFileInputStream, BiosamplesSchema[].class);
@@ -924,6 +956,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 
 			for(BiosamplesSchema readBiosample: readBiosamples){
 				System.out.println(readBiosample.getId()+"\t"+readBiosample.getIndividualId());
+				biosampleIdToAnalysisId.put(readBiosample.getId(), readBiosample.getIndividualId());
 				loadReadBiosample(readBiosample);
 			}
 		}

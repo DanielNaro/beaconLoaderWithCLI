@@ -1,0 +1,12 @@
+query MyQuery {
+  gene(order_by: {gene_id: asc}) {
+    gene_id
+    zygosity_aggregate(where: {individual: {individual_measureSmokingRate: {measure: {measurement_value: {value: {quantity: {value: {_gte: "25"}}}}}}, biosamples: {biosample_status_id: {_eq: "EFO:0009654"}}}}) {
+      aggregate {
+        avg {
+          zygosity_count
+        }
+      }
+    }
+  }
+}

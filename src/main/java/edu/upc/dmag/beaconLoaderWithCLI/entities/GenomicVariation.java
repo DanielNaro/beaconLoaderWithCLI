@@ -25,7 +25,7 @@ public class GenomicVariation {
     @ElementCollection
     @Column(length=515)
     private List<String> transcriptHGVSIds ;
-    @OneToMany
+    @ManyToMany
     @Column(length=516)
     private List<VariantAlternativeId> variantAlternativeIds;
     @ElementCollection

@@ -6,7 +6,7 @@ SELECT distinct case_level_data.zygosity_id,
                     WHEN ot.label = '1|0' THEN 1
                     WHEN ot.label = '1|1' THEN 2
                     ELSE -1
-                    END AS zygosity_cout
+                    END AS zygosity_count
 FROM case_level_data
          inner join public.ontology_term ot on case_level_data.zygosity_id = ot.id;
 
