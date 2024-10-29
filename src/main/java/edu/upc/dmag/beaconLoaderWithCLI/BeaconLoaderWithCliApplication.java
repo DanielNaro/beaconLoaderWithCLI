@@ -154,7 +154,6 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		LOG.info("EXECUTING : command line runner");
 
 		deleteAll();
-		//loadData();
 		loadDatasets();
 		loadIndividuals();
 		loadBiosamples();

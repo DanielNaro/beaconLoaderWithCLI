@@ -1,8 +1,8 @@
 package edu.upc.dmag.beaconLoaderWithCLI.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity
 public class Biosample {
@@ -16,6 +16,9 @@ public class Biosample {
     ObtentionProcedure obtentionProcedure;
     @ManyToOne
     OntologyTerm sampleOriginType;
+    @ElementCollection
+    @Column(columnDefinition="TEXT")
+    Set<String> allowedRoles;
 
     public String getId() {
         return id;

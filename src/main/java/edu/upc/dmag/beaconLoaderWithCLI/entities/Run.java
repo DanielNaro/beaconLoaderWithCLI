@@ -1,11 +1,10 @@
 package edu.upc.dmag.beaconLoaderWithCLI.entities;
 
 import edu.upc.dmag.ToLoad.RunsSchema;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.util.Set;
 
 @Entity
 public class Run {
@@ -23,6 +22,9 @@ public class Run {
     @ManyToOne
     OntologyTerm platformModel;
     Date runDate;
+    @ElementCollection
+    @Column(columnDefinition="TEXT")
+    Set<String> allowedRoles;
 
     public String getId() {
         return id;

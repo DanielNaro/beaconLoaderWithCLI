@@ -3,6 +3,7 @@ package edu.upc.dmag.beaconLoaderWithCLI.entities;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class CaseLevelData {
@@ -20,6 +21,9 @@ public class CaseLevelData {
     private Analysis analysis;
     @ManyToOne
     private OntologyTerm zygosity;
+    @ElementCollection
+    @Column(columnDefinition="TEXT")
+    Set<String> allowedRoles;
     private int depth;
 
     public void setId(int id) {
