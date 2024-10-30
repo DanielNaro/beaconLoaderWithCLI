@@ -1,0 +1,40 @@
+query MyQuery {
+    gene {
+        gene_id
+        zygosity {
+            genomic_variation {
+                genomichgvsid
+            }
+            individual {
+                id
+                individual_measureSmokingRate {
+                    measure {
+                        measurement_value {
+                            value {
+                                quantity {
+                                    value
+                                }
+                            }
+                        }
+                    }
+                }
+                sex {
+                    label
+                }
+                individual_phenotypic_features {
+                    phenotypic_feature {
+                        id
+                    }
+                }
+            }
+            zygosity {
+                label
+            }
+            biosample {
+                ontologyTermByBiosampleStatusId {
+                    label
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,55 @@
+{
+"data": {
+"gene": [
+{
+"zygosity": [],
+"gene_id": "ABBA01010928.1",
+"zygosity_for_aggregation_aggregate": {
+"aggregate": {
+"count": 0
+}
+}
+},
+{
+"zygosity": [
+{
+"zygosity_count": 0,
+"individual": {
+"sex": {
+"label": "female"
+},
+"individual_measureSmokingRate": [
+{
+"measure": {
+"measurement_value": {
+"value": {
+"quantity": {
+"value": 20
+}
+}
+}
+}
+}
+]
+}
+}
+],
+"gene_id": "CHR_START-ABBA01010928.1",
+"zygosity_for_aggregation_aggregate": {
+"aggregate": {
+"count": 2
+}
+}
+},
+{
+"zygosity": [],
+"gene_id": "ABBA01010928.1-CR383658.1",
+"zygosity_for_aggregation_aggregate": {
+"aggregate": {
+"count": 0
+}
+}
+}
+]
+}
+}

@@ -24,6 +24,9 @@ public class CaseLevelData {
     @ElementCollection
     @Column(columnDefinition="TEXT")
     Set<String> allowedRoles;
+    @ElementCollection
+    @Column(columnDefinition="TEXT")
+    Set<String> allowedRolesForAggregation;
     private int depth;
 
     public void setId(int id) {

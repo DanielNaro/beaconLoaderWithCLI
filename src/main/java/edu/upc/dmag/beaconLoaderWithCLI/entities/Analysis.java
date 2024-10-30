@@ -1,10 +1,9 @@
 package edu.upc.dmag.beaconLoaderWithCLI.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.util.Set;
 
 @Entity
 public class Analysis {
@@ -17,6 +16,9 @@ public class Analysis {
     String variantCaller;
     @ManyToOne
     Run run;
+    @ElementCollection
+    @Column(columnDefinition="TEXT")
+    Set<String> allowedRoles;
 
 
     public void setId(String id) {
