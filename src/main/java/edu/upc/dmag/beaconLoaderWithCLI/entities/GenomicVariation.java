@@ -9,6 +9,7 @@ import java.util.List;
 @Entity
 public class GenomicVariation {
     @Id
+    @Column(length=512)
     private String variantInternalId;
 
     @OneToMany
