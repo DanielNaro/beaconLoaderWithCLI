@@ -199,7 +199,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	}
 
 	private void loadGenomicVariations() throws IOException {
-		try (InputStreamReader jsonFileInputStream = new InputStreamReader(new FileInputStream("./src/main/resources/toLoad/genomicVariationsTruncated.json"))){
+		try (InputStreamReader jsonFileInputStream = new InputStreamReader(new FileInputStream("./src/main/resources/toLoad/genomicVariationsVcf.json"))){
 			Gson gson = new Gson();
 			var readGenomicVariants = gson.fromJson(jsonFileInputStream, GenomicVariantsSchema[].class);
 
