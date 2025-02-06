@@ -2,6 +2,7 @@ package edu.upc.dmag.beaconLoaderWithCLI;
 
 
 import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 import edu.upc.dmag.ToLoad.*;
 import edu.upc.dmag.ToLoad.AgeRange;
 import edu.upc.dmag.ToLoad.ClinicalInterpretation;
@@ -199,13 +200,15 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	}
 
 	private void loadGenomicVariations() throws IOException {
+		Gson gson = new Gson();
 		try (InputStreamReader jsonFileInputStream = new InputStreamReader(new FileInputStream("./src/main/resources/toLoad/genomicVariationsVcf.json"))){
-			Gson gson = new Gson();
-			var readGenomicVariants = gson.fromJson(jsonFileInputStream, GenomicVariantsSchema[].class);
+			try (JsonReader reader = new JsonReader(jsonFileInputStream)){
+				reader.beginArray();
 
-
-			for(GenomicVariantsSchema genomicVariant: readGenomicVariants){
-				loadGenomicVariants(genomicVariant);
+				while (reader.hasNext()) {
+					GenomicVariantsSchema genomicVariant = gson.fromJson(reader, GenomicVariantsSchema.class);
+					loadGenomicVariants(genomicVariant);
+				}
 			}
 		}
 	}
