@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 @Entity
 public class OntologyTerm {
     @Id
+    @Column(length=517)
     String id;
     @Column(length=517)
     String label;
