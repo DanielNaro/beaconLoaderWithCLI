@@ -1,5 +1,6 @@
 package edu.upc.dmag.beaconLoaderWithCLI.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -7,6 +8,7 @@ import jakarta.persistence.Id;
 public class OntologyTerm {
     @Id
     String id;
+    @Column(length=517)
     String label;
 
     public String getId() {
