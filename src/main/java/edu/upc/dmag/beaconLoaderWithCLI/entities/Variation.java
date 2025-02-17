@@ -12,8 +12,11 @@ public class Variation {
 
     @ManyToOne
     private Location location;
+    @Column(length=1024)
     private String alternateBases;
+    @Column(length=1025)
     private String referenceBases;
+    @Column(length=1026)
     private String variantType;
 
     @ManyToMany
