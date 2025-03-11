@@ -31,6 +31,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -81,6 +82,146 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	private final FrequencyInPopulationsRepository frequencyInPopulationsRepository;
 	private final FrequencyInPopulationRepository frequencyInPopulationRepository;
 	private final Map<String, String> biosampleIdToAnalysisId = new HashMap<>();
+	private final Map<String, String> biosampleRenamers = BeaconLoaderWithCliApplication.getBiosampleRenamer();
+
+	private static Map<String, String> getBiosampleRenamer() {
+		Map<String, String> biosampleRenamers = new HashMap<>();
+
+		biosampleRenamers.put("EU122", "MB21573");
+		biosampleRenamers.put("EU130", "MB20184");
+		biosampleRenamers.put("EU138", "MB20198");
+		biosampleRenamers.put("EU142", "MB21572");
+		biosampleRenamers.put("EU156", "MB20195");
+		biosampleRenamers.put("EU174", "MB20187");
+		biosampleRenamers.put("EU18", "MB20188");
+		biosampleRenamers.put("EU181", "MB20192");
+		biosampleRenamers.put("EU247", "MB20776");
+		biosampleRenamers.put("EU255_UN1929_", "MB20099");
+		biosampleRenamers.put("EU266", "MB20193");
+		biosampleRenamers.put("EU3", "MB20197");
+		biosampleRenamers.put("EU32", "MB20178");
+		biosampleRenamers.put("EU323", "MB20179");
+		biosampleRenamers.put("EU352_UN2451_", "MB21559");
+		biosampleRenamers.put("EU38", "MB20181");
+		biosampleRenamers.put("EU389", "MB20185");
+		biosampleRenamers.put("EU4", "MB20190");
+		biosampleRenamers.put("EU431", "MB20686");
+		biosampleRenamers.put("EU45", "MB20180");
+		biosampleRenamers.put("EU453", "MB20460");
+		biosampleRenamers.put("EU49", "MB21568");
+		biosampleRenamers.put("EU492_15_09_20", "MB20366");
+		biosampleRenamers.put("EU57", "MB20787");
+		biosampleRenamers.put("EU74_UN289_", "MB20097");
+		biosampleRenamers.put("EU80", "MB20191");
+		biosampleRenamers.put("EU9", "MB20182");
+		biosampleRenamers.put("EU94", "MB20194");
+		biosampleRenamers.put("PUA_366_S_1", "MB20367");
+		biosampleRenamers.put("PUA_422_S_1", "MB20368");
+		biosampleRenamers.put("PUA_435_S_2", "MB20369");
+		biosampleRenamers.put("PUA_440_S_2", "MB20370");
+		biosampleRenamers.put("PUA_448_S_2", "MB20371");
+		biosampleRenamers.put("PUA_466_S_2", "MB20373");
+		biosampleRenamers.put("PUA_467_S_2", "MB20374");
+		biosampleRenamers.put("PUA_498_S_2", "MB20375");
+		biosampleRenamers.put("PUA_508_S_1", "MB20376");
+		biosampleRenamers.put("PUA_510_S_1", "MB20377");
+		biosampleRenamers.put("PUA_554_S_1", "MB20378");
+		biosampleRenamers.put("PUA_614_S_2", "MB20379");
+		biosampleRenamers.put("PUA_621_S_2", "MB20380");
+		biosampleRenamers.put("PUA_650_S_2", "MB20356");
+		biosampleRenamers.put("PUA_666_S_2", "MB20357");
+		biosampleRenamers.put("PUA_674_S_1", "MB20358");
+		biosampleRenamers.put("PUA_678_S_1", "MB20359");
+		biosampleRenamers.put("PUA_679_S_1", "MB20360");
+		biosampleRenamers.put("PUA_682_S_1", "MB20361");
+		biosampleRenamers.put("PUA_728_S_2", "MB20362");
+		biosampleRenamers.put("PUA_731_S_1", "MB20363");
+		biosampleRenamers.put("PUA_754_S_2", "MB20364");
+		biosampleRenamers.put("UN105", "MB20549");
+		biosampleRenamers.put("UN1066", "MB20249");
+		biosampleRenamers.put("UN1121", "MB20247");
+		biosampleRenamers.put("UN1138", "MB21571");
+		biosampleRenamers.put("UN1175", "MB20688");
+		biosampleRenamers.put("UN128", "MB20245");
+		biosampleRenamers.put("UN1310", "MB20218");
+		biosampleRenamers.put("UN1341", "MB20219");
+		biosampleRenamers.put("UN1352", "MB20535");
+		biosampleRenamers.put("UN1471", "MB20224");
+		biosampleRenamers.put("UN1533", "MB20726");
+		biosampleRenamers.put("UN1557", "MB20410");
+		biosampleRenamers.put("UN1559", "MB20212");
+		biosampleRenamers.put("UN1613", "MB20207");
+		biosampleRenamers.put("UN1688", "MB20199");
+		biosampleRenamers.put("UN1689", "MB20215");
+		biosampleRenamers.put("UN1692", "MB20223");
+		biosampleRenamers.put("UN1706", "MB20489");
+		biosampleRenamers.put("UN1774", "MB21567");
+		biosampleRenamers.put("UN18", "MB20437");
+		biosampleRenamers.put("UN1892", "MB20747");
+		biosampleRenamers.put("UN1893", "MB20206");
+		biosampleRenamers.put("UN1910", "MB20211");
+		biosampleRenamers.put("UN1983", "MB20438");
+		biosampleRenamers.put("UN2024", "MB20202");
+		biosampleRenamers.put("UN2033", "MB20753");
+		biosampleRenamers.put("UN2056", "MB20237");
+		biosampleRenamers.put("UN2065", "MB20687");
+		biosampleRenamers.put("UN2140", "MB20242");
+		biosampleRenamers.put("UN2189", "MB20226");
+		biosampleRenamers.put("UN2204", "MB20241");
+		biosampleRenamers.put("UN2212", "MB20214");
+		biosampleRenamers.put("UN2237", "MB20730");
+		biosampleRenamers.put("UN2251", "MB20511");
+		biosampleRenamers.put("UN2286", "MB20250");
+		biosampleRenamers.put("UN2309_EU207_", "MB20737");
+		biosampleRenamers.put("UN2376", "MB20748");
+		biosampleRenamers.put("UN2408", "MB20253");
+		biosampleRenamers.put("UN2457", "MB20796");
+		biosampleRenamers.put("UN2479", "MB20248");
+		biosampleRenamers.put("UN2515", "MB20217");
+		biosampleRenamers.put("UN2602", "MB20208");
+		biosampleRenamers.put("UN2622", "MB20209");
+		biosampleRenamers.put("UN2666", "MB20238");
+		biosampleRenamers.put("UN2676", "MB20240");
+		biosampleRenamers.put("UN2693", "MB20231");
+		biosampleRenamers.put("UN2720", "MB20234");
+		biosampleRenamers.put("UN2742", "MB20436");
+		biosampleRenamers.put("UN2789", "MB20243");
+		biosampleRenamers.put("UN2821", "MB20236");
+		biosampleRenamers.put("UN2881", "MB20235");
+		biosampleRenamers.put("UN2988", "MB20204");
+		biosampleRenamers.put("UN2989", "MB20201");
+		biosampleRenamers.put("UN3001", "MB20225");
+		biosampleRenamers.put("UN3003", "MB20252");
+		biosampleRenamers.put("UN3035", "MB20232");
+		biosampleRenamers.put("UN3051", "MB21570");
+		biosampleRenamers.put("UN3058", "MB20216");
+		biosampleRenamers.put("UN3110", "MB20239");
+		biosampleRenamers.put("UN3113", "MB20229");
+		biosampleRenamers.put("UN3126", "MB20228");
+		biosampleRenamers.put("UN3161", "MB20200");
+		biosampleRenamers.put("UN3191", "MB20246");
+		biosampleRenamers.put("UN3222", "MB20233");
+		biosampleRenamers.put("UN3226", "MB20244");
+		biosampleRenamers.put("UN3282", "MB20221");
+		biosampleRenamers.put("UN3331_EU377_", "MB20735");
+		biosampleRenamers.put("UN426", "MB20196");
+		biosampleRenamers.put("UN437", "MB20227");
+		biosampleRenamers.put("UN547_EU237_", "MB20734");
+		biosampleRenamers.put("UN551", "MB20203");
+		biosampleRenamers.put("UN602", "MB20210");
+		biosampleRenamers.put("UN605", "MB20230");
+		biosampleRenamers.put("UN702", "MB21569");
+		biosampleRenamers.put("UN75", "MB20205");
+		biosampleRenamers.put("UN775", "MB20213");
+		biosampleRenamers.put("UN850", "MB20251");
+		biosampleRenamers.put("UN851", "MB20689");
+		biosampleRenamers.put("UN906", "MB20512");
+		biosampleRenamers.put("UN917", "MB20472");
+		biosampleRenamers.put("UN930", "MB20480");
+		biosampleRenamers.put("UN942", "MB20220");
+		return biosampleRenamers;
+	}
+
 
 	public BeaconLoaderWithCliApplication(
 			DatasetRepository datasetRepository,
@@ -477,10 +618,15 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		if (caseLevelDatum.getAnalysisId() != null) {
 			caseLevelData.setAnalysis(analysisRepository.getReferenceById(caseLevelDatum.getAnalysisId()));
 		} else {
-			var tentativeAnalysisId = biosampleIdToAnalysisId.get(caseLevelDatum.getBiosampleId());
-			if (tentativeAnalysisId != null) {
-				var tentativeAnalysis = analysisRepository.findById(tentativeAnalysisId);
-				tentativeAnalysis.ifPresent(caseLevelData::setAnalysis);
+			String biosampleId = caseLevelDatum.getBiosampleId();
+			try {
+				var tentativeAnalysisId = populateUsingBioSampleId(biosampleId, caseLevelData);
+			}catch (IllegalArgumentException e) {
+				String renamedBiosampleId = biosampleRenamers.get(biosampleId);
+				var tentativeAnalysisId = populateUsingBioSampleId(renamedBiosampleId, caseLevelData);
+				if (tentativeAnalysisId == null){
+					throw new IllegalArgumentException();
+				}
 			}
 		}
 		caseLevelData.setClinicalInterpretations(getClinicalInterpretations(caseLevelDatum.getClinicalInterpretations()));
@@ -489,6 +635,20 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		caseLevelData.setDepth(caseLevelDatum.getDepth());
 		caseLevelDataRepository.save(caseLevelData);
 		return caseLevelData;
+	}
+
+	@Nullable
+	private String populateUsingBioSampleId(String biosampleId, CaseLevelData caseLevelData) {
+		var tentativeAnalysisId = biosampleIdToAnalysisId.get(biosampleId);
+		if (tentativeAnalysisId != null) {
+			var tentativeAnalysis = analysisRepository.findById(tentativeAnalysisId);
+			if (tentativeAnalysis.isPresent()) {
+				caseLevelData.setAnalysis(tentativeAnalysis.get());
+			} else {
+				throw new IllegalArgumentException("No analysis found for id: " + tentativeAnalysisId);
+			}
+		}
+		return tentativeAnalysisId;
 	}
 
 	private List<PhenotypicEffect> getPhenotypicEffects(List<edu.upc.dmag.ToLoad.PhenotypicEffect> phenotypicEffects) {
