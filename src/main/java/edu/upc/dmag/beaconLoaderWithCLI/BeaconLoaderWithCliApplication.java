@@ -623,9 +623,10 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 				var tentativeAnalysisId = populateUsingBioSampleId(biosampleId, caseLevelData);
 			}catch (IllegalArgumentException e) {
 				String renamedBiosampleId = biosampleRenamers.get(biosampleId);
-				var tentativeAnalysisId = populateUsingBioSampleId(renamedBiosampleId, caseLevelData);
-				if (tentativeAnalysisId == null){
-					throw new IllegalArgumentException();
+				try {
+					var tentativeAnalysisId = populateUsingBioSampleId(renamedBiosampleId, caseLevelData);
+				}catch (IllegalArgumentException e2) {
+					System.err.println("bypassing analysis for biosampleid: "+biosampleId);
 				}
 			}
 		}
@@ -644,11 +645,12 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 			var tentativeAnalysis = analysisRepository.findById(tentativeAnalysisId);
 			if (tentativeAnalysis.isPresent()) {
 				caseLevelData.setAnalysis(tentativeAnalysis.get());
+				return tentativeAnalysisId;
 			} else {
 				throw new IllegalArgumentException("No analysis found for id: " + tentativeAnalysisId);
 			}
 		}
-		return tentativeAnalysisId;
+		throw new IllegalArgumentException("No analysisId found for id: " + biosampleId);
 	}
 
 	private List<PhenotypicEffect> getPhenotypicEffects(List<edu.upc.dmag.ToLoad.PhenotypicEffect> phenotypicEffects) {
