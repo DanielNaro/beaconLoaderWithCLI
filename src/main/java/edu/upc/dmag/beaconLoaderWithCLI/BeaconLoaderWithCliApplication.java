@@ -838,7 +838,9 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 			MolecularAttribute molecularAttribute = new MolecularAttribute();
 			molecularAttribute.setAminoacidChange(readGenomicVariant.getMolecularAttributes().getAminoacidChanges().get(i));
 			molecularAttribute.setGeneId(readGenomicVariant.getMolecularAttributes().getGeneIds().get(i));
-			molecularAttribute.setGenomicFeature(getGenomicFeature(readGenomicVariant.getMolecularAttributes().getGenomicFeatures().get(i)));
+			if (readGenomicVariant.getMolecularAttributes().getGenomicFeatures().size() == numberMolecularAttributes) {
+				molecularAttribute.setGenomicFeature(getGenomicFeature(readGenomicVariant.getMolecularAttributes().getGenomicFeatures().get(i)));
+			}
 			molecularAttribute.setMolecularEffect(getOntologyTerm(readGenomicVariant.getMolecularAttributes().getMolecularEffects().get(i)));
 			molecularAttribute.setAnnotationImpact(AnnotationImpact.fromString(readGenomicVariant.getMolecularAttributes().getAnnotationImpact().get(i)));
 			molecularAttributes.add(molecularAttribute);
