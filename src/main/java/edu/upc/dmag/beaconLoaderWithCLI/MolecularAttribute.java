@@ -8,7 +8,8 @@ import jakarta.persistence.*;
 @Entity
 public class MolecularAttribute {
     @Id
-    @Column(length=512)
+    @GeneratedValue
+    private Long id;
     private String molecularAttributeId;
     @Column(length=517)
     private String aminoacidChange;
