@@ -1,10 +1,10 @@
 package edu.upc.dmag.beaconLoaderWithCLI.entities;
 
 public enum AnnotationImpact implements Comparable<AnnotationImpact> {
+    MODIFIER,
     LOW,
     MODERATE,
-    HIGH,
-    MODIFIER;
+    HIGH;
 
     public static AnnotationImpact fromString(String value) {
         for (AnnotationImpact priority : AnnotationImpact.values()) {
