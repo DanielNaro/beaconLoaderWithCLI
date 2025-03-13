@@ -16,7 +16,7 @@ public class MolecularAttribute {
     private String geneId;
     @OneToOne
     private GenomicFeature genomicFeature;
-    @OneToOne
+    @ManyToOne
     private OntologyTerm molecularEffect;
     @Enumerated(EnumType.ORDINAL)
     private AnnotationImpact annotationImpact;
