@@ -839,6 +839,25 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		genomicVariation.setGeneIds(readGenomicVariant.getMolecularAttributes().getGeneIds());
 		genomicVariation.setGenomicFeatures(getGenomicFeatures(readGenomicVariant.getMolecularAttributes().getGenomicFeatures()));
 		genomicVariation.setMolecularEffects(getMolecularEffects(readGenomicVariant.getMolecularAttributes().getMolecularEffects()));
+		genomicVariation.setAnnotationImpact(getAnnotationImpact(readGenomicVariant.getMolecularAttributes().getAnnotationImpact()));
+		genomicVariation.setMaxAnnotationImpact(getMaxAnnotationImpact(genomicVariation.getAnnotationImpact()));
+	}
+
+	private List<AnnotationImpact> getAnnotationImpact(List<String> annotationImpact) {
+		return annotationImpact.stream().map(AnnotationImpact::fromString).collect(Collectors.toList());
+	}
+
+	private AnnotationImpact getMaxAnnotationImpact(List<AnnotationImpact> annotationImpacts) {
+		if (annotationImpacts == null || annotationImpacts.isEmpty()) {
+			return null;
+		}
+		AnnotationImpact maxImpact = AnnotationImpact.LOW;
+		for (AnnotationImpact impact : annotationImpacts) {
+			if (maxImpact.compareTo(impact) < 0) {
+				maxImpact = impact;
+			}
+		}
+		return maxImpact;
 	}
 
 	private List<OntologyTerm> getMolecularEffects(List<MolecularEffect> molecularEffects) {
@@ -1354,37 +1373,6 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	}
 
 	private OntologyTerm getOntologyTerm(FeatureType__3 featureType) {
-		var foundTerm = ontologyTermRepository.findById(featureType.getId());
-		if (foundTerm.isPresent()) {
-			return foundTerm.get();
-		} else {
-			OntologyTerm ontologyTerm = new OntologyTerm();
-			ontologyTerm.setId(featureType.getId());
-			ontologyTerm.setLabel(featureType.getLabel());
-			ontologyTermRepository.save(ontologyTerm);
-			return ontologyTerm;
-		}
-	}
-
-	private Set<OntologyTerm> getOntologyTerms(List<Modifier__5> modifiers) {
-		return modifiers.stream().map(this::getOntologyTerm).collect(Collectors.toSet());
-
-	}
-
-	private OntologyTerm getOntologyTerm(Modifier__5 readModifier) {
-		var foundTerm = ontologyTermRepository.findById(readModifier.getId());
-		if (foundTerm.isPresent()) {
-			return foundTerm.get();
-		} else {
-			OntologyTerm ontologyTerm = new OntologyTerm();
-			ontologyTerm.setId(readModifier.getId());
-			ontologyTerm.setLabel(readModifier.getLabel());
-			ontologyTermRepository.save(ontologyTerm);
-			return ontologyTerm;
-		}
-	}
-
-	private OntologyTerm getOntologyTerm(FeatureType__5 featureType) {
 		var foundTerm = ontologyTermRepository.findById(featureType.getId());
 		if (foundTerm.isPresent()) {
 			return foundTerm.get();

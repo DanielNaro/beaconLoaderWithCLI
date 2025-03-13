@@ -43,6 +43,10 @@ public class GenomicVariation {
     private VariantLevelData variantLevelData;
     @OneToOne
     private Variation variation;
+    @ElementCollection
+    @Column(columnDefinition="TEXT")
+    private List<AnnotationImpact> annotationImpact;
+    private AnnotationImpact maxAnnotationImpact;
 
     public String getVariantInternalId() {
         return variantInternalId;
@@ -154,5 +158,21 @@ public class GenomicVariation {
 
     public void setVariation(Variation variation) {
         this.variation = variation;
+    }
+
+    public void setAnnotationImpact(List<AnnotationImpact> annotationImpact) {
+        this.annotationImpact = annotationImpact;
+    }
+
+    public List<AnnotationImpact> getAnnotationImpact() {
+        return annotationImpact;
+    }
+
+    public void setMaxAnnotationImpact(AnnotationImpact maxAnnotationImpact) {
+        this.maxAnnotationImpact = maxAnnotationImpact;
+    }
+
+    public AnnotationImpact getMaxAnnotationImpact() {
+        return maxAnnotationImpact;
     }
 }
