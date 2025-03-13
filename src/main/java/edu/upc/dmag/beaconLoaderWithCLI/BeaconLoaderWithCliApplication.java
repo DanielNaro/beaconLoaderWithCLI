@@ -81,6 +81,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	private final CaseLevelDataRepository caseLevelDataRepository;
 	private final FrequencyInPopulationsRepository frequencyInPopulationsRepository;
 	private final FrequencyInPopulationRepository frequencyInPopulationRepository;
+	private final MolecularAttributeRepository molecularAttributeRepository;
 	private final Map<String, String> biosampleIdToAnalysisId = new HashMap<>();
 	private final Map<String, String> biosampleRenamers = BeaconLoaderWithCliApplication.getBiosampleRenamer();
 
@@ -252,7 +253,9 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 			VariationRepository variationRepository,
 			IntervalRepository intervalRepository,
 			CaseLevelDataRepository caseLevelDataRepository,
-			FrequencyInPopulationsRepository frequencyInPopulationsRepository, FrequencyInPopulationRepository frequencyInPopulationRepository) {
+			FrequencyInPopulationsRepository frequencyInPopulationsRepository,
+			FrequencyInPopulationRepository frequencyInPopulationRepository,
+			MolecularAttributeRepository molecularAttributeRepository) {
 		this.datasetRepository = datasetRepository;
 		this.biosampleRepository = biosampleRepository;
 		this.ontologyTermRepository = ontologyTermRepository;
@@ -283,6 +286,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 		this.caseLevelDataRepository = caseLevelDataRepository;
 		this.frequencyInPopulationsRepository = frequencyInPopulationsRepository;
 		this.frequencyInPopulationRepository = frequencyInPopulationRepository;
+		this.molecularAttributeRepository = molecularAttributeRepository;
 	}
 
 	public static void main(String[] args) {
@@ -843,6 +847,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 			}
 			molecularAttribute.setMolecularEffect(getOntologyTerm(readGenomicVariant.getMolecularAttributes().getMolecularEffects().get(i)));
 			molecularAttribute.setAnnotationImpact(AnnotationImpact.fromString(readGenomicVariant.getMolecularAttributes().getAnnotationImpact().get(i)));
+			molecularAttributeRepository.save(molecularAttribute);
 			molecularAttributes.add(molecularAttribute);
 		}
 		genomicVariation.setMolecularAttributes(molecularAttributes);
