@@ -43,8 +43,8 @@ public class GenomicVariation {
     private VariantLevelData variantLevelData;
     @OneToOne
     private Variation variation;
+    @Enumerated(EnumType.ORDINAL) // Store as String
     @ElementCollection
-    @Column(columnDefinition="TEXT")
     private List<AnnotationImpact> annotationImpact;
     private AnnotationImpact maxAnnotationImpact;
 
