@@ -363,10 +363,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 			genomicVariation.getProteinHGVSIds().addAll(readGenomicVariant.getIdentifiers().getProteinHGVSIds());
 			genomicVariation.getTranscriptHGVSIds().addAll(readGenomicVariant.getIdentifiers().getTranscriptHGVSIds());
 			genomicVariation.getVariantAlternativeIds().addAll(getVariantAlternativeIds(readGenomicVariant.getIdentifiers().getVariantAlternativeIds()));
-			genomicVariation.getAminoacidChanges().addAll(readGenomicVariant.getMolecularAttributes().getAminoacidChanges());
-			genomicVariation.getGeneIds().addAll(readGenomicVariant.getMolecularAttributes().getGeneIds());
-			genomicVariation.getGenomicFeatures().addAll(getGenomicFeatures(readGenomicVariant.getMolecularAttributes().getGenomicFeatures()));
-			genomicVariation.getMolecularEffects().addAll(getMolecularEffects(readGenomicVariant.getMolecularAttributes().getMolecularEffects()));
+			processMolecularAttributes(readGenomicVariant, genomicVariation);
 
 			var variantLevelData = getVariantLevelData(readGenomicVariant.getVariantLevelData());
 			genomicVariation.getVariantLevelData().getClinicalInterpretations().addAll(variantLevelData.getClinicalInterpretations());
@@ -835,12 +832,18 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	}
 
 	private void processMolecularAttributes(GenomicVariantsSchema readGenomicVariant, GenomicVariation genomicVariation) {
-		genomicVariation.setAminoacidChanges(readGenomicVariant.getMolecularAttributes().getAminoacidChanges());
-		genomicVariation.setGeneIds(readGenomicVariant.getMolecularAttributes().getGeneIds());
-		genomicVariation.setGenomicFeatures(getGenomicFeatures(readGenomicVariant.getMolecularAttributes().getGenomicFeatures()));
-		genomicVariation.setMolecularEffects(getMolecularEffects(readGenomicVariant.getMolecularAttributes().getMolecularEffects()));
-		genomicVariation.setAnnotationImpact(getAnnotationImpact(readGenomicVariant.getMolecularAttributes().getAnnotationImpact()));
-		genomicVariation.setMaxAnnotationImpact(getMaxAnnotationImpact(genomicVariation.getAnnotationImpact()));
+		List<MolecularAttribute> molecularAttributes = new ArrayList<MolecularAttribute>();
+		int numberMolecularAttributes = readGenomicVariant.getMolecularAttributes().getAminoacidChanges().size();
+		for(int i=0; i<numberMolecularAttributes; i++) {
+			MolecularAttribute molecularAttribute = new MolecularAttribute();
+			molecularAttribute.setAminoacidChange(readGenomicVariant.getMolecularAttributes().getAminoacidChanges().get(i));
+			molecularAttribute.setGeneId(readGenomicVariant.getMolecularAttributes().getGeneIds().get(i));
+			molecularAttribute.setGenomicFeature(getGenomicFeature(readGenomicVariant.getMolecularAttributes().getGenomicFeatures().get(i)));
+			molecularAttribute.setMolecularEffect(getOntologyTerm(readGenomicVariant.getMolecularAttributes().getMolecularEffects().get(i)));
+			molecularAttribute.setAnnotationImpact(AnnotationImpact.fromString(readGenomicVariant.getMolecularAttributes().getAnnotationImpact().get(i)));
+			molecularAttributes.add(molecularAttribute);
+		}
+		genomicVariation.setMolecularAttributes(molecularAttributes);
 	}
 
 	private List<AnnotationImpact> getAnnotationImpact(List<String> annotationImpact) {

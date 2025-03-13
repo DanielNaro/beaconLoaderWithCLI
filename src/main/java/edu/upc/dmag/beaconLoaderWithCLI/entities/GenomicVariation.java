@@ -2,6 +2,7 @@ package edu.upc.dmag.beaconLoaderWithCLI.entities;
 
 
 
+import edu.upc.dmag.beaconLoaderWithCLI.MolecularAttribute;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -29,24 +30,12 @@ public class GenomicVariation {
     @ManyToMany
     @Column(length=516)
     private List<VariantAlternativeId> variantAlternativeIds;
-    @ElementCollection
-    @Column(length=517)
-    private List<String> aminoacidChanges ;
-    @ElementCollection
-    @Column(columnDefinition="TEXT")
-    private List<String> geneIds ;
-    @OneToMany
-    private List<GenomicFeature> genomicFeatures ;
-    @ManyToMany
-    private List<OntologyTerm> molecularEffects;
     @OneToOne
     private VariantLevelData variantLevelData;
     @OneToOne
     private Variation variation;
-    @Enumerated(EnumType.ORDINAL) // Store as String
-    @ElementCollection
-    private List<AnnotationImpact> annotationImpact;
-    private AnnotationImpact maxAnnotationImpact;
+    @OneToMany
+    private List<MolecularAttribute> molecularAttributes;
 
     public String getVariantInternalId() {
         return variantInternalId;
@@ -112,37 +101,6 @@ public class GenomicVariation {
         this.variantAlternativeIds = variantAlternativeIds;
     }
 
-    public List<String> getAminoacidChanges() {
-        return aminoacidChanges;
-    }
-
-    public void setAminoacidChanges(List<String> aminoacidChanges) {
-        this.aminoacidChanges = aminoacidChanges;
-    }
-
-    public List<String> getGeneIds() {
-        return geneIds;
-    }
-
-    public void setGeneIds(List<String> geneIds) {
-        this.geneIds = geneIds;
-    }
-
-    public List<GenomicFeature> getGenomicFeatures() {
-        return genomicFeatures;
-    }
-
-    public void setGenomicFeatures(List<GenomicFeature> genomicFeatures) {
-        this.genomicFeatures = genomicFeatures;
-    }
-
-    public List<OntologyTerm> getMolecularEffects() {
-        return molecularEffects;
-    }
-
-    public void setMolecularEffects(List<OntologyTerm> molecularEffects) {
-        this.molecularEffects = molecularEffects;
-    }
 
     public VariantLevelData getVariantLevelData() {
         return variantLevelData;
@@ -160,19 +118,11 @@ public class GenomicVariation {
         this.variation = variation;
     }
 
-    public void setAnnotationImpact(List<AnnotationImpact> annotationImpact) {
-        this.annotationImpact = annotationImpact;
+    public void setMolecularAttributes(List<MolecularAttribute> molecularAttributes) {
+        this.molecularAttributes = molecularAttributes;
     }
 
-    public List<AnnotationImpact> getAnnotationImpact() {
-        return annotationImpact;
-    }
-
-    public void setMaxAnnotationImpact(AnnotationImpact maxAnnotationImpact) {
-        this.maxAnnotationImpact = maxAnnotationImpact;
-    }
-
-    public AnnotationImpact getMaxAnnotationImpact() {
-        return maxAnnotationImpact;
+    public List<MolecularAttribute> getMolecularAttributes() {
+        return molecularAttributes;
     }
 }
