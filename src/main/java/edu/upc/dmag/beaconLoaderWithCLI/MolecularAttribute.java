@@ -10,7 +10,6 @@ public class MolecularAttribute {
     @Id
     @GeneratedValue
     private Long id;
-    private String molecularAttributeId;
     @Column(length=517)
     private String aminoacidChange;
     private String geneId;
