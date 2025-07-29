@@ -45,6 +45,7 @@ import java.time.Duration;
 import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.zip.GZIPInputStream;
 
 @SpringBootApplication
 public class BeaconLoaderWithCliApplication implements CommandLineRunner {
@@ -346,16 +347,30 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 
 	private void loadGenomicVariations() throws IOException {
 		Gson gson = new Gson();
-		try (InputStreamReader jsonFileInputStream = new InputStreamReader(new FileInputStream("./src/main/resources/toLoad/genomicVariationsVcf.json"))){
-			try (JsonReader reader = new JsonReader(jsonFileInputStream)){
-				reader.beginArray();
 
-				while (reader.hasNext()) {
-					GenomicVariantsSchema genomicVariant = gson.fromJson(reader, GenomicVariantsSchema.class);
-					loadGenomicVariants(genomicVariant);
-				}
+		File inputFile = new File("./src/main/resources/toLoad/genomicVariationsVcf.json");
+		try (
+				InputStream inputStream = new FileInputStream(inputFile);
+				InputStream decompressedStream = maybeDecompress(inputStream, inputFile.getName());
+				InputStreamReader jsonFileReader = new InputStreamReader(decompressedStream);
+				JsonReader reader = new JsonReader(jsonFileReader)
+		){
+			reader.beginArray();
+
+			while (reader.hasNext()) {
+				GenomicVariantsSchema genomicVariant = gson.fromJson(reader, GenomicVariantsSchema.class);
+				loadGenomicVariants(genomicVariant);
 			}
+
+			reader.endArray();
 		}
+	}
+
+	private static InputStream maybeDecompress(InputStream inputStream, String fileName) throws IOException {
+		if (fileName.endsWith(".gz")) {
+			return new GZIPInputStream(inputStream);
+		}
+		return inputStream; // no compression
 	}
 
 	private void loadGenomicVariants(GenomicVariantsSchema readGenomicVariant) {
