@@ -348,7 +348,7 @@ public class BeaconLoaderWithCliApplication implements CommandLineRunner {
 	private void loadGenomicVariations() throws IOException {
 		Gson gson = new Gson();
 
-		File inputFile = new File("./src/main/resources/toLoad/genomicVariationsVcf.json");
+		File inputFile = new File("./src/main/resources/toLoad/genomicVariationsVcf.json.gz");
 		try (
 				InputStream inputStream = new FileInputStream(inputFile);
 				InputStream decompressedStream = maybeDecompress(inputStream, inputFile.getName());
