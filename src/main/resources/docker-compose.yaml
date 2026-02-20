@@ -3,11 +3,11 @@ services:
     image: alpine:latest
     command: sleep infinity
     ports:
-      - "5433:5433" # postgresql data port
-      - "5432:5432" # postgresql keycloak port
-      - "8086:8086" # Keycloak
-      - "8080:8080" # graphql engine
-      - "8081:8081" # data-connector-agent
+      - "6433:6433" # postgresql data port
+      - "6432:6432" # postgresql keycloak port
+      - "9086:9086" # Keycloak
+      - "9080:9080" # graphql engine
+      - "9081:9081" # data-connector-agent
 
   postgres:
     image: postgres:15
@@ -17,7 +17,7 @@ services:
     environment:
       POSTGRES_PASSWORD: postgrespassword
     network_mode: "service:localhost"
-    command: -p 5433
+    command: -p 6433
 
   postgres-keycloak:
     image: postgres:15
@@ -40,7 +40,7 @@ services:
       KC_DB_USERNAME: keycloak
       KC_DB_PASSWORD: keycloak
     command:
-      - start-dev --import-realm --http-port=8086
+      - start-dev --import-realm --http-port=9086
     volumes:
       - ./realm:/opt/keycloak/data/import
     depends_on:
@@ -52,9 +52,9 @@ services:
     restart: always
     environment:
       ## postgres database to store Hasura metadata
-      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:postgrespassword@localhost:5433/postgres
+      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:postgrespassword@localhost:6433/postgres
       ## this env var can be used to add the above postgres database to Hasura as a data source. this can be removed/updated based on your needs
-      PG_DATABASE_URL: postgres://postgres:postgrespassword@localhost:5433/postgres
+      PG_DATABASE_URL: postgres://postgres:postgrespassword@localhost:6433/postgres
       ## enable the console served by server
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
       ## enable debugging mode. It is recommended to disable this in production
@@ -64,8 +64,8 @@ services:
       # HASURA_GRAPHQL_CONSOLE_ASSETS_DIR: /srv/console-assets
       ## uncomment next line to set an admin secret
       HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
-      HASURA_GRAPHQL_METADATA_DEFAULTS: '{"backend_configs":{"dataconnector":{"athena":{"uri":"http://localhost:8081/api/v1/athena"},"mariadb":{"uri":"http://localhost:8081/api/v1/mariadb"},"mysql8":{"uri":"http://localhost:8081/api/v1/mysql"},"oracle":{"uri":"http://localhost:8081/api/v1/oracle"},"snowflake":{"uri":"http://localhost:8081/api/v1/snowflake"}}}}'
-      HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256", "jwk_url": "http://localhost:8086/realms/beaconGraphQL/protocol/openid-connect/certs", "audience": "hasura"}'
+      HASURA_GRAPHQL_METADATA_DEFAULTS: '{"backend_configs":{"dataconnector":{"athena":{"uri":"http://localhost:9081/api/v1/athena"},"mariadb":{"uri":"http://localhost:9081/api/v1/mariadb"},"mysql8":{"uri":"http://localhost:9081/api/v1/mysql"},"oracle":{"uri":"http://localhost:9081/api/v1/oracle"},"snowflake":{"uri":"http://localhost:9081/api/v1/snowflake"}}}}'
+      HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256", "jwk_url": "http://localhost:9086/realms/beaconGraphQL/protocol/openid-connect/certs", "audience": "hasura"}'
     depends_on:
       data-connector-agent:
         condition: service_healthy
@@ -80,7 +80,7 @@ services:
       QUARKUS_OPENTELEMETRY_ENABLED: "false"
       ## QUARKUS_OPENTELEMETRY_TRACER_EXPORTER_OTLP_ENDPOINT: http://jaeger:4317
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8081/api/v1/athena/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:9081/api/v1/athena/health"]
       interval: 5s
       timeout: 10s
       retries: 5
