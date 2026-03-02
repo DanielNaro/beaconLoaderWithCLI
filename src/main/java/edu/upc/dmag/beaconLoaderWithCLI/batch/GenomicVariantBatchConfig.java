@@ -695,7 +695,7 @@ public class GenomicVariantBatchConfig {
         biosampleRenamers.put("EU45", "MB20180");
         biosampleRenamers.put("EU453", "MB20460");
         biosampleRenamers.put("EU49", "MB21568");
-        biosampleRenamers.put("EU492_15_09_19", "MB20366");
+        biosampleRenamers.put("EU492_15_09_20", "MB20366");
         biosampleRenamers.put("EU57", "MB20787");
         biosampleRenamers.put("EU74_UN289_", "MB20097");
         biosampleRenamers.put("EU80", "MB20191");
