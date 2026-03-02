@@ -105,17 +105,6 @@ public class BiosampleBatchConfig {
         };
     }
 
-    @Bean
-    public ItemWriter<Biosample> biosampleWriter() {
-        return biosamples -> {
-            for (Biosample biosample : biosamples) {
-                biosampleRepository.save(biosample);
-            }
-        };
-    }
-
-    // Helper methods for processing
-
     private OntologyTerm getOntologyTerm(SampleOriginType sampleOriginType) {
         var foundTerm = ontologyTermRepository.findById(sampleOriginType.getId());
         if (foundTerm.isPresent()) {
@@ -147,19 +136,16 @@ public class BiosampleBatchConfig {
                 getAgeDatetime(readObtentionProcedure.getAgeAtProcedure().getDateTime().toString())
             );
         }
-        obtentionProcedureRepository.save(obtentionProcedure);
         return obtentionProcedure;
     }
 
     private Age getAgeDatetime(String string) {
         var ageDatetime = new AgeDatetime(string);
-        ageRepository.save(ageDatetime);
         return ageDatetime;
     }
 
     private Age getGestationalAge(Integer readGestationalAge) {
         var gestationalAge = new GestationalAge(readGestationalAge);
-        ageRepository.save(gestationalAge);
         return gestationalAge;
     }
 
@@ -168,7 +154,6 @@ public class BiosampleBatchConfig {
                 ConvertDuration.getDuration(readAgeRange.getStart()),
                 ConvertDuration.getDuration(readAgeRange.getEnd())
         );
-        ageRepository.save(ageRange);
         return ageRange;
     }
 

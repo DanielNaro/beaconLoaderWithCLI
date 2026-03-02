@@ -111,7 +111,6 @@ public class DatasetBatchConfig {
                         .map(this::getOntologyTerm)
                         .collect(Collectors.toSet())
         );
-        dataUseConditionsRepository.save(dataUseConditions);
         return dataUseConditions;
     }
 
@@ -123,7 +122,6 @@ public class DatasetBatchConfig {
             OntologyTerm ontologyTerm = new OntologyTerm();
             ontologyTerm.setId(it.getId());
             ontologyTerm.setLabel(it.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
             return ontologyTerm;
         }
     }

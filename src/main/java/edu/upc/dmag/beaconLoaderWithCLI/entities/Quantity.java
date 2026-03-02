@@ -14,7 +14,7 @@ public class Quantity {
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     ReferenceRange referenceRange;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     OntologyTerm unit;
     private double value;
 

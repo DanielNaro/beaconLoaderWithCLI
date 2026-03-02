@@ -10,11 +10,11 @@ public class Biosample {
     String id;
     @ManyToOne(cascade = CascadeType.PERSIST)
     Individual individual;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     OntologyTerm biosampleStatus;
     @ManyToOne(cascade = CascadeType.PERSIST)
     ObtentionProcedure obtentionProcedure;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     OntologyTerm sampleOriginType;
     @ElementCollection
     @Column(columnDefinition="TEXT")

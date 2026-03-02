@@ -21,7 +21,7 @@ public class ObtentionProcedure {
     @OneToOne(cascade = CascadeType.PERSIST)
     Age age;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     OntologyTerm procedureCode;
 
     public Age getAge() {

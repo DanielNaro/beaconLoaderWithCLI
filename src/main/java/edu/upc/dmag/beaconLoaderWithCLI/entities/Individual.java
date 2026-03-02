@@ -12,7 +12,7 @@ public class Individual {
     Set<Measure> measures;
     @OneToMany(cascade = CascadeType.PERSIST)
     Set<PhenotypicFeature> phenotypicFeatures;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     OntologyTerm sex;
     @ElementCollection
     @Column(columnDefinition="TEXT")

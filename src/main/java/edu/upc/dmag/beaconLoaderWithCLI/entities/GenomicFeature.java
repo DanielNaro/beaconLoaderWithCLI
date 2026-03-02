@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.CascadeType;
 
 @Entity
 public class GenomicFeature {
@@ -12,9 +11,9 @@ public class GenomicFeature {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private OntologyTerm featureClass;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private OntologyTerm featureId;
 
     public void setId(Long id) {

@@ -11,7 +11,7 @@ public class CaseLevelData {
     @GeneratedValue
     private int id;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private OntologyTerm alleleOrigin;
     @OneToMany(cascade = CascadeType.PERSIST)
     private List<PhenotypicEffect> clinicalInterpretations;
@@ -19,7 +19,7 @@ public class CaseLevelData {
     private List<PhenotypicEffect> phenotypicEffects;
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Analysis analysis;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private OntologyTerm zygosity;
     @ElementCollection
     @Column(columnDefinition="TEXT")

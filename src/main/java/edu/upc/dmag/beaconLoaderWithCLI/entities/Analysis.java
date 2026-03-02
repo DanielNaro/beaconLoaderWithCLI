@@ -14,7 +14,7 @@ public class Analysis {
     String pipelineName;
     String pipelineRef;
     String variantCaller;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     Run run;
     @ElementCollection
     @Column(columnDefinition="TEXT")

@@ -17,12 +17,12 @@ public class PhenotypicEffect {
     private String annotationToolReference;
     private String annotationToolVersion;
     private ClinicalInterpretation.ClinicalRelevance clinicalRelevance;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private OntologyTerm category;
     private String conditionId;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private OntologyTerm effect;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private OntologyTerm evidenceType;
 
 

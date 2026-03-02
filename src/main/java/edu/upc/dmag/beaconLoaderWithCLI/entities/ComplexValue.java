@@ -11,7 +11,7 @@ public class ComplexValue {
 
     @OneToOne(cascade = CascadeType.PERSIST)
     private Quantity quantity;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private OntologyTerm quantityType;
 
     public void setId(Long id) {

@@ -13,9 +13,9 @@ public class GenomicVariation {
     @Column(length=512)
     private String variantInternalId;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<CaseLevelData> caseLevelData;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<FrequencyInPopulations> frequencyInPopulationsList;
     @Column(length=512)
     private String clinvarVariantId ;
@@ -27,14 +27,14 @@ public class GenomicVariation {
     @ElementCollection
     @Column(length=515)
     private List<String> transcriptHGVSIds ;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @Column(length=516)
     private List<VariantAlternativeId> variantAlternativeIds;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private VariantLevelData variantLevelData;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Variation variation;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<MolecularAttribute> molecularAttributes;
 
     public String getVariantInternalId() {

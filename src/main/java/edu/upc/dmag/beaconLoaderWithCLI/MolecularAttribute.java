@@ -15,7 +15,7 @@ public class MolecularAttribute {
     private String geneId;
     @OneToOne(cascade = CascadeType.PERSIST)
     private GenomicFeature genomicFeature;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private OntologyTerm molecularEffect;
     @Enumerated(EnumType.ORDINAL)
     private AnnotationImpact annotationImpact;

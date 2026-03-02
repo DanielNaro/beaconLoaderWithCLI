@@ -18,7 +18,7 @@ public class ReferenceRange {
     private double high;
     private double low;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     OntologyTerm unit;
 
     public void setId(Long id) {

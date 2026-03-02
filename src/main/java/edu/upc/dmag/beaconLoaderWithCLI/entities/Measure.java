@@ -6,7 +6,7 @@ import java.sql.Date;
 
 @Entity
 public class Measure {
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     OntologyTerm assayCode;
     Date date;
     @OneToOne(cascade = CascadeType.PERSIST)
