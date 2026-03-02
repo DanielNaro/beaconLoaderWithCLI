@@ -852,7 +852,18 @@ public class GenomicVariantBatchConfig {
                 gson = new Gson();
                 initialized = true;
             } catch (IOException e) {
-                throw new RuntimeException("Error initializing genomic variants JSON file: " + filePath, e);
+                try {
+                    File inputFile = new File(filePath + ".gz");
+                    InputStream inputStream = new FileInputStream(inputFile);
+                    InputStream decompressedStream = maybeDecompress(inputStream, inputFile.getName());
+                    InputStreamReader jsonFileReader = new InputStreamReader(decompressedStream);
+                    jsonReader = new JsonReader(jsonFileReader);
+                    jsonReader.beginArray();
+                    gson = new Gson();
+                    initialized = true;
+                } catch (IOException e2) {
+                    throw new RuntimeException("Error initializing genomic variants JSON file: " + filePath + " or " + filePath + ".gz", e);
+                }
             }
         }
 
