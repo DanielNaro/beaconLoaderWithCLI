@@ -124,7 +124,7 @@ public class IndividualBatchConfig {
             OntologyTerm ontologyTerm = new OntologyTerm();
             ontologyTerm.setId(sex.getId());
             ontologyTerm.setLabel(sex.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -149,7 +149,7 @@ public class IndividualBatchConfig {
         measure.setAssayCode(getOntologyTermFromAssayCode(it.getAssayCode()));
         measure.setDate(Date.valueOf(it.getDate()));
         measure.setMeasurementValue(getMeasurementValue(it.getMeasurementValue()));
-        measureRepository.save(measure);
+        measureRepository.saveAndFlush(measure);
         return measure;
     }
 
@@ -161,7 +161,7 @@ public class IndividualBatchConfig {
             edu.upc.dmag.beaconLoaderWithCLI.entities.OntologyTerm ontologyTerm = new edu.upc.dmag.beaconLoaderWithCLI.entities.OntologyTerm();
             ontologyTerm.setId(assayCode.getId());
             ontologyTerm.setLabel(assayCode.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -176,16 +176,16 @@ public class IndividualBatchConfig {
                 var quantity = getQuantityFromQuantity(readMeasurementValue.getQuantity());
                 value.setQuantity(quantity);
             }
-            valueRepository.save(value);
+            valueRepository.saveAndFlush(value);
             measurementValue.setValue(value);
         } else {
             var complexValue = new edu.upc.dmag.beaconLoaderWithCLI.entities.ComplexValue();
             complexValue.setQuantity(getQuantityFromQuantity1(readMeasurementValue.getTypedQuantities().getQuantity()));
             complexValue.setQuantityType(getOntologyTermFromQuantityType(readMeasurementValue.getTypedQuantities().getQuantityType()));
-            complexValueRepository.save(complexValue);
+            complexValueRepository.saveAndFlush(complexValue);
             measurementValue.setComplexValue(complexValue);
         }
-        measurementValueRepository.save(measurementValue);
+        measurementValueRepository.saveAndFlush(measurementValue);
         return measurementValue;
     }
 
@@ -197,7 +197,7 @@ public class IndividualBatchConfig {
             edu.upc.dmag.beaconLoaderWithCLI.entities.OntologyTerm ontologyTerm = new edu.upc.dmag.beaconLoaderWithCLI.entities.OntologyTerm();
             ontologyTerm.setId(readOntologyTerm.getId());
             ontologyTerm.setLabel(readOntologyTerm.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -210,7 +210,7 @@ public class IndividualBatchConfig {
             edu.upc.dmag.beaconLoaderWithCLI.entities.OntologyTerm ontologyTerm = new edu.upc.dmag.beaconLoaderWithCLI.entities.OntologyTerm();
             ontologyTerm.setId(readType.getId());
             ontologyTerm.setLabel(readType.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -224,10 +224,10 @@ public class IndividualBatchConfig {
             referenceRange.setLow(readQuantity.getReferenceRange().getLow());
             referenceRange.setHigh(readQuantity.getReferenceRange().getHigh());
             referenceRange.setUnit(getOntologyTermFromUnit4(readQuantity.getReferenceRange().getUnit()));
-            referenceRangeRepository.save(referenceRange);
+            referenceRangeRepository.saveAndFlush(referenceRange);
             quantity.setReferenceRange(referenceRange);
         }
-        quantityRepository.save(quantity);
+        quantityRepository.saveAndFlush(quantity);
         return quantity;
     }
 
@@ -240,10 +240,10 @@ public class IndividualBatchConfig {
             referenceRange.setLow(readQuantity.getReferenceRange().getLow());
             referenceRange.setHigh(readQuantity.getReferenceRange().getHigh());
             referenceRange.setUnit(getOntologyTermFromUnit2(readQuantity.getReferenceRange().getUnit()));
-            referenceRangeRepository.save(referenceRange);
+            referenceRangeRepository.saveAndFlush(referenceRange);
             quantity.setReferenceRange(referenceRange);
         }
-        quantityRepository.save(quantity);
+        quantityRepository.saveAndFlush(quantity);
         return quantity;
     }
 
@@ -255,7 +255,7 @@ public class IndividualBatchConfig {
             edu.upc.dmag.beaconLoaderWithCLI.entities.OntologyTerm ontologyTerm = new edu.upc.dmag.beaconLoaderWithCLI.entities.OntologyTerm();
             ontologyTerm.setId(unit.getId());
             ontologyTerm.setLabel(unit.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -268,7 +268,7 @@ public class IndividualBatchConfig {
             edu.upc.dmag.beaconLoaderWithCLI.entities.OntologyTerm ontologyTerm = new edu.upc.dmag.beaconLoaderWithCLI.entities.OntologyTerm();
             ontologyTerm.setId(unit.getId());
             ontologyTerm.setLabel(unit.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -281,7 +281,7 @@ public class IndividualBatchConfig {
             edu.upc.dmag.beaconLoaderWithCLI.entities.OntologyTerm ontologyTerm = new edu.upc.dmag.beaconLoaderWithCLI.entities.OntologyTerm();
             ontologyTerm.setId(unit.getId());
             ontologyTerm.setLabel(unit.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -294,7 +294,7 @@ public class IndividualBatchConfig {
             edu.upc.dmag.beaconLoaderWithCLI.entities.OntologyTerm ontologyTerm = new edu.upc.dmag.beaconLoaderWithCLI.entities.OntologyTerm();
             ontologyTerm.setId(unit.getId());
             ontologyTerm.setLabel(unit.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -311,7 +311,7 @@ public class IndividualBatchConfig {
         var phenotypicFeature = new edu.upc.dmag.beaconLoaderWithCLI.entities.PhenotypicFeature();
         phenotypicFeature.setFeatureType(getOntologyTermFromFeatureType(readPhenotypicFeature.getFeatureType()));
         phenotypicFeature.setModifiers(getOntologyTermsModifiers(readPhenotypicFeature.getModifiers()));
-        phenotypicFeatureRepository.save(phenotypicFeature);
+        phenotypicFeatureRepository.saveAndFlush(phenotypicFeature);
         return phenotypicFeature;
     }
 
@@ -327,7 +327,7 @@ public class IndividualBatchConfig {
             edu.upc.dmag.beaconLoaderWithCLI.entities.OntologyTerm ontologyTerm = new edu.upc.dmag.beaconLoaderWithCLI.entities.OntologyTerm();
             ontologyTerm.setId(modifier__3.getId());
             ontologyTerm.setLabel(modifier__3.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -340,7 +340,7 @@ public class IndividualBatchConfig {
             edu.upc.dmag.beaconLoaderWithCLI.entities.OntologyTerm ontologyTerm = new edu.upc.dmag.beaconLoaderWithCLI.entities.OntologyTerm();
             ontologyTerm.setId(featureType.getId());
             ontologyTerm.setLabel(featureType.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -353,7 +353,7 @@ public class IndividualBatchConfig {
             edu.upc.dmag.beaconLoaderWithCLI.entities.OntologyTerm ontologyTerm = new edu.upc.dmag.beaconLoaderWithCLI.entities.OntologyTerm();
             ontologyTerm.setId(sex.getId());
             ontologyTerm.setLabel(sex.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }

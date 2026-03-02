@@ -109,7 +109,7 @@ public class BiosampleBatchConfig {
     public ItemWriter<Biosample> biosampleWriter() {
         return biosamples -> {
             for (Biosample biosample : biosamples) {
-                biosampleRepository.save(biosample);
+                biosampleRepository.saveAndFlush(biosample);
             }
         };
     }
@@ -123,7 +123,7 @@ public class BiosampleBatchConfig {
             OntologyTerm ontologyTerm = new OntologyTerm();
             ontologyTerm.setId(sampleOriginType.getId());
             ontologyTerm.setLabel(sampleOriginType.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -146,6 +146,7 @@ public class BiosampleBatchConfig {
                 getAgeDatetime(readObtentionProcedure.getAgeAtProcedure().getDateTime().toString())
             );
         }
+        obtentionProcedureRepository.saveAndFlush(obtentionProcedure);
         return obtentionProcedure;
     }
 
@@ -181,7 +182,7 @@ public class BiosampleBatchConfig {
             OntologyTerm ontologyTerm = new OntologyTerm();
             ontologyTerm.setId(procedureCode.getId());
             ontologyTerm.setLabel(procedureCode.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -194,7 +195,7 @@ public class BiosampleBatchConfig {
             OntologyTerm ontologyTerm = new OntologyTerm();
             ontologyTerm.setId(biosampleStatus.getId());
             ontologyTerm.setLabel(biosampleStatus.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
