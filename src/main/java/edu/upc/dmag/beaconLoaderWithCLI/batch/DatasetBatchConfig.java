@@ -3,6 +3,7 @@ package edu.upc.dmag.beaconLoaderWithCLI.batch;
 import com.google.gson.Gson;
 import edu.upc.dmag.ToLoad.DatasetsSchema;
 import edu.upc.dmag.ToLoad.DuoDataUse;
+import edu.upc.dmag.beaconLoaderWithCLI.config.DataLoadPathConfig;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.DataUseConditions;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.Dataset;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.OntologyTerm;
@@ -36,13 +37,16 @@ public class DatasetBatchConfig {
     private final DatasetRepository datasetRepository;
     private final DataUseConditionsRepository dataUseConditionsRepository;
     private final OntologyTermRepository ontologyTermRepository;
+    private final DataLoadPathConfig dataLoadPathConfig;
 
     public DatasetBatchConfig(DatasetRepository datasetRepository,
                               DataUseConditionsRepository dataUseConditionsRepository,
-                              OntologyTermRepository ontologyTermRepository) {
+                              OntologyTermRepository ontologyTermRepository,
+                              DataLoadPathConfig dataLoadPathConfig) {
         this.datasetRepository = datasetRepository;
         this.dataUseConditionsRepository = dataUseConditionsRepository;
         this.ontologyTermRepository = ontologyTermRepository;
+        this.dataLoadPathConfig = dataLoadPathConfig;
     }
 
     @Bean
@@ -69,7 +73,7 @@ public class DatasetBatchConfig {
 
     @Bean
     public ItemReader<DatasetsSchema> datasetReader() {
-        return new DatasetJsonItemReader("./src/main/resources/toLoad/datasets.json");
+        return new DatasetJsonItemReader(dataLoadPathConfig.getDatasetsPath());
     }
 
     @Bean
@@ -160,4 +164,3 @@ public class DatasetBatchConfig {
         }
     }
 }
-

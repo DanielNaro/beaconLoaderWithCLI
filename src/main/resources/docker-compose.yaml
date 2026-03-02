@@ -89,5 +89,23 @@ services:
       retries: 5
       start_period: 5s
     network_mode: "service:localhost"
+
+  beacon-loader:
+    build:
+      context: ../../../
+      dockerfile: Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:6433/postgres
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgrespassword
+    volumes:
+      # Mount data directory - adjust the path to your data files
+      - ../../../data:/data:ro
+    network_mode: "service:localhost"
+    depends_on:
+      - postgres
+    # Override the data path if needed:
+    # command: ["--beacon.data.path=/data"]
+
 volumes:
   db_data:

@@ -13,6 +13,7 @@ import edu.upc.dmag.ToLoad.Unit__1;
 import edu.upc.dmag.ToLoad.Unit__2;
 import edu.upc.dmag.ToLoad.Unit__3;
 import edu.upc.dmag.ToLoad.Unit__4;
+import edu.upc.dmag.beaconLoaderWithCLI.config.DataLoadPathConfig;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.Individual;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.OntologyTerm;
 import org.springframework.batch.core.Job;
@@ -50,6 +51,7 @@ public class IndividualBatchConfig {
     private final edu.upc.dmag.beaconLoaderWithCLI.entities.QuantityRepository quantityRepository;
     private final edu.upc.dmag.beaconLoaderWithCLI.entities.ComplexValueRepository complexValueRepository;
     private final edu.upc.dmag.beaconLoaderWithCLI.entities.PhenotypicFeatureRepository phenotypicFeatureRepository;
+    private final DataLoadPathConfig dataLoadPathConfig;
 
     public IndividualBatchConfig(
             edu.upc.dmag.beaconLoaderWithCLI.entities.IndividualRepository individualRepository,
@@ -59,7 +61,8 @@ public class IndividualBatchConfig {
             edu.upc.dmag.beaconLoaderWithCLI.entities.ValueRepository valueRepository,
             edu.upc.dmag.beaconLoaderWithCLI.entities.QuantityRepository quantityRepository,
             edu.upc.dmag.beaconLoaderWithCLI.entities.ComplexValueRepository complexValueRepository,
-            edu.upc.dmag.beaconLoaderWithCLI.entities.PhenotypicFeatureRepository phenotypicFeatureRepository) {
+            edu.upc.dmag.beaconLoaderWithCLI.entities.PhenotypicFeatureRepository phenotypicFeatureRepository,
+            DataLoadPathConfig dataLoadPathConfig) {
         this.individualRepository = individualRepository;
         this.ontologyTermRepository = ontologyTermRepository;
         this.measureRepository = measureRepository;
@@ -68,6 +71,7 @@ public class IndividualBatchConfig {
         this.quantityRepository = quantityRepository;
         this.complexValueRepository = complexValueRepository;
         this.phenotypicFeatureRepository = phenotypicFeatureRepository;
+        this.dataLoadPathConfig = dataLoadPathConfig;
     }
 
     @Bean
@@ -94,7 +98,7 @@ public class IndividualBatchConfig {
 
     @Bean
     public ItemReader<IndividualsSchema> individualReader() {
-        return new IndividualJsonItemReader("./src/main/resources/toLoad/individuals.json");
+        return new IndividualJsonItemReader(dataLoadPathConfig.getIndividualsPath());
     }
 
     @Bean

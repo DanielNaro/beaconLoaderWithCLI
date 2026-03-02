@@ -2,6 +2,7 @@ package edu.upc.dmag.beaconLoaderWithCLI.batch;
 
 import com.google.gson.Gson;
 import edu.upc.dmag.ToLoad.AnalysesSchema;
+import edu.upc.dmag.beaconLoaderWithCLI.config.DataLoadPathConfig;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.Analysis;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.AnalysisRepository;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.RunRepository;
@@ -30,11 +31,14 @@ public class AnalysisBatchConfig {
 
     private final AnalysisRepository analysisRepository;
     private final RunRepository runRepository;
+    private final DataLoadPathConfig dataLoadPathConfig;
 
     public AnalysisBatchConfig(AnalysisRepository analysisRepository,
-                               RunRepository runRepository) {
+                               RunRepository runRepository,
+                               DataLoadPathConfig dataLoadPathConfig) {
         this.analysisRepository = analysisRepository;
         this.runRepository = runRepository;
+        this.dataLoadPathConfig = dataLoadPathConfig;
     }
 
     @Bean
@@ -61,7 +65,7 @@ public class AnalysisBatchConfig {
 
     @Bean
     public ItemReader<AnalysesSchema> analysisReader() {
-        return new AnalysisJsonItemReader("./src/main/resources/toLoad/analyses.json");
+        return new AnalysisJsonItemReader(dataLoadPathConfig.getAnalysesPath());
     }
 
     @Bean

@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import edu.upc.dmag.ToLoad.LibrarySource;
 import edu.upc.dmag.ToLoad.PlatformModel;
 import edu.upc.dmag.ToLoad.RunsSchema;
+import edu.upc.dmag.beaconLoaderWithCLI.config.DataLoadPathConfig;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.BiosampleRepository;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.LibrarySelection;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.LibrarySelectionRepository;
@@ -38,15 +39,18 @@ public class RunBatchConfig {
     private final BiosampleRepository biosampleRepository;
     private final OntologyTermRepository ontologyTermRepository;
     private final LibrarySelectionRepository librarySelectionRepository;
+    private final DataLoadPathConfig dataLoadPathConfig;
 
     public RunBatchConfig(RunRepository runRepository,
                           BiosampleRepository biosampleRepository,
                           OntologyTermRepository ontologyTermRepository,
-                          LibrarySelectionRepository librarySelectionRepository) {
+                          LibrarySelectionRepository librarySelectionRepository,
+                          DataLoadPathConfig dataLoadPathConfig) {
         this.runRepository = runRepository;
         this.biosampleRepository = biosampleRepository;
         this.ontologyTermRepository = ontologyTermRepository;
         this.librarySelectionRepository = librarySelectionRepository;
+        this.dataLoadPathConfig = dataLoadPathConfig;
     }
 
     @Bean
@@ -73,7 +77,7 @@ public class RunBatchConfig {
 
     @Bean
     public ItemReader<RunsSchema> runReader() {
-        return new RunJsonItemReader("./src/main/resources/toLoad/runs.json");
+        return new RunJsonItemReader(dataLoadPathConfig.getRunsPath());
     }
 
     @Bean
@@ -176,4 +180,3 @@ public class RunBatchConfig {
         }
     }
 }
-

@@ -6,6 +6,7 @@ import edu.upc.dmag.ToLoad.*;
 import edu.upc.dmag.ToLoad.ClinicalInterpretation;
 import edu.upc.dmag.ToLoad.FrequencyInPopulation;
 import edu.upc.dmag.beaconLoaderWithCLI.MolecularAttribute;
+import edu.upc.dmag.beaconLoaderWithCLI.config.DataLoadPathConfig;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.*;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.GenomicFeature;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.Interval;
@@ -51,6 +52,7 @@ public class GenomicVariantBatchConfig {
     private final MolecularAttributeRepository molecularAttributeRepository;
     private final OntologyTermRepository ontologyTermRepository;
     private final AnalysisRepository analysisRepository;
+    private final DataLoadPathConfig dataLoadPathConfig;
 
     private final Map<String, String> biosampleIdToAnalysisId = new HashMap<>();
     private final Map<String, String> biosampleRenamers;
@@ -69,7 +71,8 @@ public class GenomicVariantBatchConfig {
             FrequencyInPopulationRepository frequencyInPopulationRepository,
             MolecularAttributeRepository molecularAttributeRepository,
             OntologyTermRepository ontologyTermRepository,
-            AnalysisRepository analysisRepository) {
+            AnalysisRepository analysisRepository,
+            DataLoadPathConfig dataLoadPathConfig) {
         this.genomicVariationRepository = genomicVariationRepository;
         this.variantAlternativeIdRepository = variantAlternativeIdRepository;
         this.phenotypicEffectRepository = phenotypicEffectRepository;
@@ -84,6 +87,7 @@ public class GenomicVariantBatchConfig {
         this.molecularAttributeRepository = molecularAttributeRepository;
         this.ontologyTermRepository = ontologyTermRepository;
         this.analysisRepository = analysisRepository;
+        this.dataLoadPathConfig = dataLoadPathConfig;
         this.biosampleRenamers = getBiosampleRenamer();
     }
 
@@ -111,7 +115,7 @@ public class GenomicVariantBatchConfig {
 
     @Bean
     public ItemReader<GenomicVariantsSchema> genomicVariantReader() {
-        return new GenomicVariantJsonItemReader("./src/main/resources/toLoad/genomicVariationsVcf.json");
+        return new GenomicVariantJsonItemReader(dataLoadPathConfig.getGenomicVariationsPath());
     }
 
     @Bean

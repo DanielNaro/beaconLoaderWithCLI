@@ -6,6 +6,7 @@ import edu.upc.dmag.ToLoad.CohortDesign;
 import edu.upc.dmag.ToLoad.CohortsSchema;
 import edu.upc.dmag.ToLoad.Gender__1;
 import edu.upc.dmag.beaconLoaderWithCLI.ConvertDuration;
+import edu.upc.dmag.beaconLoaderWithCLI.config.DataLoadPathConfig;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.AgeRangeCriteria;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.AgeRangeCriteriaRepository;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.Cohort;
@@ -40,13 +41,16 @@ public class CohortBatchConfig {
     private final CohortRepository cohortRepository;
     private final AgeRangeCriteriaRepository ageRangeCriteriaRepository;
     private final OntologyTermRepository ontologyTermRepository;
+    private final DataLoadPathConfig dataLoadPathConfig;
 
     public CohortBatchConfig(CohortRepository cohortRepository,
                              AgeRangeCriteriaRepository ageRangeCriteriaRepository,
-                             OntologyTermRepository ontologyTermRepository) {
+                             OntologyTermRepository ontologyTermRepository,
+                             DataLoadPathConfig dataLoadPathConfig) {
         this.cohortRepository = cohortRepository;
         this.ageRangeCriteriaRepository = ageRangeCriteriaRepository;
         this.ontologyTermRepository = ontologyTermRepository;
+        this.dataLoadPathConfig = dataLoadPathConfig;
     }
 
     @Bean
@@ -73,7 +77,7 @@ public class CohortBatchConfig {
 
     @Bean
     public ItemReader<CohortsSchema> cohortReader() {
-        return new CohortJsonItemReader("./src/main/resources/toLoad/cohorts.json");
+        return new CohortJsonItemReader(dataLoadPathConfig.getCohortsPath());
     }
 
     @Bean

@@ -8,6 +8,7 @@ import edu.upc.dmag.ToLoad.ObtentionProcedure;
 import edu.upc.dmag.ToLoad.ProcedureCode__1;
 import edu.upc.dmag.ToLoad.SampleOriginType;
 import edu.upc.dmag.beaconLoaderWithCLI.ConvertDuration;
+import edu.upc.dmag.beaconLoaderWithCLI.config.DataLoadPathConfig;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.Age;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.AgeDatetime;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.AgeDuration;
@@ -47,18 +48,21 @@ public class BiosampleBatchConfig {
     private final ObtentionProcedureRepository obtentionProcedureRepository;
     private final IndividualRepository individualRepository;
     private final AgeRepository ageRepository;
+    private final DataLoadPathConfig dataLoadPathConfig;
 
     public BiosampleBatchConfig(
             BiosampleRepository biosampleRepository,
             OntologyTermRepository ontologyTermRepository,
             ObtentionProcedureRepository obtentionProcedureRepository,
             IndividualRepository individualRepository,
-            AgeRepository ageRepository) {
+            AgeRepository ageRepository,
+            DataLoadPathConfig dataLoadPathConfig) {
         this.biosampleRepository = biosampleRepository;
         this.ontologyTermRepository = ontologyTermRepository;
         this.obtentionProcedureRepository = obtentionProcedureRepository;
         this.individualRepository = individualRepository;
         this.ageRepository = ageRepository;
+        this.dataLoadPathConfig = dataLoadPathConfig;
     }
 
     @Bean
@@ -85,7 +89,7 @@ public class BiosampleBatchConfig {
 
     @Bean
     public ItemReader<BiosamplesSchema> biosampleReader() {
-        return new BiosampleJsonItemReader("./src/main/resources/toLoad/biosamples.json");
+        return new BiosampleJsonItemReader(dataLoadPathConfig.getBiosamplesPath());
     }
 
     @Bean
@@ -236,4 +240,3 @@ public class BiosampleBatchConfig {
         }
     }
 }
-
