@@ -480,7 +480,7 @@ public class GenomicVariantBatchConfig {
                 try {
                     var tentativeAnalysisId = populateUsingBioSampleId(renamedBiosampleId, caseLevelData);
                 }catch (IllegalArgumentException e2) {
-                    System.err.println("bypassing analysis for biosampleid: "+biosampleId);
+                    System.err.println("bypassing population for biosampleid: "+biosampleId + " and renamed biosampleId: "+renamedBiosampleId);
                 }
             }
         }
