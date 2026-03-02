@@ -105,6 +105,16 @@ public class BiosampleBatchConfig {
         };
     }
 
+    @Bean
+    public ItemWriter<Biosample> biosampleWriter() {
+        return biosamples -> {
+            for (Biosample biosample : biosamples) {
+                biosampleRepository.save(biosample);
+            }
+        };
+    }
+
+
     private OntologyTerm getOntologyTerm(SampleOriginType sampleOriginType) {
         var foundTerm = ontologyTermRepository.findById(sampleOriginType.getId());
         if (foundTerm.isPresent()) {
