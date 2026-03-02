@@ -58,7 +58,6 @@ public class GenomicVariantBatchConfig {
     private final AnalysisRepository analysisRepository;
     private final DataLoadPathConfig dataLoadPathConfig;
 
-    private final Map<String, String> biosampleIdToAnalysisId = new HashMap<>();
     private final Map<String, String> biosampleRenamers;
 
     public GenomicVariantBatchConfig(
@@ -368,18 +367,14 @@ public class GenomicVariantBatchConfig {
     }
 
     @Nullable
-    private String populateUsingBioSampleId(String biosampleId, CaseLevelData caseLevelData) {
-        var tentativeAnalysisId = biosampleIdToAnalysisId.get(biosampleId);
-        if (tentativeAnalysisId != null) {
-            var tentativeAnalysis = analysisRepository.findById(tentativeAnalysisId);
-            if (tentativeAnalysis.isPresent()) {
-                caseLevelData.setAnalysis(tentativeAnalysis.get());
-                return tentativeAnalysisId;
-            } else {
-                throw new IllegalArgumentException("No analysis found for id: " + tentativeAnalysisId);
-            }
+    private String populateUsingBioSampleId(String tentativeAnalysisId, CaseLevelData caseLevelData) {
+        var tentativeAnalysis = analysisRepository.findById(tentativeAnalysisId);
+        if (tentativeAnalysis.isPresent()) {
+            caseLevelData.setAnalysis(tentativeAnalysis.get());
+            return tentativeAnalysisId;
+        } else {
+            throw new IllegalArgumentException("No analysis found for id: " + tentativeAnalysisId);
         }
-        throw new IllegalArgumentException("No analysisId found for id: " + biosampleId);
     }
 
     private List<PhenotypicEffect> getPhenotypicEffects(List<edu.upc.dmag.ToLoad.PhenotypicEffect> phenotypicEffects) {
