@@ -6,10 +6,10 @@ import java.sql.Date;
 
 @Entity
 public class Measure {
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     OntologyTerm assayCode;
     Date date;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     MeasurementValue measurementValue;
     @Id
     @GeneratedValue

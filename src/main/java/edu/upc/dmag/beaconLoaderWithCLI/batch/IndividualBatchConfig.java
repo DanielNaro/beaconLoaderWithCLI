@@ -149,7 +149,6 @@ public class IndividualBatchConfig {
         measure.setAssayCode(getOntologyTermFromAssayCode(it.getAssayCode()));
         measure.setDate(Date.valueOf(it.getDate()));
         measure.setMeasurementValue(getMeasurementValue(it.getMeasurementValue()));
-        measureRepository.save(measure);
         return measure;
     }
 
@@ -176,16 +175,13 @@ public class IndividualBatchConfig {
                 var quantity = getQuantityFromQuantity(readMeasurementValue.getQuantity());
                 value.setQuantity(quantity);
             }
-            valueRepository.save(value);
             measurementValue.setValue(value);
         } else {
             var complexValue = new edu.upc.dmag.beaconLoaderWithCLI.entities.ComplexValue();
             complexValue.setQuantity(getQuantityFromQuantity1(readMeasurementValue.getTypedQuantities().getQuantity()));
             complexValue.setQuantityType(getOntologyTermFromQuantityType(readMeasurementValue.getTypedQuantities().getQuantityType()));
-            complexValueRepository.save(complexValue);
             measurementValue.setComplexValue(complexValue);
         }
-        measurementValueRepository.save(measurementValue);
         return measurementValue;
     }
 
@@ -224,10 +220,8 @@ public class IndividualBatchConfig {
             referenceRange.setLow(readQuantity.getReferenceRange().getLow());
             referenceRange.setHigh(readQuantity.getReferenceRange().getHigh());
             referenceRange.setUnit(getOntologyTermFromUnit4(readQuantity.getReferenceRange().getUnit()));
-            referenceRangeRepository.save(referenceRange);
             quantity.setReferenceRange(referenceRange);
         }
-        quantityRepository.save(quantity);
         return quantity;
     }
 
@@ -240,10 +234,8 @@ public class IndividualBatchConfig {
             referenceRange.setLow(readQuantity.getReferenceRange().getLow());
             referenceRange.setHigh(readQuantity.getReferenceRange().getHigh());
             referenceRange.setUnit(getOntologyTermFromUnit2(readQuantity.getReferenceRange().getUnit()));
-            referenceRangeRepository.save(referenceRange);
             quantity.setReferenceRange(referenceRange);
         }
-        quantityRepository.save(quantity);
         return quantity;
     }
 

@@ -7,13 +7,13 @@ public class ClinicalInterpretation {
     private String annotatedWithToolName;
     private String annotatedWithToolReference;
     private String annotatedWithToolVersion;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private OntologyTerm category;
     private edu.upc.dmag.ToLoad.ClinicalInterpretation.ClinicalRelevance clinicalRelevance;
     private String conditionId;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private OntologyTerm effect;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private OntologyTerm evidenceType;
     @Id
     @GeneratedValue

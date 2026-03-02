@@ -11,15 +11,15 @@ public class CaseLevelData {
     @GeneratedValue
     private int id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private OntologyTerm alleleOrigin;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<PhenotypicEffect> clinicalInterpretations;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<PhenotypicEffect> phenotypicEffects;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Analysis analysis;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private OntologyTerm zygosity;
     @ElementCollection
     @Column(columnDefinition="TEXT")

@@ -13,15 +13,15 @@ public class Cohort {
     @Id
     String id;
     String name;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     OntologyTerm cohortDesign;
     @Enumerated(EnumType.ORDINAL)
     CohortsSchema.CohortType cohortType;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     Set<Individual> individuals;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     AgeRangeCriteria ageRangeInclusionCriteria;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     Set<OntologyTerm> gendersInclusionCriteria;
 
     public String getId() {

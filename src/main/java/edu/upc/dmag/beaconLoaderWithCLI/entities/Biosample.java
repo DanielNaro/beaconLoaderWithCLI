@@ -8,13 +8,13 @@ import java.util.Set;
 public class Biosample {
     @Id
     String id;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     Individual individual;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     OntologyTerm biosampleStatus;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     ObtentionProcedure obtentionProcedure;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     OntologyTerm sampleOriginType;
     @ElementCollection
     @Column(columnDefinition="TEXT")
