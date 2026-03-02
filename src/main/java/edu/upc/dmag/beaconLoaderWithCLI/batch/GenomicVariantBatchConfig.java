@@ -5,6 +5,7 @@ import com.google.gson.stream.JsonReader;
 import edu.upc.dmag.ToLoad.*;
 import edu.upc.dmag.ToLoad.ClinicalInterpretation;
 import edu.upc.dmag.ToLoad.FrequencyInPopulation;
+import edu.upc.dmag.beaconLoaderWithCLI.BeaconLoaderWithCliApplication;
 import edu.upc.dmag.beaconLoaderWithCLI.MolecularAttribute;
 import edu.upc.dmag.beaconLoaderWithCLI.config.DataLoadPathConfig;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.*;
@@ -17,6 +18,8 @@ import edu.upc.dmag.beaconLoaderWithCLI.entities.VariantAlternativeId;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.VariantLevelData;
 import edu.upc.dmag.beaconLoaderWithCLI.entities.Variation;
 import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.job.builder.JobBuilder;
@@ -37,6 +40,7 @@ import java.util.zip.GZIPInputStream;
 
 @Configuration
 public class GenomicVariantBatchConfig {
+    private static final Logger LOG = LoggerFactory.getLogger(GenomicVariantBatchConfig.class);
 
     private final GenomicVariationRepository genomicVariationRepository;
     private final VariantAlternativeIdRepository variantAlternativeIdRepository;
@@ -480,7 +484,9 @@ public class GenomicVariantBatchConfig {
                 try {
                     var tentativeAnalysisId = populateUsingBioSampleId(renamedBiosampleId, caseLevelData);
                 }catch (IllegalArgumentException e2) {
-                    System.err.println("bypassing population for biosampleid: "+biosampleId + " and renamed biosampleId: "+renamedBiosampleId);
+                    LOG.error("bypassing population for biosampleid: "+biosampleId + " and renamed biosampleId: "+renamedBiosampleId);
+                    LOG.error("original error: "+e.getMessage());
+                    LOG.error("renamed error: "+e2.getMessage());
                 }
             }
         }
