@@ -366,7 +366,6 @@ public class GenomicVariantBatchConfig {
         return frequency;
     }
 
-    @Nullable
     private String populateUsingBioSampleId(String tentativeAnalysisId, CaseLevelData caseLevelData) {
         var tentativeAnalysis = analysisRepository.findById(tentativeAnalysisId);
         if (tentativeAnalysis.isPresent()) {
@@ -472,17 +471,26 @@ public class GenomicVariantBatchConfig {
             caseLevelData.setAnalysis(analysisRepository.getReferenceById(caseLevelDatum.getAnalysisId()));
         } else {
             String biosampleId = caseLevelDatum.getBiosampleId();
-            try {
-                var tentativeAnalysisId = populateUsingBioSampleId(biosampleId, caseLevelData);
-            }catch (IllegalArgumentException e) {
-                String renamedBiosampleId = biosampleRenamers.get(biosampleId);
+            if (biosampleId != null) {
                 try {
-                    var tentativeAnalysisId = populateUsingBioSampleId(renamedBiosampleId, caseLevelData);
-                }catch (IllegalArgumentException e2) {
-                    LOG.error("bypassing population for biosampleid: "+biosampleId + " and renamed biosampleId: "+renamedBiosampleId);
-                    LOG.error("original error: "+e.getMessage());
-                    LOG.error("renamed error: "+e2.getMessage());
+                    var tentativeAnalysisId = populateUsingBioSampleId(biosampleId, caseLevelData);
+                }catch (IllegalArgumentException e) {
+                    String renamedBiosampleId = biosampleRenamers.get(biosampleId);
+                    if (renamedBiosampleId == null) {
+                        LOG.error("No analysis found for biosampleId: "+biosampleId);
+                        LOG.error("original error: "+e.getMessage());
+                    } else {
+                        try {
+                            var tentativeAnalysisId = populateUsingBioSampleId(renamedBiosampleId, caseLevelData);
+                        } catch (IllegalArgumentException e2) {
+                            LOG.error("bypassing population for biosampleid: " + biosampleId + " and renamed biosampleId: " + renamedBiosampleId);
+                            LOG.error("original error: " + e.getMessage());
+                            LOG.error("renamed error: " + e2.getMessage());
+                        }
+                    }
                 }
+            } else {
+                LOG.error("No analysisId or biosampleId provided for caseLevelData with id: " + caseLevelDatum.getId());
             }
         }
         caseLevelData.setClinicalInterpretations(getClinicalInterpretations(caseLevelDatum.getClinicalInterpretations()));
