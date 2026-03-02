@@ -1,19 +1,16 @@
 package edu.upc.dmag.beaconLoaderWithCLI.entities;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
 public class VariantLevelData {
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<ClinicalInterpretation> clinicalInterpretations;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<ClinicalInterpretation> phenotypicEffects;
     @Id
     @GeneratedValue

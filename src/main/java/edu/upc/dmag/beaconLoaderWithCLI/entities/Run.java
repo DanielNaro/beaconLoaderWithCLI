@@ -13,13 +13,13 @@ public class Run {
     @ManyToOne
     Biosample biosample;
     RunsSchema.LibraryLayout libraryLayout;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     LibrarySelection librarySelection;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     OntologyTerm librarySource;
     String libraryStrategy;
     String platform;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     OntologyTerm platformModel;
     Date runDate;
     @ElementCollection

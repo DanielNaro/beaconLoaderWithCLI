@@ -6,9 +6,9 @@ import java.util.Set;
 
 @Entity
 public class PhenotypicFeature {
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     OntologyTerm featureType;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     Set<OntologyTerm> modifiers;
     @Id
     @GeneratedValue

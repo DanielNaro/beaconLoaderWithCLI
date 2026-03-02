@@ -16,7 +16,7 @@ public class Dataset {
     String externalUrl;
     ZonedDateTime createDateTime;
     ZonedDateTime updateDateTime;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     DataUseConditions dataUseConditions;
 
     @ManyToMany

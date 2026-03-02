@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.CascadeType;
 
 @Entity
 public class PhenotypicEffect {
@@ -16,12 +17,12 @@ public class PhenotypicEffect {
     private String annotationToolReference;
     private String annotationToolVersion;
     private ClinicalInterpretation.ClinicalRelevance clinicalRelevance;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private OntologyTerm category;
     private String conditionId;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private OntologyTerm effect;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private OntologyTerm evidenceType;
 
 

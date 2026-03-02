@@ -18,10 +18,10 @@ public class ObtentionProcedure {
         return id;
     }
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     Age age;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     OntologyTerm procedureCode;
 
     public Age getAge() {

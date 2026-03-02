@@ -8,11 +8,11 @@ import java.util.Set;
 public class Individual {
     @Id
     String id;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     Set<Measure> measures;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     Set<PhenotypicFeature> phenotypicFeatures;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     OntologyTerm sex;
     @ElementCollection
     @Column(columnDefinition="TEXT")
