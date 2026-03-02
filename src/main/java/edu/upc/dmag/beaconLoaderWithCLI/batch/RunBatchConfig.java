@@ -114,7 +114,7 @@ public class RunBatchConfig {
             OntologyTerm ontologyTerm = new OntologyTerm();
             ontologyTerm.setId(platformModel.getId());
             ontologyTerm.setLabel(platformModel.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -127,7 +127,7 @@ public class RunBatchConfig {
             OntologyTerm ontologyTerm = new OntologyTerm();
             ontologyTerm.setId(librarySource.getId());
             ontologyTerm.setLabel(librarySource.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }

@@ -239,7 +239,7 @@ public class GenomicVariantBatchConfig {
             OntologyTerm ontologyTerm = new OntologyTerm();
             ontologyTerm.setId(evidenceType.getId());
             ontologyTerm.setLabel(evidenceType.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -252,7 +252,7 @@ public class GenomicVariantBatchConfig {
             OntologyTerm ontologyTerm = new OntologyTerm();
             ontologyTerm.setId(effect.getId());
             ontologyTerm.setLabel(effect.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -265,7 +265,7 @@ public class GenomicVariantBatchConfig {
             OntologyTerm ontologyTerm = new OntologyTerm();
             ontologyTerm.setId(category.getId());
             ontologyTerm.setLabel(category.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -283,7 +283,7 @@ public class GenomicVariantBatchConfig {
         result.setEffect(getOntologyTerm(it.getEffect()));
         result.setEvidenceType(getOntologyTerm(it.getEvidenceType()));
         result.setClinicalRelevance(getClinicalRelevance(it.getClinicalRelevance()));
-        clinicalInterpretationRepository.save(result);
+        clinicalInterpretationRepository.saveAndFlush(result);
         return result;
     }
 
@@ -303,7 +303,7 @@ public class GenomicVariantBatchConfig {
             OntologyTerm ontologyTerm = new OntologyTerm();
             ontologyTerm.setId(evidenceType.getId());
             ontologyTerm.setLabel(evidenceType.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -316,7 +316,7 @@ public class GenomicVariantBatchConfig {
             OntologyTerm ontologyTerm = new OntologyTerm();
             ontologyTerm.setId(effect.getId());
             ontologyTerm.setLabel(effect.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -329,7 +329,7 @@ public class GenomicVariantBatchConfig {
             OntologyTerm ontologyTerm = new OntologyTerm();
             ontologyTerm.setId(category.getId());
             ontologyTerm.setLabel(category.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -411,7 +411,7 @@ public class GenomicVariantBatchConfig {
             OntologyTerm ontologyTerm = new OntologyTerm();
             ontologyTerm.setId(evidenceType.getId());
             ontologyTerm.setLabel(evidenceType.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -424,7 +424,7 @@ public class GenomicVariantBatchConfig {
             OntologyTerm ontologyTerm = new OntologyTerm();
             ontologyTerm.setId(effect.getId());
             ontologyTerm.setLabel(effect.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -437,7 +437,7 @@ public class GenomicVariantBatchConfig {
             OntologyTerm ontologyTerm = new OntologyTerm();
             ontologyTerm.setId(category.getId());
             ontologyTerm.setLabel(category.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -517,7 +517,7 @@ public class GenomicVariantBatchConfig {
             OntologyTerm ontologyTerm = new OntologyTerm();
             ontologyTerm.setId(evidenceType.getId());
             ontologyTerm.setLabel(evidenceType.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -530,7 +530,7 @@ public class GenomicVariantBatchConfig {
             OntologyTerm ontologyTerm = new OntologyTerm();
             ontologyTerm.setId(effect.getId());
             ontologyTerm.setLabel(effect.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -543,7 +543,7 @@ public class GenomicVariantBatchConfig {
             OntologyTerm ontologyTerm = new OntologyTerm();
             ontologyTerm.setId(category.getId());
             ontologyTerm.setLabel(category.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -559,7 +559,7 @@ public class GenomicVariantBatchConfig {
             OntologyTerm ontologyTerm = new OntologyTerm();
             ontologyTerm.setId(alleleOrigin.getId());
             ontologyTerm.setLabel(alleleOrigin.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -573,7 +573,7 @@ public class GenomicVariantBatchConfig {
             OntologyTerm ontologyTerm = new OntologyTerm();
             ontologyTerm.setId(convertedId);
             ontologyTerm.setLabel(zygosity.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -630,7 +630,7 @@ public class GenomicVariantBatchConfig {
             OntologyTerm ontologyTerm = new OntologyTerm();
             ontologyTerm.setId(it.getId());
             ontologyTerm.setLabel(it.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -651,7 +651,7 @@ public class GenomicVariantBatchConfig {
             OntologyTerm ontologyTerm = new OntologyTerm();
             ontologyTerm.setId(featureClass.getId());
             ontologyTerm.setLabel(featureClass.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -664,7 +664,7 @@ public class GenomicVariantBatchConfig {
             OntologyTerm ontologyTerm = new OntologyTerm();
             ontologyTerm.setId(featureID.getId());
             ontologyTerm.setLabel(featureID.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }

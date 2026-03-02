@@ -123,7 +123,7 @@ public class CohortBatchConfig {
             OntologyTerm ontologyTerm = new OntologyTerm();
             ontologyTerm.setId(it.getId());
             ontologyTerm.setLabel(it.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
@@ -136,7 +136,7 @@ public class CohortBatchConfig {
             OntologyTerm ontologyTerm = new OntologyTerm();
             ontologyTerm.setId(cohortDesign.getId());
             ontologyTerm.setLabel(cohortDesign.getLabel());
-            ontologyTermRepository.save(ontologyTerm);
+            ontologyTermRepository.saveAndFlush(ontologyTerm);
             return ontologyTerm;
         }
     }
