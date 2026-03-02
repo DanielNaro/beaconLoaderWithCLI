@@ -8,9 +8,9 @@ import java.util.Set;
 public class Individual {
     @Id
     String id;
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany
     Set<Measure> measures;
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany
     Set<PhenotypicFeature> phenotypicFeatures;
     @ManyToOne
     OntologyTerm sex;

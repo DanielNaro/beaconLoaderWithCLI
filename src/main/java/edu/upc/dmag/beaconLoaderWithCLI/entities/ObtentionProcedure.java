@@ -18,7 +18,7 @@ public class ObtentionProcedure {
         return id;
     }
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne
     Age age;
 
     @ManyToOne

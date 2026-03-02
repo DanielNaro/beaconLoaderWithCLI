@@ -17,9 +17,9 @@ public class Cohort {
     OntologyTerm cohortDesign;
     @Enumerated(EnumType.ORDINAL)
     CohortsSchema.CohortType cohortType;
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany
     Set<Individual> individuals;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne
     AgeRangeCriteria ageRangeInclusionCriteria;
     @ManyToMany
     Set<OntologyTerm> gendersInclusionCriteria;

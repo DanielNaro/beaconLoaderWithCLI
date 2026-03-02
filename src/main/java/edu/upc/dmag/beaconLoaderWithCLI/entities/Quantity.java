@@ -12,7 +12,7 @@ public class Quantity {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     ReferenceRange referenceRange;
     @ManyToOne
     OntologyTerm unit;

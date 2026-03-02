@@ -9,7 +9,7 @@ public class Measure {
     @ManyToOne
     OntologyTerm assayCode;
     Date date;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne
     MeasurementValue measurementValue;
     @Id
     @GeneratedValue

@@ -9,7 +9,7 @@ public class Value {
     long id;
     @ManyToOne
     private OntologyTerm termValue;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne
     Quantity quantity;
 
     public Quantity getQuantity() {

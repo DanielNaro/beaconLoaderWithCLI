@@ -10,7 +10,7 @@ public class Location {
 
     private String species_id;
     private String chr;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne
     private Interval interval;
 
     public void setId(Long id) {

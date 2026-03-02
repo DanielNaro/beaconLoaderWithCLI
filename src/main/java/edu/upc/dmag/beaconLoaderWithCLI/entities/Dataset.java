@@ -19,9 +19,9 @@ public class Dataset {
     @OneToOne(cascade = CascadeType.PERSIST)
     DataUseConditions dataUseConditions;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany
     Set<Biosample> biosamples;
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany
     Set<Individual> individuals;
 
     public String getInfo_beacon_contact() {

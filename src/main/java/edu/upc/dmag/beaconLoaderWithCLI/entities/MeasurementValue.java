@@ -8,9 +8,9 @@ public class MeasurementValue {
     @GeneratedValue
     private Long id;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne
     private ComplexValue complexValue;
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne
     private Value value;
 
     public ComplexValue getComplexValue() {

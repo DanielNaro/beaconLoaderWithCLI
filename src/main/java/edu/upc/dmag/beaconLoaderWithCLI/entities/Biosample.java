@@ -8,11 +8,11 @@ import java.util.Set;
 public class Biosample {
     @Id
     String id;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     Individual individual;
     @ManyToOne
     OntologyTerm biosampleStatus;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     ObtentionProcedure obtentionProcedure;
     @ManyToOne
     OntologyTerm sampleOriginType;

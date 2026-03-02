@@ -9,7 +9,7 @@ public class ComplexValue {
     @GeneratedValue
     private Long id;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne
     private Quantity quantity;
     @ManyToOne
     private OntologyTerm quantityType;
