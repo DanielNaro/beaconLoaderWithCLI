@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.CascadeType;
 
 import java.util.Objects;
 
@@ -17,7 +18,7 @@ public class ReferenceRange {
     private double high;
     private double low;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     OntologyTerm unit;
 
     public void setId(Long id) {

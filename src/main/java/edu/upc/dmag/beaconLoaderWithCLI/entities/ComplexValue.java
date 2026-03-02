@@ -9,9 +9,9 @@ public class ComplexValue {
     @GeneratedValue
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Quantity quantity;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private OntologyTerm quantityType;
 
     public void setId(Long id) {

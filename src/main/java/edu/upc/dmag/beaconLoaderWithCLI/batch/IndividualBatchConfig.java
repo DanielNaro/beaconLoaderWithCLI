@@ -51,6 +51,7 @@ public class IndividualBatchConfig {
     private final edu.upc.dmag.beaconLoaderWithCLI.entities.QuantityRepository quantityRepository;
     private final edu.upc.dmag.beaconLoaderWithCLI.entities.ComplexValueRepository complexValueRepository;
     private final edu.upc.dmag.beaconLoaderWithCLI.entities.PhenotypicFeatureRepository phenotypicFeatureRepository;
+    private final edu.upc.dmag.beaconLoaderWithCLI.entities.ReferenceRangeRepository referenceRangeRepository;
     private final DataLoadPathConfig dataLoadPathConfig;
 
     public IndividualBatchConfig(
@@ -62,6 +63,7 @@ public class IndividualBatchConfig {
             edu.upc.dmag.beaconLoaderWithCLI.entities.QuantityRepository quantityRepository,
             edu.upc.dmag.beaconLoaderWithCLI.entities.ComplexValueRepository complexValueRepository,
             edu.upc.dmag.beaconLoaderWithCLI.entities.PhenotypicFeatureRepository phenotypicFeatureRepository,
+            edu.upc.dmag.beaconLoaderWithCLI.entities.ReferenceRangeRepository referenceRangeRepository,
             DataLoadPathConfig dataLoadPathConfig) {
         this.individualRepository = individualRepository;
         this.ontologyTermRepository = ontologyTermRepository;
@@ -71,6 +73,7 @@ public class IndividualBatchConfig {
         this.quantityRepository = quantityRepository;
         this.complexValueRepository = complexValueRepository;
         this.phenotypicFeatureRepository = phenotypicFeatureRepository;
+        this.referenceRangeRepository = referenceRangeRepository;
         this.dataLoadPathConfig = dataLoadPathConfig;
     }
 
@@ -221,6 +224,7 @@ public class IndividualBatchConfig {
             referenceRange.setLow(readQuantity.getReferenceRange().getLow());
             referenceRange.setHigh(readQuantity.getReferenceRange().getHigh());
             referenceRange.setUnit(getOntologyTermFromUnit4(readQuantity.getReferenceRange().getUnit()));
+            referenceRangeRepository.save(referenceRange);
             quantity.setReferenceRange(referenceRange);
         }
         quantityRepository.save(quantity);
@@ -236,6 +240,7 @@ public class IndividualBatchConfig {
             referenceRange.setLow(readQuantity.getReferenceRange().getLow());
             referenceRange.setHigh(readQuantity.getReferenceRange().getHigh());
             referenceRange.setUnit(getOntologyTermFromUnit2(readQuantity.getReferenceRange().getUnit()));
+            referenceRangeRepository.save(referenceRange);
             quantity.setReferenceRange(referenceRange);
         }
         quantityRepository.save(quantity);

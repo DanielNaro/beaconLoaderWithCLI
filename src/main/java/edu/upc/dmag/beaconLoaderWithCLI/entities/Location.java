@@ -1,9 +1,6 @@
 package edu.upc.dmag.beaconLoaderWithCLI.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 
 @Entity
 public class Location {
@@ -13,7 +10,7 @@ public class Location {
 
     private String species_id;
     private String chr;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Interval interval;
 
     public void setId(Long id) {

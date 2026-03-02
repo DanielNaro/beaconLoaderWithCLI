@@ -10,7 +10,7 @@ public class Variation {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Location location;
     @Column(length=1024)
     private String alternateBases;
@@ -21,7 +21,7 @@ public class Variation {
 
     @ManyToMany
     private List<VariationHaplotypeMember> members;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Copies copies;
 
     public void setId(Long id) {

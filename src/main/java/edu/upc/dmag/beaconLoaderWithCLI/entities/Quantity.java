@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.CascadeType;
 
 @Entity
 public class Quantity {
@@ -11,9 +12,9 @@ public class Quantity {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     ReferenceRange referenceRange;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     OntologyTerm unit;
     private double value;
 

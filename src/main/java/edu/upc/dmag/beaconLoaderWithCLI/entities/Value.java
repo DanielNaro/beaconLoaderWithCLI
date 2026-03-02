@@ -7,9 +7,9 @@ public class Value {
     @Id
     @GeneratedValue
     long id;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private OntologyTerm termValue;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     Quantity quantity;
 
     public Quantity getQuantity() {
