@@ -1,0 +1,137 @@
+{
+  "resource_version": 48,
+  "metadata": {
+    "version": 3,
+    "sources": [
+      {
+        "name": "beacon",
+        "kind": "postgres",
+        "tables": [
+          {
+            "table": {
+              "name": "Individual_measureSmoking_rate",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "individual",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "individual_id": "id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "individual",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "measure",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "measures_id": "id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "measure",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "individual",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "smoking_rate",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "id": "individual_id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "Individual_measureSmoking_rate",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "measure",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "assay_code",
+                "using": {
+                  "foreign_key_constraint_on": "assay_code_id"
+                }
+              },
+              {
+                "name": "individual_measure",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "measures_id",
+                    "table": {
+                      "name": "individual_measures",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "measurement_value",
+                "using": {
+                  "foreign_key_constraint_on": "measurement_value_id"
+                }
+              }
+            ]
+          }
+
+
+        ],
+        "configuration": {
+          "connection_info": {
+            "database_url": {
+              "from_env": "HASURA_GRAPHQL_METADATA_DATABASE_URL"
+            },
+            "isolation_level": "read-committed",
+            "use_prepared_statements": false
+          }
+        }
+      }
+    ],
+    "backend_configs": {
+      "dataconnector": {
+        "athena": {
+          "uri": "http://localhost:9081/api/v1/athena"
+        },
+        "mariadb": {
+          "uri": "http://localhost:9081/api/v1/mariadb"
+        },
+        "mysql8": {
+          "uri": "http://localhost:9081/api/v1/mysql"
+        },
+        "oracle": {
+          "uri": "http://localhost:9081/api/v1/oracle"
+        },
+        "snowflake": {
+          "uri": "http://localhost:9081/api/v1/snowflake"
+        }
+      }
+    }
+  }
+}

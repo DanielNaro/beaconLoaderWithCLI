@@ -1,0 +1,3663 @@
+{
+  "resource_version": 55,
+  "metadata": {
+    "version": 3,
+    "sources": [
+      {
+        "name": "beacon_data",
+        "kind": "postgres",
+        "tables": [
+          {
+            "table": {
+              "name": "Individual_measureSmoking_rate",
+              "schema": "public"
+            },
+            "configuration": {
+              "column_config": {},
+              "custom_column_names": {},
+              "custom_name": "individual_measuresmoking_rate",
+              "custom_root_fields": {}
+            },
+            "object_relationships": [
+              {
+                "name": "individual",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "individual_id": "id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "individual",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "measure",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "measures_id": "id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "measure",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "individual_id",
+                    "measures_id"
+                  ],
+                  "filter": {
+                    "individual": {
+                      "individual_allowed_roles": {
+                        "allowed_roles": {
+                          "_eq": "X-Hasura-Role"
+                        }
+                      }
+                    }
+                  },
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "age",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "obtention_procedure",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "age_id",
+                    "table": {
+                      "name": "obtention_procedure",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id",
+                    "date_time",
+                    "dtype",
+                    "age",
+                    "duration",
+                    "end_age",
+                    "start_age"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "age_range_criteria",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "cohort",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "age_range_inclusion_criteria_id",
+                    "table": {
+                      "name": "cohort",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "end_age",
+                    "start_age",
+                    "id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "analysis",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "run",
+                "using": {
+                  "foreign_key_constraint_on": "run_id"
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "analysis_allowed_roles",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "analysis_id",
+                    "table": {
+                      "name": "analysis_allowed_roles",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "case_level_data",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "analysis_id",
+                    "table": {
+                      "name": "case_level_data",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "analysis_date",
+                    "aligner",
+                    "id",
+                    "pipeline_name",
+                    "pipeline_ref",
+                    "run_id",
+                    "variant_caller"
+                  ],
+                  "filter": {
+                    "analysis_allowed_roles": {
+                      "allowed_roles": {
+                        "_eq": "X-Hasura-Role"
+                      }
+                    }
+                  },
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "analysis_allowed_roles",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "analysis",
+                "using": {
+                  "foreign_key_constraint_on": "analysis_id"
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "biosample",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "individual",
+                "using": {
+                  "foreign_key_constraint_on": "individual_id"
+                }
+              },
+              {
+                "name": "obtention_procedure",
+                "using": {
+                  "foreign_key_constraint_on": "obtention_procedure_id"
+                }
+              },
+              {
+                "name": "ontologyTermByBiosampleStatusId",
+                "using": {
+                  "foreign_key_constraint_on": "biosample_status_id"
+                }
+              },
+              {
+                "name": "sample_origin_type",
+                "using": {
+                  "foreign_key_constraint_on": "sample_origin_type_id"
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "biosample_allowed_roles",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "biosample_id",
+                    "table": {
+                      "name": "biosample_allowed_roles",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "dataset_biosamples",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "biosamples_id",
+                    "table": {
+                      "name": "dataset_biosamples",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "runs",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "biosample_id",
+                    "table": {
+                      "name": "run",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "obtention_procedure_id",
+                    "biosample_status_id",
+                    "id",
+                    "individual_id",
+                    "sample_origin_type_id"
+                  ],
+                  "filter": {
+                    "biosample_allowed_roles": {
+                      "allowed_roles": {
+                        "_eq": "X-Hasura-Role"
+                      }
+                    }
+                  },
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "biosample_allowed_roles",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "biosample",
+                "using": {
+                  "foreign_key_constraint_on": "biosample_id"
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "case_level_data",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "allele_origin",
+                "using": {
+                  "foreign_key_constraint_on": "allele_origin_id"
+                }
+              },
+              {
+                "name": "analysis",
+                "using": {
+                  "foreign_key_constraint_on": "analysis_id"
+                }
+              },
+              {
+                "name": "genomic_variation_case_level_datum",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "case_level_data_id",
+                    "table": {
+                      "name": "genomic_variation_case_level_data",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "zygosity",
+                "using": {
+                  "foreign_key_constraint_on": "zygosity_id"
+                }
+              },
+              {
+                "name": "zygosity_as_count",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "zygosity_id": "zygosity_id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "zygosity_as_count",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "case_level_data_allowed_roles",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "case_level_data_id",
+                    "table": {
+                      "name": "case_level_data_allowed_roles",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "case_level_data_allowed_roles_for_aggregations",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "case_level_data_id",
+                    "table": {
+                      "name": "case_level_data_allowed_roles_for_aggregation",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "case_level_data_clinical_interpretations",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "case_level_data_id",
+                    "table": {
+                      "name": "case_level_data_clinical_interpretations",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "case_level_data_phenotypic_effects",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "case_level_data_id",
+                    "table": {
+                      "name": "case_level_data_phenotypic_effects",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "depth",
+                    "id",
+                    "allele_origin_id",
+                    "analysis_id",
+                    "zygosity_id"
+                  ],
+                  "filter": {
+                    "case_level_data_allowed_roles": {
+                      "allowed_roles": {
+                        "_eq": "X-Hasura-Role"
+                      }
+                    }
+                  },
+                  "allow_aggregations": true,
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "case_level_data_allowed_roles",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "case_level_datum",
+                "using": {
+                  "foreign_key_constraint_on": "case_level_data_id"
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "case_level_data_allowed_roles_for_aggregation",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "case_level_datum",
+                "using": {
+                  "foreign_key_constraint_on": "case_level_data_id"
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "case_level_data_clinical_interpretations",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "case_level_datum",
+                "using": {
+                  "foreign_key_constraint_on": "case_level_data_id"
+                }
+              },
+              {
+                "name": "phenotypic_effect",
+                "using": {
+                  "foreign_key_constraint_on": "clinical_interpretations_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "case_level_data_id",
+                    "clinical_interpretations_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "case_level_data_for_aggregation",
+              "schema": "public"
+            },
+            "array_relationships": [
+              {
+                "name": "allowed_roles",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "id": "case_level_data_id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "case_level_data_allowed_roles_for_aggregation",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [],
+                  "filter": {
+                    "allowed_roles": {
+                      "allowed_roles_for_aggregation": {
+                        "_eq": "X-Hasura-Role"
+                      }
+                    }
+                  }
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "case_level_data_phenotypic_effects",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "case_level_datum",
+                "using": {
+                  "foreign_key_constraint_on": "case_level_data_id"
+                }
+              },
+              {
+                "name": "phenotypic_effect",
+                "using": {
+                  "foreign_key_constraint_on": "phenotypic_effects_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "case_level_data_id",
+                    "phenotypic_effects_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "clinical_interpretation",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "category",
+                "using": {
+                  "foreign_key_constraint_on": "category_id"
+                }
+              },
+              {
+                "name": "effect",
+                "using": {
+                  "foreign_key_constraint_on": "effect_id"
+                }
+              },
+              {
+                "name": "evidence_type",
+                "using": {
+                  "foreign_key_constraint_on": "evidence_type_id"
+                }
+              },
+              {
+                "name": "variant_level_data_clinical_interpretation",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "clinical_interpretations_id",
+                    "table": {
+                      "name": "variant_level_data_clinical_interpretations",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "variant_level_data_phenotypic_effect",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "phenotypic_effects_id",
+                    "table": {
+                      "name": "variant_level_data_phenotypic_effects",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "clinical_relevance",
+                    "id",
+                    "annotated_with_tool_name",
+                    "annotated_with_tool_reference",
+                    "annotated_with_tool_version",
+                    "category_id",
+                    "condition_id",
+                    "effect_id",
+                    "evidence_type_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "cohort",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "age_range_criterium",
+                "using": {
+                  "foreign_key_constraint_on": "age_range_inclusion_criteria_id"
+                }
+              },
+              {
+                "name": "cohort_design",
+                "using": {
+                  "foreign_key_constraint_on": "cohort_design_id"
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "cohort_genders_inclusion_criteria",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "cohort_id",
+                    "table": {
+                      "name": "cohort_genders_inclusion_criteria",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "cohort_individuals",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "cohort_id",
+                    "table": {
+                      "name": "cohort_individuals",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "cohort_type",
+                    "age_range_inclusion_criteria_id",
+                    "cohort_design_id",
+                    "id",
+                    "name"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "cohort_genders_inclusion_criteria",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "cohort",
+                "using": {
+                  "foreign_key_constraint_on": "cohort_id"
+                }
+              },
+              {
+                "name": "genders_inclusion_criteria",
+                "using": {
+                  "foreign_key_constraint_on": "genders_inclusion_criteria_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "cohort_id",
+                    "genders_inclusion_criteria_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "cohort_individuals",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "cohort",
+                "using": {
+                  "foreign_key_constraint_on": "cohort_id"
+                }
+              },
+              {
+                "name": "individual",
+                "using": {
+                  "foreign_key_constraint_on": "individuals_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "cohort_id",
+                    "individuals_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "complex_value",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "measurement_value",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "complex_value_id",
+                    "table": {
+                      "name": "measurement_value",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "quantity",
+                "using": {
+                  "foreign_key_constraint_on": "quantity_id"
+                }
+              },
+              {
+                "name": "quantity_type",
+                "using": {
+                  "foreign_key_constraint_on": "quantity_type_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id",
+                    "quantity_id",
+                    "quantity_type_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "copies",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "variation",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "copies_id",
+                    "table": {
+                      "name": "variation",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "data_use_conditions",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "dataset",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "data_use_conditions_id",
+                    "table": {
+                      "name": "dataset",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "data_use_conditions_duo_data_uses",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "data_use_conditions_id",
+                    "table": {
+                      "name": "data_use_conditions_duo_data_uses",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "data_use_conditions_duo_data_uses",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "data_use_condition",
+                "using": {
+                  "foreign_key_constraint_on": "data_use_conditions_id"
+                }
+              },
+              {
+                "name": "duo_data_use",
+                "using": {
+                  "foreign_key_constraint_on": "duo_data_uses_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "data_use_conditions_id",
+                    "duo_data_uses_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "dataset",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "data_use_condition",
+                "using": {
+                  "foreign_key_constraint_on": "data_use_conditions_id"
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "dataset_biosamples",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "dataset_id",
+                    "table": {
+                      "name": "dataset_biosamples",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "dataset_individuals",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "dataset_id",
+                    "table": {
+                      "name": "dataset_individuals",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "additional_properties",
+                    "create_date_time",
+                    "data_use_conditions_id",
+                    "update_date_time",
+                    "description",
+                    "external_url",
+                    "id",
+                    "info_beacon_contact",
+                    "info_beacon_mapping",
+                    "info_beacon_version",
+                    "name",
+                    "version"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "dataset_biosamples",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "biosample",
+                "using": {
+                  "foreign_key_constraint_on": "biosamples_id"
+                }
+              },
+              {
+                "name": "dataset",
+                "using": {
+                  "foreign_key_constraint_on": "dataset_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "biosamples_id",
+                    "dataset_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "dataset_individuals",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "dataset",
+                "using": {
+                  "foreign_key_constraint_on": "dataset_id"
+                }
+              },
+              {
+                "name": "individual",
+                "using": {
+                  "foreign_key_constraint_on": "individuals_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "dataset_id",
+                    "individuals_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "frequency_in_population",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "frequency_in_populations_frequency",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "frequencies_id",
+                    "table": {
+                      "name": "frequency_in_populations_frequencies",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "frequency",
+                    "id",
+                    "population"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "frequency_in_populations",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "genomic_variation_frequency_in_populations_list",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "frequency_in_populations_list_id",
+                    "table": {
+                      "name": "genomic_variation_frequency_in_populations_list",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "frequency_in_populations_frequencies",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "frequency_in_populations_id",
+                    "table": {
+                      "name": "frequency_in_populations_frequencies",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id",
+                    "source",
+                    "source_reference",
+                    "version"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "frequency_in_populations_frequencies",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "frequencyInPopulationByFrequenciesId",
+                "using": {
+                  "foreign_key_constraint_on": "frequencies_id"
+                }
+              },
+              {
+                "name": "frequency_in_population",
+                "using": {
+                  "foreign_key_constraint_on": "frequency_in_populations_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "frequencies_id",
+                    "frequency_in_populations_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "gene",
+              "schema": "public"
+            },
+            "array_relationships": [
+              {
+                "name": "zygosity",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "gene_id": "gene_id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "individual_zygosity_by_gene",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "zygosity_for_aggregation",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "gene_id": "gene_id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "individual_zygosity_by_gene_for_aggregation",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "gene_id"
+                  ],
+                  "filter": {}
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "genomic_feature",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "feature",
+                "using": {
+                  "foreign_key_constraint_on": "feature_id_id"
+                }
+              },
+              {
+                "name": "feature_class",
+                "using": {
+                  "foreign_key_constraint_on": "feature_class_id"
+                }
+              },
+              {
+                "name": "genomic_variation_genomic_feature",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "genomic_features_id",
+                    "table": {
+                      "name": "genomic_variation_genomic_features",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id",
+                    "feature_class_id",
+                    "feature_id_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "genomic_variation",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "variant_level_datum",
+                "using": {
+                  "foreign_key_constraint_on": "variant_level_data_id"
+                }
+              },
+              {
+                "name": "variation",
+                "using": {
+                  "foreign_key_constraint_on": "variation_id"
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "genomic_variation_aminoacid_changes",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "genomic_variation_variant_internal_id",
+                    "table": {
+                      "name": "genomic_variation_aminoacid_changes",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "genomic_variation_case_level_data",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "genomic_variation_variant_internal_id",
+                    "table": {
+                      "name": "genomic_variation_case_level_data",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "genomic_variation_frequency_in_populations_lists",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "genomic_variation_variant_internal_id",
+                    "table": {
+                      "name": "genomic_variation_frequency_in_populations_list",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "genomic_variation_gene_ids",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "genomic_variation_variant_internal_id",
+                    "table": {
+                      "name": "genomic_variation_gene_ids",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "genomic_variation_genomic_features",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "genomic_variation_variant_internal_id",
+                    "table": {
+                      "name": "genomic_variation_genomic_features",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "genomic_variation_molecular_effects",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "genomic_variation_variant_internal_id",
+                    "table": {
+                      "name": "genomic_variation_molecular_effects",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "genomic_variation_proteinhgvsids",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "genomic_variation_variant_internal_id",
+                    "table": {
+                      "name": "genomic_variation_proteinhgvsids",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "genomic_variation_transcripthgvsids",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "genomic_variation_variant_internal_id",
+                    "table": {
+                      "name": "genomic_variation_transcripthgvsids",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "genomic_variation_variant_alternative_ids",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "genomic_variation_variant_internal_id",
+                    "table": {
+                      "name": "genomic_variation_variant_alternative_ids",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "variant_level_data_id",
+                    "variation_id",
+                    "clinvar_variant_id",
+                    "genomichgvsid",
+                    "variant_internal_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "genomic_variation_aminoacid_changes",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "genomic_variation",
+                "using": {
+                  "foreign_key_constraint_on": "genomic_variation_variant_internal_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "aminoacid_changes",
+                    "genomic_variation_variant_internal_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "genomic_variation_case_level_data",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "case_level_datum",
+                "using": {
+                  "foreign_key_constraint_on": "case_level_data_id"
+                }
+              },
+              {
+                "name": "genomic_variation",
+                "using": {
+                  "foreign_key_constraint_on": "genomic_variation_variant_internal_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "case_level_data_id",
+                    "genomic_variation_variant_internal_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "genomic_variation_frequency_in_populations_list",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "frequency_in_population",
+                "using": {
+                  "foreign_key_constraint_on": "frequency_in_populations_list_id"
+                }
+              },
+              {
+                "name": "genomic_variation",
+                "using": {
+                  "foreign_key_constraint_on": "genomic_variation_variant_internal_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "frequency_in_populations_list_id",
+                    "genomic_variation_variant_internal_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "genomic_variation_gene_ids",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "genomic_variation",
+                "using": {
+                  "foreign_key_constraint_on": "genomic_variation_variant_internal_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "gene_ids",
+                    "genomic_variation_variant_internal_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "genomic_variation_genomic_features",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "genomic_feature",
+                "using": {
+                  "foreign_key_constraint_on": "genomic_features_id"
+                }
+              },
+              {
+                "name": "genomic_variation",
+                "using": {
+                  "foreign_key_constraint_on": "genomic_variation_variant_internal_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "genomic_features_id",
+                    "genomic_variation_variant_internal_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "genomic_variation_molecular_effects",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "genomic_variation",
+                "using": {
+                  "foreign_key_constraint_on": "genomic_variation_variant_internal_id"
+                }
+              },
+              {
+                "name": "molecular_effects",
+                "using": {
+                  "foreign_key_constraint_on": "molecular_effects_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "genomic_variation_variant_internal_id",
+                    "molecular_effects_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "genomic_variation_proteinhgvsids",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "genomic_variation",
+                "using": {
+                  "foreign_key_constraint_on": "genomic_variation_variant_internal_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "proteinhgvsids",
+                    "genomic_variation_variant_internal_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "genomic_variation_transcripthgvsids",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "genomic_variation",
+                "using": {
+                  "foreign_key_constraint_on": "genomic_variation_variant_internal_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "transcripthgvsids",
+                    "genomic_variation_variant_internal_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "genomic_variation_variant_alternative_ids",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "genomic_variation",
+                "using": {
+                  "foreign_key_constraint_on": "genomic_variation_variant_internal_id"
+                }
+              },
+              {
+                "name": "variant_alternative_id",
+                "using": {
+                  "foreign_key_constraint_on": "variant_alternative_ids_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "genomic_variation_variant_internal_id",
+                    "variant_alternative_ids_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "individual",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "sex",
+                "using": {
+                  "foreign_key_constraint_on": "sex_id"
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "biosamples",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "individual_id",
+                    "table": {
+                      "name": "biosample",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "cohort_individuals",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "individuals_id",
+                    "table": {
+                      "name": "cohort_individuals",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "dataset_individuals",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "individuals_id",
+                    "table": {
+                      "name": "dataset_individuals",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "individual_allowed_roles",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "individual_id",
+                    "table": {
+                      "name": "individual_allowed_roles",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "individual_measureSmokingRate",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "id": "individual_id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "Individual_measureSmoking_rate",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "individual_measures",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "individual_id",
+                    "table": {
+                      "name": "individual_measures",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "individual_phenotypic_features",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "individual_id",
+                    "table": {
+                      "name": "individual_phenotypic_features",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id"
+                  ],
+                  "filter": {
+                    "individual_allowed_roles": {
+                      "allowed_roles": {
+                        "_eq": "X-Hasura-Role"
+                      }
+                    }
+                  }
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "individual_allowed_roles",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "individual",
+                "using": {
+                  "foreign_key_constraint_on": "individual_id"
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "individual_measures",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "individual",
+                "using": {
+                  "foreign_key_constraint_on": "individual_id"
+                }
+              },
+              {
+                "name": "measure",
+                "using": {
+                  "foreign_key_constraint_on": "measures_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "measures_id",
+                    "individual_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "individual_phenotypic_features",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "individual",
+                "using": {
+                  "foreign_key_constraint_on": "individual_id"
+                }
+              },
+              {
+                "name": "phenotypic_feature",
+                "using": {
+                  "foreign_key_constraint_on": "phenotypic_features_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "phenotypic_features_id",
+                    "individual_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "individual_zygosity_by_gene",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "biosample",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "biosample_id": "id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "biosample",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "case_level_data",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "case_level_data_id": "id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "case_level_data",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "genomic_variation",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "variation_id": "variation_id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "genomic_variation",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "individual",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "individual_id": "id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "individual",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "zygosity",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "zygosity_id": "id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "ontology_term",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "zygosity_count"
+                  ],
+                  "filter": {
+                    "_and": [
+                      {
+                        "individual": {
+                          "individual_allowed_roles": {
+                            "allowed_roles": {
+                              "_eq": "X-Hasura-Role"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "case_level_data": {
+                          "case_level_data_allowed_roles": {
+                            "allowed_roles": {
+                              "_eq": "X-Hasura-Role"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "biosample": {
+                          "biosample_allowed_roles": {
+                            "allowed_roles": {
+                              "_eq": "X-Hasura-Role"
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "allow_aggregations": true,
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "individual_zygosity_by_gene_for_aggregation",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "biosample",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "biosample_id": "id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "biosample",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "case_level_data",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "case_level_data_id": "id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "case_level_data_for_aggregation",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "individual",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "individual_id": "id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "individual",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "variation",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "variation_id": "id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "variation",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "zygosity",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "zygosity_id": "id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "ontology_term",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "zygosity_count"
+                  ],
+                  "filter": {
+                    "_and": [
+                      {
+                        "individual": {
+                          "individual_allowed_roles": {
+                            "allowed_roles": {
+                              "_eq": "X-Hasura-Role"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "biosample": {
+                          "biosample_allowed_roles": {
+                            "allowed_roles": {
+                              "_eq": "X-Hasura-Role"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "case_level_data": {
+                          "allowed_roles": {
+                            "allowed_roles_for_aggregation": {
+                              "_eq": "X-Hasura-Role"
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "limit": 0,
+                  "allow_aggregations": true,
+                  "query_root_fields": [
+                    "select_aggregate",
+                    "select"
+                  ],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "interval",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "location",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "interval_id",
+                    "table": {
+                      "name": "location",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id",
+                    "end_pos",
+                    "start_pos",
+                    "type"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "library_layout",
+              "schema": "public"
+            },
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id",
+                    "name"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "library_selection",
+              "schema": "public"
+            },
+            "array_relationships": [
+              {
+                "name": "runs",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "library_selection_id",
+                    "table": {
+                      "name": "run",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id",
+                    "name"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "location",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "interval",
+                "using": {
+                  "foreign_key_constraint_on": "interval_id"
+                }
+              },
+              {
+                "name": "variation_haplotype_member",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "location_id",
+                    "table": {
+                      "name": "variation_haplotype_member",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "variations",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "location_id",
+                    "table": {
+                      "name": "variation",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id",
+                    "interval_id",
+                    "chr",
+                    "species_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "measure",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "assay_code",
+                "using": {
+                  "foreign_key_constraint_on": "assay_code_id"
+                }
+              },
+              {
+                "name": "individual_measure",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "measures_id",
+                    "table": {
+                      "name": "individual_measures",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "measurement_value",
+                "using": {
+                  "foreign_key_constraint_on": "measurement_value_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "date",
+                    "id",
+                    "measurement_value_id",
+                    "assay_code_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "measurement_value",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "complex_value",
+                "using": {
+                  "foreign_key_constraint_on": "complex_value_id"
+                }
+              },
+              {
+                "name": "measure",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "measurement_value_id",
+                    "table": {
+                      "name": "measure",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "value",
+                "using": {
+                  "foreign_key_constraint_on": "value_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "complex_value_id",
+                    "id",
+                    "value_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "obtention_procedure",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "age",
+                "using": {
+                  "foreign_key_constraint_on": "age_id"
+                }
+              },
+              {
+                "name": "procedure_code",
+                "using": {
+                  "foreign_key_constraint_on": "procedure_code_id"
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "biosamples",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "obtention_procedure_id",
+                    "table": {
+                      "name": "biosample",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "age_id",
+                    "id",
+                    "procedure_code_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "ontology_term",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "data_use_conditions_duo_data_use",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "duo_data_uses_id",
+                    "table": {
+                      "name": "data_use_conditions_duo_data_uses",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "biosamples",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "sample_origin_type_id",
+                    "table": {
+                      "name": "biosample",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "biosamplesByBiosampleStatusId",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "biosample_status_id",
+                    "table": {
+                      "name": "biosample",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "caseLevelDataByAlleleOriginId",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "allele_origin_id",
+                    "table": {
+                      "name": "case_level_data",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "case_level_data",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "zygosity_id",
+                    "table": {
+                      "name": "case_level_data",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "clinicalInterpretationsByCategoryId",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "category_id",
+                    "table": {
+                      "name": "clinical_interpretation",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "clinicalInterpretationsByEffectId",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "effect_id",
+                    "table": {
+                      "name": "clinical_interpretation",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "clinical_interpretations",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "evidence_type_id",
+                    "table": {
+                      "name": "clinical_interpretation",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "cohort_genders_inclusion_criteria",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "genders_inclusion_criteria_id",
+                    "table": {
+                      "name": "cohort_genders_inclusion_criteria",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "cohorts",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "cohort_design_id",
+                    "table": {
+                      "name": "cohort",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "complex_values",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "quantity_type_id",
+                    "table": {
+                      "name": "complex_value",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "genomicFeaturesByFeatureIdId",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "feature_id_id",
+                    "table": {
+                      "name": "genomic_feature",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "genomic_features",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "feature_class_id",
+                    "table": {
+                      "name": "genomic_feature",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "genomic_variation_molecular_effects",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "molecular_effects_id",
+                    "table": {
+                      "name": "genomic_variation_molecular_effects",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "individuals",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "sex_id",
+                    "table": {
+                      "name": "individual",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "measures",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "assay_code_id",
+                    "table": {
+                      "name": "measure",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "obtention_procedures",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "procedure_code_id",
+                    "table": {
+                      "name": "obtention_procedure",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "phenotypicEffectsByCategoryId",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "category_id",
+                    "table": {
+                      "name": "phenotypic_effect",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "phenotypicEffectsByEffectId",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "effect_id",
+                    "table": {
+                      "name": "phenotypic_effect",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "phenotypic_effects",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "evidence_type_id",
+                    "table": {
+                      "name": "phenotypic_effect",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "phenotypic_feature_modifiers",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "modifiers_id",
+                    "table": {
+                      "name": "phenotypic_feature_modifiers",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "phenotypic_features",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "feature_type_id",
+                    "table": {
+                      "name": "phenotypic_feature",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "quantities",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "unit_id",
+                    "table": {
+                      "name": "quantity",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "reference_ranges",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "unit_id",
+                    "table": {
+                      "name": "reference_range",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "runs",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "library_source_id",
+                    "table": {
+                      "name": "run",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "runsByPlatformModelId",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "platform_model_id",
+                    "table": {
+                      "name": "run",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "values",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "term_value_id",
+                    "table": {
+                      "name": "value",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id",
+                    "label"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "phenotypic_effect",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "case_level_data_clinical_interpretation",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "clinical_interpretations_id",
+                    "table": {
+                      "name": "case_level_data_clinical_interpretations",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "case_level_data_phenotypic_effect",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "phenotypic_effects_id",
+                    "table": {
+                      "name": "case_level_data_phenotypic_effects",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "category",
+                "using": {
+                  "foreign_key_constraint_on": "category_id"
+                }
+              },
+              {
+                "name": "effect",
+                "using": {
+                  "foreign_key_constraint_on": "effect_id"
+                }
+              },
+              {
+                "name": "evidence_type",
+                "using": {
+                  "foreign_key_constraint_on": "evidence_type_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "clinical_relevance",
+                    "id",
+                    "annotation_tool_name",
+                    "annotation_tool_reference",
+                    "annotation_tool_version",
+                    "category_id",
+                    "condition_id",
+                    "effect_id",
+                    "evidence_type_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "phenotypic_feature",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "feature_type",
+                "using": {
+                  "foreign_key_constraint_on": "feature_type_id"
+                }
+              },
+              {
+                "name": "individual_phenotypic_feature",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "phenotypic_features_id",
+                    "table": {
+                      "name": "individual_phenotypic_features",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "phenotypic_feature_modifiers",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "phenotypic_feature_id",
+                    "table": {
+                      "name": "phenotypic_feature_modifiers",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id",
+                    "feature_type_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "phenotypic_feature_modifiers",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "modifiers",
+                "using": {
+                  "foreign_key_constraint_on": "modifiers_id"
+                }
+              },
+              {
+                "name": "phenotypic_feature",
+                "using": {
+                  "foreign_key_constraint_on": "phenotypic_feature_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "phenotypic_feature_id",
+                    "modifiers_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "quantity",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "complex_value",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "quantity_id",
+                    "table": {
+                      "name": "complex_value",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "reference_range",
+                "using": {
+                  "foreign_key_constraint_on": "reference_range_id"
+                }
+              },
+              {
+                "name": "unit",
+                "using": {
+                  "foreign_key_constraint_on": "unit_id"
+                }
+              },
+              {
+                "name": "valueById",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "quantity_id",
+                    "table": {
+                      "name": "value",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "value",
+                    "id",
+                    "reference_range_id",
+                    "unit_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "reference_range",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "unit",
+                "using": {
+                  "foreign_key_constraint_on": "unit_id"
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "quantities",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "reference_range_id",
+                    "table": {
+                      "name": "quantity",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "high",
+                    "low",
+                    "id",
+                    "unit_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "run",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "biosample",
+                "using": {
+                  "foreign_key_constraint_on": "biosample_id"
+                }
+              },
+              {
+                "name": "library_selection",
+                "using": {
+                  "foreign_key_constraint_on": "library_selection_id"
+                }
+              },
+              {
+                "name": "library_source",
+                "using": {
+                  "foreign_key_constraint_on": "library_source_id"
+                }
+              },
+              {
+                "name": "platform_model",
+                "using": {
+                  "foreign_key_constraint_on": "platform_model_id"
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "analyses",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "run_id",
+                    "table": {
+                      "name": "analysis",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "run_allowed_roles",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "run_id",
+                    "table": {
+                      "name": "run_allowed_roles",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "library_layout",
+                    "run_date",
+                    "library_selection_id",
+                    "biosample_id",
+                    "id",
+                    "library_source_id",
+                    "library_strategy",
+                    "platform",
+                    "platform_model_id"
+                  ],
+                  "filter": {
+                    "run_allowed_roles": {
+                      "allowed_roles": {
+                        "_eq": "X-Hasura-Role"
+                      }
+                    }
+                  },
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "run_allowed_roles",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "run",
+                "using": {
+                  "foreign_key_constraint_on": "run_id"
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "value",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "measurement_value",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "value_id",
+                    "table": {
+                      "name": "measurement_value",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "quantity",
+                "using": {
+                  "foreign_key_constraint_on": "quantity_id"
+                }
+              },
+              {
+                "name": "term_value",
+                "using": {
+                  "foreign_key_constraint_on": "term_value_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id",
+                    "quantity_id",
+                    "term_value_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "variant_alternative_id",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "genomic_variation_variant_alternative_id",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "variant_alternative_ids_id",
+                    "table": {
+                      "name": "genomic_variation_variant_alternative_ids",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "genomic_variation_variant_alternative_ids",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "variant_alternative_ids_id",
+                    "table": {
+                      "name": "genomic_variation_variant_alternative_ids",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id",
+                    "notes",
+                    "reference"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "variant_level_data",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "genomic_variation",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "variant_level_data_id",
+                    "table": {
+                      "name": "genomic_variation",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "variant_level_data_clinical_interpretations",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "variant_level_data_id",
+                    "table": {
+                      "name": "variant_level_data_clinical_interpretations",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "variant_level_data_phenotypic_effects",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "variant_level_data_id",
+                    "table": {
+                      "name": "variant_level_data_phenotypic_effects",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "variant_level_data_clinical_interpretations",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "clinical_interpretation",
+                "using": {
+                  "foreign_key_constraint_on": "clinical_interpretations_id"
+                }
+              },
+              {
+                "name": "variant_level_datum",
+                "using": {
+                  "foreign_key_constraint_on": "variant_level_data_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "clinical_interpretations_id",
+                    "variant_level_data_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "variant_level_data_phenotypic_effects",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "clinical_interpretation",
+                "using": {
+                  "foreign_key_constraint_on": "phenotypic_effects_id"
+                }
+              },
+              {
+                "name": "variant_level_datum",
+                "using": {
+                  "foreign_key_constraint_on": "variant_level_data_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "phenotypic_effects_id",
+                    "variant_level_data_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "variation",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "copy",
+                "using": {
+                  "foreign_key_constraint_on": "copies_id"
+                }
+              },
+              {
+                "name": "genomic_variation",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "variation_id",
+                    "table": {
+                      "name": "genomic_variation",
+                      "schema": "public"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "location",
+                "using": {
+                  "foreign_key_constraint_on": "location_id"
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "variation_members",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "variation_id",
+                    "table": {
+                      "name": "variation_members",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "copies_id",
+                    "id",
+                    "location_id",
+                    "alternate_bases",
+                    "reference_bases",
+                    "variant_type"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "variation_haplotype_member",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "location",
+                "using": {
+                  "foreign_key_constraint_on": "location_id"
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "variation_members",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "members_id",
+                    "table": {
+                      "name": "variation_members",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "location_id",
+                    "id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "variation_members",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "variation",
+                "using": {
+                  "foreign_key_constraint_on": "variation_id"
+                }
+              },
+              {
+                "name": "variation_haplotype_member",
+                "using": {
+                  "foreign_key_constraint_on": "members_id"
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "variation_id",
+                    "members_id"
+                  ],
+                  "filter": {},
+                  "query_root_fields": [],
+                  "subscription_root_fields": []
+                },
+                "comment": ""
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "zygosity_as_count",
+              "schema": "public"
+            },
+            "object_relationships": [
+              {
+                "name": "case_level_data",
+                "using": {
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "zygosity_id": "zygosity_id"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "case_level_data",
+                      "schema": "public"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "name": "zygosity_as_count_by_genomic_variation",
+              "schema": "public"
+            }
+          }
+        ],
+        "configuration": {
+          "connection_info": {
+            "database_url": {
+              "from_env": "PG_DATABASE_URL"
+            },
+            "isolation_level": "read-committed",
+            "use_prepared_statements": false
+          }
+        }
+      }
+    ]
+  }
+}
