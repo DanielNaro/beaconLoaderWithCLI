@@ -106,6 +106,12 @@ services:
       HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET}
       HASURA_GRAPHQL_METADATA_DEFAULTS: '{"backend_configs":{"dataconnector":{"athena":{"uri":"http://localhost:${DATA_CONNECTOR_AGENT_PORT}/api/v1/athena"},"mariadb":{"uri":"http://localhost:${DATA_CONNECTOR_AGENT_PORT}/api/v1/mariadb"},"mysql8":{"uri":"http://localhost:${DATA_CONNECTOR_AGENT_PORT}/api/v1/mysql"},"oracle":{"uri":"http://localhost:${DATA_CONNECTOR_AGENT_PORT}/api/v1/oracle"},"snowflake":{"uri":"http://localhost:${DATA_CONNECTOR_AGENT_PORT}/api/v1/snowflake"}}}}'
       HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256", "jwk_url": "http://localhost:${KEYCLOAK_PORT}/realms/beaconGraphQL/protocol/openid-connect/certs", "audience": "hasura"}'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:${GRAPHQL_ENGINE_PORT}/healthz"]
+      interval: 25s
+      timeout: 10s
+      retries: 50
+      start_period: 5s
     depends_on:
       data-connector-agent:
         condition: service_healthy
