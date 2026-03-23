@@ -77,7 +77,8 @@ services:
       KC_METRICS_ENABLED: true
       KC_HTTP_MANAGEMENT_PORT: ${KEYCLOAK_MANAGEMENT_PORT}
     command:
-      - start-dev --import-realm --http-port=${KEYCLOAK_PORT}
+      - start-dev
+      - --import-realm
     volumes:
       - ./realm:/opt/keycloak/data/import
     depends_on:
