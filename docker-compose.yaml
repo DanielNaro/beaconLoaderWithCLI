@@ -3,28 +3,29 @@ services:
     image: alpine:latest
     command: sleep infinity
     environment:
-      BEACON_DB_PORT: ${BEACON_DB_PORT:-5433}
-      KEYCLOAK_DB_PORT: ${KEYCLOAK_DB_PORT:-5432}
+      BEACON_DB_PORT: ${BEACON_DB_PORT}
+      KEYCLOAK_DB_PORT: ${KEYCLOAK_DB_PORT}
       # Beacon Postgres credentials (used by postgres, hasura and beacon-loader)
-      BEACON_DB_NAME: ${BEACON_DB_NAME:-postgres}
-      BEACON_DB_USER: ${BEACON_DB_USER:-postgres}
-      BEACON_DB_PASSWORD: ${BEACON_DB_PASSWORD:-password_for_beacon_postgres}
+      BEACON_DB_NAME: ${BEACON_DB_NAME}
+      BEACON_DB_USER: ${BEACON_DB_USER}
+      BEACON_DB_PASSWORD: ${BEACON_DB_PASSWORD}
       # Keycloak Postgres credentials (used by postgres-keycloak and keycloak)
-      KEYCLOAK_DB_NAME: ${KEYCLOAK_DB_NAME:-keycloak-db}
-      KEYCLOAK_DB_USER: ${KEYCLOAK_DB_USER:-keycloak}
-      KEYCLOAK_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD:-keycloak}
+      KEYCLOAK_DB_NAME: ${KEYCLOAK_DB_NAME}
+      KEYCLOAK_DB_USER: ${KEYCLOAK_DB_USER}
+      KEYCLOAK_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
       # Hasura admin secret
-      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-secret_key_for_hasura}
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET}
       # Service ports
-      KEYCLOAK_PORT: ${KEYCLOAK_PORT:-9086}
-      GRAPHQL_ENGINE_PORT: ${GRAPHQL_ENGINE_PORT:-9080}
-      DATA_CONNECTOR_AGENT_PORT: ${DATA_CONNECTOR_AGENT_PORT:-9081}
+      KEYCLOAK_PORT: ${KEYCLOAK_PORT}
+      GRAPHQL_ENGINE_PORT: ${GRAPHQL_ENGINE_PORT}
+      DATA_CONNECTOR_AGENT_PORT: ${DATA_CONNECTOR_AGENT_PORT}
     ports:
       - "${BEACON_DB_PORT}:${BEACON_DB_PORT}" # postgresql data port
       - "${KEYCLOAK_DB_PORT}:${KEYCLOAK_DB_PORT}" # postgresql keycloak port
       - "${KEYCLOAK_PORT}:${KEYCLOAK_PORT}" # Keycloak
       - "${GRAPHQL_ENGINE_PORT}:${GRAPHQL_ENGINE_PORT}" # graphql engine
       - "${DATA_CONNECTOR_AGENT_PORT}:${DATA_CONNECTOR_AGENT_PORT}" # data-connector-agent
+      - "${KEYCLOAK_MANAGEMENT_PORT}:${KEYCLOAK_MANAGEMENT_PORT}" # Keycloak management port
 
   postgres:
     image: postgres:15
@@ -37,6 +38,11 @@ services:
       POSTGRES_DB: ${BEACON_DB_NAME}
     network_mode: "service:localhost"
     command: -p ${BEACON_DB_PORT}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${BEACON_DB_USER} -d ${BEACON_DB_NAME} -p ${BEACON_DB_PORT}"]
+      interval: 5s
+      timeout: 600s
+      retries: 50
 
   postgres-keycloak:
     image: postgres:15
@@ -47,9 +53,14 @@ services:
       POSTGRES_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
     network_mode: "service:localhost"
     command: -p ${KEYCLOAK_DB_PORT}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${KEYCLOAK_DB_USER} -d ${KEYCLOAK_DB_NAME} -p ${KEYCLOAK_DB_PORT}"]
+      interval: 5s
+      timeout: 600s
+      retries: 50
 
   keycloak:
-    image: quay.io/keycloak/keycloak:22.0
+    image: quay.io/keycloak/keycloak:26.4.2
     container_name: keycloak
     environment:
       KEYCLOAK_ADMIN: admin
@@ -60,13 +71,27 @@ services:
       KC_DB_USERNAME: ${KEYCLOAK_DB_USER}
       KC_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
       KC_DB_URL_PORT: ${KEYCLOAK_DB_PORT}
+        
+      KC_HTTP_PORT: ${KEYCLOAK_PORT}
+      KC_HTTP_ENABLED: true
+      KC_HEALTH_ENABLED: true
+      KC_METRICS_ENABLED: true
+      KC_HTTP_MANAGEMENT_PORT: ${KEYCLOAK_MANAGEMENT_PORT}
     command:
-      - start-dev --import-realm --http-port=${KEYCLOAK_PORT}
+      - start-dev
+      - --import-realm
     volumes:
       - ./realm:/opt/keycloak/data/import
     depends_on:
-      - postgres
+      postgres-keycloak:
+        condition: service_healthy
     network_mode: "service:localhost"
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/${KEYCLOAK_MANAGEMENT_PORT} && echo -e \"GET /health/live HTTP/1.1\r\nHost: localhost\r\n\r\n\" >&3 && grep -q \"200\" <&3'"]
+      interval: 30s
+      timeout: 1000s
+      retries: 50
+      start_period: 10s
 
   graphql-engine:
     image: hasura/graphql-engine:v2.42.0
@@ -81,8 +106,16 @@ services:
       HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET}
       HASURA_GRAPHQL_METADATA_DEFAULTS: '{"backend_configs":{"dataconnector":{"athena":{"uri":"http://localhost:${DATA_CONNECTOR_AGENT_PORT}/api/v1/athena"},"mariadb":{"uri":"http://localhost:${DATA_CONNECTOR_AGENT_PORT}/api/v1/mariadb"},"mysql8":{"uri":"http://localhost:${DATA_CONNECTOR_AGENT_PORT}/api/v1/mysql"},"oracle":{"uri":"http://localhost:${DATA_CONNECTOR_AGENT_PORT}/api/v1/oracle"},"snowflake":{"uri":"http://localhost:${DATA_CONNECTOR_AGENT_PORT}/api/v1/snowflake"}}}}'
       HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256", "jwk_url": "http://localhost:${KEYCLOAK_PORT}/realms/beaconGraphQL/protocol/openid-connect/certs", "audience": "hasura"}'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:${GRAPHQL_ENGINE_PORT}/healthz"]
+      interval: 25s
+      timeout: 10s
+      retries: 50
+      start_period: 5s
     depends_on:
       data-connector-agent:
+        condition: service_healthy
+      keycloak:
         condition: service_healthy
     network_mode: "service:localhost"
 
@@ -101,6 +134,9 @@ services:
       timeout: 10s
       retries: 5
       start_period: 5s
+    depends_on:
+      postgres:
+        condition: service_healthy
     network_mode: "service:localhost"
 
   beacon-loader:
@@ -116,7 +152,10 @@ services:
       - ./data:/data:ro
     network_mode: "service:localhost"
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
+      keycloak:
+        condition: service_healthy
     # Override the data path if needed:
     # command: ["--beacon.data.path=/data"]
 
