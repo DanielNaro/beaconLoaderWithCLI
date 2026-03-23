@@ -86,7 +86,7 @@ services:
         condition: service_healthy
     network_mode: "service:localhost"
     healthcheck:
-      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8999 && echo -e \"GET /health/live HTTP/1.1\r\nHost: localhost\r\n\r\n\" >&3 && grep -q \"200\" <&3'"]
+      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/${KEYCLOAK_MANAGEMENT_PORT} && echo -e \"GET /health/live HTTP/1.1\r\nHost: localhost\r\n\r\n\" >&3 && grep -q \"200\" <&3'"]
       interval: 30s
       timeout: 1000s
       retries: 50
