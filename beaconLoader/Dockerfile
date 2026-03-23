@@ -29,10 +29,6 @@ COPY --from=build /app/target/*.jar app.jar
 # Create a directory for data files
 RUN mkdir -p /data
 
-# Set default environment variables
-ENV SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5433/postgres
-ENV SPRING_DATASOURCE_USERNAME=postgres
-ENV SPRING_DATASOURCE_PASSWORD=password_for_beacon_postgres
 ENV BEACON_DATA_PATH=/data
 
 # Expose port if needed (optional, for any web endpoints)
@@ -43,4 +39,3 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 
 # Default command arguments (can be overridden)
 CMD ["--beacon.data.path=/data"]
-
