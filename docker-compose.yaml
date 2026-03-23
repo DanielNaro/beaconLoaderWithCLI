@@ -38,7 +38,7 @@ services:
     network_mode: "service:localhost"
     command: -p ${BEACON_DB_PORT}
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB} -p ${BEACON_DB_PORT}"]
+      test: ["CMD-SHELL", "pg_isready -U ${BEACON_DB_USER} -d ${BEACON_DB_NAME} -p ${BEACON_DB_PORT}"]
       interval: 5s
       timeout: 600s
       retries: 50
