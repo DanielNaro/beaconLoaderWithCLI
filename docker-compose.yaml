@@ -3,22 +3,22 @@ services:
     image: alpine:latest
     command: sleep infinity
     environment:
-      BEACON_DB_PORT: ${BEACON_DB_PORT:-5433}
-      KEYCLOAK_DB_PORT: ${KEYCLOAK_DB_PORT:-5432}
+      BEACON_DB_PORT: ${BEACON_DB_PORT}
+      KEYCLOAK_DB_PORT: ${KEYCLOAK_DB_PORT}
       # Beacon Postgres credentials (used by postgres, hasura and beacon-loader)
-      BEACON_DB_NAME: ${BEACON_DB_NAME:-postgres}
-      BEACON_DB_USER: ${BEACON_DB_USER:-postgres}
-      BEACON_DB_PASSWORD: ${BEACON_DB_PASSWORD:-password_for_beacon_postgres}
+      BEACON_DB_NAME: ${BEACON_DB_NAME}
+      BEACON_DB_USER: ${BEACON_DB_USER}
+      BEACON_DB_PASSWORD: ${BEACON_DB_PASSWORD}
       # Keycloak Postgres credentials (used by postgres-keycloak and keycloak)
-      KEYCLOAK_DB_NAME: ${KEYCLOAK_DB_NAME:-keycloak-db}
-      KEYCLOAK_DB_USER: ${KEYCLOAK_DB_USER:-keycloak}
-      KEYCLOAK_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD:-keycloak}
+      KEYCLOAK_DB_NAME: ${KEYCLOAK_DB_NAME}
+      KEYCLOAK_DB_USER: ${KEYCLOAK_DB_USER}
+      KEYCLOAK_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD}
       # Hasura admin secret
-      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-secret_key_for_hasura}
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET}
       # Service ports
-      KEYCLOAK_PORT: ${KEYCLOAK_PORT:-9086}
-      GRAPHQL_ENGINE_PORT: ${GRAPHQL_ENGINE_PORT:-9080}
-      DATA_CONNECTOR_AGENT_PORT: ${DATA_CONNECTOR_AGENT_PORT:-9081}
+      KEYCLOAK_PORT: ${KEYCLOAK_PORT}
+      GRAPHQL_ENGINE_PORT: ${GRAPHQL_ENGINE_PORT}
+      DATA_CONNECTOR_AGENT_PORT: ${DATA_CONNECTOR_AGENT_PORT}
     ports:
       - "${BEACON_DB_PORT}:${BEACON_DB_PORT}" # postgresql data port
       - "${KEYCLOAK_DB_PORT}:${KEYCLOAK_DB_PORT}" # postgresql keycloak port
