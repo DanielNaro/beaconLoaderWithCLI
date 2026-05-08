@@ -271,8 +271,16 @@ public class GenomicVariantBatchConfig {
                 processMolecularAttributes(readGenomicVariant, genomicVariation);
 
                 var variantLevelData = getVariantLevelData(readGenomicVariant.getVariantLevelData());
-                genomicVariation.getVariantLevelData().getClinicalInterpretations().addAll(variantLevelData.getClinicalInterpretations());
-                genomicVariation.getVariantLevelData().getPhenotypicEffects().addAll(variantLevelData.getPhenotypicEffects());
+                if (variantLevelData != null) {
+                    var currentVariantLevelData = genomicVariation.getVariantLevelData();
+                    if (currentVariantLevelData == null) {
+                        genomicVariation.setVariantLevelData(variantLevelData);
+                    } else {
+                        currentVariantLevelData.getClinicalInterpretations().addAll(variantLevelData.getClinicalInterpretations());
+                        currentVariantLevelData.getPhenotypicEffects().addAll(variantLevelData.getPhenotypicEffects());
+                    }
+                }
+
 
                 return genomicVariation;
             }
